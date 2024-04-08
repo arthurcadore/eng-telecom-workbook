@@ -75,14 +75,32 @@ Conteúdo Principal: Explica como os princípios de modulação e demodulação 
 
 = Análise dos resultados
 \
-Seção III - Apresentação e comentários dos gráfios/figuras das etapas de desenvolvimento do relatório
+
+
+Inicialmente, foi feita a importação dos sinais de áudio que serão utilizados como modulantes para a transmissão. Como os sinais de áudio utilizados não possuem exatamente o mesmo comprimento, foram renomeados como *sinal curto* e um *sinal longo*, ambos em formato .wav, e posteriormente através do comprimento dos vetores, um corte foi realizado no sinal com o maior comprimento, para torna-los iguais em termos de duração.
+\
+
+A figura abaixo mostra o sinal de áudio curto que será utilizado como modulante da portadora cosseno (em vermelho) e o sinal de áudio longo que será utilizado como modulante da portadora seno (em preto).
+\ 
+
+Na figura abaixo também está representado o sinal de áudio curto no domínio da frequência, através da aplicação de uma transformada de Fourier, é possível visualizar a distribuição da amplitude do sinal no espectro de frequência. 
 
 #figure(
   outlined: true,
   image("./pictures/modulante.png", width: 100%),
-  caption: [Sinal de Áudio aplicado como modulante \ Figura elaborada pelo autor],
+  caption: [Portadoras geradas e sinal Modulado. \ Figura elaborada pelo autor],
   supplement: "Figura"
 );
+
+Em seguida, um sinal de portadora foi gerado a partir da definição de frequência e amplitude do sinal (40000Hz e 1 respectivamente), e posteriormente, a modulação AM foi realizada para cada sinal de áudio, utilizando a portadora correspondente a cada sinal.
+\
+
+Neste processo é importante notar que o primeiro sinal de portadora foi gerado a partir de um cosseno, equanto que o segundo sinal de portadora foi gerado a partir de um seno. Essa diferença entre os dois sinais de base é vital para a transmissão dos sinais modulados pelo mesmo meio de transmissão. 
+\
+
+Isso ocorre pois os sinais de cosseno e seno são ortogonais entre si, ou seja, não interferem um no outro (idealmente), e por isso, podem ser transmitidos simultaneamente na mesma frequência sem interferência. Caso fosse utilizado dois sinais não ortogonais entre si, haveria interferência entre os mesmos no momento da transmissão no mesmo meio, oque impossibilitaria a distinção entre eles no receptor, e portanto, a informação iria se perder.  
+
+
 
 #figure(
   outlined: true,
@@ -91,6 +109,15 @@ Seção III - Apresentação e comentários dos gráfios/figuras das etapas de d
   supplement: "Figura"
 );
 
+
+Uma vez com o sinal modulado, e multiplexado, podemos transmiti-lo pelo meio físico sem que haja interferência entre cada portadora (idealmente). O sinal no meio físico é ilustrado abaixo em azul. 
+\
+
+Sua FFT também é apresentada, de maneira em que é possível visualizar a distribuição de frequência dos sinais multiplexados no espectro de frequências. Note que a FFT do sinal multiplexado é a soma das FFTs dos sinais modulados, oque é esperado, pois a modulação neste caso é uma operação linear, e portanto, a FFT do sinal modulado é a soma das FFTs dos sinais modulantes. 
+\
+
+Desta forma, é possivel verificar que as amplitudes máximas do sinal multiplexado são mais "largas" do que as de cada sinal modulante individualmente. Isso ocorre pois a soma da FFT dos dois sinais modulantes irá representar uma distribuição de frequência mais ampla do que a de cada sinal modulante individualmente.
+
 #figure(
   outlined: true,
   image("./pictures/multiplexado.png", width: 100%),
@@ -98,12 +125,29 @@ Seção III - Apresentação e comentários dos gráfios/figuras das etapas de d
   supplement: "Figura"
 );
 
+Em seguida, com o sinal já transmitido, é necessário realizar sua recepção e demodulação no receptor. Para isso, o sinal é multiplicado pela portadora correspondente a cada sinal modulante (o que está visível no script maltab) que será apresentado mais adiante. 
+\
+
+Posteriormente, com o sinal demodulado (ou seja, retornado a sua frequência de banda base), devemos aplicar um filtro no sinal para garantir que o mesmo seja limpo e que a informação possa ser extraída de maneira correta.
+\
+
+Para isso, foi utilizado um filtro FIR de ordem relativamente alta (neste caso 100), com frequência de corte de 20kHz. A frequência neste script foi fixada em 20kHz, pois trata-se de um sinal de áudio, e portanto, não há informação relevante acima desta frequência para ser capturada. 
+\ 
+
+Para verificar se de fato o filtro está atuando corretamente, foi plotado a resposta em frequência do filtro FIR para cada sinal demodulado, as respostas estão exibidas em vermelho (cosseno) e preto (seno) respectivamente.
+\
 #figure(
   outlined: true,
   image("./pictures/respostafiltro.png", width: 100%),
   caption: [Sinal de Áudio aplicado como modulante \ Figura elaborada pelo autor],
   supplement: "Figura"
 );
+
+\
+Com o sinal demodulado e filtrado, podemos verificar se distorções ocorreram indevidamente no sinal, ou se a informação foi corretamente extraída. Para isso, foi plotado o sinal demodulado (coluna esquerda na imagem abaixo) e apenas filtrado para cada sinal modulante (coluna direita na imagem abaixo). 
+\
+
+Para garantir que mesmo instante de tempo fosse plotado, um janeamento foi realizado no sinal de entrada, de maneira em que apenas o intervalo de tempo entre 30% e 70% da duração do sinal fosse plotado, assim, está ilustrado o mesmo instante de tempo antes da modulação e após a demodulação do sinal de áudio. 
 
 #figure(
   outlined: true,
@@ -112,6 +156,10 @@ Seção III - Apresentação e comentários dos gráfios/figuras das etapas de d
   supplement: "Figura"
 );
 
+Outro parâmetro importante a ser analisado é a densidade espectral de potência dos sinais modulantes e do sinal multiplexado. Como podemos ver na imagem abaixo, está plotada a densidade dos sinais modulantes (cosseno e seno) e também do sinal multiplexado. 
+\
+
+Note que a densidade do sinal multiplexado está deslocada para a direita, isso ocorre pois após a modulação, a frequência do sinal é deslocada para a frequência da portadora, e portanto, a densidade espectral de potência do sinal modulado é deslocada para a frequência da portadora. 
 
 #figure(
   outlined: true,
@@ -268,6 +316,7 @@ ylabel('Magnitude')
 ```]
 
 == Etapa 3 - Demodulação dos sinais:
+
 
 #sourcecode[```matlab
 % Realizando a demodulação do sinal no receptor: 
