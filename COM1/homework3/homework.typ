@@ -262,7 +262,11 @@ ylabel('Magnitude')
 
 == Etapa 2 - Modulação IQ dos sinais:
 
+Uma vez com os sinais de entrada (modulantes) importados e seus respectivos sinais gerados, podemos criar os sinais de portadora para a transmissão de maneira ortogonal.
 
+Em seguida foi realizada a modulação AM dos sinais de áudio com sua respectiva portadora (seno e cosseno), e posteriormente, a multiplexação dos sinais foi realizada somando os sinais modulados. 
+
+Após a multiplexação, o sinal no dominio do tempo foi plotado no domínio do tempo e da frequência, para visualizar a amplitude e a distribuição de frequência do sinal multiplexado.
 
 #sourcecode[```matlab
 
@@ -329,6 +333,16 @@ ylabel('Magnitude')
 
 == Etapa 3 - Demodulação dos sinais:
 
+Uma vez com o sinal multiplexado gerado, simulando que o sinal foi transmitido pelo meio físico e recebido no receptor, é necessário realizar a demodulação do sinal.
+\
+
+Para isso, no receptor o sinal é multiplicado novamente pelo sinal da portadora correspondente a cada sinal modulante, e posteriormente, um filtro FIR é aplicado para garantir que o sinal seja limpo e que a informação possa ser extraída de maneira correta.
+\
+
+Em seguida, para podermos aproveitar o sinal recebido, precisamos realizar uma filtragem para retirar qualquer possivel ruído que possa ter sido adicionado durante a transmissão. 
+\
+
+Para isso, definimos um filtro passa baixa (20KHz) de alta ordem (100) para realizar a filtragem do sinal demodulado. Para visualizarmos se o filtro corresponde as especificações necessárias, um plot da resposta em frequência do filtro FIR para cada sinal demodulado foi realizado.
 
 #sourcecode[```matlab
 % Realizando a demodulação do sinal no receptor: 
@@ -368,6 +382,9 @@ ylabel('Magnitude')
 ```]
 
 == Etapa 4 - Filtragem: 
+\
+Uma vez com o filtro FIR definido, podemos aplicar a filtragem do sinal demodulado para garantir que a informação seja extraída de maneira correta. 
+
 
 #sourcecode[```matlab
 % Filtragem dos sinais demodulados
@@ -411,6 +428,8 @@ ylabel('Magnitude')
 ```]
 
 == Etapa 5 - Comparando com o sinal original:
+\
+Em seguida, os dois sinais demodulados no dominio do tempo foram comparados com os sinais de entrada, para verificar se a informação foi corretamente modulada, transmitida e demodulada, e portanto, se a informação foi preservada. 
 
 #sourcecode[```matlab
 % Comparando sinal transmitido com sinal recebido: 
@@ -474,9 +493,13 @@ xlabel('Frequência (Hz)')
 ylabel('Magnitude')
 ```]
 
-= Conclusões
+= Conclusão
 \
-Seção V aklndoqismdlakmsdlaksmdlkasmdlaksmdlk aslkdmalskdm alskdmalksmd laksmd aksldmas 
+A partir dos conceitos vistos e dos resultados apresentados, podemos concluir que a modulação IQ é uma técnica eficiente para a transmissão de dados, pois permite a transmissão de dois sinais distintos na mesma frequência sem interferência (idealmente), ao mesmo tempo em que é uma técnica razoavelmente simples de ser implementada, pois necessita apenas de dois sinais ortogonais base para agir como portadora.
+
+Desta forma, a modulação IQ permitiu a transmissão dos dois sinais de áudio pela mesma frequência de tranmissão base (40000Hz), sem que houvesse interferência entre os sinais (idealmente), e portanto, aproveitando de melhor maneira o espectro elétromagnético.
+
+Assim podemos compreender o motivo pela qual essa técnica de transmissão por ortogonalidade vem sido aplicada nas tecnologias mais atuais de transmissão wireless como OFDM e OFDMA, pela capacidade de aproveitar da melhor maneira possivel o espectro eletromagnético disponível, e portanto, transmitir mais dados em menos tempo e com menos interferência.
 
 = Referências
 \
