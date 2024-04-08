@@ -4,6 +4,9 @@
 clc; clear all; close all
 pkg load signal
 
+% Altera o tamanho da fonte nos plots para 15
+set(0, 'DefaultAxesFontSize', 15);
+
 % Definição dos parâmetros da portadora do sinal IQ:
 carrier_amplitude = 1; 
 carrier_frequency = 40000;
