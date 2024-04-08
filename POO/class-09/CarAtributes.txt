@@ -1,0 +1,23 @@
+
+
+Sistema de revenda: 
+
+preço de compra
+preço de venda
+ano do carro 
+kilometragem
+
+altere kilometragem
+altere preço
+
+
+Jogo de formula 1: 
+
+Velocidade máxima 
+aceleração 
+tipo de direção 
+tipo de freio 
+
+
+acelerar 
+freiar

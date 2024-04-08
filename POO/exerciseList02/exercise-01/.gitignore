@@ -1,0 +1,8 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+
+# adicionada sessão para evitar que os arquivos necessários seja ignorados
+!libs/*.jar
