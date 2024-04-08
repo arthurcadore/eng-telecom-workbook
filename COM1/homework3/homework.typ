@@ -41,13 +41,31 @@ Além dos conceitos base apresentados acima, também está abaixo um resumo dos 
 
 === Item 5.1 (Real and Complex Signals — it’s all Sines and Cosines) 
 
-Objetivo: Explorar a representação de sinais reais e complexos na engenharia de sinais, utilizando a fórmula de Euler para simplificar matematicamente a manipulação de sinais em termos de exponenciais complexas.
-Conteúdo Principal: Demonstra que, embora operemos com sinais reais no mundo físico (como tensões induzidas por campos eletromagnéticos), a representação complexa dos sinais facilita a análise matemática. A seção se aprofunda na identidade de Euler e na conversão de sinais sinusoidais para sua forma exponencial complexa, permitindo uma manipulação matemática mais simples.
+Objetivo: Introduzir os conceitos de sinais reais e complexos e sua representação em termos de senos e cossenos.
+
+O processamento de sinais lida com sinais reais do mundo físico, como sinais de tensão analógicos que representam. Esses sinais variam ao longo do tempo e podem assumir valores positivos e negativos.
+\
+
+Um exemplo de sinal análogico, é oque é recebido por uma antena, que gera um sinal de tensão em resposta ao campo eletromagnético induzido ao seu redor, ou microfone captando ondas sonoras, e assim gerando um sinal de tensão analógico em resposta às variações na pressão do ar. 
+\
+
+Em sistemas de comunicação analogicos e digitais, os sinais são frequentemente representados através de uma soma de exponenciais complexas, contudo, os sinais complexos não existam efetivamente no mundo real, porem, são representados assim na matemática para facilitar as operações e manipulações/conclusões, mas são usados apenas para fins de análise, ou seja, nenhum sinal puramente complexo (imaginário) é gerado ou transmitido na prática.
+\
+
+Para ilustrar sua importância, o texto do autor sugere tentar derivar as equações trigonométricas dos sinais analógicos sem a utilização de sinais complexos, e assim, perceber a dificuldade e a complexidade que seria necessária para realizar esse tipo de manipulação.
 
 === Item 5.4 (Quadrature Modulation and Demodulation (QAM)
 
-Objetivo: Introduzir o conceito de modulação em quadratura e demonstrar sua implementação no RTL-SDR.
-Conteúdo Principal: Explica a motivação por trás do uso da modulação em quadratura para melhorar a eficiência espectral. Utiliza sinais de exemplo para ilustrar a modulação e demodulação em quadratura, destacando o processo de recuperação de sinais de banda base a partir do sinal recebido.
+Objetivo: Apresentar a modulação e demodulação em quadratura (QAM) e sua aplicação em sistemas de comunicação.
+\
+
+Nesta sessão, entramos no ponto de representação 'complexa', onde podemos introduzir a demodulação de amplitude em quadratura (QAM) realizada pelo RTL-SDR. 
+\
+
+O objetivo da transmissão em QAM é alcançar uma tecnica de modulação mais eficiente em largura de banda, em outras palavras, consumir (idealmente) a mesma largura no espectro elétromagnético para encaminhar mais informação. 
+\
+
+Podemos utilizar como exemplo a modulação em quadratura, onde transmitimos dois sinais de largura de tensão, ambos modulados na mesma frequência de portadora, mas com a fase da portadora separada por 90°, sendo um uma onda senoidal e a outra uma onda cossenoidal (por convenção são snais de seno e cosseno, para que a representação complexa seja a mais simples possivel). 
 
 === Item 5.5 (Quadrature Amplitude Modulation using Complex Notation)
 Objetivo: Descrever a modulação de amplitude em quadratura (QAM) usando notação complexa.
