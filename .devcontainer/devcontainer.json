@@ -1,0 +1,22 @@
+{
+  "name": "Typst Devcontainer",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "settings": {
+    "workbench.colorTheme": "dracula",
+    "workspaceFolder": "/workspace",
+    "remoteUser": "vscode",
+    "terminal": {
+      "integrated": {
+        "shellArgs": ["-f", "/etc/bash.bashrc"]
+      }
+    }
+  },
+  "extensions": [
+    "nvarner.typst-lsp",
+    "dracula-theme.theme-dracula",
+    "mathematic.vscode-pdf",
+    "GitHub.copilot"
+  ]
+}
