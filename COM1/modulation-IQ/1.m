@@ -1,9 +1,6 @@
-% QAM transmission of two diferent audio singals. 
+% QAM transmission of two diferent audio signals. 
 
 % QAM - Quadrature Amplitude modulation
-
-clc; clear all; close all
-
 
 clc; clear all; close all
 
@@ -13,12 +10,10 @@ clc; clear all; close all
 % sinal com maior duração
 [signal2, Fs2] = audioread('wolf.wav');
 
-
 signal = transpose(signal);
 signal2 = transpose(signal2);
 
 duracao = length(signal)/Fs;
-
 signal2 = signal2(1:length(signal));
 
 Ts = 1/Fs; 
@@ -62,11 +57,9 @@ title('Sinal Longo (Frequncy domain)')
 carrier_frequency = 1000000;
 
 carrier_1 = Ac*cos(2*pi*carrier_frequency*t);
-
 carrier_2 = Ac*sin(2*pi*carrier_frequency*t);
 
 modulated1 = signal.*carrier_1; 
-
 modulated2 = signal2.*carrier_2; 
 
 multiplexed = modulated1 + modulated2;
@@ -92,7 +85,6 @@ title('Sinal Curto Modulado (Time domain)')
 subplot(224)
 plot(t,modulated2,'b')
 title('Sinal Longo Modulado (Time domain)')
-
 
 figure(3)
 subplot(211)
