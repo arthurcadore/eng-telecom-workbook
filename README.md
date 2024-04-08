@@ -1,7 +1,7 @@
 # Telecom Engineering Workbook
-## IFSC - São José
+## Author: Arthur Cadore M. Barcella - IFSC - São José
 
-This repository is dedicated to all homeworks and projects developed during the Telecom Engineering course at IFSC - São José. 
+This repository is dedicated to all homeworks and projects developed during the Telecom Engineering course at IFSC. 
 ---
 
 #### How to Use the Repository:
