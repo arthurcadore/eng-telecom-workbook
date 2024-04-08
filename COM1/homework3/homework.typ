@@ -175,6 +175,16 @@ Note que a densidade do sinal multiplexado está deslocada para a direita, isso 
 Abaixo estão os scripts e códigos utilizados para a realização deste relatório:
 
 == Etapa 1 - Import do sinal e definições: 
+\
+
+Inicialmente, foi feita a importação dos sinais de áudio que serão utilizados como modulante para transmissão. Em seguida, foi feita a transposição e corte dos sinais de áudio para transformar em vetores com a mesma amplitude. 
+\ 
+
+Em seguida, foi calculado o vetor de tempo a partir do tamanho do menor sinal, e a FFT dos sinais de entrada foi calculada para amostrar seu estado no domínio da frequência.
+\ 
+
+Por fim, foi plotado os sinais de entrada no domínio do tempo e da frequência, para visualizar a amplitude e a distribuição de frequência dos sinais modulantes.
+
 
 #sourcecode[```matlab
 % IQ transmission of two diferent audio signals. 
@@ -251,6 +261,8 @@ ylabel('Magnitude')
 ```]
 
 == Etapa 2 - Modulação IQ dos sinais:
+
+
 
 #sourcecode[```matlab
 
@@ -464,7 +476,7 @@ ylabel('Magnitude')
 
 = Conclusões
 \
-Seção V - Conclusões
+Seção V aklndoqismdlakmsdlaksmdlkasmdlaksmdlk aslkdmalskdm alskdmalksmd laksmd aksldmas 
 
 = Referências
 \
