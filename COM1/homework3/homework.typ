@@ -40,8 +40,8 @@ Os principais conceitos teóricos abordados neste relatório são:
 Além dos conceitos base apresentados acima, também está abaixo um resumo dos principais conceitos teóricos das sessões 5.1, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9 e 5.10 do livro "Software Defined Radio Using MATLAB & Simulink and the RTL-SDR": 
 
 === Item 5.1 (Real and Complex Signals — it’s all Sines and Cosines) 
-
-Objetivo: Introduzir os conceitos de sinais reais e complexos e sua representação em termos de senos e cossenos.
+\
+- Objetivo: Introduzir os conceitos de sinais reais e complexos e sua representação em termos de senos e cossenos.
 
 O processamento de sinais lida com sinais reais do mundo físico, como sinais de tensão analógicos que representam. Esses sinais variam ao longo do tempo e podem assumir valores positivos e negativos.
 \
@@ -55,10 +55,9 @@ Em sistemas de comunicação analogicos e digitais, os sinais são frequentement
 Para ilustrar sua importância, o texto do autor sugere tentar derivar as equações trigonométricas dos sinais analógicos sem a utilização de sinais complexos, e assim, perceber a dificuldade e a complexidade que seria necessária para realizar esse tipo de manipulação.
 
 === Item 5.4 (Quadrature Modulation and Demodulation (QAM)
-
-Objetivo: Apresentar a modulação e demodulação em quadratura (QAM) e sua aplicação em sistemas de comunicação.
 \
-
+- Objetivo: Apresentar a modulação e demodulação em quadratura (QAM) e sua aplicação em sistemas de comunicação.
+\
 Nesta sessão, entramos no ponto de representação 'complexa', onde podemos introduzir a demodulação de amplitude em quadratura (QAM) realizada pelo RTL-SDR. 
 \
 
@@ -68,32 +67,70 @@ O objetivo da transmissão em QAM é alcançar uma tecnica de modulação mais e
 Podemos utilizar como exemplo a modulação em quadratura, onde transmitimos dois sinais de largura de tensão, ambos modulados na mesma frequência de portadora, mas com a fase da portadora separada por 90°, sendo um uma onda senoidal e a outra uma onda cossenoidal (por convenção são snais de seno e cosseno, para que a representação complexa seja a mais simples possivel). 
 
 === Item 5.5 (Quadrature Amplitude Modulation using Complex Notation)
-Objetivo: Descrever a modulação de amplitude em quadratura (QAM) usando notação complexa.
-Conteúdo Principal: Detalha como a notação complexa pode simplificar a representação e manipulação de sinais QAM, apresentando um exemplo prático de como os sinais podem ser modulados para transmissão.
+\
+- Objetivo: Apresentar a modulação de amplitude em quadratura (QAM) usando notação complexa.
+\
+Nesta sessão do livro, o autor apresenta a notação complexa para simplificar a análise matemática de um sistema QAM (Quadrature Amplitude Modulation). Inicialmente, é observado que o sistema QAM é composto apenas por sinais reais (ou seja, sem a adição de componentes imaginários), e, portanto, não utiliza notação complexa. 
+\
+
+No entanto, ao introduzir a notação complexa, o equacionamento e tratamento dos sinais se torna mais fácil, pois podemos decompor o sinal em uma soma de componentes complexos. 
+\
 
 === Item 5.6 (Quadrature Amplitude Demodulation using Complex Notation)
-Objetivo: Explorar o processo de demodulação de amplitude em quadratura usando notação complexa.
-Conteúdo Principal: Apresenta o método de demodulação QAM, evidenciando como a notação complexa facilita o processo de extração de sinais de banda base do sinal recebido.
+\
+- Objetivo: Apresentar a demodulação de amplitude em quadratura (QAM) usando notação complexa.
+
+
+Nesta sessão, é descrito que o processo de demodulação do sinal QAM também pode ser convenientemente expresso usando notação de sinais complexos. 
+Isto é, após a multiplicação do sinal, o sinal recebido no receptor pode ser representado por uma função base (que identifica o sinal modulante) multiplicado por um deslocamento na frequência através da multiplicação de uma exponencial complexa.
 
 === Item 5.7 (Spectral Representation for Complex Demodulation)
-Objetivo: Examinar a representação espectral de sinais complexos e sua aplicação na demodulação.
-Conteúdo Principal: Demonstra a transformação espectral de sinais modulados em frequência para sua baseband complexa, detalhando o impacto da modulação complexa nas propriedades espectrais dos sinais.
+\
+- Objetivo: Apresentar a representação espectral para a demodulação complexa.
+\
+Nesta sessão, o autor descreve o processo de modulação e demodulação de sinais complexos, onde são utilizados sinais reais independentes para formar um sinal complexo. Apartir do sinal complexo gerado, são aplicadas transformadas de Fourier (FFT) para analisar os espectros de magnitude dos sinais.
+\
+
+Durante a modulação, o sinal modulante é deslocado em frequência para ser centrado em torno de uma frequência específica (a frequência da portadora). Já no processo de demodulação, os sinais real e imaginário são filtrados por um filtro (tipicamente um filtro passa-baixas, por ser mais simples que um passa faixas, e portanto mais barato), com as especificações de frequeência e ordem adequadas para recuperar o sinal modulante complexo. 
 
 === Item 5.8 (Frequency Offset Error and Correction at the Receiver)
-Objetivo: Discutir o erro de deslocamento de frequência no receptor e como corrigi-lo.
-Conteúdo Principal: Explica o conceito de erro de deslocamento de frequência, suas causas potenciais e métodos para correção, especialmente em relação ao uso do RTL-SDR.
+\
+- Objetivo: Apresentar o erro de deslocamento de frequência e sua correção no receptor.
+\
+Nesta sessão, texto apresenta um possível erro no receptor devido a 
+ao desvio de frequência em relação a frequência ideal para recepção do sinal modulado. 
+\
+
+Esse desvio é ilustrado na equação de demodulação do receptor, que é modificada para compensar esse erro, de maneira em que o receptor se sintonize novamente com a frequência central onde o sinal está sendo transmitido. 
+\
+
+De acordo com o autor, este tipo de erro é comum em receptores RTL-SDR, onde a frequência de recepção pode ser desviada por algumas centenas de Hz ou até kHz devido a tolerâncias nos componentes do receptor que variam as impedâncias imaginárias causando descasamento, portanto, sendo necessário um ajuste compensar este erro em software. 
 
 === Item 5.9 (Frequency Correction using a Complex Exponential)
-Objetivo: Descrever um método de correção de frequência usando uma exponencial complexa.
-Conteúdo Principal: Apresenta uma técnica para ajustar a frequência de sinais recebidos por meio da multiplicação por uma exponencial complexa, abordando o contexto de sua aplicação prática.
+\
+- Objetivo: Apresentar a correção de frequência usando uma exponencial complexa.
+\
+Nesta sessão, o autor explica sobre a coreção de frequência comentada na sessão anterior para compensar casos de desvio de frequência, através da multiplicação do sinal complexo de entrada no receptor por um valor específico complexo.
+\
+
+Em seguida, o ajuste do desvio pode incluir ajuste da fase do sinal da portadora, sincronização e/ou seções de temporização, seguidas pelas seções de decodificação do sinal, porem, as etapas que o sinal sofrerá para ser ajustado irão depender do tipo de sinal que está tentando ser captado. 
+\
+
+Nesta sessão o autor também comenta que deve-se notar sobre as orientações passadas serem válidas para cenários idealizados. Ou seja, as operações realizadas assumem operações matemáticas perfeitas e ignora os efeitos do mundo real ao transmitir o sinal no meio. No entanto, essas operações são úteis para entender o processo de ajuste de frequência e a correção de erros de desvio de frequência.
 
 === Item 5.10 (RTL-SDR Quadrature / Complex Architecture)
-Objetivo: Conectar os conceitos de modulação complexa e demodulação com a arquitetura do RTL-SDR.
-Conteúdo Principal: Explica como os princípios de modulação e demodulação em quadratura são implementados na arquitetura do RTL-SDR, preparando o terreno para aplicações práticas discutidas nos capítulos seguintes.
+\
+- Objetivo: Apresentar a arquitetura quadratura/complexa do RTL-SDR.
+\
+Nesta sessão, o autor descreve a arquitetura do RTL-SDR, que é um receptor de software definido que utiliza modulação em quadratura para receber sinais de rádio.
+\
+Primeiro descreve o processo de modulação e transmissão pelo meio de comunicação (no caso de RadioFrequência, o meio wireless). Em seguida, no lado do receptor, descreve sobre o sinal sendo recebido e demodulado pelo circuito RTL-SDR, e depois passado para algum interpretador de sinais, como o MATLAB ou Simulink. 
+\
+
+Neste ponto, as amostras lidas no MATLAB ou Simulink correspondem ao sinal de saída (sinal demodulado), e podem ser lidas e compreendidas através de ilustrações do modelo de sistema apresentado na Figura 5 do livro. 
 
 = Análise dos resultados
 \
-
 
 Inicialmente, foi feita a importação dos sinais de áudio que serão utilizados como modulantes para a transmissão. Como os sinais de áudio utilizados não possuem exatamente o mesmo comprimento, foram renomeados como *sinal curto* e um *sinal longo*, ambos em formato .wav, e posteriormente através do comprimento dos vetores, um corte foi realizado no sinal com o maior comprimento, para torna-los iguais em termos de duração.
 \
