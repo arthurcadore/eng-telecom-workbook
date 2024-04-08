@@ -4,10 +4,15 @@
 clc; clear all; close all
 pkg load signal
 
-% sinal com menor duração
+% Definição dos parâmetros da portadora do sinal IQ:
+carrier_amplitude = 1; 
+carrier_frequency = 1000000;
+
+% Coletando os sinais para transmissão:
 [short_signal, Fs] = audioread('long-signal.wav');
 [long_signal, Fs2] = audioread('long-signal.wav');
 
+% Fazendo a transposição linha/coluna do sinal de entrada
 short_signal = transpose(short_signal);
 long_signal = transpose(long_signal);
 
@@ -29,12 +34,15 @@ f_step = 1/duracao;
 f = [-Fs/2:f_step:Fs/2];
 f = [1:length(signal_cos)];
 
+% calculando a FFT do sinal de entrada (que será utilizado no cosseno):
 signal_cos_F = fft(signal_cos)/length(signal_cos);
 signal_cos_F = fftshift(signal_cos_F);
 
+% calculando a FFT do sinal de entrada (que será utilizado no seno):
 signal_sin_F = fft(signal_sin)/length(signal_sin);
 signal_sin_F = fftshift(signal_sin_F);
 
+% Plot dos sinais de entrada (dominio do tempo e frequência):
 figure(1)
 subplot(221)
 plot(t,signal_cos,'b')
@@ -52,17 +60,18 @@ subplot(224)
 plot(f,abs(signal_sin_F), 'b')
 title('Sinal Longo (Frequncy domain)')
 
-carrier_amplitude = 1; 
-carrier_frequency = 1000000;
-
+% Criando dos sinais de portadora para transmissão ortogonal (um com seno e outro com cosseno):
 carrier_cos = carrier_amplitude*cos(2*pi*carrier_frequency*t);
 carrier_sin = carrier_amplitude*sin(2*pi*carrier_frequency*t);
 
+% Realizando a modulação AM do sinal de aúdio na portadora correspondente a cada sinal:
 modulated_cos = signal_cos .* carrier_cos; 
 modulated_sin = signal_sin .* carrier_sin; 
 
+% Realizando a multiplexação do sinal (a partir do principio de ortogonalidade):
 multiplexed_signal = modulated_cos + modulated_sin;
 
+% Calculando a FFT do sinal para amostrar seu estado no dominio da frequência:
 multiplexed_signal_F = fft(multiplexed_signal)/length(multiplexed_signal);
 multiplexed_signal_F = fftshift(multiplexed_signal_F);
 
@@ -93,3 +102,47 @@ title('Sinal multiplexado')
 subplot(212)
 plot(f,abs(multiplexed_signal_F), 'b')
 title('Sinal multiplexado (Frequencia)')'
+
+% Realizando a demodulação do sinal no receptor: 
+
+demodulated_cos = multiplexed_signal .* carrier_cos;
+demodulated_sin = multiplexed_signal .* carrier_sin;
+
+% Ordem do filtro FIR
+filtro_ordem = 100;
+
+% Frequência de corte do filtro FIR
+frequencia_corte = 20000;
+
+% Coeficientes do filtro FIR para cada sinal demodulado
+coeficientes_filtro_cos = fir1(filtro_ordem, frequencia_corte/(Fs/2));
+coeficientes_filtro_sin = fir1(filtro_ordem, frequencia_corte/(Fs/2));
+
+% Resposta em frequência do filtro FIR para cada sinal demodulado
+[H_cos, f_cos] = freqz(coeficientes_filtro_cos, 1, length(signal_cos), Fs);
+[H_sin, f_sin] = freqz(coeficientes_filtro_sin, 1, length(signal_sin), Fs);
+
+% Plot da resposta em frequência dos filtros
+figure(5)
+subplot(211)
+plot(f_cos, abs(H_cos), 'b')
+title('Resposta em Frequência do Filtro FIR para o Sinal Curto')
+
+subplot(212)
+plot(f_sin, abs(H_sin), 'b')
+title('Resposta em Frequência do Filtro FIR para o Sinal Longo')
+
+% Filtragem dos sinais demodulados
+demodulated_cos_filtered = filter(coeficientes_filtro_cos, 1, demodulated_cos);
+demodulated_sin_filtered = filter(coeficientes_filtro_sin, 1, demodulated_sin);
+
+% Plot dos sinais demodulados
+figure(4)
+subplot(211)
+plot(t, demodulated_cos_filtered, 'b')
+title('Sinal Curto Demodulado (Time domain)')
+
+subplot(212)
+plot(t, demodulated_sin_filtered, 'b')
+title('Sinal Longo Demodulado (Time domain)')
+
