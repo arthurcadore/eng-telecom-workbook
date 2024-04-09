@@ -1,4 +1,8 @@
 close all; clear all; clc;
+pkg load signal;
+
+% Altera o tamanho da fonte nos plots para 15
+set(0, 'DefaultAxesFontSize', 20);
 
 % Defining the signals amplitude. 
 A_modulating = 1; 
@@ -30,7 +34,7 @@ t_final = 2;
 t = [t_inicial:Ts:t_final];
 
 % modulating_singal = A_modulating *cos(2*pi*f_modulating_max*t);
-[modulating_signal, Hs] = audioread('general-signal.wav');
+[modulating_signal, Hs] = audioread('randomSignal.wav');
 modulating_signal = transpose(modulating_signal);
 
 % Calculate the number of zeros to be added
@@ -53,18 +57,21 @@ plot(t, (modulating_signal),'b', 'LineWidth', 2)
 xlim([0.00054 0.00067])
 xlabel('Time (s)')
 ylabel('Amplitude')
+title('Random Sound Signal (Time Domain)')
 
 subplot(312)
 plot(t, abs(modulating_signal),'r', 'LineWidth', 2)
 xlim([0.00054 0.00067])
 xlabel('Time (s)')
 ylabel('Amplitude')
+title('Random Sound Signal - Absolute (Time Domain)')
 
 subplot(313)
 plot(t, modulated_signal,'k', 'LineWidth', 2)
 xlim([0.00054 0.00067])
 xlabel('Time (s)')
 ylabel('Amplitude')
+title('Modulated FM Signal (Time Domain)')
 
 % calculating the step of the frequency vector "f" (frequency domain); 
 f_step = 1/t_final;
@@ -72,6 +79,27 @@ f_step = 1/t_final;
 % creating the frequency vector "f" (frequency domain); 
 f = [-fs/2:f_step:fs/2];
 
+% calculating the FFT of the random signal;
+modulating_f = fft(modulating_signal)/length(modulating_signal);
+modulating_f = fftshift(modulating_f);
+
 % calculating the FFT of the modulated signal;
 modulated_f = fft(modulated_signal)/length(modulated_signal);
 modulated_f = fftshift(modulated_f);
+
+% Plotting the modulated signal on frequency domain;
+figure(2)
+subplot(211)
+plot(f, abs(modulating_f), 'k', 'LineWidth', 2)
+xlabel('Frequency (Hz)')
+ylabel('Amplitude')
+title('Modulating Signal (Frequency Domain)')
+xlim([-f_carrier*1.2 f_carrier*1.2])
+ylim([0 A_carrier/1000])
+subplot(212)
+plot(f, abs(modulated_f), 'k', 'LineWidth', 2)
+xlabel('Frequency (Hz)')
+ylabel('Amplitude')
+title('Modulated Signal (Frequency Domain)')
+xlim([-f_carrier*1.2 f_carrier*1.2])
+ylim([0 A_carrier/1000])
