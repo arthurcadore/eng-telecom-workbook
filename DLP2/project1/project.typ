@@ -23,7 +23,7 @@ asdsd
 
 #figure(
   outlined: true,
-  image("./pictures/image.png", width: 80%),
+  image("./pictures/RTL-P1.png", width: 80%),
   caption: [Definições de $x_1[n]$ e $x_2[n]$ \ Figura elaborada pelo autor],
   supplement: "Figura"
 );
