@@ -1,5 +1,8 @@
 #import "@preview/klaro-ifsc-sj:0.1.0": report
 #import "@preview/codelst:2.0.1": sourcecode
+#import "@preview/codelst:2.0.1": sourcecode
+#show par: it => block(below: 1.5em)[#it]
+#set text(font: "Arial", size: 12pt)
 
 #show: doc => report(
   title: "Nome do Relatório",
