@@ -28,14 +28,12 @@ passo_f = 1/t_final;
 % vetor "f" correspondente ao periodo de análise (dominio da frequência); 
 f = [-fs/2:passo_f:fs/2];
 
-
 % definição das funções de cada componente do sinal; 
 x1_t = A1*cos(2*pi*f1*t);
 x2_t = A2*cos(2*pi*f2*t);
 x3_t = A3*cos(2*pi*f3*t);
 
 % adicionando uma componente DC ao sinal; 
-
 x4_t = 2; 
 
 % somátório das componentes para compor o sinal completo

@@ -32,7 +32,6 @@ passo_f = 1/t_final;
 % vetor "f" correspondente ao periodo de análise (dominio da frequência); 
 f = [-fs/2:passo_f:fs/2];
 
-
 % definição das funções de cada componente do sinal; 
 x1_t = A1*sen(2*pi*f1*t);
 x2_t = A2*sen(2*pi*f2*t);
