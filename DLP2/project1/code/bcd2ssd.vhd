@@ -19,19 +19,18 @@ begin
 
     ssd_out <= ssd when ac_ccn = '1' else
         not ssd;
-    bcd_int <= to_integer(unsigned(bcd));
 
-    with bcd_int select ssd <=
-        "0111111" when 0,
-        "0000110" when 1,
-        "1011011" when 2,
-        "1001111" when 3,
-        "1100110" when 4,
-        "1101101" when 5,
-        "1111101" when 6,
-        "0000111" when 7,
-        "1111111" when 8,
-        "1101111" when 9,
+    with bcd select ssd <=
+        "0111111" when "0000",
+        "0000110" when "0001",
+        "1011011" when "0010",
+        "1001111" when "0011",
+        "1100110" when "0100",
+        "1101101" when "0101",
+        "1111101" when "0110",
+        "0000111" when "0111",
+        "1111111" when "1000",
+        "1101111" when "1001",
         -- Character "E" when others: 
         "1111001" when others;
 

@@ -1,4 +1,5 @@
-% Plot an AM-DSB modulated singal using an 10KHz carrier signal and an 1KHz modulating wave.
+% Plot an AM-DSB modulated singal using an 10KHz 
+% carrier signal and an 1KHz modulating wave.
 
 % AM - Amplitude modulation
 % DSB - Double Side Band
@@ -106,36 +107,34 @@ final_F5 = fftshift(final_F5);
 
 figure(1)
 subplot(521)
-plot(t,modulating_signal1','b')
+plot(t,modulating_signal1,'b')
 xlim([0 3*T])
 ylim([-1.2*A_modulating 1.2*A_modulating])
 title('modulating signal 1 (Time domain)')
 
 subplot(523)
-plot(t,modulating_signal2','b')
+plot(t,modulating_signal2,'b')
 xlim([0 3*T])
 ylim([-1.2*A_modulating 1.2*A_modulating])
 title('modulating signal 2 (Time domain)')
 
 subplot(525)
-plot(t,modulating_signal3','b')
+plot(t,modulating_signal3,'b')
 xlim([0 3*T])
 ylim([-1.2*A_modulating 1.2*A_modulating])
 title('modulating signal 3 (Time domain)')
 
 subplot(527)
-plot(t,modulating_signal4','b')
+plot(t,modulating_signal4,'b')
 xlim([0 3*T])
 ylim([-1.2*A_modulating 1.2*A_modulating])
 title('modulating signal 4 (Time domain)')
 
 subplot(529)
-plot(t,modulating_signal5','b')
+plot(t,modulating_signal5,'b')
 xlim([0 3*T])
 ylim([-1.2*A_modulating 1.2*A_modulating])
 title('modulating signal 5 (Time domain)')
-
-
 
 figure(2)
 subplot(321)

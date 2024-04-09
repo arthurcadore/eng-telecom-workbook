@@ -14,6 +14,13 @@
 
 = Descrição de desenvolvimento
 
+= Conceitos teóricos utilizados
+
+asdsd
+
+
+= Implementação com somador BCD
+
 #figure(
   outlined: true,
   image("./pictures/image.png", width: 80%),
@@ -21,36 +28,30 @@
   supplement: "Figura"
 );
 
-= Conceitos teóricos utilizados
-
-asd
-
-
-= Implementação com somador BCD:
-
 
 Para implementação da primeir parte da atividade, implementamos quatro códigos VHDL para a contagem ocorrer em diretamente em BCD. 
 
 Para isso, utilizamos os códigos bcd_counter, bcd2ssd, bcd2ssd e project1.
 
-= Implementação com somador binário e conversor BCD:
-\
+= Implementação com somador binário e conversor BCD
+
 Para realizar a segunda etapa da atividade, implementamos quatro códigos VHDL para a contagem ocorrer em binário (de maneira mais simples), e em seguida realizar sua conversão para BCD. Para isso, utilizamos os códigos bin2bcd, binAdder e bcd2ssd, além de um código que declara os componentes utilizados, chamado project1.
 
 O código bin2bcd é responsável por converter um número binário de 8 bits para BCD, dividindo o número em centenas, dezenas e unidades. \
-O código binAdder é responsável por somar dois números binários de 8 bits, e o código bcd2ssd é responsável por converter um número BCD para um display de 7 segmentos. \
+O código binAdder é responsável por somar dois números binários de 8 bits, e o código bcd2ssd é responsável por converter um número BCD para um display de 7 segmentos. 
+
 Por fim, o código project1 declara os componentes utilizados e realiza a conexão entre eles.
 
 = Conclusão:
-\
 
-Podemos concluir que a implementação X é mais rápida devido ao tempo de propagação amostrado em cada um dos casos. Também podemos concluir que a implementação Y é mais eficiente em termos de área, pois o consumo de área foi menor em relação à implementação X. 
+Podemos concluir que a implementação 1 é mais rápida devido ao tempo de propagação amostrado em cada um dos casos. Também podemos concluir que a implementação Y é mais eficiente em termos de área, pois o consumo de área foi menor em relação à implementação X. 
 
 #table(
   columns: (1fr, 1fr, 1fr),
-  table.header[Implementacao][Área][Tempo de propagação],
-  [Parte 1], [], [],
-  [Parte 2], [], [],
+  align: (left, center, center),
+  table.header[Implementacao][Área (LE)][Tempo de propagação (ns)],
+  [Parte 1], [48], [3.823],
+  [Parte 2], [83], [13.699],
 )
 
 = Códigos VHDL utilizados - Parte 1:

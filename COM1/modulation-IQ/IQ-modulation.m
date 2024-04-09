@@ -118,7 +118,6 @@ xlabel('Tempo (s)')
 ylabel('Amplitude')
 
 % Verificando o sinal multiplexado: 
-
 figure(3)
 subplot(211)
 plot(t,multiplexed_signal,'b')
@@ -134,7 +133,6 @@ xlabel('Frequência (Hz)')
 ylabel('Magnitude')
 
 % Realizando a demodulação do sinal no receptor: 
-
 demodulated_cos = multiplexed_signal .* carrier_cos;
 demodulated_sin = multiplexed_signal .* carrier_sin;
 
@@ -207,9 +205,7 @@ title('Sinal Modulante (Portadora Seno) Demodulado (Frequency domain)')
 xlabel('Frequência (Hz)')
 ylabel('Magnitude')
 
-% =======================
 % Comparando sinal transmitido com sinal recebido: 
-
 figure(4)
 subplot(221)
 plot(t, demodulated_cos_filtered, 'r')
@@ -239,8 +235,7 @@ title('Sinal Modulante da Portadora Seno (Time domain)')
 xlabel('Tempo (s)')
 ylabel('Amplitude')
 
-% Calculando a densidade espectral do sinal modulado: 
-
+% Calculando/Plotando a densidade espectral do sinal modulado: 
 figure(7)
 subplot(221)
 plot(pwelch(signal_cos), 'r', 'LineWidth', 3);

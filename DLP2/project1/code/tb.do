@@ -1,13 +1,12 @@
 vlib rtl_work
 vmap work rtl_work
 
-vcom -93 -work work {/home/arthur.cmb/eng-dlp2/projeto2/binAdder.vhd}
-vcom -93 -work work {/home/arthur.cmb/eng-dlp2/projeto2/project1.vhd}
-vcom -93 -work work {/home/arthur.cmb/eng-dlp2/projeto2/bcd2ssd.vhd}
-vcom -93 -work work {/home/arthur.cmb/eng-dlp2/projeto2/bin2bcd.vhd}
+vcom -93 -work work {../../binAdder.vhd}
+vcom -93 -work work {../../project1.vhd}
+vcom -93 -work work {../../bcd2ssd.vhd}
+vcom -93 -work work {../../bin2bcd.vhd}
 
 vsim work.project1(ifsc)
-
 do wave.do
 
 force -freeze sim:/project1/reset 1 0, 0 10
