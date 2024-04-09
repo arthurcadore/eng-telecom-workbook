@@ -12,39 +12,75 @@
   doc,
 )
 
-= Descrição de desenvolvimento
+= Introdução
 
-= Conceitos teóricos utilizados
+Neste relatório, está explicita duas implementações de soma de números representados em binário. Os números a serem somados serão inseridos no circuito como dois vetores de bits (8bits cada), desta forma, o somador poderá somar números de 0 a 99. 
 
-asdsd
+A primeira implementação será realizada diretamente em BCD, ou seja, a soma dos vetores de bits é realizada em BCD e em seguida convertida para SSD (representação para display de 7-segmentos) enquanto que na segunda implementação, a soma é realizada em binário primeiro, e em seguida convertida para BCD e posteriormente para SSD.
 
+O objetivo deste relatório é comparar o consumo de área e o tempo de propagação entre as duas implementações, e determinar qual é a mais eficiente e adequada para cenários de aplicação. 
 
 = Implementação com somador BCD
+
+A primeira implementação foi realizada diretamente com a soma em BCD e a conversão para SSD. Para isso, utilizamos um somador BCD de 4 dígitos, que soma dois números BCD de 4 dígitos e retorna o resultado em BCD.
+
+Como a soma é de números com 2 algarismos, é necessário 8 bits (4 mais 4) para a representação em BCD. Portanto, a entrada do somador é de dois vetores de 8bits. 
 
 #figure(
   outlined: true,
   image("./pictures/RTL-P1.png", width: 80%),
-  caption: [Definições de $x_1[n]$ e $x_2[n]$ \ Figura elaborada pelo autor],
+  caption: [RTL - Circuito da Primeira Parte \ Figura elaborada pelo autor],
   supplement: "Figura"
 );
 
+Como podemos ver na imagem apresentada acima, o RTL mostra a implementação do somador BCD de 4 dígitos. O somador recebe dois vetores de 4 bits cada (um para dezena e outro para a unidade), e retorna um vetor de 4 bits, para o somador da unidade, o carry out é enviado para o somador da dezena.
 
-Para implementação da primeir parte da atividade, implementamos quatro códigos VHDL para a contagem ocorrer em diretamente em BCD. 
+Em seguida, são utilizados três conversores BCD para SSD, que convertem um número BCD de 4 bits para um display de 7 segmentos, para a representação do número somado.
 
-Para isso, utilizamos os códigos bcd_counter, bcd2ssd, bcd2ssd e project1.
+Para verificar seu funcionamento, na primeira etapa, realizamos um testebench para verificar se a implementação está correta. Abaixo está a simulação do testbench: 
+
+#figure(
+  outlined: true,
+  image("./pictures/RTLSIM-P1.png", width: 80%),
+  caption: [Simulação RTL - Primeira parte\ Figura elaborada pelo autor],
+  supplement: "Figura"
+);
 
 = Implementação com somador binário e conversor BCD
 
-Para realizar a segunda etapa da atividade, implementamos quatro códigos VHDL para a contagem ocorrer em binário (de maneira mais simples), e em seguida realizar sua conversão para BCD. Para isso, utilizamos os códigos bin2bcd, binAdder e bcd2ssd, além de um código que declara os componentes utilizados, chamado project1.
+Para realizar a segunda etapa da atividade, implementamos quatro códigos VHDL para a contagem ocorrer em binário (de maneira mais simples), e em seguida realizar sua conversão para BCD (oque é mais custoso em relação a primeira parte da atividade). Para isso, utilizamos os códigos bin2bcd, binAdder e bcd2ssd, além de um código que declara os componentes utilizados, chamado project1.
 
-O código bin2bcd é responsável por converter um número binário de 8 bits para BCD, dividindo o número em centenas, dezenas e unidades. \
+#figure(
+  outlined: true,
+  image("./pictures/RTL-P2.png", width: 80%),
+  caption: [RTL - Circuito da Segunda Parte\ Figura elaborada pelo autor],
+  supplement: "Figura"
+);
+
+Como podemos notar, nesta segunda implementação, os dois vetores de bits são diretamente somados e em seguida convertidos para BCD e posteriormente para SSD, para isso, os seguintes códigos (representados por componentes) foram utilizados:
+
+O código bin2bcd é responsável por converter um número binário de 8 bits para BCD, dividindo o número em centenas, dezenas e unidades. 
+\
+
 O código binAdder é responsável por somar dois números binários de 8 bits, e o código bcd2ssd é responsável por converter um número BCD para um display de 7 segmentos. 
 
-Por fim, o código project1 declara os componentes utilizados e realiza a conexão entre eles.
+\
+Por fim, o código "project1" declara os componentes utilizados e realiza a conexão entre eles.
 
-= Conclusão:
+Para verificarmos seu funcionamento, realizamos um testbench para verificar se a implementação está correta. Abaixo está a simulação do testbench:
 
-Podemos concluir que a implementação 1 é mais rápida devido ao tempo de propagação amostrado em cada um dos casos. Também podemos concluir que a implementação Y é mais eficiente em termos de área, pois o consumo de área foi menor em relação à implementação X. 
+#figure(
+  outlined: true,
+  image("./pictures/RTLSIM-P2.png", width: 80%),
+  caption: [Simulação RTL - Segunda parte\ Figura elaborada pelo autor],
+  supplement: "Figura"
+);
+
+Podemos notar que a implementação 2 é mais complexa que a implementação 1, pois a implementação 2 realiza a soma em binário e em seguida converte para BCD e SSD, enquanto que a implementação 1 realiza a soma diretamente em BCD e converte para SSD.
+
+= Conclusão
+
+A partir dos resultados obtidos, podemos concluir que a implementação 1 é mais rápida devido ao tempo de propagação amostrado em cada um dos casos. Também podemos concluir que a implementação Y é mais eficiente em termos de área, pois o consumo de área foi menor em relação à implementação X. 
 
 #table(
   columns: (1fr, 1fr, 1fr),
@@ -54,61 +90,14 @@ Podemos concluir que a implementação 1 é mais rápida devido ao tempo de prop
   [Parte 2], [83], [13.699],
 )
 
-= Códigos VHDL utilizados - Parte 1:
-\
-
-#sourcecode[```vhd
-library ieee;
-use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
-use ieee.math_real.all;
-
-entity bcd_adder_4d is
-    port(
-        b0, b1: in std_logic_vector(3 downto 0);
-        a0, a1: in std_logic_vector(3 downto 0);
-        s0, s1, s2: out std_logic_vector(3 downto 0)
-    );
-end entity bcd_adder_4d;
-
-architecture bcd_adder_4d of bcd_adder_4d is
-    component bcd_adder is
-        port(
-            cin: in std_logic;
-            a, b: in std_logic_vector(3 downto 0);
-            s: out std_logic_vector(3 downto 0);
-            cout: out std_logic
-        );
-    end component;
-
-    signal c0, c1: std_logic;
-begin
-    bcd_adder_0: bcd_adder port map(
-        cin => '0',
-        a => a0,
-        b => b0,
-        s => s0,
-        cout => c0 
-    );
-
-    bcd_adder_1: bcd_adder port map(
-        cin => c0,
-        a => a1,
-        b => b1,
-        s => s1,
-        cout => c1
-    );
-
-    s2 <= "000" & c1;
-
-end architecture bcd_adder_4d;
-```]
-
-
 
 
 = Códigos VHDL utilizados - Parte 2:
-\
+
+Para a segunda parte, utilizei outro arquivo bin2bcd.vhd, ao invés do arquivo provido pelo professor em aula, devido a dificuldades de coloca-lo em operação. 
+
+Como a implementação abaixo não necessita de registradores para operar, o calculo de área e tempo de propagação foi feito sem necessidade de alterações, garantindo confiabilidade no resultado obtido. 
+
 == bin2bcd
 #sourcecode[```vhd
 library ieee;
@@ -136,6 +125,8 @@ begin
     su     <= std_logic_vector(resize(su_uns, 4));
 end architecture;
 ```]
+
+O código binAdder é reponsavel por somar dois números binários de 7 (128 represetações possiveis, e portanto atendendo a especificação) bits e retornar o resultado em binário com 8 bits.
 
 == binAdder
 #sourcecode[```vhd
@@ -173,6 +164,8 @@ end v1;
 ```]
 
 == bcd2ssd:
+
+O código bcd2ssd é responsável por converter um número BCD de 4 bits para um display de 7 segmentos.
 
 #sourcecode[```vhd
 library ieee;
@@ -216,7 +209,8 @@ end architecture bcd2ssd_v1;
 ```]
 
 == Project-1 (declaração de componentes):
-\
+
+O código project1 declara os componentes utilizados e realiza a conexão entre eles.
 
 #sourcecode[```vhd
 library ieee;
