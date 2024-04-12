@@ -12,20 +12,20 @@
   doc,
 )
 
-= Introdução
+= Exemplo de instânciação de componentes: 
 
-Seção I - Descrição do que será desenvolvido/abordado no relatório
-
-Imagem de exemplo: 
+== Imagem de exemplo: 
 
 #figure(
-  outlined: true,
-  image("./pictures/image.png", width: 60%),
-  caption: [Definições de $x_1[n]$ e $x_2[n]$ \ Figura elaborada pelo autor],
-  supplement: "Figura"
-);
+  figure(
+    image("./pictures/timeDomain.png"),
+    numbering: none,
+    caption: [Sinal de entrada no domínio do tempo]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
 
-Tabela de exemplo: 
+== Tabela de exemplo: 
 
 #table(
   columns: (1fr, 1fr, 1fr),
@@ -34,9 +34,8 @@ Tabela de exemplo:
   [Parte 2], [], [],
 )
 
-trecho de código de exemplo: 
+== Trecho de código de exemplo: 
 
-== bin2bcd
 #sourcecode[```vhd
 library ieee;
 use ieee.std_logic_1164.all;
@@ -48,21 +47,11 @@ entity bin2bcd is
         sd, su, sc : out std_logic_vector (3 downto 0)
     );
 end entity;
-
-architecture ifsc_v1 of bin2bcd is
-    signal A_uns          : unsigned (7 downto 0);
-    signal sd_uns, su_uns, sc_uns : unsigned (7 downto 0);
-
-begin
-    A_uns  <= unsigned(A);
-	 sc_uns <= A_uns/100;
-    sd_uns <= A_uns/10;
-    su_uns <= A_uns rem 10;
-    sc     <= std_logic_vector(resize(sc_uns, 4));
-    sd     <= std_logic_vector(resize(sd_uns, 4));
-    su     <= std_logic_vector(resize(su_uns, 4));
-end architecture;
 ```]
+
+= Introdução
+
+Seção I - Descrição do que será desenvolvido/abordado no relatório
 
 = Fundamentação teórica
 

@@ -20,8 +20,7 @@ O objetivo deste relatório é apresentar o desenvolvimento de um sistema de mod
 Neste relatório será apresentado a fundamentação teórica do processo de modulação e demodulação em frequência, bem como a análise dos sinais modulados e demodulados, os scripts MATLAB utilizados e os resultados obtidos.
 \
 
-Desta forma, poderemos compreender o processo de modulação e demodulação FM, bem como 
-
+Desta forma, poderemos compreender o processo de modulação e demodulação FM, bem como a análise dos sinais modulados e demodulados, e a importância deste processo para a transmissão de sinais de áudio em sistemas de comunicação.
 
 = Fundamentação teórica
 
@@ -29,7 +28,19 @@ Seção II - Conceitos teóricos utilizados no relatório
 
 = Análise dos resultados
 
-Seção III - Apresentação e comentários dos gráfios/figuras das etapas de desenvolvimento do relatório
+Inicialmente, foi feita a importação de um sinal de áudio para ser utilizado como modulante da portadora em frequência, para transmissão em FM. 
+
+A figura abaixo mostra o plot do sinal no domínio do tempo, bem como seu respectivo plot do sinal no domínio da frequência.
+
+#figure(
+  figure(
+    image("./pictures/timeDomain.png"),
+    numbering: none,
+    caption: [Sinal de entrada no domínio do tempo]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
 
 = Scripts e Códigos Utilizados:
 
