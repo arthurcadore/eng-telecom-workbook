@@ -64,8 +64,11 @@ Seção III - Apresentação e comentários dos gráfios/figuras das etapas de d
 = Scripts e Códigos Utilizados:
 Seção IV -  Scripts e Codigos
 
-= Conclusões
+= Conclusão
 Seção V - Conclusões
 
 = Referências
-Seção VI - Referências bibliograficas
+
+Para o desenvolvimento deste relatório, foi utilizado o seguinte material de referência:
+
+- #link("https://www.researchgate.net/publication/287760034_Software_Defined_Radio_using_MATLAB_Simulink_and_the_RTL-SDR")[Software Defined Radio Using MATLAB & Simulink and the RTL-SDR, de Robert W. Stewart]

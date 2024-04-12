@@ -250,7 +250,7 @@ modulated_f = fft(modulated_signal)/length(modulated_signal);
 modulated_f = fftshift(modulated_f);
 ```]
 
-= Conclusões
+= Conclusão
 
 
 A partir dos conceitos vistos e dos resultados obtidos, podemos concluir que o processo de modulação e demodulação em frequência é uma tecnica eficiente para a transmissão de sinais de áudio em sistemas de comunicação, pois permite a transmissão de sinais de áudio com qualidade e fidelidade com baixa interência devido a informação estar sendo carregada na variação de frequência e não na amplitude do sinal. 
