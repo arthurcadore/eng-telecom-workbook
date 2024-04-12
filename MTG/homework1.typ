@@ -3,6 +3,9 @@
 #show heading: set block(below: 1.5em)
 #show par: set block(spacing: 1.5em)
 #set text(font: "Arial", size: 12pt)
+#set page(
+  footer: "Engenharia de Telecomunicações - IFSC-SJ",
+)
 
 #show: doc => report(
   title: "Casamento de Impedâncias por Elementos Mistos",
@@ -37,7 +40,7 @@ $"Zin"$, 5,  ctrl(0, show-dot:false)
 - *Z0* é a impedância da linha de transmissão 
 - *ZL* é a impedância da carga.
 
-==== Linha Casada:
+=== Linha Casada:
 Sendo assim, o circuito final após o casamento por elementos mistos é composto por uma linha de transmissão de comprimento variável e um componente reativo, que juntos, casam a impedância da carga, desta forma, na entrada do circuito, a impedância imaginária é cancelada e a impedância real (normalizada) é igual a 1, ou seja, casada com a linha. 
 
 #align(center)[
@@ -62,8 +65,8 @@ $"Zin"$, 3, $"XLC"$, 4,  ctrl(0, show-dot:false),
   columns: (1fr, 1fr, 1fr),
   align: (left, center, center),
   table.header[][Impedância da linha ($ohm$)][Impedância da Carga ($ohm$)],
-  [Valor Real], [50], [$30 + 70$j],
-  [Valor Normalizado], [1], [$ 0,6 + 1,4$j],
+  [Valor Real], [50], [$11 + 25$j],
+  [Valor Normalizado], [1], [$ 0,22 + 0,5$j],
 )
 
 == Representação na carta
@@ -85,19 +88,21 @@ Desta forma, podemos concluir que os valores necessários para o casamento misto
 #table(
   columns: (1fr, 1fr, 1fr),
   align: (left, center, center),
-  table.header[][Impedância da LTC($ohm$)][Comprimento da LTC ($ohm$)],
-  [Valor Normalizado], [50], [$30 + 70$j],
-  [Valor Real], [50], [$30 + 70$j],
+  table.header[][Impedância vista na LTC($ohm$)][Comprimento da LTC ($lambda$)],
+  [Valor Normalizado], [$1 + 1,9$j], [0,11$lambda$],
+  [Valor Real], [$50+95$j], [0,11$lambda$],
 )
 
 === Componente de Casamento Reativo: 
+
+Com a parte real da impedância casada, podemos calcular o valor do componente reativo a ser adicionado ao circuito para casar a parte imaginária da impedância
 
 #table(
   columns: (1fr, 1fr),
   align: (left, center),
   table.header[][Impedância do componente($ohm$)],
-  [Valor Normalizado], [50],
-  [Impedância Real], [50],
+  [Valor Normalizado], [1,9j],
+  [Impedância Real], [95j],
 )
 
 #let impedancia = "indutiva"
@@ -106,7 +111,6 @@ Desta forma, podemos concluir que os valores necessários para o casamento misto
 #let c 
 #let l
 #let piNumb = 3.14159265359
-
 
 Realizando o calculo de da impedância #impedancia, obtemos o seguinte valor do componente a ser adicionado a posição "XLC" do circuito de linha casada. Para realizar o calculo, podemos aplicar a equação apresentada abaixo:
 \
@@ -141,12 +145,24 @@ $"XL" = 2 * pi * f * L arrow #impedanciaV = 2 * pi * f * L arrow L = #impedancia
 L = #l
 $
 ]
-  table(
-    columns: (1fr, 1fr),
-    align: (left, center),
-    table.header[Valor do Indutor ($L$)][#l]
-  )
 }
+
+== Circuito resultante: 
+
+O circuito resultante ficará da seguinte forma apresentada abaixo, onde os componentes adicionados fazem o casamento da impedância da carga, desta forma, a impedância de entrada do circuito é casada com a linha de transmissão:
+
+#align(center)[
+#{
+import "@preview/quill:0.2.1": *
+
+quantum-circuit(
+scale: 120%,
+$"Zin"$, 2, $"50"ohm$, ctrl(1),1, $"0,11"lambda$, 1, $"11+25j"ohm$, ctrl(1, show-dot:false),  [\ ],
+$"Zin"$, 3, $"+95j"ohm$, 4,  ctrl(0, show-dot:false),
+)
+}
+]
+
 
 = Referências
 

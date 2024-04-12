@@ -3,6 +3,9 @@
 #show heading: set block(below: 1.5em)
 #show par: set block(spacing: 1.5em)
 #set text(font: "Arial", size: 12pt)
+#set page(
+  footer: "Engenharia de Telecomunicações - IFSC-SJ",
+)
 
 #show: doc => report(
   title: "Nome do Relatório",
