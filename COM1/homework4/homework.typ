@@ -88,7 +88,7 @@ Uma vez com o sinal modulado, e multiplexado, podemos transmiti-lo pelo meio fí
 Na recepção do sinal, precisamos realizar sua demodulação para ter novamente o sinal de áudio original. Para isso, utilizamos um demodulador FM, que é basicamente um circuito que realiza a derivação do sinal modulado, conforme o script abaixo:
 
 #sourcecode[```matlab
-
+a
 ```]
 
 Com o sinal demodulado, utilizamos um filtro passa-baixas para eliminar as frequências indesejadas, e obter o sinal de áudio original.
@@ -251,7 +251,14 @@ modulated_f = fftshift(modulated_f);
 ```]
 
 = Conclusões
-Seção V - Conclusões
+
+
+A partir dos conceitos vistos e dos resultados obtidos, podemos concluir que o processo de modulação e demodulação em frequência é uma tecnica eficiente para a transmissão de sinais de áudio em sistemas de comunicação, pois permite a transmissão de sinais de áudio com qualidade e fidelidade com baixa interência devido a informação estar sendo carregada na variação de frequência e não na amplitude do sinal. 
+
+Desta forma, podemos compreender seu uso em sistemas de telecomunicação utilizado atualmente pelas rádios analógicas regionais para transmissão de sinais de áudio em broadcast para toda a região, visto que esse tipo de transmissão possui um baixo índice de ruído e distorção. 
 
 = Referências
-Seção VI - Referências bibliograficas
+
+Para o desenvolvimento deste relatório, foi utilizado o seguinte material de referência:
+
+- #link("https://www.researchgate.net/publication/287760034_Software_Defined_Radio_using_MATLAB_Simulink_and_the_RTL-SDR")[Software Defined Radio Using MATLAB & Simulink and the RTL-SDR, de Robert W. Stewart]
