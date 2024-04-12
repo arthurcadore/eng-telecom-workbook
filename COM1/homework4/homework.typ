@@ -28,6 +28,8 @@ Seção II - Conceitos teóricos utilizados no relatório
 
 = Análise dos resultados
 
+== Sinal de áudio Aleatório: 
+
 Inicialmente, foi feita a importação de um sinal de áudio para ser utilizado como modulante da portadora em frequência, para transmissão em FM. 
 
 A figura abaixo mostra o plot do sinal no domínio do tempo, bem como seu respectivo plot do sinal no domínio da frequência.
@@ -41,6 +43,123 @@ A figura abaixo mostra o plot do sinal no domínio do tempo, bem como seu respec
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+Uma vez com o sinal de entrada definido, a modulação em frequência foi realizada através da integração do argumento de fase da portadora a partir do sinal da modulante, conforme o script abaixo: 
+
+#sourcecode[```matlab
+% Creating the FM modulated signal: 
+phase_argument = 2*pi*k_f*cumsum(modulating_signal)*(Ts);
+modulated_signal = A_carrier * cos(2*pi*f_carrier*t + phase_argument);
+```]
+
+Onde na figura acima os parâmetros são: 
+
+-  `modulating_signal` é o sinal de áudio importado. 
+-  `k_f` é a sensibilidade do modulador para variação de frequência. 
+-  `Ts` é o período de amostragem do sinal.
+-  `A_carrier` é a amplitude da portadora
+-  `f_carrier` é a frequência da portadora. 
+-  `t` é o vetor de tempo do sinal modulado (utilizado para realizar a modulação em FM).
+-  `phase_argument` é o argumento de fase da portadora do sinal, gerado a partir da integração do sinal modulante.
+-  `modulated_signal` é o sinal modulado em FM.
+
+Uma vez com o sinal modulado em FM, podemos compreender o formato do sinal modulado no domínio do tempo e da frequência, conforme a figura abaixo:
+
+#figure(
+  figure(
+    image("./pictures/FrequencyDomain.png"),
+    numbering: none,
+    caption: [Sinal modulado em FM no domínio do tempo e da frequência]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+Uma vez com o sinal modulado, e multiplexado, podemos transmiti-lo pelo meio físico sem que haja interferência entre cada portadora (idealmente). O sinal no meio físico é ilustrado abaixo em azul. 
+\
+
+#figure(
+  figure(
+    image("./pictures/FrequencyDomain.png"),
+    numbering: none,
+    caption: [Sinal modulado e "transmitido" no meio físico]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+Na recepção do sinal, precisamos realizar sua demodulação para ter novamente o sinal de áudio original. Para isso, utilizamos um demodulador FM, que é basicamente um circuito que realiza a derivação do sinal modulado, conforme o script abaixo:
+
+#sourcecode[```matlab
+
+```]
+
+Com o sinal demodulado, utilizamos um filtro passa-baixas para eliminar as frequências indesejadas, e obter o sinal de áudio original.
+
+Para isso, foi utilizado um filtro FIR de ordem relativamente alta (neste caso 100), com frequência de corte de 20kHz. A frequência neste script foi fixada em 20kHz, pois trata-se de um sinal de áudio, e portanto, não há informação relevante acima desta frequência para ser capturada. 
+
+Para verificar se de fato o filtro está atuando corretamente, abaixo está um plot da resposta em frequência do filtro FIR:
+
+#figure(
+  figure(
+    image("./pictures/FrequencyDomain.png"),
+    numbering: none,
+    caption: [Resposta em frequência do filtro FIR]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+Com o sinal demodulado e filtrado, podemos realizar seu plot no dominio do tempo e também realizar a FFT do sinal para observar as componentes de frequência do sinal demodulado.
+
+#figure(
+  figure(
+    image("./pictures/FrequencyDomain.png"),
+    numbering: none,
+    caption: [Sinal demodulado no domínio do tempo e da frequência]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+Como podemos observar, o sinal demodulado é muito semelhante ao sinal de áudio original, com pequenas distorções devido ao processo de modulação e demodulação em frequência.
+
+== Sinal Senoidal Modulante
+
+Devido as variações no processo de modulação e demodulação apresentadas anteriormente, foi feita a análise de um sinal puramente senoidal como modulante em FM, para verificar se o processo de modulação e demodulação em frequência está correto. 
+
+Inicialmente, foi feita a definição dos parâmetros do sinal modulante e em seguida o plot do mesmo no dominio do tempo e também da frequência: 
+
+#figure(
+  figure(
+    image("./pictures/timeDomain.png"),
+    numbering: none,
+    caption: [Sinal senoidal modulante no domínio do tempo e da frequência]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+Em seguida, com o sinal modulante definido, foi feita a modulação em frequência do sinal senoidal, note que para esse processo de modulação, o sinal modulante é uma senoide pura, e portanto, o sinal modulado em FM possui uma variação suave e periódica de frequência ao longo do tempo. 
+\
+
+Sendo assim possivel analisar o sinal modulado no dominio do tempo e da frequência, conforme a figura abaixo:
+
+#figure(
+  figure(
+    image("./pictures/FrequencyDomain.png"),
+    numbering: none,
+    caption: [Sinal modulado em FM no domínio do tempo e da frequência]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+Com o sinal modulado em FM definido, podemos transmiti-lo pelo meio físico, e realizar a demodulação do sinal para obter o sinal senoidal original.
+
+Na recepção, foi feita a demodulação do sinal modulado, e em seguida a filtragem do sinal demodulado para obter o sinal senoidal original, a figura abaixo mostra o sinal demodulado no dominio do tempo e da frequência:
+
+#figure(
+  figure(
+    image("./pictures/FrequencyDomain.png"),
+    numbering: none,
+    caption: [Sinal demodulado no domínio do tempo e da frequência]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
 
 = Scripts e Códigos Utilizados:
 
