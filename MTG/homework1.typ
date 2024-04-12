@@ -97,9 +97,56 @@ Desta forma, podemos concluir que os valores necessários para o casamento misto
   align: (left, center),
   table.header[][Impedância do componente($ohm$)],
   [Valor Normalizado], [50],
-  [Valor Real], [50],
+  [Impedância Real], [50],
 )
 
+#let impedancia = "indutiva"
+#let frequencia = 1e9
+#let impedanciaV = 0.1
+#let c 
+#let l
+#let piNumb = 3.14159265359
+
+
+Realizando o calculo de da impedância #impedancia, obtemos o seguinte valor do componente a ser adicionado a posição "XLC" do circuito de linha casada. Para realizar o calculo, podemos aplicar a equação apresentada abaixo:
+\
+
+#if impedancia == "capacitiva"{
+
+c = 1/(2 * piNumb * frequencia * impedanciaV)
+
+align(center)[
+$"XC" = 1/(2 *pi * f * C) arrow #impedanciaV = 1/(2 * pi * frequencia * C) arrow C = 1/(2 * pi * frequencia * impedanciaV) 
+
+\
+
+C = #c 
+$
+]
+  table(
+    columns: (1fr, 1fr),
+    align: (left, center),
+    table.header[Valor do Capacitor ($F$)][#c]
+  )
+  
+}else {
+
+l = impedanciaV / (2 * piNumb * frequencia)
+
+align(center)[
+$"XL" = 2 * pi * f * L arrow #impedanciaV = 2 * pi * f * L arrow L = #impedanciaV / (2 * pi * f)
+
+\
+
+L = #l
+$
+]
+  table(
+    columns: (1fr, 1fr),
+    align: (left, center),
+    table.header[Valor do Indutor ($L$)][#l]
+  )
+}
 
 = Referências
 
