@@ -14,7 +14,14 @@
 
 = Introdução
 
-Seção I - Descrição do que será desenvolvido/abordado no relatório
+O objetivo deste relatório é apresentar o desenvolvimento de um sistema de modulação e demodulação em frequência (FM) para sinais de áudio. O sistema foi desenvolvido através de linguagem MATLAB (Octa ve), e tem como objetivo principal a compreensão do processo de modulação e demodulação em frequência, bem como a análise dos sinais modulados e demodulados.
+\
+
+Neste relatório será apresentado a fundamentação teórica do processo de modulação e demodulação em frequência, bem como a análise dos sinais modulados e demodulados, os scripts MATLAB utilizados e os resultados obtidos.
+\
+
+Desta forma, poderemos compreender o processo de modulação e demodulação FM, bem como 
+
 
 = Fundamentação teórica
 
