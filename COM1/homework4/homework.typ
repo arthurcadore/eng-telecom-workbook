@@ -24,7 +24,91 @@ Desta forma, poderemos compreender o processo de modulação e demodulação FM,
 
 = Fundamentação teórica
 
-Seção II - Conceitos teóricos utilizados no relatório
+== Principais Conceitos
+
+Os principais conceitos teóricos abordados neste relatório são: 
+
+- Modulação FM: A modulação em frequência (FM) é um processo de modulação em que a frequência da portadora é variada de acordo com a amplitude do sinal modulante. A variação da frequência da portadora é proporcional à amplitude do sinal modulante, resultando em um sinal modulado em frequência. A modulação em frequência é amplamente utilizada em sistemas de comunicação para transmissão de sinais de áudio, devido à sua alta qualidade de áudio e baixa interferência.
+
+- Demodulação FM: A demodulação em frequência é o processo de recuperar o sinal modulante original a partir do sinal modulado em frequência. A demodulação FM é realizada através da diferenciação do sinal modulado, que resulta em um sinal que contém a informação de frequência do sinal modulante original. O sinal demodulado é então filtrado para remover as frequências indesejadas e obter o sinal de áudio original.
+
+- Sinal Portador: O sinal portador é um sinal (tipicamente de alta frequência) que é modulado pela informação do sinal modulante. O sinal portador é a base para a transmissão do sinal modulado em frequência e é recuperado na demodulação para obter o sinal de áudio original.
+
+- Sinal Modulante: O sinal modulante é o sinal de áudio que é modulado em frequência para transmissão em sistemas de comunicação. O sinal modulante é a informação que é transmitida através da variação da frequência da portadora.
+
+== Resumo dos Itens abordados (Material de Referência)
+
+Além dos conceitos base apresentados acima, o material de referência também aborda os seguintes tópicos, que são importantes para o entendimento do processo de modulação e demodulação em frequência (itens 9.1, 9.2, 9.3 e 9.4). 
+
+=== The history of the FM Standard 
+
+Objetivo: Apresentar a modulação em frequência (FM) e sua importância para a transmissão de sinais de áudio em sistemas de comunicação.
+\
+
+Nesta sessão do livro, o autor apresenta a história da modulação em frequência (FM) e sua importância para a transmissão de sinais de áudio em sistemas de comunicação. O nacimento da modulação em frequência ocorreu em 1933 com o americano Edwin Howard Armstrong, que desenvolveu e demonstrou a rádio FM como uma solução para o "problema do ruído estático". 
+\
+
+Em 1912, Edwin Armstrong descobriu que, se as ondas eletromagnéticas emitidas pelos receptores de rádio (de válvula de vidro) fossem alimentadas de volta através do hardware (circuito de RF), a intensidade do sinal aumentava, e assim, ondas de rádio eram geradas.
+\
+
+De acordo com o livro, ele chamou esse processo de feedback positivo de regeneração, e é considerado uma das descobertas mais importantes na história do rádio, pois significava que receptores de rádio também poderiam ser usados como transmissores.
+
+=== The mathematics of FM & the Modulation Index 
+
+Objetivo: Apresentar a matemática da modulação em frequência (FM) e o índices de modulação FM.
+
+Nesta sessão, o autor explica sobre a construção de um modulador FM analógico através de um VCO (Voltage Controller Oscillator). O VCO gera um sinal senoidal cuja fase (e, portanto, efetivamente a frequência) muda em resposta a variações de amplitude de um sinal de controle de entrada. 
+\
+
+Quando o sinal modulante é inserido no VCO, ele é multiplicado por uma constante (k_f) que representa a relação de variação de tensão proporcional a variação de frequência. 
+\ 
+Assim, conforme o sinal modulante varia (supondo uma senoide por exemplo), o sinal modulado tem sua frequência variada na mesma proporção que a variação de tensão ao longo do tempo. 
+\
+A fase do senoide é determinada pelo valor instantâneo de tensão do sinal modulante, e a frequência do sinal modulado é determinada pela taxa de variação da fase do sinal modulante.
+
+=== FM Signal Bandwidth
+
+Objetivo: Apresentar a largura de banda do sinal FM e as diferenças entre NFM (Narrowband FM) e WFM (Wideband FM).
+
+Nesta sessão, o autor apresenta a largura de banda do sinal FM e as diferenças entre NFM (Narrowband FM) e WFM (Wideband FM). A largura de banda do sinal FM é determinada pela taxa de variação da frequência do sinal modulante. 
+\
+
+A modulação em frequência é considerada um processo de Banda Estreita ou Banda Larga, e o valor do índice de modulação determina isso.  Se o índice de modulação de um sinal FM for << 1, é considerado FM de Banda Estreita (NFM), enquanto se for >> 1, é FM de Banda Larga (WFM).
+
+==== NFM (Narrowband FM): 
+
+A modulação em frequência de banda estreita (NFM) é caracterizada por um índice de modulação << 1, resultando em um desvio de frequência máximo limitado, geralmente em torno de 5kHz. Neste cenário, as aproximações podem ser feitas para simplificar os cálculos, já que a contribuição da frequência instantânea é negligenciável. A equação de modulação FM pode ser expandida usando identidades trigonométricas apropriadas. A NFM é comumente usada em aplicações como comunicações de rádio bidirecionais e sistemas de rádio de curto alcance, onde a largura de banda é limitada e a fidelidade do sinal é essencial.
+
+==== WFM (Wideband FM):
+
+A modulação em frequência de banda larga (WFM) é o padrão usado por estações de rádio comerciais, caracterizado por um índice de modulação >> 1. Neste caso, o desvio de frequência máximo permitido é maior, frequentemente em torno de 75kHz. A WFM oferece uma qualidade de áudio superior à NFM, mas requer uma largura de banda maior. Durante o processo de modulação, são criadas um número infinito de bandas laterais ao redor da frequência da portadora, o que exige uma limitação da largura de banda para evitar interferências entre canais. As estações de rádio FM geralmente são separadas por 0,2MHz nos receptores analógicos devido a essa limitação de largura de banda.
+
+=== FM Demodulation Using Differentiation 
+
+Objetivo: Apresentar a demodulação em frequência utilizando a diferenciação do sinal modulado.
+\
+
+Nesta seção, o autor descreve o processo de demodulação do sinal FM modulado através de diferenciação do sinal recebido. Para o sinal transmitido (e recebido perfeitamente), um novo sinal diferenciado denotado como (onde o traço denota a derivada) é gerado pelo receptor. 
+\
+
+Neste método, o sinal terá a aparência de um sinal AM-DSB-TC no domínio do tempo, pois possui uma envoltória de informação (embora, ao contrário de uma envoltória AM padrão, a frequência do componente da portadora ainda muda). De acordo com o autor, as flutuações nesta envoltória são diretamente proporcionais à frequência instantânea do sinal modulado, que deve ser diretamente proporcional à amplitude do sinal de informação original.
+\
+
+Se considerarmos que o termo senoidal de alta frequência pode ser removido por um detector de envoltória (utilizado nos scripts matlab descritos neste documento, veja o código abaixo), fica claro que a amplitude da envoltória é diretamente proporcional à amplitude do sinal de informação. Embora tenha um deslocamento DC (e ganho de resultante da constante de modulação FM), o sinal de áudio original pode ser recuperado com precisão.s
+
+#sourcecode[```matlab
+% Calculating the FM demodulation for the modulated signal
+demodulated_signal = diff(modulated_signal) * fs / k0;
+demodulated_signal = [demodulated_signal, 0];  % Sinal demodulado
+
+% calculating the FFT of the random signal;
+demodulated_f = fft(demodulated_signal)/length(demodulated_signal);
+demodulated_f = fftshift(demodulated_f);
+
+% Calculating the signal wrap. 
+demodulated_wrap = abs(hilbert(demodulated_signal));
+```]
+
 
 = Análise dos resultados
 
