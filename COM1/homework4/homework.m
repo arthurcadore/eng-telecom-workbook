@@ -111,12 +111,36 @@ ylim([0 A_carrier/1000])
 demodulated_signal = diff(modulated_signal) * fs / k0;
 demodulated_signal = [demodulated_signal, 0];  % Sinal demodulado
 
+% Ordem do filtro FIR
+filtro_ordem = 100;
+
+% Frequência de corte do filtro FIR 
+% Como trata-se de um sinal de áudio, a frequência de corte pode ser fixada em 20kHz
+frequencia_corte = 20000;
+
+% Coeficientes do filtro FIR para cada sinal demodulado
+coeficientes_filtro = fir1(filtro_ordem, frequencia_corte/(fs/2));
+
+% Resposta em frequência do filtro FIR para cada sinal demodulado
+[H_fir, f_fir] = freqz(coeficientes_filtro, 1, length(t), fs);
+  
+% Plot da resposta em frequência do filtro:
+figure(6)
+plot(f_fir, abs(H_fir), 'r', 'LineWidth', 3)
+xlim([0 frequencia_corte*1.1])
+title('Resposta em Frequência do Filtro FIR')
+xlabel('Frequência (Hz)')
+ylabel('Magnitude')
+
+% Filtragem dos sinais demodulados
+demodulated_filtered = filter(coeficientes_filtro, 1, demodulated_signal);
+
 % calculating the FFT of the random signal;
-demodulated_f = fft(demodulated_signal)/length(demodulated_signal);
-demodulated_f = fftshift(demodulated_f);
+demodulated_filtered_f = fft(demodulated_filtered)/length(demodulated_filtered);
+demodulated_filtered_f = fftshift(demodulated_filtered_f);
 
 % Calculating the signal wrap. 
-demodulated_wrap = abs(hilbert(demodulated_signal));
+demodulated_wrap = abs(hilbert(demodulated_filtered));
 
 % Plotting the modulated and demodulated signals on time domain:
 figure(3)
@@ -135,15 +159,15 @@ ylabel('Amplitude')
 title('Sinal Demodulado FM (Domínio do Tempo)')
 
 subplot(313)
-plot(t, demodulated_wrap, 'r--', 'LineWidth', 2)
+plot(t, demodulated_filtered, 'r--', 'LineWidth', 2)
 xlim([0.00054 0.00067])
 xlabel('Tempo (s)')
 ylabel('Amplitude')
-title('Envoltória do Sinal Demodulado FM (Domínio do Tempo)')
+title('Sinal Demodulado FM Filtrado (Domínio do Tempo)')
 
 figure(4)
 subplot(211)
-plot(f, demodulated_f, 'k', 'LineWidth', 2)
+plot(f, demodulated_filtered_f, 'k', 'LineWidth', 2)
 xlabel('Frequency (Hz)')
 ylabel('Amplitude')
 title('Demodulated Signal (Frequency Domain)')
@@ -151,9 +175,9 @@ xlim([-f_carrier*1.2 f_carrier*1.2])
 ylim([0 A_carrier/1000])
 
 subplot(212)
-plot(f, abs(demodulated_f), 'k', 'LineWidth', 2)
+plot(f, abs(demodulated_filtered_f), 'k', 'LineWidth', 2)
 xlabel('Frequency (Hz)')
 ylabel('Amplitude')
 title('Absolute Demodulated Signal (Frequency Domain)')
-xlim([-f_carrier*1.2 f_carrier*1.2])a
+xlim([-f_carrier*1.2 f_carrier*1.2])
 ylim([0 A_carrier/1000])
