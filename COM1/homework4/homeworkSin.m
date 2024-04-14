@@ -105,11 +105,15 @@ xlim([-f_carrier*1.2 f_carrier*1.2])
 ylim([0 A_carrier/1000])
 
 % Calculating the FM demodulation for the modulated signal
-si_hat_t = diff(modulated_signal) * fs / k0;
-si_hat_t = [si_hat_t, 0];  % Sinal demodulado
+demodulated_signal = diff(modulated_signal) * fs / k0;
+demodulated_signal = [demodulated_signal, 0];  % Sinal demodulado
+
+% calculating the FFT of the random signal;
+demodulated_f = fft(demodulated_signal)/length(demodulated_signal);
+demodulated_f = fftshift(demodulated_f);
 
 % Calculating the signal wrap. 
-wrap = abs(hilbert(si_hat_t));
+demodulated_wrap = abs(hilbert(demodulated_signal));
 
 % Plotting the modulated and demodulated signals on time domain:
 figure(3)
@@ -121,9 +125,9 @@ ylabel('Amplitude')
 title('Sinal Modulado FM (Domínio do Tempo)')
 
 subplot(212)
-plot(t, si_hat_t, 'b', 'LineWidth', 2)
+plot(t, demodulated_signal, 'b', 'LineWidth', 2)
 hold on
-plot(t, wrap, 'r--', 'LineWidth', 2)
+plot(t, demodulated_wrap, 'r--', 'LineWidth', 2)
 xlim([0.00054 0.00067])
 xlabel('Tempo (s)')
 ylabel('Amplitude')
