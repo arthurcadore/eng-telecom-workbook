@@ -34,9 +34,8 @@ t_final = 2;
 % "t" vector, correspondig to the time period of analysis, on time domain.
 t = [t_inicial:Ts:t_final];
 
-% Import the audioSignal to use as modulating FM signal: 
-[modulating_signal, Hs] = audioread('randomSignal.wav');
-modulating_signal = transpose(modulating_signal);
+% Modulating Singnal for FM modulation
+modulating_signal = A_modulating *cos(2*pi*f_modulating_max*t);
 
 % Calculate the number of zeros to be added
 num_zeros = length(t) - length(modulating_signal);
