@@ -30,9 +30,8 @@ impulse_train(mod(t, 1/fs) == 0) = 1;
 
 signal_sampled = signal .* impulse_train;
 
-
 % Quantidade de níveis desejada (tirando o 0)
-n=4;
+n=2;
 num_levels = 2^n;
 
 % Gerando os níveis de quantização automaticamente
@@ -51,18 +50,39 @@ for i = 1:length(signal_sampled)
 end
 
 figure(1)
-subplot(411)
+subplot(311)
 plot(t,signal)
-xlim([0 5*T])
-subplot(412)
+grid on;
+xlim([0 3*T])
+title('Sinal Senoidal (Dominio do tempo)')
+
+subplot(312)
 stem(t,impulse_train, 'MarkerFaceColor', 'b')
-xlim([0 5*T])
-subplot(413)
+grid on;
+xlim([0 3*T])
+title('Trem de impulsos (Dominio do tempo)')
+
+subplot(313)
 stem(t,signal_sampled, 'LineStyle','none', 'MarkerFaceColor', 'b')
-xlim([0 5*T])
-subplot(414)
+grid on;
+xlim([0 3*T])
+title('Sinal Senoidal Amostrado (Dominio do tempo)')
+
+figure(2)
+subplot(211)
+stem(t,signal_sampled, 'LineStyle','none', 'MarkerFaceColor', 'b')
+grid on;
+xlim([0 3*T])
+title('Sinal Senoidal Amostrado (Dominio do tempo)')
+
+subplot(212)
 stem(t,quantized_signal, 'LineStyle','none', 'MarkerFaceColor', 'b')
-xlim([0 5*T])
+xlim([0 3*T])
+hold on; 
+plot(t,signal, 'r')
+xlim([0 3*T])
+grid on;
+title('Sinal Senoidal Amostrado e Quantizado (Dominio do tempo)')
 
 % convertendo valores quantizados para binário: 
 binary_signal = dec2bin((quantized_signal + 1) * (2^(n-1)), n);
@@ -81,12 +101,21 @@ end
 % Definindo o vetor de tempo para o sinal PCM
 t_pcm = [t_inicial:Ts:t_final];
 
-figure(2)
+figure(3)
+subplot(211)
+stem(t,quantized_signal, 'LineStyle','none', 'MarkerFaceColor', 'b')
+xlim([0 3*T])
+hold on; 
+plot(t,signal, 'r')
+xlim([0 3*T])
+grid on;
+title('Sinal Senoidal Amostrado e Quantizado (Dominio do tempo)')
+
+
+subplot(212)
 stairs(t_pcm, pcm_signal, 'b', 'LineWidth', 2);
-xlim([0 5*T])
+xlim([0 3*T])
 xlabel('Tempo (s)');
 ylabel('Amplitude');
-title('Sinal PCM com multiníveis de amplitude (Onda Quadrada)');
+title('Sinal PCM com Multiníveis de Amplitude (Dominio do tempo)');
 grid on;
-
-
