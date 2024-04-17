@@ -32,7 +32,7 @@ impulse_train(mod(t, 1/fs) == 0) = 1;
 signal_sampled = signal .* impulse_train;
 
 % Quantidade de níveis desejada (tirando o 0)
-n=2;
+n=4;
 num_levels = 2^n;
 
 levels = 2/num_levels;
@@ -90,8 +90,8 @@ repeated_signal = reshape(repmat(binary_signal_concatenated, 2, 1), 1, []);
 
 
 % Superamostragem
-n = 10;
-amplitude =5;
+n = 3*n;
+amplitude = 5;
 repeated_signal_up = upsample(repeated_signal, n);
 
 filtr_tx = ones(1, n);
@@ -147,15 +147,54 @@ t_received = linspace(0, 1, length(t_super)/n);
 
 % Plotando o sinal
 figure(3)
-subplot(211)
-plot(t_received, received_signal);
-xlim([0, 50*T]);
-subplot(212)
-stem(t_received, received_binary);
-xlim([0, 50*T]);
+subplot(311)
+plot(t_received, received_signal,  'LineWidth', 2);
+xlim([0, 150*T]);
+subplot(312)
+stem(t_received, received_binary,  'LineWidth', 2);
+xlim([0, 150*T]);
+subplot(313)
+plot(t_received, received_binary,  'LineWidth', 2);
+xlim([0, 150*T]);
+ylim([-0.1 1.2*max(received_binary)]);
 
 num_erro = sum(xor(received_signal, received_binary)) 
 taxa_erro = num_erro/length(t_super)
 
-% fazer o bi2de 
-% recuperar o sinal analog multiplicando pelo passo. 
+received_binary = received_binary(2:2:end);
+% separa o vetor received_binary em um vetor com strings de tamanho n e usa a função bin2dec para converter para decimal
+n=sqrt(num_levels);
+num_bits = length(received_binary);
+num_groups = floor(num_bits / n);
+
+% Ajusta o vetor de bits para ter um comprimento múltiplo de n
+received_binary_adjusted = received_binary(1:num_groups*n);
+
+% Reshape para formar os grupos de n bits
+received_binary_reshaped = reshape(received_binary_adjusted, n, num_groups)';
+
+% Converte os grupos de bits em números decimais
+received_decimal = bi2de(fliplr(received_binary_reshaped));
+
+% Ajustando a amplitude do sinal; 
+avarage_value = max(received_decimal)/2;
+for i = 1:length(received_decimal)
+    received_decimal(i) = received_decimal(i)-avarage_value;
+end
+
+t_intepreted = linspace(0, 1, length(received_decimal));
+
+received_decimal = transpose(received_decimal);
+
+figure(6)
+subplot(311)
+plot(t_intepreted, received_decimal, 'b', 'LineWidth', 2)
+xlim([0 800*T])
+subplot(312)
+plot(t_intepreted, signal*8, 'r', 'LineWidth', 2)
+xlim([0 800*T])
+subplot(313)
+plot(t_intepreted, received_decimal, 'b', 'LineWidth', 2)
+hold on;
+plot(t_intepreted, signal*8, 'r', 'LineWidth', 2)
+xlim([0 800*T])
