@@ -2,6 +2,8 @@
 ## Author: Arthur Cadore M. Barcella - IFSC - São José
 
 This repository is dedicated to all homeworks and projects developed during the Telecom Engineering course at IFSC. 
+
+![main](./pictures/main.png)
 ---
 
 #### How to Use the Repository:
