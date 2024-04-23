@@ -16,10 +16,37 @@
 
 = Introdução
 
+Neste relatório, será apresentado o desenvolvimento de um relógio digital com precisão de milisegundos, utilizando um PLL (Phase-Locked Loop) para a geração de um sinal de clock de 5 kHz. O projeto foi desenvolvido utilizando a ferramenta Quartus Prime Lite Edition 20.1.0.720 e a placa de desenvolvimento DE2-115.
 
 
+= Implementação 
 
-= Implementação com somador BCD
+A primeira etapa da implementação é a geração de um sinal de clock de 5 kHz. Para isso, foi utilizado um PLL com um clock de entrada de 50 MHz (valor de clock padrão para o chip implantado nesta placa). 
+\
+
+
+Para isso, geramos o PLL através da ferramenta `PLL Intel FPGA IP`. Após a configuração do PLL, o sinal de clock de 5 kHz foi obtido na saída deste componente, sendo na sua configuração um *divisor de frequência de 10.000.*
+\
+
+Abaixo está uma sessão do código VHD gerado pelo Quartus para a configuração do PLL.
+\
+
+#sourcecode[```vhd
+	GENERIC MAP (
+		bandwidth_type => "AUTO",
+		clk0_divide_by => 25000,
+		clk0_duty_cycle => 50,
+		clk0_multiply_by => 1,
+		clk0_phase_shift => "0",
+		compensate_clock => "CLK0",
+		inclk0_input_frequency => 20000,
+		intended_device_family => "Cyclone IV E",
+		lpm_hint => "CBX_MODULE_PREFIX=pll",
+		lpm_type => "altpll",
+		operation_mode => "NORMAL",
+		pll_type => "AUTO",
+```]
+
 
 
 #figure(
@@ -38,13 +65,19 @@
 = Conclusão
 
 
+A partir da implementação do PLL vista anteriormente, juntamente com a implementação de divisão de clock sem o uso do PLL, podemos concluir que a utilização de um PLL é muito útil para a geração de sinais de clock com frequências específicas de maneira confiável.
+
+Isso pois o PLL é capaz de gerar sinais de clock com frequências específicas, além de possuir uma maior precisão e estabilidade em relação a outros métodos de geração de clock.
+
+Abaixo estão as principais diferenças de tempo de propagação e quantidade de registradores utilizados entre a implementação com e sem o uso do PLL: 
+
 #figure(
   figure(
     table(
      columns: (1fr, 1fr, 1fr),
     align: (left, center, center),
-    table.header[Implementacao][Área (LE)][Tempo de propagação (ns)],
-    [Parte 1], [48], [3.823],
+    table.header[Implementacao][Área (LE)][Registradores],
+    [Parte 1], [239], [124],
     [Parte 2], [83], [13.699],
     ),
     numbering: none,
