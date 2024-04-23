@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity project2 is
+entity top_timer_de2_115 is
   port (
     CLOCK_50 : in std_logic;
     KEY      : in std_logic_vector (0 downto 0);
@@ -14,7 +14,17 @@ entity project2 is
 
 end entity;
 
-architecture top_a3_2019_2 of project2 is
+architecture top_a3_2019_2 of top_timer_de2_115 is
+
+
+component pll is
+	port
+	(
+		inclk0   : IN STD_LOGIC  := '0';
+		c0			: OUT STD_LOGIC 
+	);
+end component;
+
 
   component timer
     port (
@@ -40,18 +50,31 @@ architecture top_a3_2019_2 of project2 is
   end component;
 
   signal minT, minU : std_logic_vector(3 downto 0);
-  signal secT, secU : std_logic_vector(3 downto 0);
+  signal secT, secU : std_logic_vector(3component pll is
+    port
+    (
+      inclk0   : IN STD_LOGIC  := '0';
+      c0			: OUT STD_LOGIC 
+    );
+  end component; downto 0);
   signal min, sec         : std_logic_vector(5 downto 0);
   signal r_reg, r_next    : unsigned(22 downto 0);
   signal reset            : std_logic;
+  signal clock_pll			  : std_logic;
 
 begin
 
   reset <= not KEY(0);
+  
+
+  pll_inst : pll PORT MAP (
+		inclk0	 => CLOCK_50,
+		c0	       => clock_pll
+	);
 
   t0 : timer
   port map(
-    clk   => CLOCK_50,
+    clk   => clock_pll,
     reset => reset,
     sec   => sec,
     min   => min);
@@ -61,7 +84,7 @@ begin
   generic map (
     N => 6)
   port map (
-    clk => CLOCK_50, 
+    clk => clock_pll, 
     reset => reset,
     binary_in => sec,
     bcd0 => secU,
@@ -74,7 +97,7 @@ begin
   generic map (
     N => 6)
   port map (
-    clk => CLOCK_50, 
+    clk => clock_pll, 
     reset => reset,
     binary_in => min,
     bcd0 => minU,
