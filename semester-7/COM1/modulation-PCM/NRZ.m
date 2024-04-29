@@ -175,8 +175,45 @@ xlim([0, 50*T]);
 
 num_erro = sum(xor(received_signal, received_binary)) 
 taxa_erro = num_erro/length(t_super)
-received_signal
-% fazer o bi2de 
-% recuperar o sinal analog multiplicando pelo passo. 
 
 
+
+
+
+
+
+% Vetor de tempo para o sinal recebido
+t_received = linspace(0, 1, length(received_signal));
+
+% Interpolando o sinal para restaurar a taxa de amostragem original
+received_signal_interp = interp(received_signal, n);
+
+% Filtrando o sinal interpolado para remover artefatos
+filtr_rx = ones(1, n);
+received_signal_filtered = filter(filtr_rx, 1, received_signal_interp) / n;
+
+% Plotando o sinal recuperado
+figure(4);
+subplot(211);
+plot(t_super, filtered_signal, 'LineWidth', 2, 'DisplayName', 'Sinal Original');
+hold on;
+plot(t_received, received_signal_filtered(1:length(t_received)), '--', 'LineWidth', 2, 'DisplayName', 'Sinal Recuperado');
+xlim([0, 50*T]);
+ylim([-amplitude*1.2 , amplitude*1.2]);
+xlabel('Tempo');
+ylabel('Amplitude');
+title('Sinal Original e Sinal Recuperado');
+legend;
+grid on;
+
+% Convertendo o sinal recuperado para o formato analógico
+received_analog_signal = received_signal_filtered(1:length(t_received)) * (2*amplitude) - amplitude; % Normalização da amplitude
+
+% Plotando o sinal analógico recuperado
+subplot(212);
+plot(t_received, received_analog_signal, 'LineWidth', 2);
+xlim([0, 50*T]);
+xlabel('Tempo');
+ylabel('Amplitude');
+title('Sinal Analógico Recuperado');
+grid on;
