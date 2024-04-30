@@ -21,31 +21,94 @@ Neste relatório, será apresentado o desenvolvimento de um relógio digital com
 
 = Implementação 
 
-A primeira etapa da implementação é a geração de um sinal de clock de 5 kHz. Para isso, foi utilizado um PLL com um clock de entrada de 50 MHz (valor de clock padrão para o chip implantado nesta placa). 
+== Parte 1 - Adicionar Centésimo de Segundo ao Relógio
+
+
+== Parte 2 - Adicionar PLL
+
+A segunda etapa da implementação é a geração de um sinal de clock de 5 kHz (ao invés do sinal de clock padrão utilizado pela FPGA. Para isso, foi utilizado um PLL com um clock de entrada de 50 MHz (valor de clock padrão para o chip implantado nesta placa). 
 \
 
-
-Para isso, geramos o PLL através da ferramenta `PLL Intel FPGA IP`. Após a configuração do PLL, o sinal de clock de 5 kHz foi obtido na saída deste componente, sendo na sua configuração um *divisor de frequência de 10.000.*
+O componente de PLL foi gerado através da ferramenta `PLL Intel FPGA IP`. Após a configuração do PLL, o sinal de clock de 5 kHz foi obtido na saída deste componente, sendo na sua configuração um *divisor de frequência de 10.000.*
 \
 
-Abaixo está uma sessão do código VHD gerado pelo Quartus para a configuração do PLL.
+#figure(
+  figure(
+    image("./pictures/pllconfig2.png", width: 80%),
+    numbering: none,
+    caption: [Configuração do PLL através da ferramenta ALT-PLL]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+
+Na própria ferramenta, ao inserir os valores de entrada e saída desejados para o circuito de PLL, o Quartus gera o código VHDL necessário para a configuração do circuito que irá controlar a seção analógica do PLL, assim sendo possivel realizar a multiplicação ou divisão de frequência corretamente. 
+
+
+Ao finailizar a configuração, foi solicitado gerar os seguintes arquivos: 
+
+#figure(
+  figure(
+    image("./pictures/pllconfig3.png", width: 80%),
+    numbering: none,
+    caption: [Configuração do PLL através da ferramenta ALT-PLL]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+
+Abaixo está uma sessão do código VHD gerado pelo Quartus, para a configuração VHDL do PLL, demais arquivos são necessários para realizar a instânciação do PLL como um componente do circuito principal.
 \
 
 #sourcecode[```vhd
 	GENERIC MAP (
 		bandwidth_type => "AUTO",
-		clk0_divide_by => 25000,
+		clk0_divide_by => 10000,
 		clk0_duty_cycle => 50,
 		clk0_multiply_by => 1,
 		clk0_phase_shift => "0",
 		compensate_clock => "CLK0",
-		inclk0_input_frequency => 20000,
+		inclk0_input_frequency => 50000,
 		intended_device_family => "Cyclone IV E",
 		lpm_hint => "CBX_MODULE_PREFIX=pll",
 		lpm_type => "altpll",
 		operation_mode => "NORMAL",
 		pll_type => "AUTO",
 ```]
+
+É possivel notar na descrição acima frequência de entrada, a frequência de saída, o fator de divisão e o duty-cicle do circuito de PLL. 
+
+Esses parâmetros são necessários para determinar o formato da onda na saída do circuito, sendo que a frequência precisa ser dividida pelas 10.000 vezes para obter a frequência de 5 kHz.
+
+O duty cicle é de 50% para que a onda seja simétrica, abaixo está uma imagem para ilustrar a diferença entre um duty-cicle de 50% entre 25% e 75%:
+
+#figure(
+  figure(
+    image("./pictures/dutycicle.png",  width: 80%),
+    numbering: none,
+    caption: [Duty-Cicle]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+
+
+#figure(
+  figure(
+    image("./pictures/rtlpll.png",  width: 80%),
+    numbering: none,
+    caption: [RTL do circuito operando com PLL]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+
+
+== Parte 3 - Modificar contadores para BCD
+
+
+== Parte 4 - Modificar o r_reg para LFSR
+
 
 
 
