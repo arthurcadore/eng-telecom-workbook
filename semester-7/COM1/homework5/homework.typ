@@ -66,7 +66,7 @@ A figura abaixo ilustra o sinal digital transmitido através do canal de comunic
 
 #figure(
   figure(
-    image("./pictures/pcmtx.png"),
+    image("./pictures/supersample.png"),
     numbering: none,
     caption: [Sinal Digital Transmitido através do Canal PCM NRZ]
   ),
@@ -84,7 +84,7 @@ Para ilustrar o sinal recebido e o ruído AWGN adicionado, temos a figura abaixo
 
 #figure(
   figure(
-    image("./pictures/pcmtx.png"),
+    image("./pictures/awgn.png"),
     numbering: none,
     caption: [Sinal Recebido com Ruído AWGN]
   ),
@@ -101,7 +101,7 @@ Abaixo temos a figura do sinal PCM reconstruido no receptor, note que abaixo do 
 
 #figure(
   figure(
-    image("./pictures/pcmrx.png"),
+    image("./pictures/rx.png"),
     numbering: none,
     caption: [Sinal PCM Reconstruido no Receptor]
   ),
@@ -121,7 +121,7 @@ Desta forma, mapeamos cada agrupamento de 4bits em sua correspondente amplitude 
 
 #figure(
   figure(
-    image("./pictures/ad.png"),
+    image("./pictures/da.png"),
     numbering: none,
     caption: [Sinal Analógico Reconstruido no Receptor]
   ),
