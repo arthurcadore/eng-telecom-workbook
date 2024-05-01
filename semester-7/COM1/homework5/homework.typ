@@ -313,7 +313,68 @@ grid on;
 O código abaixo apresenta a etapa de adição de ruído AWGN ao sinal transmitido, simulando as interferências e distorções que ocorrem em um canal de comunicação real.
 
 #sourcecode[```matlab
-a
+ n = 10;
+  amplitude =5;
+  repeated_signal_up = upsample(repeated_signal, n);
+
+  filtr_tx = ones(1, n);
+  filtered_signal = filter(filtr_tx, 1, repeated_signal_up)*2*amplitude-amplitude;
+
+  % criando um novo vetor de t para o sinal filtrado
+  t_super = linspace(0, 1, length(filtered_signal));
+
+  var_noise = 0.1; 
+  transmission_noise = sqrt(var_noise)*randn(1,length(filtered_signal)); 
+
+  transmitted_signal = filtered_signal + transmission_noise; 
+
+  % Plotando o sinal
+  figure(2)
+  subplot(211)
+  plot(t,repeated_signal, 'LineWidth', 2);
+  ylim([-0.2, 1.2]);
+  xlim([0, 50*T]);
+  xlabel('Tempo');
+  ylabel('Amplitude');
+  title('Sinal Binário como Onda Quadrada');
+  grid on;
+
+  subplot(212)
+  plot(t_super,filtered_signal, 'LineWidth', 2);
+  xlim([0, 50*T]);
+  ylim([-amplitude*1.2 , amplitude*1.2]);
+  xlabel('Tempo');
+  ylabel('Amplitude');
+  title('Sinal Binário como Onda Quadrada - Superamostrado');
+  grid on;
+
+  figure(5)
+  subplot(311)
+  plot(t_super,transmission_noise, 'LineWidth', 2);
+  xlim([0, 50*T]);
+  ylim([-amplitude*1.2 , amplitude*1.2]);
+  xlabel('Tempo');
+  ylabel('Amplitude');
+  title('Sinal Ruidoso - AWGN');
+  grid on;
+
+  subplot(312)
+  plot(t_super,filtered_signal, 'LineWidth', 2);
+  xlim([0, 50*T]);
+  ylim([-amplitude*1.2 , amplitude*1.2]);
+  xlabel('Tempo');
+  ylabel('Amplitude');
+  title('Sinal Binário como Onda Quadrada');
+  grid on;
+
+  subplot(313)
+  plot(t_super,transmitted_signal, 'LineWidth', 2);
+  xlim([0, 50*T]);
+  ylim([-amplitude*1.2 , amplitude*1.2]);
+  xlabel('Tempo');
+  ylabel('Amplitude');
+  title('Sinal Transmitido no Meio de Transmissão');
+  grid on;
 ```]
 
 == Reconstrução do sinal PCM
