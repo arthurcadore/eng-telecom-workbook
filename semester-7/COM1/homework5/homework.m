@@ -32,7 +32,7 @@ impulse_train(mod(t, 1/fs) == 0) = 1;
 signal_sampled = signal .* impulse_train;
 
 % Quantidade de níveis desejada (tirando o 0)
-n=4;
+n=2;
 num_levels = 2^n;
 
 % Gerando os níveis de quantização automaticamente
@@ -126,13 +126,32 @@ transmitted_signal = filtered_signal + transmission_noise;
 
 % Plotando o sinal
 figure(2)
-subplot(311)
+subplot(211)
 plot(t,repeated_signal, 'LineWidth', 2);
 ylim([-0.2, 1.2]);
 xlim([0, 50*T]);
 xlabel('Tempo');
 ylabel('Amplitude');
 title('Sinal Binário como Onda Quadrada');
+grid on;
+
+subplot(212)
+plot(t_super,filtered_signal, 'LineWidth', 2);
+xlim([0, 50*T]);
+ylim([-amplitude*1.2 , amplitude*1.2]);
+xlabel('Tempo');
+ylabel('Amplitude');
+title('Sinal Binário como Onda Quadrada - Superamostrado');
+grid on;
+
+figure(5)
+subplot(311)
+plot(t_super,transmission_noise, 'LineWidth', 2);
+xlim([0, 50*T]);
+ylim([-amplitude*1.2 , amplitude*1.2]);
+xlabel('Tempo');
+ylabel('Amplitude');
+title('Sinal Ruidoso - AWGN');
 grid on;
 
 subplot(312)
@@ -150,7 +169,7 @@ xlim([0, 50*T]);
 ylim([-amplitude*1.2 , amplitude*1.2]);
 xlabel('Tempo');
 ylabel('Amplitude');
-title('Sinal Binário como Onda Quadrada');
+title('Sinal Transmitido no Meio de Transmissão');
 grid on;
 
 % Recepção: 
@@ -165,17 +184,37 @@ received_binary = received_signal > limiar;
 t_received = linspace(0, 1, length(t_super)/n);
 
 % Plotando o sinal
+% Plotting the signal
 figure(3)
-subplot(211)
-plot(t_received, received_signal);
-xlim([0, 50*T]);
-subplot(212)
-stem(t_received, received_binary);
-xlim([0, 50*T]);
 
-num_erro = sum(xor(received_signal, received_binary)) 
-taxa_erro = num_erro/length(t_super)
+subplot(411)
+plot(t_received, received_signal,  'LineWidth', 2);
+xlim([0, 150*T]);
+title('Sinal Recebino no RX - Time Domain');
+grid on;
 
+subplot(412)
+plot(t_received, received_binary,  'LineWidth', 2);
+xlim([0, 150*T]);
+ylim([-0.1 1.2*max(received_binary)]);
+title('Sinal Filtrado no receptor - Time Domain');
+grid on;
+
+subplot(413)
+stem(t_received, received_binary,  'LineWidth', 2);
+xlim([0, 150*T]);
+title('Sinal Interpretado no receptor - Time Domain');
+grid on;
+
+
+subplot(414)
+plot(t,repeated_signal, 'LineWidth', 2);
+ylim([-0.2, 1.2]);
+xlim([0, 150*T]);
+xlabel('Time');
+ylabel('Amplitude');
+title('Sinal PCM Enviado por TX - Time Domain (Para Comparação)');
+grid on;
 
 
 
@@ -198,7 +237,7 @@ subplot(211);
 plot(t_super, filtered_signal, 'LineWidth', 2, 'DisplayName', 'Sinal Original');
 hold on;
 plot(t_received, received_signal_filtered(1:length(t_received)), '--', 'LineWidth', 2, 'DisplayName', 'Sinal Recuperado');
-xlim([0, 50*T]);
+xlim([0, 150*T]);
 ylim([-amplitude*1.2 , amplitude*1.2]);
 xlabel('Tempo');
 ylabel('Amplitude');
@@ -212,7 +251,7 @@ received_analog_signal = received_signal_filtered(1:length(t_received)) * (2*amp
 % Plotando o sinal analógico recuperado
 subplot(212);
 plot(t_received, received_analog_signal, 'LineWidth', 2);
-xlim([0, 50*T]);
+xlim([0, 150*T]);
 xlabel('Tempo');
 ylabel('Amplitude');
 title('Sinal Analógico Recuperado');
