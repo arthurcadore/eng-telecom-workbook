@@ -624,14 +624,11 @@ $
 Assim, temos que:
 
 $
-sigma^2_e = 2^{-2.7} / 12 = 2^{-14} / 12 = 0,00006103515625/12 = 0,00000508626302
+sigma^2_e = 2^{-2.7} / 12 = 2^{-14} / 12 = (0,00006103515625/12) = 0,00000508626302
 $
 
 Agora, para calcular a variância do ruído de saida do sistema, temos que: 
 
-c = b0 
-b = b1
-a = a1
 $
 sigma^2_f = sigma^2_e + sigma^2_e (C^2 + B^2 + 2A.B.C)/(1-A^2)
 $
