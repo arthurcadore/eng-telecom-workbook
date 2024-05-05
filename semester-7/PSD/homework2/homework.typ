@@ -538,8 +538,6 @@ A partir da função de transferência obtida no item A, podemos desenhar o diag
 
 = Questão 3: 
 
-== Solucionando a questão:
-
 A figura a seguir mostra uma implementação em forma direta II de um sistema: 
 
 #figure(
