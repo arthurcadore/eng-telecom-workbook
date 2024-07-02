@@ -34,7 +34,7 @@ O componente de PLL foi gerado através da ferramenta `PLL Intel FPGA IP`. Após
 
 #figure(
   figure(
-    image("./pictures/pllconfig2.png", width: 80%),
+    rect(image("./pictures/pllconfig2.png", width: 80%)),
     numbering: none,
     caption: [Configuração do PLL através da ferramenta ALT-PLL]
   ),
@@ -49,7 +49,7 @@ Ao finailizar a configuração, foi solicitado gerar os seguintes arquivos:
 
 #figure(
   figure(
-    image("./pictures/pllconfig3.png", width: 80%),
+    rect(image("./pictures/pllconfig3.png", width: 80%)),
     numbering: none,
     caption: [Configuração do PLL através da ferramenta ALT-PLL]
   ),
@@ -84,18 +84,18 @@ O duty cicle é de 50% para que a onda seja simétrica, abaixo está uma imagem 
 
 #figure(
   figure(
-    image("./pictures/dutycicle.png",  width: 80%),
+    rect(image("./pictures/dutycicle.png", width: 80%)),
     numbering: none,
-    caption: [Duty-Cicle]
+    caption: [Ilustração de variação de duty-cicle]
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
-
+Com a adição do PLL no circuito, temos uma topologia 
 
 #figure(
   figure(
-    image("./pictures/rtlpll.png",  width: 80%),
+    rect(image("./pictures/rtlpll.png",  width: 80%)),
     numbering: none,
     caption: [RTL do circuito operando com PLL]
   ),
