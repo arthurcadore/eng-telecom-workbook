@@ -68,6 +68,25 @@ ylabel('Resposta ao impulso')
 xlabel('Amostras (n)')
 ```]
 
+#figure(
+  figure(
+    rect(image("./pictures/ex1.1.png")),
+    numbering: none,
+    caption: [Forma de onda no domínio do tempo e densidade espectral de potência do sinal filtrado.]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+
+#figure(
+  figure(
+    rect(image("./pictures/ex1.2.png")),
+    numbering: none,
+    caption: [Forma ]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
 = Questão 1:
 
 Projete um filtro passa-baixas usando o método da amostragem em frequência que satisfaça a especificação a seguir:
@@ -236,6 +255,82 @@ Projete um filtro passa-faixa usando o método da amostragem em frequência que 
 - $Omega "p2"$ = 8 $"rad" / s$ 
 - $Omega s$ = 20,0 $"rad" / s$ 
 - Agora aumente o número de amostras, mantendo sua paridade e faça suas considerações.
+
+#sourcecode[```matlab
+clear all  % Limpa todas as variáveis e funções da área de trabalho
+
+% Definindo os parâmetros do filtro
+M = 104;  % Aumentar a ordem do filtro para 104 (paridade mantida)
+N = M + 1;  % Define o comprimento do filtro
+Omega_r1 = 2.0;  % Frequência de rejeição 1
+Omega_p1 = 3.0;  % Frequência de passagem 1
+Omega_r2 = 7.0;  % Frequência de rejeição 2
+Omega_p2 = 8.0;  % Frequência de passagem 2
+Omega_s = 20.0;  % Frequência de amostragem
+
+kr1 = floor(N * Omega_r1 / Omega_s);  % Índice de rejeição 1
+kp1 = floor(N * Omega_p1 / Omega_s);  % Índice de passagem 1
+kr2 = floor(N * Omega_r2 / Omega_s);  % Índice de rejeição 2
+kp2 = floor(N * Omega_p2 / Omega_s);  % Índice de passagem 2
+
+% Criando o vetor de resposta em frequência desejada
+A = zeros(1, N);
+A(kp1:kr2) = 1;  % Passa-faixa
+
+% Ajuste dos índices para evitar vetores de tamanho não inteiro
+if (kr1 - kp1) > 1
+    kp1 = kr1 - 1;
+end
+if (kp2 - kr2) > 1
+    kp2 = kr2 + 1;
+end
+
+% Inicializando o vetor de resposta ao impulso
+h = zeros(1, N);
+
+k = 1:M/2;  % Índices para o cálculo da resposta ao impulso
+for n = 0:M
+    h(n + 1) = A(1) + 2 * sum((-1) .^ k .* A(k + 1) .* cos(pi * k * (1 + 2 * n) / N));
+end
+
+h = h / N;  % Normalização da resposta ao impulso
+
+% Calculando a resposta em frequência
+[H, w] = freqz(h, 1, 2048, Omega_s);
+
+% Plotando a resposta em frequência
+figure(1)
+plot(w, 20 * log10(abs(H)))
+axis([0 10 -50 10])
+ylabel('Resposta de Módulo (dB)')
+xlabel('Frequência (rad/s)')
+title('Resposta em Frequência com M aumentado')
+
+% Plotando a resposta ao impulso
+figure(2)
+stem(h)
+ylabel('Resposta ao impulso')
+xlabel('Amostras (n)')
+```]
+
+#figure(
+  figure(
+    rect(image("./pictures/q3.1.png")),
+    numbering: none,
+    caption: [Forma ]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+
+#figure(
+  figure(
+    rect(image("./pictures/q3.2.png")),
+    numbering: none,
+    caption: [Forma ]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
 
 = Questão 4: 
 
