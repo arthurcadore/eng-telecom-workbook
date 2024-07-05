@@ -23,6 +23,20 @@ Neste relatório, será apresentado o desenvolvimento de um relógio digital com
 
 == Parte 1 - Adicionar Centésimo de Segundo ao Relógio
 
+A primeira etapa da implementação foi a adição de um contador de 100 para a contagem de centésimos de segundo. Para isso, foi utilizado um contador de 7 bits, que conta de 0 a 99, e um comparador para resetar o contador quando atingir o valor de 100.
+
+Foi instânciado um novo componente de contagem ao circuito e dois conversores BDC2SSD para a impressão dos digitos em um display de 7 segmentos. 
+
+O seguinte RTL foi gerado após a adição do contador de centésimos de segundo ao circuito:
+
+#figure(
+  figure(
+    rect(image("./pictures/rtlpll.png",  width: 80%)),
+    numbering: none,
+    caption: [RTL do circuito operando com PLL]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
 
 == Parte 2 - Adicionar PLL
 
@@ -91,7 +105,9 @@ O duty cicle é de 50% para que a onda seja simétrica, abaixo está uma imagem 
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
-Com a adição do PLL no circuito, temos uma topologia 
+Com a adição do PLL no circuito, temos uma topologia RTL com um intermediário entre o clock de entrada e o clock de saída, como ilustrado abaixo. 
+
+Para ajustar a contagem do segundo, o componente de timer também teve que ser ajustado para contar 5.000 vezes mais rápido, ou seja, de 0 a 99,99 em 5.000 ms.
 
 #figure(
   figure(
@@ -104,14 +120,6 @@ Com a adição do PLL no circuito, temos uma topologia
 
 
 
-== Parte 3 - Modificar contadores para BCD
-
-
-== Parte 4 - Modificar o r_reg para LFSR
-
-
-
-
 #figure(
   figure(
     image("./pictures/pinplanner.png"),
@@ -121,8 +129,10 @@ Com a adição do PLL no circuito, temos uma topologia
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+== Parte 3 - Modificar contadores para BCD
 
-= Implementação com somador binário e conversor BCD
+
+== Parte 4 - Modificar o r_reg para LFSR
 
 
 = Conclusão
@@ -140,8 +150,8 @@ Abaixo estão as principais diferenças de tempo de propagação e quantidade de
      columns: (1fr, 1fr, 1fr),
     align: (left, center, center),
     table.header[Implementacao][Área (LE)][Registradores],
-    [Parte 1], [239], [124],
-    [Parte 2], [83], [13.699],
+    [Parte 1], [83], [13.699],
+    [Parte 2], [239], [124],
     ),
     numbering: none,
     caption: [Sinal de entrada no domínio do tempo]
