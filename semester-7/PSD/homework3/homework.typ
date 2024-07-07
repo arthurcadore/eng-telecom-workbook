@@ -18,11 +18,17 @@
 
 = Exemplo: 
 
-#sourcecode[```matlab
-clear all  % Limpa todas as variáveis e funções da área de trabalho
+Abaixo está o exemplo apresentado em sala para entender o projeto do filtro:
 
-M = 52;  % Define a ordem do filtro
-N = M + 1;  % Define o comprimento do filtro
+#sourcecode[```matlab
+
+clear all; close all; clc;
+
+% Define a ordem do filtro
+M = 52;  
+% Define o comprimento do filtro
+N = M + 1;  
+
 Omega_p = 4;  % Frequência de passagem
 Omega_r = 4.2;  % Frequência de rejeição
 Omega_s = 10;  % Frequência de amostragem
@@ -30,9 +36,7 @@ Omega_s = 10;  % Frequência de amostragem
 kp = floor(N * Omega_p / Omega_s);  % Índice de passagem
 kr = floor(N * Omega_r / Omega_s);  % Índice de rejeição
 
-A = [ones(1, kp + 1) zeros(1, M / 2 - kr + 1)];  % Vetor de resposta ideal em frequência
-
-% Corrigindo o cálculo de 'A' para evitar vetores de tamanho não inteiro
+% Criando o vetor 'A' 
 A = [ones(1, kp + 1) zeros(1, ceil(M / 2 - kr) + 1)];
 
 % Ajuste de kp se a diferença entre kr e kp for maior que 1
@@ -43,12 +47,14 @@ end
 % Inicializando o vetor de resposta ao impulso
 h = zeros(1, N);
 
-k = 1:M/2;  % Índices para o cálculo da resposta ao impulso
+% Realizando laço de criação do vetor de resposta ao impuslo
+k = 1:M/2; 
 for n = 0:M
     h(n + 1) = A(1) + 2 * sum((-1) .^ k .* A(k + 1) .* cos(pi * k * (1 + 2 * n) / N));
 end
 
-h = h / N;  % Normalização da resposta ao impulso
+% Normalização da resposta ao impulso
+h = h / N;  
 
 % Calculando a resposta em frequência
 [H, w] = freqz(h, 1, 2048, Omega_s);
@@ -68,11 +74,13 @@ ylabel('Resposta ao impulso')
 xlabel('Amostras (n)')
 ```]
 
+A partir deste script, temos os seguintes resultados: 
+
 #figure(
   figure(
     rect(image("./pictures/ex1.1.png")),
     numbering: none,
-    caption: [Forma de onda no domínio do tempo e densidade espectral de potência do sinal filtrado.]
+    caption: [Forma de filtragem do filtro projetado]
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
@@ -82,7 +90,7 @@ xlabel('Amostras (n)')
   figure(
     rect(image("./pictures/ex1.2.png")),
     numbering: none,
-    caption: [Forma ]
+    caption: [Resposta ao impulso do filtro ]
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
@@ -97,11 +105,16 @@ Projete um filtro passa-baixas usando o método da amostragem em frequência que
 - $Omega s$ = 10,0 $"rad" / s$ 
 
 #sourcecode[```matlab
-clear all  % Limpa todas as variáveis e funções da área de trabalho
+clear all; close all; clc;
 
-% Definindo os parâmetros do filtro
-M = 200;  % Define a ordem do filtro
-N = M + 1;  % Define o comprimento do filtro
+% Define a ordem do filtro
+
+ % Define a ordem do filtro
+M = 200;
+
+% Define o comprimento do filtro
+N = M + 1; 
+
 Omega_p = 4.0;  % Frequência de passagem
 Omega_r = 4.2;  % Frequência de rejeição
 Omega_s = 10.0;  % Frequência de amostragem
@@ -109,10 +122,10 @@ Omega_s = 10.0;  % Frequência de amostragem
 kp = floor(N * Omega_p / Omega_s);  % Índice de passagem
 kr = floor(N * Omega_r / Omega_s);  % Índice de rejeição
 
-% Corrigindo o cálculo de 'A' para evitar vetores de tamanho não inteiro
+ % Vetor de resposta em frequência
 A = [ones(1, kp + 1) zeros(1, N - (kp + 1))];
 
-% Ajuste de kp se a diferença entre kr e kp for maior que 1
+% Criando o vetor 'A' 
 if (kr - kp) > 1
     kp = kr - 1;
 end
@@ -120,12 +133,14 @@ end
 % Inicializando o vetor de resposta ao impulso
 h = zeros(1, N);
 
-k = 1:M/2;  % Índices para o cálculo da resposta ao impulso
+% Realizando laço de criação do vetor de resposta ao impuslo
+k = 1:M/2; 
 for n = 0:M
     h(n + 1) = A(1) + 2 * sum((-1) .^ k .* A(k + 1) .* cos(pi * k * (1 + 2 * n) / N));
 end
 
-h = h / N;  % Normalização da resposta ao impulso
+% Normalização da resposta ao impulso
+h = h / N;  
 
 % Calculando a resposta em frequência
 [H, w] = freqz(h, 1, 2048, Omega_s);
@@ -145,11 +160,13 @@ ylabel('Resposta ao impulso')
 xlabel('Amostras (n)')
 ```]
 
+A partir deste script, temos os seguintes resultados: 
+
 #figure(
   figure(
     rect(image("./pictures/q1.1.png")),
     numbering: none,
-    caption: [Forma de onda no domínio do tempo e densidade espectral de potência do sinal filtrado.]
+    caption: [Forma de filtragem do filtro projetado]
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
@@ -159,7 +176,7 @@ xlabel('Amostras (n)')
   figure(
     rect(image("./pictures/q1.2.png")),
     numbering: none,
-    caption: [Forma ]
+    caption: [Resposta ao impulso do filtro ]
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
@@ -176,11 +193,15 @@ Projete um filtro passa-altas usando o método da amostragem em frequência que 
 - Agora aumente o número de amostras, mantendo a paridade e faça suas considerações.
 
 #sourcecode[```matlab
-clear all  % Limpa todas as variáveis e funções da área de trabalho
 
-% Definindo os parâmetros do filtro
-M = 52;  % Define a ordem do filtro
-N = M + 1;  % Define o comprimento do filtro
+clear all; close all; clc;
+
+% Define a ordem do filtro
+M = 52;  
+
+% Define o comprimento do filtro
+N = M + 1;  
+
 Omega_r = 4.0;  % Frequência de rejeição
 Omega_p = 4.2;  % Frequência de passagem
 Omega_s = 10.0;  % Frequência de amostragem
@@ -188,10 +209,9 @@ Omega_s = 10.0;  % Frequência de amostragem
 kp = floor(N * Omega_p / Omega_s);  % Índice de passagem
 kr = floor(N * Omega_r / Omega_s);  % Índice de rejeição
 
-% Corrigindo o cálculo de 'A' para evitar vetores de tamanho não inteiro
+ % Vetor de resposta em frequência
 A = [zeros(1, kr) ones(1, N - kr)];
 
-% Ajuste de kr se a diferença entre kr e kp for maior que 1
 if (kr - kp) > 1
     kp = kr - 1;
 end
@@ -199,12 +219,14 @@ end
 % Inicializando o vetor de resposta ao impulso
 h = zeros(1, N);
 
-k = 1:M/2;  % Índices para o cálculo da resposta ao impulso
+% Realizando laço de criação do vetor de resposta ao impuslo
+k = 1:M/2;  
 for n = 0:M
     h(n + 1) = A(1) + 2 * sum((-1) .^ k .* A(k + 1) .* cos(pi * k * (1 + 2 * n) / N));
 end
 
-h = h / N;  % Normalização da resposta ao impulso
+% Normalização da resposta ao impulso
+h = h / N;  
 
 % Calculando a resposta em frequência
 [H, w] = freqz(h, 1, 2048, Omega_s);
@@ -224,11 +246,13 @@ ylabel('Resposta ao impulso')
 xlabel('Amostras (n)')
 ```]
 
+A partir deste script, temos os seguintes resultados: 
+
 #figure(
   figure(
     rect(image("./pictures/q2.1.png")),
     numbering: none,
-    caption: [Forma ]
+    caption: [Forma de filtragem do filtro projetado ]
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
@@ -238,7 +262,7 @@ xlabel('Amostras (n)')
   figure(
     rect(image("./pictures/q2.2.png")),
     numbering: none,
-    caption: [Forma ]
+    caption: [Resposta ao impulso do filtro ]
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
@@ -257,11 +281,15 @@ Projete um filtro passa-faixa usando o método da amostragem em frequência que 
 - Agora aumente o número de amostras, mantendo sua paridade e faça suas considerações.
 
 #sourcecode[```matlab
-clear all  % Limpa todas as variáveis e funções da área de trabalho
 
-% Definindo os parâmetros do filtro
-M = 104;  % Aumentar a ordem do filtro para 104 (paridade mantida)
-N = M + 1;  % Define o comprimento do filtro
+clear all; close all; clc;
+
+% Define a ordem do filtro
+M = 104;
+
+% Define o comprimento do filtro
+N = M + 1;  
+
 Omega_r1 = 2.0;  % Frequência de rejeição 1
 Omega_p1 = 3.0;  % Frequência de passagem 1
 Omega_r2 = 7.0;  % Frequência de rejeição 2
@@ -273,11 +301,11 @@ kp1 = floor(N * Omega_p1 / Omega_s);  % Índice de passagem 1
 kr2 = floor(N * Omega_r2 / Omega_s);  % Índice de rejeição 2
 kp2 = floor(N * Omega_p2 / Omega_s);  % Índice de passagem 2
 
-% Criando o vetor de resposta em frequência desejada
+ % Vetor de resposta em frequência
 A = zeros(1, N);
 A(kp1:kr2) = 1;  % Passa-faixa
 
-% Ajuste dos índices para evitar vetores de tamanho não inteiro
+% Ajustando dos índices para evitar vetores de tamanho não inteiro
 if (kr1 - kp1) > 1
     kp1 = kr1 - 1;
 end
@@ -288,7 +316,8 @@ end
 % Inicializando o vetor de resposta ao impulso
 h = zeros(1, N);
 
-k = 1:M/2;  % Índices para o cálculo da resposta ao impulso
+% Índices para o cálculo da resposta ao impulso
+k = 1:M/2;  
 for n = 0:M
     h(n + 1) = A(1) + 2 * sum((-1) .^ k .* A(k + 1) .* cos(pi * k * (1 + 2 * n) / N));
 end
@@ -313,11 +342,13 @@ ylabel('Resposta ao impulso')
 xlabel('Amostras (n)')
 ```]
 
+A partir deste script, temos os seguintes resultados: 
+
 #figure(
   figure(
     rect(image("./pictures/q3.1.png")),
     numbering: none,
-    caption: [Forma ]
+    caption: [Forma de filtragem do filtro projetado ]
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
@@ -327,7 +358,7 @@ xlabel('Amostras (n)')
   figure(
     rect(image("./pictures/q3.2.png")),
     numbering: none,
-    caption: [Forma ]
+    caption: [Resposta ao impulso do filtro ]
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
@@ -344,22 +375,29 @@ Projete um filtro rejeita-faixa usando o método da amostragem em frequência qu
 - $Omega s$ = 20,0 $"rad" / s$ 
 
 #sourcecode[```matlab
-clear all
+
+clear all; close all; clc;
+
+% Define a ordem do filtro
 M = 52; 
+% Define o comprimento do filtro
 N = M + 1; 
-Omega_p1 = 2; 
-Omega_r1 = 3; 
-Omega_r2 = 7; 
-Omega_p2 = 8; 
-Omega_s = 20; 
 
-kp1 = floor(N * Omega_p1 / Omega_s);
-kr1 = floor(N * Omega_r1 / Omega_s);
-kr2 = floor(N * Omega_r2 / Omega_s);
-kp2 = floor(N * Omega_p2 / Omega_s);
+Omega_p1 = 2; % Frequência de passagem 1
+Omega_r1 = 3; % Frequência de rejeição 1  
+Omega_r2 = 7; % Frequência de passagem 2
+Omega_p2 = 8; % Frequência de rejeição 2
+Omega_s = 20; % Frequência de amostragem
 
+kp1 = floor(N * Omega_p1 / Omega_s); % Índice de rejeição 1 
+kr1 = floor(N * Omega_r1 / Omega_s); % Índice de passagem 1
+kr2 = floor(N * Omega_r2 / Omega_s); % Índice de rejeição 2
+kp2 = floor(N * Omega_p2 / Omega_s); % Índice de passagem 2
+
+ % Vetor de resposta em frequência
 A = [ones(1, kp1 + 1), zeros(1, kr2 - kp1 + 1), ones(1, M/2 - kp2 + 3)];
 
+% Inicializando o vetor de resposta ao impulso
 k = 1:M/2;
 h = zeros(1, N);
 for n = 0:M
@@ -383,11 +421,13 @@ ylabel('Resposta ao impulso')
 xlabel('Amostras (n)')
 ```]
 
+A partir deste script, temos os seguintes resultados: 
+
 #figure(
   figure(
     rect(image("./pictures/q4.1.png")),
     numbering: none,
-    caption: [Forma ]
+    caption: [Forma de filtragem do filtro projetado ]
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
@@ -397,7 +437,7 @@ xlabel('Amostras (n)')
   figure(
     rect(image("./pictures/q4.2.png")),
     numbering: none,
-    caption: [Forma ]
+    caption: [Resposta ao impulso do filtro ]
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
@@ -415,22 +455,28 @@ Projete um filtro passa-faixa tipo III usando o método da amostragem em frequê
 - $Omega s$ = 20,0 $"rad" / s$ 
 
 #sourcecode[```matlab
-clear all
+clear all; close all; clc;
+
+% Define a ordem do filtro
 M = 52; 
+% Define o comprimento do filtro
 N = M + 1; 
-Omega_p1 = 3; 
-Omega_r1 = 2; 
-Omega_r2 = 7; 
-Omega_p2 = 8; 
-Omega_s = 20; 
 
-kp1 = floor(N * Omega_p1 / Omega_s);
-kr1 = floor(N * Omega_r1 / Omega_s);
-kr2 = floor(N * Omega_r2 / Omega_s);
-kp2 = floor(N * Omega_p2 / Omega_s);
+Omega_p1 = 3; % Frequência de rejeição 1
+Omega_r1 = 2; % Frequência de passagem 1
+Omega_r2 = 7; % Frequência de rejeição 2
+Omega_p2 = 8; % Frequência de passagem 2
+Omega_s = 20; % Frequência de amostragem
 
+kp1 = floor(N * Omega_p1 / Omega_s); % Índice de rejeição 1
+kr1 = floor(N * Omega_r1 / Omega_s); % Índice de passagem 1
+kr2 = floor(N * Omega_r2 / Omega_s); % Índice de rejeição 2
+kp2 = floor(N * Omega_p2 / Omega_s); % Índice de passagem 2
+
+ % Vetor de resposta em frequência
 A = [zeros(1, kr1+1), ones(1, kp2 - kr1 + 1), zeros(1, kr2 - kp1 + 1)];
 
+% Inicializando o vetor de resposta ao impulso
 k = 1:M/2;
 h = zeros(1, N);
 for n = 0:M
@@ -454,11 +500,13 @@ ylabel('Resposta ao impulso')
 xlabel('Amostras (n)')
 ```]
 
+A partir deste script, temos os seguintes resultados: 
+
 #figure(
   figure(
     rect(image("./pictures/q5.1.png")),
     numbering: none,
-    caption: [Forma ]
+    caption: [Forma de filtragem do filtro projetado  ]
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
@@ -468,7 +516,7 @@ xlabel('Amostras (n)')
   figure(
     rect(image("./pictures/q5.2.png")),
     numbering: none,
-    caption: [Forma ]
+    caption: [Resposta ao impulso do filtro ]
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
@@ -483,30 +531,37 @@ Projete um filtro passa-baixas usando o método da amostragem em frequência que
 - $Omega s$ = 10,0 $"rad" / s$ 
 
 #sourcecode[```matlab
-clear all
+clear all; close all; clc;
+
+% Define a ordem do filtro
 M = 53;
+% Define o comprimento do filtro
 N = M + 1;
 
-Omega_p = 4;
-Omega_r = 4.2;
-Omega_s = 10;
+Omega_p = 4; % Frequência de rejeição
+Omega_r = 4.2; % Frequência de passagem
+Omega_s = 10; % Frequência de amostragem
 
-kp = floor(N * Omega_p / Omega_s);
-kr = floor(N * Omega_r / Omega_s);
+kp = floor(N * Omega_p / Omega_s);  % Índice de passagem
+kr = floor(N * Omega_r / Omega_s);  % Índice de rejeição
 
+ % Vetor de resposta em frequência
 A = [ones(1, kp + 1), zeros(1, N/2 - kp - 1)];
 
 if (kr - kp) > 1
     kp = kr - 1;
 end
 
+% Inicializando o vetor de resposta ao impulso
 k = 1:M/2;
 h = zeros(1, N);
 
+% Realizando laço de criação do vetor de resposta ao impuslo
 for n = 0:M
     h(n + 1) = A(1) + 2 * sum((-1).^k .* A(k + 1) .* cos(pi * k * (1 + 2 * n) / N));
 end
 
+% Normalização da resposta ao impulso
 h = h ./ N;
 
 [H, w] = freqz(h, 1, 2048, Omega_s);
@@ -524,11 +579,13 @@ ylabel('Resposta ao impulso')
 xlabel('Amostras (n)')
 ```]
 
+A partir deste script, temos os seguintes resultados: 
+
 #figure(
   figure(
     rect(image("./pictures/q6.1.png")),
     numbering: none,
-    caption: [Forma ]
+    caption: [Forma de filtragem do filtro projetado ]
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
@@ -538,7 +595,7 @@ xlabel('Amostras (n)')
   figure(
     rect(image("./pictures/q6.2.png")),
     numbering: none,
-    caption: [Forma ]
+    caption: [Resposta ao impulso do filtro ]
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
