@@ -9,10 +9,10 @@
 )
 
 #show: doc => report(
-  title: "Filtros Digitais",
+  title: "Projetos de Filtros Por Amostragem",
   subtitle: "Processamento de Sinais Digitais",
   authors: ("Arthur Cadore Matuella Barcella",),
-  date: "05 de Maio de 2024",
+  date: "07 de Julho de 2024",
   doc,
 )
 
