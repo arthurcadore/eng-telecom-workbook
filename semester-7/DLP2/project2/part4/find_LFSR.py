@@ -11,20 +11,16 @@ def lfsr(seed, taps, count):
             xor ^= state[t]
         return xor
     
-    for _ in range(count):
+    for i in range(count):
         new_bit = next_bit(state, taps)  # Calcula o próximo bit
         state = [new_bit] + state[:-1]  # Desloca os bits para a direita e insere o novo bit na frente
-
-    return state
+        state_str = ''.join(map(str, state))
+        print(f"{i + 1}: {state_str}")
 
 # Parâmetros
 seed = '1111111111111'
 taps = [0, 2, 3, 12]
 count = 5000
 
-# Gera a sequência LFSR e captura o estado na posição 5000
-final_state = lfsr(seed, taps, count)
-
-# Converte o estado final para string e imprime
-final_state_str = ''.join(map(str, final_state))
-print(f"Estado do LFSR na contagem 5000: {final_state_str}")
+# Gera a sequência LFSR e imprime todos os estados
+lfsr(seed, taps, count)
