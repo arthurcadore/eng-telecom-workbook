@@ -181,6 +181,7 @@ A partir deste script, temos os seguintes resultados:
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+Como podemos ver pelas imagens apresentadas, o filtro possui uma resposa em frequência com ganho/atenuação 0 dB na frequência de passagem (até 4 rad/s) e atenuação de 50 dB na frequência de rejeição (a partir de 4,2 rad/s). A resposta ao impulso do filtro é apresentada na segunda imagem, onde podemos ver que o filtro possui uma resposta ao impulso com 201 amostras, sendo a amostra central a de maior valor.
 
 = Questão 2: 
 
@@ -266,6 +267,10 @@ A partir deste script, temos os seguintes resultados:
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
+
+Como podemos ver pelas imagens apresentadas, o filtro possui uma resposa em frequência com ganho/atenuação 0 dB nas frequências de passagem (a partir de 4dB, considerando que não há flutuações de ganho na banda de passagem), e nas frequências de rejeição (até 4dB) um ganho variavel entre -20 e -50dB, variando de acordo com a frequência. 
+
+A resposta ao impulso do filtro é apresentada na segunda imagem, onde podemos ver que o filtro possui uma resposta ao impulso com 105 amostras, sendo a amostra central a de maior valor.
 
 
 = Questão 3: 
@@ -363,6 +368,10 @@ A partir deste script, temos os seguintes resultados:
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+Como podemos ver pelas imagens apresentadas, o filtro possui uma resposa em frequência com ganho/atenuação 0 dB nas frequências de passagem (de 3 a 7 rad/s), e nas frequências de rejeição (até 2 e a partir de 8 rad/s) um ganho variavel entre -20 e -50dB, variando de acordo com a frequência.
+
+
+
 = Questão 4: 
 
 Projete um filtro rejeita-faixa usando o método da amostragem em frequência que satisfaça a especificação a seguir:
@@ -441,6 +450,10 @@ A partir deste script, temos os seguintes resultados:
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
+
+Como podemos ver pelas imagens apresentadas, o filtro possui uma resposa em frequência com um ganho variavel entre -20 e -50dB nas frequências de rejeição (de 3 a 7 rad/s), e nas frequências de passagem (até 2 e a partir de 8 rad/s) um ganho 0 (tendo flutuações de acordo com a frequência). A resposta ao impulso do filtro é apresentada na segunda imagem, onde podemos ver que o filtro possui uma resposta ao impulso com 53 amostras, sendo a amostra central a de menor valor.
+
+
 
 
 = Questão 5: 
@@ -521,6 +534,10 @@ A partir deste script, temos os seguintes resultados:
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+Como podemos ver pelas imagens apresentadas, o filtro possui uma resposa em frequência com um ganho variavel entre -20 e -50dB nas frequências de rejeição (menor que 2 e maior que 9 rad/s), e nas frequências de passagem (até 2 e a partir de 8 rad/s) um ganho 0 (tendo flutuações de acordo com a frequência). A resposta ao impulso do filtro é apresentada na segunda imagem, onde podemos ver que o filtro possui uma resposta ao impulso com 53 amostras, sendo a amostra central a de menor valor.
+
+
+
 = Questão 6:
 
 Projete um filtro passa-baixas usando o método da amostragem em frequência que satisfaça a especificação a seguir
@@ -599,3 +616,5 @@ A partir deste script, temos os seguintes resultados:
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
+
+Como podemos ver pelas imagens apresentadas, o filtro possui uma resposa em frequência com um ganho 0 dB nas frequências de passagem (até 4 rad/s), e nas frequências de rejeição (a partir de 4,2 rad/s) um ganho variavel entre -20 e -50dB, variando de acordo com a frequência. A resposta ao impulso do filtro é apresentada na segunda imagem, onde podemos ver que o filtro possui uma resposta ao impulso com 54 amostras, sendo a amostra central a de maior valor.
