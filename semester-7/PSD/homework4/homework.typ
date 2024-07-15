@@ -264,11 +264,12 @@ h_ret = h_ideal;
 
 % Plot da resposta em frequência do filtro passa-faixa ideal:
 figure(1)
+subplot(2,2,1)
 plot(w, 20*log10(abs(H_ret)))
 axis([0 Omega_s/2 -90 10])
 ylabel('Resposta de Módulo (dB)');
 xlabel('Frequência (rad/s)');
-title('Resposta em Frequência - Filtro Passa-Faixa Ideal');
+title('Resposta - Filtro Passa-Faixa Ideal');
 
 % Hamming:
 % Janela de Hamming com comprimento M+1
@@ -277,12 +278,12 @@ h_ham = h_ideal .* h_aux';
 [H_ham, w] = freqz(h_ham, 1, 2048, Omega_s);
 
 % Plot da resposta em frequência com a janela de Hamming:
-figure(2)
+subplot(2,2,2)
 plot(w, 20*log10(abs(H_ham)))
 axis([0 Omega_s/2 -90 10])
 ylabel('Resposta de Módulo (dB)');
 xlabel('Frequência (rad/s)');
-title('Resposta em Frequência - Janela de Hamming');
+title('Resposta - Janela de Hamming');
 
 % Hanning:
 % Janela de Hanning com comprimento M+1
@@ -291,12 +292,12 @@ h_han = h_ideal .* h_aux';
 [H_han, w] = freqz(h_han, 1, 2048, Omega_s);
 
 % Plot da resposta em frequência com a janela de Hanning:
-figure(3)
+subplot(2,2,3)
 plot(w, 20*log10(abs(H_han)))
 axis([0 Omega_s/2 -150 10])
 ylabel('Resposta de Módulo (dB)');
 xlabel('Frequência (rad/s)');
-title('Resposta em Frequência - Janela de Hanning');
+title('Resposta - Janela de Hanning');
 
 % Blackman:
 % Janela de Blackman com comprimento M+1
@@ -305,13 +306,22 @@ h_black = h_ideal .* h_aux';
 [H_black, w] = freqz(h_black, 1, 2048, Omega_s);
 
 % Plot da resposta em frequência com a janela de Blackman:
-figure(4)
+subplot(2,2,4)
 plot(w, 20*log10(abs(H_black)))
 axis([0 Omega_s/2 -150 10])
 ylabel('Resposta de Módulo (dB)');
 xlabel('Frequência (rad/s)');
-title('Resposta em Frequência - Janela de Blackman');
+title('Resposta - Janela de Blackman');
 ```]
+
+#figure(
+  figure(
+    rect(image("./pictures/q1.1.png")),
+    numbering: none,
+    caption: [Forma de filtragem do filtro projetado]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
 
 
 === M=100:
@@ -346,11 +356,12 @@ h_ret = h_ideal;
 
 % Plot da resposta em frequência do filtro passa-faixa ideal:
 figure(1)
+subplot(2,2,1)
 plot(w, 20*log10(abs(H_ret)))
 axis([0 Omega_s/2 -90 10])
 ylabel('Resposta de Módulo (dB)');
 xlabel('Frequência (rad/s)');
-title('Resposta em Frequência - Filtro Passa-Faixa Ideal');
+title('Resposta - Filtro Passa-Faixa Ideal');
 
 % Hamming:
 % Janela de Hamming com comprimento M+1
@@ -359,12 +370,12 @@ h_ham = h_ideal .* h_aux';
 [H_ham, w] = freqz(h_ham, 1, 2048, Omega_s);
 
 % Plot da resposta em frequência com a janela de Hamming:
-figure(2)
+subplot(2,2,2)
 plot(w, 20*log10(abs(H_ham)))
 axis([0 Omega_s/2 -90 10])
 ylabel('Resposta de Módulo (dB)');
 xlabel('Frequência (rad/s)');
-title('Resposta em Frequência - Janela de Hamming');
+title('Resposta - Janela de Hamming');
 
 % Hanning:
 % Janela de Hanning com comprimento M+1
@@ -373,12 +384,12 @@ h_han = h_ideal .* h_aux';
 [H_han, w] = freqz(h_han, 1, 2048, Omega_s);
 
 % Plot da resposta em frequência com a janela de Hanning:
-figure(3)
+subplot(2,2,3)
 plot(w, 20*log10(abs(H_han)))
 axis([0 Omega_s/2 -150 10])
 ylabel('Resposta de Módulo (dB)');
 xlabel('Frequência (rad/s)');
-title('Resposta em Frequência - Janela de Hanning');
+title('Resposta - Janela de Hanning');
 
 % Blackman:
 % Janela de Blackman com comprimento M+1
@@ -387,13 +398,22 @@ h_black = h_ideal .* h_aux';
 [H_black, w] = freqz(h_black, 1, 2048, Omega_s);
 
 % Plot da resposta em frequência com a janela de Blackman:
-figure(4)
+subplot(2,2,4)
 plot(w, 20*log10(abs(H_black)))
 axis([0 Omega_s/2 -150 10])
 ylabel('Resposta de Módulo (dB)');
 xlabel('Frequência (rad/s)');
-title('Resposta em Frequência - Janela de Blackman');
+title('Resposta - Janela de Blackman');
 ```]
+
+#figure(
+  figure(
+    rect(image("./pictures/q1.2.png")),
+    numbering: none,
+    caption: [Forma de filtragem do filtro projetado]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
 
 
 === M=1000:
@@ -428,11 +448,12 @@ h_ret = h_ideal;
 
 % Plot da resposta em frequência do filtro passa-faixa ideal:
 figure(1)
+subplot(2,2,1)
 plot(w, 20*log10(abs(H_ret)))
 axis([0 Omega_s/2 -90 10])
 ylabel('Resposta de Módulo (dB)');
 xlabel('Frequência (rad/s)');
-title('Resposta em Frequência - Filtro Passa-Faixa Ideal');
+title('Resposta - Filtro Passa-Faixa Ideal');
 
 % Hamming:
 % Janela de Hamming com comprimento M+1
@@ -441,12 +462,12 @@ h_ham = h_ideal .* h_aux';
 [H_ham, w] = freqz(h_ham, 1, 2048, Omega_s);
 
 % Plot da resposta em frequência com a janela de Hamming:
-figure(2)
+subplot(2,2,2)
 plot(w, 20*log10(abs(H_ham)))
 axis([0 Omega_s/2 -90 10])
 ylabel('Resposta de Módulo (dB)');
 xlabel('Frequência (rad/s)');
-title('Resposta em Frequência - Janela de Hamming');
+title('Resposta - Janela de Hamming');
 
 % Hanning:
 % Janela de Hanning com comprimento M+1
@@ -455,12 +476,12 @@ h_han = h_ideal .* h_aux';
 [H_han, w] = freqz(h_han, 1, 2048, Omega_s);
 
 % Plot da resposta em frequência com a janela de Hanning:
-figure(3)
+subplot(2,2,3)
 plot(w, 20*log10(abs(H_han)))
 axis([0 Omega_s/2 -150 10])
 ylabel('Resposta de Módulo (dB)');
 xlabel('Frequência (rad/s)');
-title('Resposta em Frequência - Janela de Hanning');
+title('Resposta - Janela de Hanning');
 
 % Blackman:
 % Janela de Blackman com comprimento M+1
@@ -469,14 +490,24 @@ h_black = h_ideal .* h_aux';
 [H_black, w] = freqz(h_black, 1, 2048, Omega_s);
 
 % Plot da resposta em frequência com a janela de Blackman:
-figure(4)
+subplot(2,2,4)
 plot(w, 20*log10(abs(H_black)))
 axis([0 Omega_s/2 -150 10])
 ylabel('Resposta de Módulo (dB)');
 xlabel('Frequência (rad/s)');
-title('Resposta em Frequência - Janela de Blackman');
-
+title('Resposta - Janela de Blackman');
 ```]
+
+#figure(
+  figure(
+    rect(image("./pictures/q1.3.png")),
+    numbering: none,
+    caption: [Forma de filtragem do filtro projetado]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+
 
 == Questão 2:
 
@@ -489,8 +520,78 @@ Projete um filtro que satisfaça as especificações a seguir, usando a janela d
 - Ωs = 5000 rad/s 
 
 #sourcecode[```matlab
-% Parâmetros do filtro
+pkg load signal;
+
+% Parâmetros passados pela questão: 
+
+Omega_p = 1000;  
+Omega_r = 1200;  
+Omega_s = 5000;  
+
+% Ripple de passagem em dB
+Ap = 1.0; 
+
+% Atenuação mínima em dB
+Ar = 40;   
+
+
+% Convertendo Ap para amplitude
+delta_p = (10^(0.05*Ap) - 1) / (10^(0.05*Ap) + 1);  
+
+% Convertendo Ar para amplitude
+delta_r = 10^(-0.05*Ar);  
+
+% Definição das frequências de corte em radianos:
+F = [Omega_p Omega_r]; 
+A = [1 0]; 
+ripples = [delta_p delta_r]; 
+
+% Determinação dos parâmetros do filtro usando Kaiserord:
+[M, Wn, beta, FILTYPE] = kaiserord(F, A, ripples, Omega_s);
+
+% Geração da janela de Kaiser:
+kaiser_win = kaiser(M+1, beta);
+
+% Projeto do filtro FIR usando fir1 com a janela de Kaiser:
+h = fir1(M, Wn, FILTYPE, kaiser_win, 'noscale');
+
+% Plot da resposta ao impulso:
+figure(1)
+stem(0:M, h)
+ylabel('h[n]');
+xlabel('n');
+title('Resposta ao Impulso');
+
+% Cálculo e plot da resposta em frequência:
+[H, w] = freqz(h, 1, 2048, Omega_s);
+figure(2)
+plot(w, 20*log10(abs(H)))
+axis([0 Omega_s/2 -90 10])
+ylabel('Resposta de Módulo (dB)');
+xlabel('Frequência (rad/s)');
+title('Resposta em Frequência');
+
 ```]
+
+
+#figure(
+  figure(
+    rect(image("./pictures/q2.1.png")),
+    numbering: none,
+    caption: [Forma de filtragem do filtro projetado]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+
+#figure(
+  figure(
+    rect(image("./pictures/q2.2.png")),
+    numbering: none,
+    caption: [Forma de filtragem do filtro projetado]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
 
 
 == Questão 3:
@@ -506,8 +607,76 @@ Projete um filtro que satisfaça as especificações a seguir, usando a janela d
 - Ωs = 10000 rad/s 
 
 #sourcecode[```matlab
-% Parâmetros do filtro
+pkg load signal;
+
+% Parâmetros passados pela questão: 
+Omega_r1 = 800;   
+Omega_p1 = 1000;  
+Omega_p2 = 1400;  
+Omega_r2 = 1600;  
+Omega_s = 10000;  
+
+% Ripple de passagem em dB
+Ap = 1.0;   
+
+% Atenuação mínima em dB
+Ar = 80.0;  
+
+% Convertendo Ap para amplitude
+delta_p = (10^(0.05*Ap) - 1) / (10^(0.05*Ap) + 1); 
+
+% Convertendo Ar para amplitude
+delta_r = 10^(-0.05*Ar);  
+
+% Definição das frequências de corte em radianos:
+F = [Omega_r1 Omega_p1 Omega_p2 Omega_r2]; 
+A = [0 1 0];  
+ripples = [delta_r delta_p delta_r]; 
+
+% Determinação dos parâmetros do filtro usando Kaiserord:
+[M, Wn, beta, FILTYPE] = kaiserord(F, A, ripples, Omega_s);
+
+% Geração da janela de Kaiser:
+kaiser_win = kaiser(M+1, beta);
+
+% Projeto do filtro FIR usando fir1 com a janela de Kaiser:
+h = fir1(M, Wn, FILTYPE, kaiser_win, 'noscale');
+
+% Plot da resposta ao impulso:
+figure(1)
+stem(0:M, h)
+ylabel('h[n]');
+xlabel('n');
+title('Resposta ao Impulso');
+
+% Cálculo e plot da resposta em frequência:
+[H, w] = freqz(h, 1, 2048, Omega_s);
+figure(2)
+plot(w, 20*log10(abs(H)))
+axis([0 Omega_s/2 -90 10])
+ylabel('Resposta de Módulo (dB)');
+xlabel('Frequência (rad/s)');
+title('Resposta em Frequência');
 ```]
+
+#figure(
+  figure(
+    rect(image("./pictures/q3.1.png")),
+    numbering: none,
+    caption: [Forma de filtragem do filtro projetado]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+#figure(
+  figure(
+    rect(image("./pictures/q3.2.png")),
+    numbering: none,
+    caption: [Forma de filtragem do filtro projetado]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
 
 == Questão 4:
 
