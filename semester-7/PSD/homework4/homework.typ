@@ -9,14 +9,16 @@
 )
 
 #show: doc => report(
-  title: "Projetos de Filtros Por Amostragem",
+  title: "Projetos de Filtros Por Janelamento",
   subtitle: "Processamento de Sinais Digitais",
   authors: ("Arthur Cadore Matuella Barcella",),
   date: "07 de Julho de 2024",
   doc,
 )
 
-= Exemplos:
+= Fundamentação Teórica:
+
+O janelamento é uma técnica utilizada para projetar filtros digitais, onde a resposta ao impulso do filtro ideal é multiplicada por uma janela. As janelas mais comuns são a janela retangular, de Hamming, de Hanning, de Blackman e de Kaiser Abaixo estão definidos alguns exemplos de filtros projetados por janelamento como exemplo para a resolução das questões posteriormente. 
 
 == Exemplo 1:
 
@@ -228,11 +230,13 @@ ylabel('|S(f)|')
 
 = Questões: 
 
+Abaixo estão as resoluções das questões propostas, onde são projetados filtros passa-faixa e rejeita-faixa utilizando as janelas de Hamming, Hanning, Blackman e Kaiser.
+
 == Questão 1:
 
-Projete um filtro passa-faixa usando a janela de Hamming, a janela de Hanning e janela de Blackman que satisfaça a especificação a seguir.
+Projete um filtro passa-faixa usando a janela de Hamming, a janela de Hanning e janela de Blackman que satisfaça a especificação a seguir. Para o projeto, varie a ordem do filtro "M" entre 10, 100 e 1000.
 
-=== M=10: 
+=== Ordem M = 10: 
 
 - M = 10
 - Ωc1 = 10 rad/s
@@ -324,7 +328,7 @@ title('Resposta - Janela de Blackman');
 )
 
 
-=== M=100:
+=== Ordem M = 100:
 
 - M = 100
 - Ωc1 = 10 rad/s
@@ -416,7 +420,7 @@ title('Resposta - Janela de Blackman');
 )
 
 
-=== M=1000:
+=== Ordem M = 1000:
 
 - M = 1000
 - Ωc1 = 10 rad/s
@@ -597,6 +601,8 @@ title('Resposta em Frequência');
 
 == Questão 3: 
 
+Projete um filtro que satisfaça as especificações a seguir, usando a janela de Kaiser:
+
 - Ap = 1,0 dB
 - Ar = 40 dB
 - Ωr = 1000 rad/s
@@ -696,6 +702,7 @@ Crie um sinal de entrada composto de três componentes senoidais, nas frequênci
 
 Os parâmetros dados pela questão (resumo) estão abaixo. Para essa questão, será utilizado o filtro de kaiser, desta forma definimos um valor de atenuação maior que 60dB para garantir que o filtro atenda a especificação.
 
+```
 1° Filtro 
 - Ωs = 8 kHz
 - Ωc = 770 Hz
@@ -713,6 +720,7 @@ Os parâmetros dados pela questão (resumo) estão abaixo. Para essa questão, s
 - Ωc = 941 Hz
 - Ωr1 = 852 Hz
 - Ωr2 = 1209 Hz
+```
  
 #sourcecode[```matlab
 clear all;
