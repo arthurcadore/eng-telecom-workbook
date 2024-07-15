@@ -595,8 +595,16 @@ title('Resposta em Frequência');
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+== Questão 3: 
 
-== Questão 3:
+- Ap = 1,0 dB
+- Ar = 40 dB
+- Ωr = 1000 rad/s
+- Ωp = 1200 rad/s
+- Ωs = 5000 rad/s 
+
+
+== Questão 4:
 
 Projete um filtro que satisfaça as especificações a seguir, usando a janela de Kaiser:
 
@@ -682,82 +690,17 @@ title('Resposta em Frequência');
 )
 
 
-== Questão 4:
+== Questão 5:
 
-Crie um sinal de entrada composto de três componentes senoidais, nas frequências 770 Hz, 852 Hz e 941 Hz, com Ωs = 8 kHz. Projete três filtros passa-faixa digitais, o primeiro com frequência central em 770 Hz, o segundo em 852 Hz e o terceiro em 941 Hz. Para o primeiro filtro, as extremidades das faixas de rejeição estão nas frequências 697 e 852; para o segundo, em 770 e 941 Hz; para o terceiro. Em 852 e 1209 Hz. Nos três filtros, a atenuação mínima na faixa de rejeição é 60 dB. 
+Crie um sinal de entrada composto de três componentes senoidais, nas frequências 770 Hz, 852 Hz e 941 Hz, com Ωs = 8 kHz. Projete três filtros passa-faixa digitais, o primeiro com frequência central em 770 Hz, o segundo em 852 Hz e o terceiro em 941 Hz.
 
-Para essa questão, será utilizado o filtro de kaiser, desta forma definimos um valor de atenuação maior que 60dB para garantir que o filtro atenda a especificação.
+Os parâmetros dados pela questão (resumo) estão abaixo. Para essa questão, será utilizado o filtro de kaiser, desta forma definimos um valor de atenuação maior que 60dB para garantir que o filtro atenda a especificação.
 
-=== Filtro 770Hz: 
-
-Parâmetros dados pela questão (resumo): 
-
-1° Filtro: 
+1° Filtro 
 - Ωs = 8 kHz
 - Ωc = 770 Hz
 - Ωr1 = 697 Hz
 - Ωr2 = 852 Hz
-
-#sourcecode[```matlab
-clear all; close all; clc; 
-
-pkg load signal;
-
-Fator_Borda=8;
-% Parâmetros passados pela questão: 
-Omega_p1 = 697;  
-Omega_r1 = Omega_p1 - Omega_p1/Fator_Borda;   
-Omega_p2 = 852;  
-Omega_r2 = Omega_p2 + Omega_p2/Fator_Borda;  
-Omega_s = 8000;  
-
-% Ripple de passagem em dB
-Ap = 1.0;   
-
-% Atenuação mínima em dB
-Ar = 80.0;  
-
-% Convertendo Ap para amplitude
-delta_p = (10^(0.05*Ap) - 1) / (10^(0.05*Ap) + 1); 
-
-% Convertendo Ar para amplitude
-delta_r = 10^(-0.05*Ar);  
-
-% Definição das frequências de corte em radianos:
-F = [Omega_r1 Omega_p1 Omega_p2 Omega_r2]; 
-A = [0 1 0];  
-ripples = [delta_r delta_p delta_r]; 
-
-% Determinação dos parâmetros do filtro usando Kaiserord:
-[M, Wn, beta, FILTYPE] = kaiserord(F, A, ripples, Omega_s);
-
-% Geração da janela de Kaiser:
-kaiser_win = kaiser(M+1, beta);
-
-% Projeto do filtro FIR usando fir1 com a janela de Kaiser:
-h = fir1(M, Wn, FILTYPE, kaiser_win, 'noscale');
-
-% Plot da resposta ao impulso:
-figure(1)
-stem(0:M, h)
-ylabel('h[n]');
-xlabel('n');
-title('Resposta ao Impulso');
-
-% Cálculo e plot da resposta em frequência:
-[H, w] = freqz(h, 1, 2048, Omega_s);
-figure(2)
-plot(w, 20*log10(abs(H)))
-axis([0 Omega_s/2 -90 10])
-ylabel('Resposta de Módulo (dB)');
-xlabel('Frequência (rad/s)');
-title('Resposta em Frequência');
-```]
-
-
-=== Filtro 852Hz: 
-
-Parâmetros dados pela questão (resumo): 
 
 2° Filtro:
 - Ωs = 8 kHz
@@ -765,24 +708,230 @@ Parâmetros dados pela questão (resumo):
 - Ωr1 = 770 Hz
 - Ωr2 = 941 Hz
 
-#sourcecode[```matlab
-% Parâmetros do filtro
-```]
-
-
-=== Filtro 941Hz: 
-
-Parâmetros dados pela questão (resumo): 
-
 3° Filtro:
 - Ωs = 8 kHz
 - Ωc = 941 Hz
 - Ωr1 = 852 Hz
 - Ωr2 = 1209 Hz
-
+ 
 #sourcecode[```matlab
-% Parâmetros do filtro
+clear all;
+close all;
+clc;
+
+% Parâmetros do sinal e frequência de amostragem
+Omega_s = 8000; % Frequência de amostragem em Hz
+
+% Frequências das componentes senoidais
+freq1 = 770; % Hz
+freq2 = 852; % Hz
+freq3 = 941; % Hz
+
+% Amplitudes das componentes senoidais
+amp1 = 5;
+amp2 = 5;
+amp3 = 5;
+
+% Tempo de amostragem
+tmin = 0;
+tmax = 1; % segundos
+fs = 1/Omega_s;
+t = tmin:1/Omega_s:tmax-1/Omega_s;
+
+t1 = 2000*fs;
+t2 = 2100*fs;
+% Sinal composto de três senoidais
+sinal = amp1 * sin(2*pi*freq1*t) + amp2 * sin(2*pi*freq2*t) + amp3 * sin(2*pi*freq3*t);
+
+% Plot do sinal original no tempo
+figure;
+subplot(2,1,1);
+plot(t, sinal);
+xlim([t1 t2])
+title('Sinal Original');
+xlabel('Tempo (s)');
+ylabel('Amplitude');
+
+% Calculando o espectro do sinal original
+Sinal_fft = fft(sinal);
+L = length(sinal);
+Sinal_fft = abs(Sinal_fft/L);
+Sinal_fft = Sinal_fft(1:L/2+1);
+Sinal_fft(2:end-1) = 2*Sinal_fft(2:end-1);
+f = Omega_s*(0:(L/2))/L;
+
+subplot(2,1,2);
+plot(f, Sinal_fft);
+title('Espectro de Amplitude do Sinal Original');
+xlabel('Frequência (Hz)');
+ylabel('|S(f)|');
+
+% Parâmetros dos filtros
+fc1 = 770; % Frequência central do primeiro filtro
+fc2 = 852; % Frequência central do segundo filtro
+fc3 = 941; % Frequência central do terceiro filtro
+
+largura_filtro = 4;
+
+% Extremidades das faixas de rejeição para cada filtro
+Omega_c1a = (697 + (((852-697)/2)/largura_filtro))  * 2 * pi / Omega_s;
+Omega_c1b = (852 - (((852-697)/2)/largura_filtro)) * 2 * pi / Omega_s;
+
+Omega_c2a = (770 + (((941-770)/2)/largura_filtro)) * 2 * pi / Omega_s;
+Omega_c2b = (941 - (((941-770)/2)/largura_filtro))* 2 * pi / Omega_s;
+
+Omega_c3a = (852 + (((1209-852)/2)/largura_filtro)) * 2 * pi / Omega_s;
+Omega_c3b = (1209 - (((1209-852)/2)/largura_filtro)) * 2 * pi / Omega_s;
+
+% Ordem dos filtros
+M = 1001;
+
+% Vetor de tempo para a resposta ao impulso
+n = (-M/2:M/2)';
+
+% Janelas de Hamming para os filtros
+w_hamm = hamming(M+1);
+
+% Filtros passa-faixa projetados
+h1_n = ((sin(Omega_c1b.*n) - sin(Omega_c1a.*n))./(pi.*n));
+h1_n((M+1)/2+1) = (Omega_c1b - Omega_c1a)/pi;
+h1_hamm = w_hamm.*h1_n;
+
+h2_n = ((sin(Omega_c2b.*n) - sin(Omega_c2a.*n))./(pi.*n));
+h2_n((M+1)/2+1) = (Omega_c2b - Omega_c2a)/pi;
+h2_hamm = w_hamm.*h2_n;
+
+h3_n = ((sin(Omega_c3b.*n) - sin(Omega_c3a.*n))./(pi.*n));
+h3_n((M+1)/2+1) = (Omega_c3b - Omega_c3a)/pi;
+h3_hamm = w_hamm.*h3_n;
+
+% Filtragem dos sinais
+sinal_filtrado1 = filter(h1_hamm, 1, sinal);
+sinal_filtrado2 = filter(h2_hamm, 1, sinal);
+sinal_filtrado3 = filter(h3_hamm, 1, sinal);
+
+% Calculando o espectro dos sinais filtrados
+Sinal_fft_filtrado1 = fft(sinal_filtrado1);
+Sinal_fft_filtrado1 = abs(Sinal_fft_filtrado1/L);
+Sinal_fft_filtrado1 = Sinal_fft_filtrado1(1:L/2+1);
+Sinal_fft_filtrado1(2:end-1) = 2*Sinal_fft_filtrado1(2:end-1);
+
+Sinal_fft_filtrado2 = fft(sinal_filtrado2);
+Sinal_fft_filtrado2 = abs(Sinal_fft_filtrado2/L);
+Sinal_fft_filtrado2 = Sinal_fft_filtrado2(1:L/2+1);
+Sinal_fft_filtrado2(2:end-1) = 2*Sinal_fft_filtrado2(2:end-1);
+
+Sinal_fft_filtrado3 = fft(sinal_filtrado3);
+Sinal_fft_filtrado3 = abs(Sinal_fft_filtrado3/L);
+Sinal_fft_filtrado3 = Sinal_fft_filtrado3(1:L/2+1);
+Sinal_fft_filtrado3(2:end-1) = 2*Sinal_fft_filtrado3(2:end-1);
+
+% Plot dos sinais filtrados no tempo e no domínio da frequência
+figure;
+
+% Sinal filtrado 1
+subplot(2,2,1);
+plot(t, sinal_filtrado1);
+xlim([t1 t2])
+
+title('Sinal Filtrado com Filtro Passa-Faixa 1 (770 Hz)');
+xlabel('Tempo (s)');
+ylabel('Amplitude');
+
+subplot(2,2,2);
+plot(f, Sinal_fft_filtrado1);
+title('Espectro de Amplitude do Sinal Filtrado 1');
+xlabel('Frequência (Hz)');
+ylabel('|S(f)|');
+
+% Resposta em frequência do filtro 1
+[H1, W1] = freqz(h1_hamm, 1, 1024, Omega_s);
+subplot(2,2,[3 4]);
+plot(W1, 20*log10(abs(H1)));
+title('Resposta em Frequência do Filtro 1 (770 Hz)');
+xlabel('Frequência (Hz)');
+ylabel('Magnitude (dB)');
+
+% Sinal filtrado 2
+figure;
+subplot(2,2,1);
+plot(t, sinal_filtrado2);
+xlim([t1 t2])
+title('Sinal Filtrado com Filtro Passa-Faixa 2 (852 Hz)');
+xlabel('Tempo (s)');
+ylabel('Amplitude');
+
+subplot(2,2,2);
+plot(f, Sinal_fft_filtrado2);
+title('Espectro de Amplitude do Sinal Filtrado 2');
+xlabel('Frequência (Hz)');
+ylabel('|S(f)|');
+
+% Resposta em frequência do filtro 2
+[H2, W2] = freqz(h2_hamm, 1, 1024, Omega_s);
+subplot(2,2,[3 4]);
+plot(W2, 20*log10(abs(H2)));
+title('Resposta em Frequência do Filtro 2 (852 Hz)');
+xlabel('Frequência (Hz)');
+ylabel('Magnitude (dB)');
+
+% Sinal filtrado 3
+figure;
+subplot(2,2,1);
+plot(t, sinal_filtrado3);
+xlim([t1 t2])
+title('Sinal Filtrado com Filtro Passa-Faixa 3 (941 Hz)');
+xlabel('Tempo (s)');
+ylabel('Amplitude');
+
+subplot(2,2,2);
+plot(f, Sinal_fft_filtrado3);
+title('Espectro de Amplitude do Sinal Filtrado 3');
+xlabel('Frequência (Hz)');
+ylabel('|S(f)|');
+
+% Resposta em frequência do filtro 3
+[H3, W3] = freqz(h3_hamm, 1, 1024, Omega_s);
+subplot(2,2,[3 4]);
+plot(W3, 20*log10(abs(H3)));
+title('Resposta em Frequência do Filtro 3 (941 Hz)');
+xlabel('Frequência (Hz)');
+ylabel('Magnitude (dB)');
 ```]
 
 
+#figure(
+  figure(
+    rect(image("./pictures/q4.1.png")),
+    numbering: none,
+    caption: [Forma de filtragem do filtro projetado]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
 
+#figure(
+  figure(
+    rect(image("./pictures/q4.2.png")),
+    numbering: none,
+    caption: [Forma de filtragem do filtro projetado]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+#figure(
+  figure(
+    rect(image("./pictures/q4.3.png")),
+    numbering: none,
+    caption: [Forma de filtragem do filtro projetado]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+#figure(
+  figure(
+    rect(image("./pictures/q4.4.png")),
+    numbering: none,
+    caption: [Forma de filtragem do filtro projetado]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
