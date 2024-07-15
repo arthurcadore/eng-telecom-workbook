@@ -520,6 +520,8 @@ Projete um filtro que satisfaça as especificações a seguir, usando a janela d
 - Ωs = 5000 rad/s 
 
 #sourcecode[```matlab
+clear all; close all; clc; 
+
 pkg load signal;
 
 % Parâmetros passados pela questão: 
@@ -607,6 +609,8 @@ Projete um filtro que satisfaça as especificações a seguir, usando a janela d
 - Ωs = 10000 rad/s 
 
 #sourcecode[```matlab
+clear all; close all; clc; 
+
 pkg load signal;
 
 % Parâmetros passados pela questão: 
@@ -681,6 +685,100 @@ title('Resposta em Frequência');
 == Questão 4:
 
 Crie um sinal de entrada composto de três componentes senoidais, nas frequências 770 Hz, 852 Hz e 941 Hz, com Ωs = 8 kHz. Projete três filtros passa-faixa digitais, o primeiro com frequência central em 770 Hz, o segundo em 852 Hz e o terceiro em 941 Hz. Para o primeiro filtro, as extremidades das faixas de rejeição estão nas frequências 697 e 852; para o segundo, em 770 e 941 Hz; para o terceiro. Em 852 e 1209 Hz. Nos três filtros, a atenuação mínima na faixa de rejeição é 60 dB. 
+
+Para essa questão, será utilizado o filtro de kaiser, desta forma definimos um valor de atenuação maior que 60dB para garantir que o filtro atenda a especificação.
+
+=== Filtro 770Hz: 
+
+Parâmetros dados pela questão (resumo): 
+
+1° Filtro: 
+- Ωs = 8 kHz
+- Ωc = 770 Hz
+- Ωr1 = 697 Hz
+- Ωr2 = 852 Hz
+
+#sourcecode[```matlab
+clear all; close all; clc; 
+
+pkg load signal;
+
+Fator_Borda=8;
+% Parâmetros passados pela questão: 
+Omega_p1 = 697;  
+Omega_r1 = Omega_p1 - Omega_p1/Fator_Borda;   
+Omega_p2 = 852;  
+Omega_r2 = Omega_p2 + Omega_p2/Fator_Borda;  
+Omega_s = 8000;  
+
+% Ripple de passagem em dB
+Ap = 1.0;   
+
+% Atenuação mínima em dB
+Ar = 80.0;  
+
+% Convertendo Ap para amplitude
+delta_p = (10^(0.05*Ap) - 1) / (10^(0.05*Ap) + 1); 
+
+% Convertendo Ar para amplitude
+delta_r = 10^(-0.05*Ar);  
+
+% Definição das frequências de corte em radianos:
+F = [Omega_r1 Omega_p1 Omega_p2 Omega_r2]; 
+A = [0 1 0];  
+ripples = [delta_r delta_p delta_r]; 
+
+% Determinação dos parâmetros do filtro usando Kaiserord:
+[M, Wn, beta, FILTYPE] = kaiserord(F, A, ripples, Omega_s);
+
+% Geração da janela de Kaiser:
+kaiser_win = kaiser(M+1, beta);
+
+% Projeto do filtro FIR usando fir1 com a janela de Kaiser:
+h = fir1(M, Wn, FILTYPE, kaiser_win, 'noscale');
+
+% Plot da resposta ao impulso:
+figure(1)
+stem(0:M, h)
+ylabel('h[n]');
+xlabel('n');
+title('Resposta ao Impulso');
+
+% Cálculo e plot da resposta em frequência:
+[H, w] = freqz(h, 1, 2048, Omega_s);
+figure(2)
+plot(w, 20*log10(abs(H)))
+axis([0 Omega_s/2 -90 10])
+ylabel('Resposta de Módulo (dB)');
+xlabel('Frequência (rad/s)');
+title('Resposta em Frequência');
+```]
+
+
+=== Filtro 852Hz: 
+
+Parâmetros dados pela questão (resumo): 
+
+2° Filtro:
+- Ωs = 8 kHz
+- Ωc = 852 Hz
+- Ωr1 = 770 Hz
+- Ωr2 = 941 Hz
+
+#sourcecode[```matlab
+% Parâmetros do filtro
+```]
+
+
+=== Filtro 941Hz: 
+
+Parâmetros dados pela questão (resumo): 
+
+3° Filtro:
+- Ωs = 8 kHz
+- Ωc = 941 Hz
+- Ωr1 = 852 Hz
+- Ωr2 = 1209 Hz
 
 #sourcecode[```matlab
 % Parâmetros do filtro
