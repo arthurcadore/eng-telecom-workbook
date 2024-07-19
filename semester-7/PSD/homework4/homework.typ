@@ -607,7 +607,71 @@ Projete um filtro que satisfaça as especificações a seguir, usando a janela d
 - Ar = 40 dB
 - Ωr = 1000 rad/s
 - Ωp = 1200 rad/s
-- Ωs = 5000 rad/s 
+- Ωs = 5000 rad/s
+
+|#sourcecode[```
+pkg load signal; 
+
+% Especificações do filtro
+Ap = 1.0;          % Ripple de passagem em dB
+Ar = 40;           % Atenuação mínima em dB
+Omega_r = 1000;    % Frequência de rejeição em rad/s
+Omega_p = 1200;    % Frequência de passagem em rad/s
+Omega_s = 5000;    % Frequência de amostragem em rad/s
+
+% Cálculo dos ripples em escala linear
+delta_p = (10^(0.05*Ap) - 1) / (10^(0.05*Ap) + 1);  % Ripple de passagem
+delta_r = 10^(-0.05*Ar);                            % Atenuação de rejeição
+
+% Vetores de frequência e amplitude
+F = [Omega_r Omega_p];  % Frequências de interesse
+A = [0 1];              % Amplitudes desejadas (0 para rejeição, 1 para passagem)
+ripples = [delta_r delta_p];  % Ripples correspondentes
+
+% Determinação dos parâmetros do filtro usando Kaiserord
+[M, Wn, beta, FILTYPE] = kaiserord(F, A, ripples, Omega_s);
+
+% Geração da janela de Kaiser
+kaiser_win = kaiser(M+1, beta);
+
+% Projeto do filtro FIR usando fir1 com a janela de Kaiser
+h = fir1(M, Wn, FILTYPE, kaiser_win, 'noscale');
+
+% Plot da resposta ao impulso
+figure(1)
+stem(0:M, h)
+ylabel('h[n]');
+xlabel('n');
+title('Resposta ao Impulso');
+
+% Cálculo e plot da resposta em frequência
+[H, w] = freqz(h, 1, 2048, Omega_s);
+figure(2)
+plot(w, 20*log10(abs(H)))
+axis([0 Omega_s/2 -90 10])
+ylabel('Resposta de Módulo (dB)');
+xlabel('Frequência (rad/s)');
+title('Resposta em Frequência');
+```]
+
+#figure(
+  figure(
+    rect(image("./pictures/q3.1.png")),
+    numbering: none,
+    caption: [Forma de filtragem do filtro projetado]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+#figure(
+  figure(
+    rect(image("./pictures/q3.2.png")),
+    numbering: none,
+    caption: [Forma de filtragem do filtro projetado]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
 
 
 == Questão 4:
@@ -679,7 +743,7 @@ title('Resposta em Frequência');
 
 #figure(
   figure(
-    rect(image("./pictures/q3.1.png")),
+    rect(image("./pictures/q4.1.png")),
     numbering: none,
     caption: [Forma de filtragem do filtro projetado]
   ),
@@ -688,7 +752,7 @@ title('Resposta em Frequência');
 
 #figure(
   figure(
-    rect(image("./pictures/q3.2.png")),
+    rect(image("./pictures/q4.2.png")),
     numbering: none,
     caption: [Forma de filtragem do filtro projetado]
   ),
@@ -910,7 +974,7 @@ ylabel('Magnitude (dB)');
 
 #figure(
   figure(
-    rect(image("./pictures/q4.1.png")),
+    rect(image("./pictures/q5.1.png")),
     numbering: none,
     caption: [Forma de filtragem do filtro projetado]
   ),
@@ -919,7 +983,7 @@ ylabel('Magnitude (dB)');
 
 #figure(
   figure(
-    rect(image("./pictures/q4.2.png")),
+    rect(image("./pictures/q5.2.png")),
     numbering: none,
     caption: [Forma de filtragem do filtro projetado]
   ),
@@ -928,7 +992,7 @@ ylabel('Magnitude (dB)');
 
 #figure(
   figure(
-    rect(image("./pictures/q4.3.png")),
+    rect(image("./pictures/q5.3.png")),
     numbering: none,
     caption: [Forma de filtragem do filtro projetado]
   ),
@@ -937,7 +1001,7 @@ ylabel('Magnitude (dB)');
 
 #figure(
   figure(
-    rect(image("./pictures/q4.4.png")),
+    rect(image("./pictures/q5.4.png")),
     numbering: none,
     caption: [Forma de filtragem do filtro projetado]
   ),
