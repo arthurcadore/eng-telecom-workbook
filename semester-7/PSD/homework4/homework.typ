@@ -9,7 +9,7 @@
 )
 
 #show: doc => report(
-  title: "Projetos de Filtros Por Janelamento",
+  title: "Projeto de Filtros Por Janelamento",
   subtitle: "Processamento de Sinais Digitais",
   authors: ("Arthur Cadore Matuella Barcella",),
   date: "07 de Julho de 2024",
@@ -318,6 +318,9 @@ xlabel('Frequência (rad/s)');
 title('Resposta - Janela de Blackman');
 ```]
 
+
+Abaixo temos o plot da resposta em frequência do filtro passa-faixa ideal e dos filtros projetados com as janelas de Hamming, Hanning e Blackman para a ordem M = 10. Nota-se que a atenuação gerada pelo filtro para "M = 10" não é suficiente para atender as especificações do projeto, além de que a banda de passagem sofre uma variação consideravel do ganho em relação ao filtro ideal.
+
 #figure(
   figure(
     rect(image("./pictures/q1.1.png")),
@@ -409,6 +412,10 @@ ylabel('Resposta de Módulo (dB)');
 xlabel('Frequência (rad/s)');
 title('Resposta - Janela de Blackman');
 ```]
+
+Ao aumentar em 10 vezes a ordem do filtro, temos que a resposta em frequência do filtro projetado com as janelas de Hamming, Hanning e Blackman se aproximam da resposta do filtro ideal, e se assemelhando a uma resposta em frequência apropriada para um filtro passa-faixa. 
+
+Nota-se que com essa ordem é possivel distinguir a banda de passagem e a banda de rejeição do filtro, além de que a atenuação gerada pelo filtro é suficiente para atender as especificações do projeto.
 
 #figure(
   figure(
@@ -502,6 +509,10 @@ xlabel('Frequência (rad/s)');
 title('Resposta - Janela de Blackman');
 ```]
 
+Aumentando ainda mais a ordem do filtro para "M = 1000", temos a maximização da atenuação gerada pelo filtro na banda de rejeição, e uma queda mais acentuada do ganho na banda de passagem. 
+
+Com isso, temos que a resposta em frequência do filtro projetado com as janelas de Hamming, Hanning e Blackman se aproximam ainda mais da resposta do filtro ideal, e se assemelhando a uma resposta em frequência apropriada para um filtro passa-faixa.
+
 #figure(
   figure(
     rect(image("./pictures/q1.3.png")),
@@ -579,6 +590,7 @@ title('Resposta em Frequência');
 
 ```]
 
+Abaixo temos a resposta em frequência do filtro projetado com a janela de Kaiser para as especificações dadas. Nota-se que a resposta em frequência do filtro projetado atende as especificações do projeto, com uma atenuação de 40dB na banda de rejeição e um ripple de 1dB na banda de passagem.
 
 #figure(
   figure(
@@ -589,6 +601,7 @@ title('Resposta em Frequência');
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+Abaixo também é exibido a resposta ao impulso do filtro projetado, onde é possível observar a resposta ao impulso do filtro projetado com a janela de Kaiser.
 
 #figure(
   figure(
@@ -609,7 +622,9 @@ Projete um filtro que satisfaça as especificações a seguir, usando a janela d
 - Ωp = 1200 rad/s
 - Ωs = 5000 rad/s
 
-|#sourcecode[```
+|#sourcecode[```matlab
+clear all; close all; clc;
+
 pkg load signal; 
 
 % Especificações do filtro
@@ -654,6 +669,10 @@ xlabel('Frequência (rad/s)');
 title('Resposta em Frequência');
 ```]
 
+Abaixo temos a resposta em frequência do filtro projetado com a janela de Kaiser para as especificações dadas. Nota-se que a resposta em frequência do filtro projetado atende as especificações do projeto, com uma atenuação de 40dB na banda de rejeição e um ripple de 1dB na banda de passagem.
+
+Nota-se que a resposta em frequência deste filtro se assemelha bastante a resposta em frequência do filtro projetado na questão anterior, com a diferença de que a banda de passagem e a banda de rejeição estão invertidas.
+
 #figure(
   figure(
     rect(image("./pictures/q3.1.png")),
@@ -662,6 +681,8 @@ title('Resposta em Frequência');
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
+
+O mesmo ocorre para a resposta ao impulso do filtro projetado, onde é possível observar a resposta ao impulso do filtro projetado com a janela de Kaiser de maneira similar ao filtro projetado na questão anterior.
 
 #figure(
   figure(
@@ -741,14 +762,8 @@ xlabel('Frequência (rad/s)');
 title('Resposta em Frequência');
 ```]
 
-#figure(
-  figure(
-    rect(image("./pictures/q4.1.png")),
-    numbering: none,
-    caption: [Forma de filtragem do filtro projetado]
-  ),
-  caption: figure.caption([Elaborada pelo Autor], position: top)
-)
+Abaixo temos a resposta em frequência do filtro projetado com a janela de Kaiser para as especificações dadas. Nota-se que a resposta em frequência do filtro projetado atende as especificações do projeto, com uma atenuação de 80dB na banda de rejeição e um ripple de 1dB na banda de passagem.
+
 
 #figure(
   figure(
@@ -759,6 +774,16 @@ title('Resposta em Frequência');
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+Abaixo também é exibido a resposta ao impulso do filtro projetado, onde é possível observar a resposta ao impulso do filtro projetado com a janela de Kaiser.
+
+#figure(
+  figure(
+    rect(image("./pictures/q4.1.png")),
+    numbering: none,
+    caption: [Forma de filtragem do filtro projetado]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
 
 == Questão 5:
 
@@ -971,6 +996,9 @@ xlabel('Frequência (Hz)');
 ylabel('Magnitude (dB)');
 ```]
 
+A partir do código apresentado acima, primeiramente temos o plot do sinal original no tempo e no domínio da frequência. 
+
+O plot no dominio da frequência permite verificar que as três componentes cossenoidais estão presentes no somatório do sinal. 
 
 #figure(
   figure(
@@ -981,6 +1009,10 @@ ylabel('Magnitude (dB)');
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+Em seguida, temos o plot do sinal filtrado (com filtro passa faixa de 770Hz) no tempo e no domínio da frequência. Nota-se que no dominio da frequência, apenas o sinal de 770Hz é mantido, enquanto os sinais de 852Hz e 941Hz são atenuados até proximo de 0. 
+
+Também há o plot da resposta em frequência do filtro passa-faixa de 770Hz, onde é possível observar a banda de passagem e a banda de rejeição do filtro.
+
 #figure(
   figure(
     rect(image("./pictures/q5.2.png")),
@@ -989,6 +1021,10 @@ ylabel('Magnitude (dB)');
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
+
+Em seguida, temos o plot do sinal filtrado (com filtro passa faixa de 852Hz) no tempo e no domínio da frequência. Nota-se que no dominio da frequência, apenas o sinal de 852Hz é mantido, enquanto os sinais de 770Hz e 941Hz são atenuados até proximo de 0. 
+
+Também há o plot da resposta em frequência do filtro passa-faixa de 852Hz, onde é possível observar a banda de passagem e a banda de rejeição do filtro.
 
 #figure(
   figure(
@@ -999,6 +1035,10 @@ ylabel('Magnitude (dB)');
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+Em seguida, temos o plot do sinal filtrado (com filtro passa faixa de 941Hz) no tempo e no domínio da frequência. Nota-se que no dominio da frequência, apenas o sinal de 941Hz é mantido, enquanto os sinais de 770Hz e 852Hz são atenuados até proximo de 0.
+
+Também há o plot da resposta em frequência do filtro passa-faixa de 941Hz, onde é possível observar a banda de passagem e a banda de rejeição do filtro.
+
 #figure(
   figure(
     rect(image("./pictures/q5.4.png")),
@@ -1007,3 +1047,5 @@ ylabel('Magnitude (dB)');
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
+
+Desta forma, podemos concluir que os três filtros projetados atendem as especificações do projeto, onde cada filtro mantém apenas a componente senoidal desejada e atenua as demais componentes cossenoidais. 
