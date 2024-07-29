@@ -14,7 +14,7 @@
   title: "Modulador 16-QAM",
   subtitle: "Sistemas de Comunicação I",
   authors: ("Arthur Cadore Matuella Barcella",),
-  date: "30 de Junho de 2024",
+  date: "29 de Julho de 2024",
   doc,
 )
 
@@ -313,8 +313,6 @@ Desta forma, foi possível visualizar as componentes do sinal demoduladas, onde 
 
 Uma vez com o sinal filtrado, podemos realizar o downsampling do sinal para retornar a taxa de amostragem original, onde o sinal foi decimado para a taxa de amostragem original, e o excesso de amostras foi removido.
 
-
-
 #sourcecode[```matlab
 % Realizando o downsampling do sinal:
 
@@ -405,7 +403,11 @@ Abaixo está o diagrama 16-QAM após a recepção, note que os pontos estão mai
 
 == Parte 2: 
 
+Para o desenvolvimento da segunda parte, foi estruturado um script em octave para realizar a transmissão e recepção do sinal QAM utilizando a modulação QAM com a representação complexa.
+
 === Definindo parâmetros de execução:
+
+A primeira etapa do desenvolvimento, é a definição das variáveis que serão utilizadas nos processos de modulação e demodulação do sinal QAM. Desta forma, foi definido os seguintes parâmetros:
 
 #sourcecode[```matlab
 clc; close all; clear all;
@@ -435,13 +437,19 @@ Ts = 1 / Fs;
 
 % Definindo o SNR do sinal de transmissão: 
 SNR = 12;
+```]
 
+Em seguida, foi estruturado também o vetor de dados que será utilizado para a modulação do sinal QAM, para isso, foi gerado um vetor de dados aleatórios com 1000 elementos.
+
+#sourcecode[```matlab
 % Criando o vetor de dados: 
 Vector_length = 1000; 
 info = randi([0 M-1], 1, Vector_length); 
 ```]
 
 === Modualando o sinal QAM:
+
+Uma vez com os parâmetros definidos e o vetor de dados gerado, o primeiro passo foi realizra a modulação do sinal QAM, onde o sinal foi modulado utilizando a função #highlight[qammod] do pacote de comunicações do octave. Em seguida, os dados gerados pela função de modulação QAM podem ser visualizados através de um diagrama de constelação, utilizando a função #highlight[scatterplot].
 
 #sourcecode[```matlab
 % Modulação QAM:
@@ -457,9 +465,9 @@ grid on;
 
 % Criando o vetor de tempo com base no comprimento da informação:
 t = [0:Ts:(length(info_mod) * Tb - Ts)]; 
-
 ```]
 
+Com base no diagrama de constelação gerado, é possível visualizar a representação dos símbolos QAM no plano complexo, onde cada símbolo é representado por um ponto no plano complexo, sendo a parte real do sinal representada no eixo x e a parte imaginária do sinal representada no eixo y:
 
 #figure(
   figure(
@@ -472,6 +480,8 @@ t = [0:Ts:(length(info_mod) * Tb - Ts)];
 
 === Realizando o Upsampling do sinal:
 
+Em seguida, foi realizado o processo de upsampling do sinal, onde o sinal modulado foi expandido para a taxa de amostragem desejada. O objetivo desse processo é aumentar a taxa de amostragem do sinal, oque melhora a qualidade do sinal e facilita a filtragem do sinal.
+
 #sourcecode[```matlab
 % Upsample do sinal: 
 
@@ -483,6 +493,8 @@ info_mod_tx = filter(filtro_NRZ, 1, info_mod_up); % Filtragem
 ```]
 
 === Modulando o sinal para transmissão:
+
+Na sequencia, com o sinal modulado e expandido, foi realizado a modulação do sinal para a transmissão, onde o sinal foi modulado utilizando a representação complexa, onde o sinal foi multiplicado pela portadora complexa.
 
 #sourcecode[```matlab
 % Modulando para transmissão:
@@ -514,6 +526,8 @@ xlim([0 10 * Tb]);
 ylim([-5 5]);
 ```]
 
+Podemos ver no plot do sinal transmitido e do sinal recebido com ruído, onde é possível observar a diferença entre o sinal transmitido e o sinal recebido, e a presença do ruído no sinal recebido: 
+
 #figure(
   figure(
     rect(image("./pictures/2.2.png")),
@@ -524,6 +538,8 @@ ylim([-5 5]);
 )
 
 === Demodulando o sinal recebido:
+
+Para realizar a demodulação do sinal recebido, foi utilizado a representação complexa, onde o sinal recebido foi multiplicado pela própria portadora complexa, retornando o sinal modulado para a banda base.
 
 #sourcecode[```matlab
 % Demodulação do sinal de recepção:
@@ -536,6 +552,8 @@ sinal_demodulado = sinal_recebido .* portadora_rx;
 
 === Filtrando o sinal demodulado:
 
+Em seguida, o sinal demodulado foi filtrado utilizando um filtro passa-baixa para recuperar o sinal original, e o sinal foi filtrado utilizando a função #highlight[filter] do octave com base nos parâmetros definidos anteriormente.
+
 #sourcecode[```matlab
 % Filtrando o sinal demodulado:
 
@@ -546,6 +564,8 @@ info_rx_filtered = filter(filtro_passa_baixa, 1, sinal_demodulado);
 ```]
 
 === Realizando o downsampling do sinal:
+
+Uma vez com o sinal filtrado, podemos realizar o downsampling do sinal para retornar a taxa de amostragem original, onde o sinal foi reduzido para a taxa de amostragem original, e o excesso de amostras foi removido.
 
 #sourcecode[```matlab
 % Realizando o downsampling do sinal:
@@ -573,6 +593,8 @@ ylabel('Amplitude');
 grid on;
 ```]
 
+Com o sinal reduzido, podemos ver no dominio do tempo as componentes de fase e quadratura do sinal recebido, onde é possível observar a diferença entre o sinal transmitido e o sinal recebido, e a presença do ruído no sinal recebido:
+
 #figure(
   figure(
     rect(image("./pictures/2.3.png")),
@@ -583,6 +605,8 @@ grid on;
 )
 
 === Reconstruindo o sinal QAM Transmitido:
+
+Com o sinal recebido já reconstruido, podemos realizar seu plot no diagrama de constelação, para verificar a diferença entre o sinal transmitido e o sinal recebido.
 
 #sourcecode[```matlab
 % Reconstruindo o sinal QAM Transmitido:
@@ -604,6 +628,8 @@ title('Diagrama de Constelação do Sinal Recebido');
 grid on;
 ```]	
 
+Na figura abaixo, é possivel visualizar o sinal antes de ser transmitido, onde os pontos estão bem definidos e separados, oque indica que o sinal está bem modulado: 
+
 #figure(
   figure(
     rect(image("./pictures/2.4.png")),
@@ -612,6 +638,8 @@ grid on;
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
+
+Já na figura abaixo, podemos ver o sinal após a recepção, onde os pontos estão mais próximos e dispersos, oque indica que o sinal foi afetado pelo ruído e interferências, e a qualidade do sinal foi reduzida:
 
 #figure(
   figure(
@@ -623,6 +651,8 @@ grid on;
 )
 
 === Comparação das componentes real e imaginária: 
+
+Podemos também realizar a comparação do sinal no dominio do tempo nas componentes real e imaginária, onde é possível observar a diferença entre o sinal transmitido e o sinal recebido, e a presença do ruído no sinal recebido, isso pode ser visualizado através do script abaixo: 
 
 #sourcecode[```matlab
 figure;
@@ -651,6 +681,29 @@ ylim([-5 5]);
 grid on;
 ```]
 
+A figura abaixo apresenta as diferenças entre as componentes real e imaginária do sinal transmitido e do sinal recebido, onde é possível observar a diferença entre o sinal transmitido e o sinal recebido, e a presença do ruído no sinal recebido:
+
+#figure(
+  figure(
+    rect(image("./pictures/2.6.png")),
+    numbering: none,
+    caption: [Diagrama de constelação QAM do sinal Recebido]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
 = Conclusão:
 
+A partir dos conceitos vistos, do desenvolvimento e dos resultados obtidos, é possível concluir que a modulação QAM é uma técnica de modulação digital que permite transmitir dados de forma eficiente e robusta, onde é possível transmitir múltiplos bits por símbolo, oque aumenta a eficiência espectral do sinal.
+
+Também é possivel concluir que com uma maior SNR do sinal de transmissão, é possível obter um sinal de melhor qualidade, onde o sinal recebido é mais próximo do sinal transmitido, e a qualidade do sinal é melhor.
+
+E partir de um valor de SNR suficientemente alto, podemos aumentar a banda de transmissão do canal sem aumentar a taxa de erro de bit, oque permite transmitir mais dados em um mesmo canal de comunicação, além de não consumir mais energia na transmissão. 
+
 = Referências Bibliográficas:
+
+Para o desenvolvimento deste relatório, foi utilizado o seguinte material de referência:
+
+- #link("https://www.researchgate.net/publication/287760034_Software_Defined_Radio_using_MATLAB_Simulink_and_the_RTL-SDR")[Software Defined Radio Using MATLAB & Simulink and the RTL-SDR, de Robert W. Stewart]
+
+
