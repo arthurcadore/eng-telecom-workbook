@@ -11,3 +11,81 @@
   date: "30 de Junho de 2024",
   doc,
 )
+
+
+#sourcecode[```
+authors
+```]
+
+= Introdução: 
+
+= Desenvolvimento e Resultados: 
+
+== Parte 1: 
+
+#figure(
+  figure(
+    rect(image("./pictures/1.png")),
+    numbering: none,
+    caption: [Diagrama de constelação QAM do sinal]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+#figure(
+  figure(
+    rect(image("./pictures/2.png")),
+    numbering: none,
+    caption: [Componentes do sinal de transmissão]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+#figure(
+  figure(
+    rect(image("./pictures/3.png")),
+    numbering: none,
+    caption: [Sinal de Transmissão (Sem e com ruído)]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+#figure(
+  figure(
+    rect(image("./pictures/4.png")),
+    numbering: none,
+    caption: [Componentes do sinal Demoduladas e Filtradas]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+#figure(
+  figure(
+    rect(image("./pictures/5.png")),
+    numbering: none,
+    caption: [Comparando sinal de TX com sinaL de RX]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+#figure(
+  figure(
+    rect(image("./pictures/6.png")),
+    numbering: none,
+    caption: [Diagrama de constelação QAM do sinal Transmitido]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+#figure(
+  figure(
+    rect(image("./pictures/7.png")),
+    numbering: none,
+    caption: [Diagrama de constelação QAM do sinal Recebido]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+= Conclusão:
+
+= Referências Bibliográficas:
