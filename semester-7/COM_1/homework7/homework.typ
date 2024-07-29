@@ -3,9 +3,15 @@
 #show heading: set block(below: 1.5em)
 #show par: set block(spacing: 1.5em)
 #set text(font: "Arial", size: 12pt)
+#set highlight(
+  fill: rgb("#c1c7c3"),
+  stroke: rgb("#6b6a6a"),
+  extent: 2pt,
+  radius: 0.2em, 
+  ) 
 
 #show: doc => report(
-  title: "Transmissão / Recepção Digital",
+  title: "Modulador 16-QAM",
   subtitle: "Sistemas de Comunicação I",
   authors: ("Arthur Cadore Matuella Barcella",),
   date: "30 de Junho de 2024",
@@ -17,11 +23,19 @@
 
 = Introdução: 
 
+O objetivo deste relatório é realizar a transmissão e recepção de um sinal digital utilizando a modulação QAM (Quadrature Amplitude Modulation), o sinal será composto por um vetor de dados aleatórios com 1000 elementos, onde cada elemento obtido através dos dados aleatórios representa um diferente símbolo QAM. O sinal será modulado e transmitido, e posteriormente será recebido e demodulado, sendo possível comparar o sinal transmitido com o sinal recebido.
+
 = Desenvolvimento e Resultados: 
+
+O desenvolvimento do relatório foi dividido em duas partes, na primeira parte foi realizado a transmissão e recepção do sinal QAM utilizando a modulação QAM com a representação do sinal em fase e quadratura, e na segunda parte foi realizado a transmissão e recepção do sinal QAM utilizando a modulação QAM com a representação complexa.
 
 == Parte 1: 
 
+Para o desenvolvimento da primeira parte, foi estruturado um script em octave para realizar a transmissão e recepção do sinal QAM utilizando a modulação QAM com a representação do sinal em fase e quadratura.
+
 === Definindo parâmetros de execução:
+
+A primeira etapa do desenvolvimento, é a definição das variáveis que serão utilizadas nos processos de modulação e demodulação do sinal QAM. Desta forma, defini os seguintes parâmetros:
 
 #sourcecode[```matlab
 %% Inicializando pacotes necessários: 
@@ -54,13 +68,19 @@ SNR = 12;
 
 % Definindo o filtro FIR passa-baixa para a recepção:
 filtro_passa_baixa = fir1(100, fc/(Fs/2)); 
+```]
 
+Em seguida, foi estruturado também o vetor de dados que será utilizado para a modulação do sinal QAM, para isso, foi gerado um vetor de dados aleatórios com 1000 elementos.
+
+#sourcecode[```matlab 
 % Criando o vetor de dados: 
 Vector_length = 1000; 
 info = randi([0 M-1], 1, Vector_length); 
 ```]
 
 === Realizando a modulação QAM:
+
+Uma vez com os parâmetros definidos e o vetor de dados gerado, o primeiro passo foi realizra a modulação do sinal QAM, onde o sinal foi modulado utilizando a função #highlight[qammod] do pacote de comunicações do octave. Em seguida, os dados gerados pela função de modulação QAM podem ser visualizados através de um diagrama de constelação, utilizando a função #highlight[scatterplot].
 
 #sourcecode[```matlab
 % Modulação QAM:
@@ -80,6 +100,7 @@ info_i_imag = imag(info_mod);
 t = [0:Ts:(length(info_r_real) * Tb - Ts)]; 
 ```]
 
+Com base no diagrama de constelação gerado, é possível visualizar a representação dos símbolos QAM no plano complexo, onde cada símbolo é representado por um ponto no plano complexo, sendo a parte real do sinal representada no eixo x e a parte imaginária do sinal representada no eixo y: 
 
 #figure(
   figure(
@@ -91,6 +112,10 @@ t = [0:Ts:(length(info_r_real) * Tb - Ts)];
 )
 
 === Upsampling do sinal: 
+
+Em seguida, foi realizado o processo de upsampling do sinal, onde o sinal modulado foi expandido para a taxa de amostragem desejada. O objetivo desse processo é aumentar a taxa de amostragem do sinal, oque melhora a qualidade do sinal e facilita a filtragem do sinal.
+
+Para isso, foi utilizado a função #highlight[upsample] do octave, que adiciona zeros entre as amostras. Em seguida, foi criado um filtro NRZ para realizar o upsample (valor positivo) do sinal, e o sinal foi filtrado utilizando a função #highlight[filter].
 
 #sourcecode[```matlab
 % Criando um filtro NRZ para realizar o upsample do sinal: 
@@ -120,16 +145,11 @@ xlim([0 10 * Tb]);
 ylim([-5 5]);
 ```]
 
-#figure(
-  figure(
-    rect(image("./pictures/2.png")),
-    numbering: none,
-    caption: [Componentes do sinal de transmissão]
-  ),
-  caption: figure.caption([Elaborada pelo Autor], position: top)
-)
 
 === Modulando o sinal para transmissão:
+
+Em seguida, o sinal foi modulado para a transmissão, onde foi criado um sinal portadora cosseno e um sinal portadora seno, e o sinal de informação foi multiplicado por essas portadoras para realizar a modulação do sinal.
+
 
 #sourcecode[```matlab
 % Modulando para transmissão:
@@ -159,17 +179,27 @@ xlim([0 10 * Tb]);
 ylim([-5 5]);
 ```]
 
+Desta forma, foi possível visualizar o sinal de informação antes da modulação, note que após a expansão das amostras, existem diversos zeros e uns contínuos, o que permite uma visualização "quadrada" do sinal. 
+
+Também podemos ver o sinal após a modulação, onde o sinal foi multiplicado pela portadora cosseno e seno, e o sinal de informação foi modulado para a transmissão.
 
 #figure(
   figure(
-    rect(image("./pictures/3.png")),
+    rect(image("./pictures/2.png")),
     numbering: none,
-    caption: [Sinal de Transmissão (Sem e com ruído)]
+    caption: [Componentes do sinal de transmissão]
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+
 === Criando o sinal de transmissão:
+
+Uma vez com as componentes do sinal já moduladas, foi realizado a soma das componentes do sinal para obter o sinal de transmissão (Fase e Quadratura), oque resulta no sinal de transmissão QAM.
+
+Em seguida, foi adicionado ruído ao sinal transmitido, utilizando a função #highlight[awgn] do octave, onde foi adicionado um ruído com a relação sinal ruído (SNR) de 12 dB. Foi utilizada a função #highlight[awgn] pois essa função adiciona ruído gaussiano branco ao sinal transmitido, oque a torna o mais próximo possível de um piso de ruído térmico.
+
+O objetivo de adicionar ruído ao sinal transmitido é simular o ambiente de transmissão real, onde o sinal é afetado por ruídos e interferências, e assim, é possível avaliar a qualidade do sinal recebido. 
 
 #sourcecode[```matlab
 % Criando o sinal de transmissão:
@@ -198,17 +228,22 @@ ylim([-5 5]);
 
 ```]
 
+Desta forma, foi possível visualizar o sinal de transmissão e o sinal recebido com ruído, onde é possível observar a diferença entre o sinal transmitido e o sinal recebido, e a presença do ruído no sinal recebido.
 
 #figure(
   figure(
-    rect(image("./pictures/4.png")),
+    rect(image("./pictures/3.png")),
     numbering: none,
-    caption: [Componentes do sinal Demoduladas e Filtradas]
+    caption: [Sinal de Transmissão (Sem e com ruído)]
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+
 === Demodulando o sinal recebido:
+
+Na recepção do sinal, o sinal recebido foi demodulado utilizando a representação do sinal em fase e quadratura, onde o sinal recebido foi multiplicado pela portadora cosseno e seno, retornando o sinal para a banda base. 
+
 
 #sourcecode[```matlab
 % Demodulação do sinal de recepção:
@@ -236,16 +271,9 @@ ylabel('Amplitude');
 xlim([0 10 * Tb]);
 ```]
 
-#figure(
-  figure(
-    rect(image("./pictures/5.png")),
-    numbering: none,
-    caption: [Comparando sinal de TX com sinaL de RX]
-  ),
-  caption: figure.caption([Elaborada pelo Autor], position: top)
-)
-
 === Filtrando o sinal demodulado:
+
+Com o sinal já demodulado, foi filtrado utilizando um filtro passa-baixa para recuperar o sinal original, e o sinal foi filtrado utilizando a função #highlight[filter] do octave com base nos parâmetros definidos anteriormente.
 
 #sourcecode[```matlab
 % Filtrando o sinal demodulado:
@@ -269,7 +297,23 @@ ylabel('Amplitude');
 xlim([0 10 * Tb]);
 ```]
 
+Desta forma, foi possível visualizar as componentes do sinal demoduladas, onde é possível observar a diferença entre o sinal transmitido e o sinal recebido, e a presença do ruído no sinal recebido: 
+
+#figure(
+  figure(
+    rect(image("./pictures/4.png")),
+    numbering: none,
+    caption: [Componentes do sinal Demoduladas e Filtradas]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+
 === Realizando o downsampling do sinal:
+
+Uma vez com o sinal filtrado, podemos realizar o downsampling do sinal para retornar a taxa de amostragem original, onde o sinal foi decimado para a taxa de amostragem original, e o excesso de amostras foi removido.
+
+
 
 #sourcecode[```matlab
 % Realizando o downsampling do sinal:
@@ -308,7 +352,23 @@ xlim([0 10 * Tb]);
 ylim([-5 5]);
 ```]
 
+Desta forma, foi possível visualizar a comparação entre as componentes do sinal transmitido e do sinal recebido, onde é possível observar a diferença entre o sinal transmitido e o sinal recebido, e a presença do ruído no sinal recebido:
+
+#figure(
+  figure(
+    rect(image("./pictures/5.png")),
+    numbering: none,
+    caption: [Comparando sinal de TX com sinaL de RX]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+
 === Plotando o sinal QAM Transmitido e Recebido:
+
+Com os sinais antes da transmissão e após a recepção, é possivel reconstruir o sinal QAM transmitido e verificar o sinal QAM recebido. 
+
+Assim, podemos plotar os diagramas de constelação dos sinais transmitidos e recebidos e realizar um comparativo entre ambos.
 
 #sourcecode[```matlab
 scatterplot(info_mod);
@@ -321,6 +381,8 @@ title('Diagrama de Constelação - Sinal RX');
 xlim([-5 5]);
 ylim([-5 5]);
 ```]
+
+Abaixo está o diagrama 16-QAM antes da transmissão, note que os pontos estão bem definidos e separados, oque indica que o sinal está bem modulado.
 #figure(
   figure(
     rect(image("./pictures/6.png")),
@@ -329,6 +391,8 @@ ylim([-5 5]);
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
+
+Abaixo está o diagrama 16-QAM após a recepção, note que os pontos estão mais próximos e dispersos, oque indica que o sinal foi afetado pelo ruído e interferências, e a qualidade do sinal foi reduzida.
 
 #figure(
   figure(
