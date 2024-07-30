@@ -31,7 +31,7 @@ A primeira etapa do projeto é em montar o diagrama ASM da FSM que será respons
 
 #figure(
   figure(
-    image("./diagrams/diagram.svg", width: 60%),
+    image("./diagrams/diagram.svg", width: 65%),
     numbering: none,
     caption: [Diagrama ASM da FSM]
   ),
@@ -68,6 +68,75 @@ A implementação da FSM consiste na
 == Instânciação dos componentes e conexão dos sinais:
 
 == Aplicação na placa FPGA:
+
+== Demais códigos utilizados:
+
+Além dos códigos apresentados anteriormente, foram utilizados também os códigos abaixo para a implementação da calculadora.
+
+=== bcd2ssd: 
+
+O código bcd2ssd é responsável por converter um número BCD de 4bits para um display de 7 segmentos.
+
+#sourcecode[```verilog
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity bcd2ssd is
+  port (
+    BCD : in std_logic_vector (3 downto 0);
+    SSD : out std_logic_vector (6 downto 0)
+  );
+
+end entity;
+
+architecture arch of bcd2ssd is
+begin
+
+  with BCD select
+    SSD <= "1000000" when "0000",
+    "1111001" when "0001",
+    "0100100" when "0010",
+    "0110000" when "0011",
+    "0011001" when "0100",
+    "0010010" when "0101",
+    "0000011" when "0110",
+    "1111000" when "0111",
+    "0000000" when "1000",
+    "0011000" when "1001",
+    "0111111" when others;
+end arch;
+```]
+
+=== bin2bcd:
+
+O código bin2bcd é responsável por converter um número binário de 8bits para BCD, onde cada dígito é representado por 4bits.
+
+#sourcecode[```verilog
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity bin2bcd is
+    port (
+        A      : in  std_logic_vector (7 downto 0);
+        sd, su, sc : out std_logic_vector (3 downto 0)
+    );
+end entity;
+
+architecture ifsc_v1 of bin2bcd is
+    signal A_uns          : unsigned (7 downto 0);
+    signal sd_uns, su_uns, sc_uns : unsigned (7 downto 0);
+
+begin
+    A_uns  <= unsigned(A);
+	 sc_uns <= A_uns/100;
+    sd_uns <= A_uns/10;
+    su_uns <= A_uns rem 10;
+    sc     <= std_logic_vector(resize(sc_uns, 4));
+    sd     <= std_logic_vector(resize(sd_uns, 4));
+    su     <= std_logic_vector(resize(su_uns, 4));
+end architecture;
+```]
 
 = Conclusão:
 
