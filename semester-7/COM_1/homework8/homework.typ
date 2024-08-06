@@ -28,6 +28,10 @@ O desenvolvimento deste relatório foi dividido em três diferentes seções, on
 
 == Desempenho de modulações MPSK
 
+Para calcular o desempenho de modulações MPSK, foi implementado um script em MATLAB que realiza a modulação e demodulação dos sinais, calculando a taxa de erro de bit (BER) para diferentes valores de M. 
+
+O script gera dados aleatórios binários, modula os dados e adiciona ruído gaussiano branco, demodula os sinais e calcula a taxa de erro de bit para diferentes valores de SNR.
+
 #sourcecode[```matlab
 clear all; close all; clc
 pkg load communications;
@@ -85,7 +89,12 @@ end
 
 ```]	
 
+A seguir, são apresentados os gráficos de BER para diferentes valores de M.
+
+
 === 4-MPSK
+
+O primeiro gráfico apresenta a taxa de erro de bit (BER) para a modulação 4-PSK. Note que a BER diminui à medida que o SNR aumenta, o que é esperado, isso pois o sinal se torna mais robusto em relação ao ruído, ou seja, fica mais distinguivel ao receptor. 
 
 #figure(
   figure(
@@ -99,6 +108,8 @@ end
 
 === 8-MPSK
 
+Já no gráfico da modulação 8-PSK, é possível observar que a BER é maior em relação à modulação 4-PSK, isso ocorre pois a modulação 8-PSK possui mais fases, o que torna o sinal mais suscetível a erros devido ao ruído, dessa forma, a curva se aproxima mais da direita da imagem, pois o sinal precisa de um SNR maior para ser distinguido do ruído.
+
 #figure(
   figure(
     rect(image("./pictures/8psk.png")),
@@ -110,6 +121,8 @@ end
 
 
 === 16-MPSK
+
+Da mesma maneira, o gráfico da modulação 16-PSK apresenta uma BER ainda maior, isso ocorre pois a modulação 16-PSK possui mais fases, o que torna o sinal mais suscetível a erros devido ao ruído, dessa forma, a curva se aproxima mais da direita da imagem, pois o sinal precisa de um SNR maior para ser distinguido do ruído.
 
 #figure(
   figure(
@@ -123,6 +136,8 @@ end
 
 === 32-MPSK
 
+Novamente, o gráfico da modulação 32-PSK apresenta uma BER ainda maior, isso ocorre pois a modulação 32-PSK possui mais fases, o que torna o sinal mais suscetível a erros devido ao ruído, dessa forma, a curva se aproxima mais da direita da imagem, pois o sinal precisa de um SNR maior para ser distinguido do ruído.
+
 #figure(
   figure(
     rect(image("./pictures/32psk.png")),
@@ -135,6 +150,10 @@ end
 
 === Desempenho comparativo: 
 
+Abaixo podemos observar um gráfico comparativo entre as modulações MPSK, onde é possível observar que a BER aumenta à medida que o número de fases aumenta, isso ocorre pois o sinal se torna mais suscetível a erros devido ao ruído, dessa forma, a curva se aproxima mais da direita da imagem, pois o sinal precisa de um SNR maior para ser distinguido do ruído.
+
+Note que a modulação 4-PSK possui a menor BER, enquanto a modulação 32-PSK possui a maior BER, isso ocorre pois um sinal modulado com mais fases é mais suscetível a erros devido ao ruído.
+
 #figure(
   figure(
     rect(image("./pictures/mpsk.png")),
@@ -144,8 +163,9 @@ end
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
-#sourcecode[```matlab
+Abaixo está o script correspondente para gerar a imagem apresentada acima:
 
+#sourcecode[```matlab
 Clear all; close all; clc;
 pkg load communications;
 
@@ -205,6 +225,10 @@ hold off;
 ```]
 
 == Desempenho de modulações MQAM
+
+Para calcular o desempenho de modulações MQAM, foi implementado um script em MATLAB que realiza a modulação e demodulação dos sinais, calculando a taxa de erro de bit (BER) para diferentes valores de M. 
+
+O script gera dados aleatórios, modula os dados e adiciona ruído gaussiano branco, demodula os sinais e calcula a taxa de erro de bit para diferentes valores de SNR.
 
 #sourcecode[```matlab
 pkg load communications; % Carrega o pacote de comunicações
@@ -290,13 +314,54 @@ for M = [4, 16, 64]
 end
 ```]
 
+A seguir, são apresentados os gráficos de BER para diferentes valores de M.
+
 === 4-MQAM
+
+O primeiro gráfico apresenta a taxa de erro de bit (BER) para a modulação 4-QAM. Note que a BER diminui à medida que o SNR aumenta, o que é esperado, isso pois o sinal se torna mais robusto em relação ao ruído, ou seja, fica mais distinguivel ao receptor. 
+
+Porem, note que esse caimento é bastante acentuado, isso ocorre pois a modulação 4-QAM possui menos fases, o que torna o sinal mais robusto em relação ao ruído, dessa forma, a curva se aproxima mais da esquerda da imagem, pois o sinal precisa de um SNR menor para ser distinguido do ruído.
+
+#figure(
+  figure(
+    rect(image("./pictures/4qam.png")),
+    numbering: none,
+    caption: [Taxa de erro de bit (BER) para modulação 4-QAM]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
 
 === 16-MQAM
 
+Já no gráfico da modulação 16-QAM, é possível observar que a BER é maior em relação à modulação 4-QAM, isso ocorre pois a modulação 16-QAM possui mais fases, o que torna o sinal mais suscetível a erros devido ao ruído, dessa forma, a curva se aproxima mais da direita da imagem, pois o sinal precisa de um SNR maior para ser distinguido do ruído.
+
+#figure(
+  figure(
+    rect(image("./pictures/16qam.png")),
+    numbering: none,
+    caption: [Taxa de erro de bit (BER) para modulação 16-QAM]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
 === 64-MQAM
 
+Por fim, o gráfico da modulação 64-QAM apresenta uma BER ainda maior, isso ocorre pois a modulação 64-QAM possui mais fases, o que torna o sinal mais suscetível a erros devido ao ruído, dessa forma, a curva se aproxima mais da direita da imagem, pois o sinal precisa de um SNR maior para ser distinguido do ruído.
+
+#figure(
+  figure(
+    rect(image("./pictures/64qam.png")),
+    numbering: none,
+    caption: [Taxa de erro de bit (BER) para modulação 64-QAM]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
 === Desempenho comparativo:
+
+Abaixo podemos ver um comparativo entre as modulações MQAM, onde é possível observar que a BER aumenta à medida que o número de fases aumenta, isso ocorre pois o sinal se torna mais suscetível a erros devido ao ruído, dessa forma, a curva se aproxima mais da direita da imagem, pois o sinal precisa de um SNR maior para ser distinguido do ruído.
+
+Note que a modulação 4-QAM possui a menor BER, enquanto a modulação 64-QAM possui a maior BER, isso ocorre pois um sinal modulado com mais fases é mais suscetível a erros devido ao ruído.
 
 #figure(
   figure(
@@ -307,6 +372,7 @@ end
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+Abaixo está o script correspondente para gerar a imagem apresentada acima:
 
 #sourcecode[```matlab
 clear all; close all; clc;
@@ -394,15 +460,13 @@ legend('show');
 hold off;
 ```]
 
-== Comparação de modulações PSK vs. QAM
-
-=== 4-PSK vs. 4-QAM
-
-=== 16-PSK vs. 16-QAM
-
-=== 64-PSK vs. 64-QAM
-
 = Conclusão:
+
+Apartir dos conceitos apresentados, testes realizados e resultados obtidos, podemos concluir que a modulação MPSK é mais robusta em relação ao ruído em comparação com a modulação MQAM, isso ocorre pois a modulação MPSK possui menos fases, o que torna o sinal mais robusto em relação ao ruído, dessa forma, a curva se aproxima mais da esquerda da imagem, pois o sinal precisa de um SNR menor para ser distinguido do ruído.
+
+Por outro lado, a modulação MQAM possui mais fases, o que torna o sinal mais suscetível a erros devido ao ruído, dessa forma, a curva se aproxima mais da direita da imagem, pois o sinal precisa de um SNR maior para ser distinguido do ruído.
+
+Dessa forma, a escolha entre MPSK e MQAM depende do ambiente de comunicação, se o ambiente possui muito ruído, a modulação MPSK é mais indicada, por outro lado, se o ambiente possui menos ruído, a modulação MQAM é mais indicada.
 
 = Referências Bibliográficas:
 
