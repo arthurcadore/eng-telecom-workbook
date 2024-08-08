@@ -74,8 +74,6 @@ Note que uma vez com o código implementado, o diagrama FSM obtido no simulador 
 
 A implementação da FSM consiste no recebimento de sinais especificos de entrada, e a partir do estado atual e dos sinais recebidos a máquina decide para qual estado irá, e neste, qual saidas devem ser ativadas.
 
-Abaixo podemos ver o código VHDL da FSM:
-
 #figure(
   figure(
     image("./pictures/fsm2.png"),
@@ -84,10 +82,6 @@ Abaixo podemos ver o código VHDL da FSM:
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
-
-#sourcecode[```verilog
-a
-```] 
 
 == Implementação do VHDL datapath da calculadora:
 
