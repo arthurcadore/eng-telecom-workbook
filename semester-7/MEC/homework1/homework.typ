@@ -75,17 +75,34 @@ Para o calculo do esforço cortante, foi verificado o valor diretamente no softw
 
 #figure(
   figure(
-    rect(image("./pictures/r2.2.png")),
+    rect(image("./pictures/r2.2.png"), width: 70%),
     numbering: none,
     caption: [Calculo do Esforço Cortante] 
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+Valor do esforço cortante total:
+
+$
+W_1  - R_1 + V(x)  = 0 
+$
+
+Portanto: 
+$
+W_1 = w(x - x_i) = 5000x - 0 
+$
+Substituindo os valores, temos: 
+
+$
+V(x) = 5000x - 25000
+$
+
+A partir dos resultados, temos o seguinte gráfico apresentado para a distribuição do esforço cortante ao longo da viga: 
 
 #figure(
   figure(
-    rect(image("./pictures/r2.3.png")),
+    rect(image("./pictures/r2.3.png"), width: 90%),
     numbering: none,
     caption: [Plot do Esforço Cortante] 
   ),
@@ -98,7 +115,7 @@ Para o calculo do momento fletor, da mesma maneira, foi verificado o valor diret
 
 #figure(
   figure(
-    rect(image("./pictures/r2.4.png")),
+    rect(image("./pictures/r2.4.png"), width: 70%),
     numbering: none,
     caption: [Calculo do Momento Fletor] 
   ),
@@ -107,9 +124,21 @@ Para o calculo do momento fletor, da mesma maneira, foi verificado o valor diret
 
 Valor do momento fletor total: 
 
+$
+W_1 (x - x_i) - R_1(x - x_i) + M(x) = 0
+$
+
+Portanto:
+
+$
+M(x) = -2500x^2 - 25000x
+$
+
+A partir dos resultados, temos o seguinte gráfico apresentado para a distribuição do momento fletor ao longo da viga:
+
 #figure(
   figure(
-    rect(image("./pictures/r2.5.png")),
+    rect(image("./pictures/r2.5.png"), width: 90%),
     numbering: none,
     caption: [Plot do Momento Fletor] 
   ),
