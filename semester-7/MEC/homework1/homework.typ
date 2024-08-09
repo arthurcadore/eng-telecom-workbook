@@ -33,7 +33,28 @@ Determine qual é a Tensão máxima de flexão atua na viga bi-apoiada mostrada 
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+=== Esforço Cortante:
 
+#figure(
+  figure(
+    rect(image("./pictures/r1.1.png", width: 90%)),
+    numbering: none,
+    caption: [Calculo do Esforço Cortante] 
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+
+=== Momento Fletor:
+
+#figure(
+  figure(
+    rect(image("./pictures/r1.2.png", width: 90%)),
+    numbering: none,
+    caption: [Calculo do Momento Fletor] 
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
 
 == Questão 2: 
 
@@ -69,7 +90,7 @@ R_1 = 25000N ; R_2 = 25000N
 $
 
 
-=== Esforço de viga cortante: 
+=== Esforço Cortante: 
 
 Para o calculo do esforço cortante, foi verificado o valor diretamente no software: 
 
