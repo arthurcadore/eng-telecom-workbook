@@ -20,6 +20,115 @@
 
 = Questão 1
 
+Usando a transformação bilinear, projete um filtro passa-baixas Butterworth que atenda as seguintes especificações:
+
+$
+0.9 <= |H(e^{j  omega})| <= 1 
+$
+$  
+0 <= omega <= 0.2 pi
+$
+$ 
+|H(e^{j  omega})| <= 0.2
+$
+$  
+0.3 pi <= omega <= pi
+$
+
+Considere também que: 
+
+- Ts (tempo de amostragem) = 2
+- Faça o mesmo projeto usando o MATLAB ou simulink. Plote a resposta em frequência
+
+== Projeto do Filtro IIR no Simulink:
+
+=== Pré-Distorção do Sinal: 
+
+O primeiro passo no desenvolvimento do projeto foi a montagem do filtro IIR no Simulink. Utilizamos a ferramenta para alterar os parâmetros do filtro procurando pelos valores que atendessem as especificações de banda de passagem e de rejeição.
+
+Seguindo a formula para transformação bilinear para transformar a frequência analógica em frequência digital: 
+
+$
+omega = 2/"Ts" tan(omega/2) 
+$
+
+Desta forma, temos que: 
+
+#sourcecode[```matlab
+wp = 0.2*pi;
+wr = 0.3*pi;
+ts = 2;
+
+omega_ap = (2/ts)*tan(wp/2)
+omega_ar = (2/ts)*tan(wr/2)
+
+```]
+
+=== Normalização do Filtro:
+
+A normalização do filtro é realizada para que o filtro projetado atenda as especificações de banda de passagem e de rejeição.
+
+Para o processo de normalização, seguimos a tabela apresentada em aula que contém a seguinte transformada: 
+
+$
+Omega'_p = 1/a
+$
+$
+Omega'_r = 1/a (Omega_"r"/Omega_"p")
+$
+
+Desta forma, temos que: 
+
+#sourcecode[```matlab
+a = 1;
+omega_p_linha = 1/a
+omega_r_linha = omega_p_linha * (omega_ar/omega_ap)
+```]
+
+=== Calculo das atenuações: 
+
+Para o calculo das atenuações, utilizamos a formula apresentada em aula. 
+
+Para a banda de passagem: 
+
+$
+G_p = 20 log_10 (1 - sigma_p)
+$
+
+Para a banda de rejeição:
+
+$
+G_r = 20 log_10 (sigma_r)
+$
+
+Desta forma: 
+#sourcecode[```matlab
+sigma_p = 0.9;
+sigma_r = 0.2;
+
+atenuacao_p = -1 * (20*log10(sigma_p))
+atenuacao_r = -1 * (20*log10(sigma_r))
+```]
+
+=== Calculo dos parâmetros do filtro: 
+
+$
+e = sqrt(10^(0,1,A_p) -1)
+$
+
+$
+n >= log_10((10^(0,1,A_r) -1) / e^2) / (2 log_10 Omega'_r)
+$
+
+#sourcecode[```matlab
+eps = sqrt((10^(0.1*atenuacao_p))-1)
+
+numerador = log10((10^(0.1*atenuacao_r)-1) / eps^2);
+denominador = 2*log10(omega_r_linha);
+
+n = ceil(numerador/denominador)
+```]
+
 = Questão 2
 
 Crie, usando MATLAB, um sinal de entrada composto de três componentes senoidais, nas frequências 770Hz, 852Hz e 941Hz, com Ωs = 8 kHz. Projete, usando o simulink ou o MATLAB, um filtro IIR para isolar cada componente. Documente as especificações utilizadas. Faça comentários.
