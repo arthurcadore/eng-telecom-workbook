@@ -260,6 +260,7 @@ Uma vez com o filtro projetado e os parâmetros definidos, é possivel gerar um 
 #sourcecode[```matlab
 clc; close all; clear all;
 
+% Parâmetros do sinal
 tmin = 0;
 tmax = 2;
 Omega_s = 8000;
@@ -268,16 +269,21 @@ Ts = 1/Fs;
 L = (tmax - tmin)/Ts;
 t = 0:Ts:tmax-Ts;
 
+% Componentes do sinal de entrada
 f1 = 770;
 f2 = 852;
 f3 = 941;
 
+% Sinal de entrada composto: 
 s_t = sin(2*pi*f1*t) + sin(2*pi*f2*t) + sin(2*pi*f3*t);
+
+% Realizando a FFT do sinal composto: 
 S_f = fft(s_t);
 S_f = abs(2*S_f/L);
 S_f = fftshift(S_f);
 freq = Fs*(-(L/2):(L/2)-1)/L;
 
+% Realizando o plot do sinal composto no dominio do tempo: 
 figure;
 subplot(2,1,1);
 plot(t,s_t);
@@ -285,6 +291,7 @@ ylabel('Amplitude');
 xlabel('Tempo (s)');
 title('Sinal de entrada');
 
+% Plotando a FFT do sinal composto
 subplot(2,1,2);
 plot(freq,S_f);
 title('Espectro do sinal composto de três componentes senoidais');
@@ -293,8 +300,10 @@ ylabel('Amplitude');
 xlim([-1000 1000]);
 ylim([-0.1 1.1]);
 
+% ==============================================
+% Aplicando as componentes de filtragem 
 % Filtro de 770Hz Butterworth
-Num = Numerator = [
+Num = [
      0.000000000007648974625344080593812088956; 0; 
     -0.000000000030595898501376322375248355826; 0; 
      0.000000000045893847752064483562872533739; 0; 
@@ -313,10 +322,13 @@ Den = [1;
      0.991336860368820738109718604391673579812 
 ];
 
+% Realizando a filtragem do sinal composto: 
 s_770hz = filter(Num, Den, s_t);
 S_770hz = fft(s_770hz);
 S_770hz = abs(2*S_770hz/L);
 S_770hz = fftshift(S_770hz);
+
+% Realizando o plot do sinal composto no dominio do tempo:
 figure;
 subplot(2,1,1);
 plot(freq,S_f);
@@ -333,6 +345,8 @@ ylabel('Amplitude');
 xlim([-1000 1000]);
 ylim([-0.1 1.1]);
 
+% ==============================================
+% Aplicando as componentes de filtragem 
 % Filtro de 852Hz Butterworth
 Num = [
      0.000000000007674623107715503777944271234; 0; 
@@ -352,11 +366,13 @@ Den = [1;
      0.991329630860964927663303569715935736895 
 ];
 
-
+% Realizando a filtragem do sinal composto:
 s_852hz = filter(Num, Den, s_t);
 S_852hz = fft(s_852hz);
 S_852hz = abs(2*S_852hz /L);
 S_852hz  = fftshift(S_852hz );
+
+% Realizando o plot do sinal composto no dominio do tempo:
 figure;
 subplot(2,1,1);
 plot(freq,S_f);
@@ -373,6 +389,8 @@ ylabel('Amplitude');
 xlim([-1000 1000]);
 ylim([-0.1 1.1]);
 
+% ==============================================
+% Aplicando as componentes de filtragem 
 % Filtro de 940Hz Butterworth
 Num = [0.000000000007698496068837793746781982269; 0;
     -0.000000000030793984275351174987127929078; 0; 
@@ -391,10 +409,13 @@ Den = [1;
       0.991322918116968265778155000589322298765
 ];
 
+% Realizando a filtragem do sinal composto:
 s_940hz = filter(Num, Den, s_t);
 S_940hz = fft(s_940hz);
 S_940hz = abs(2*S_940hz/L);
 S_940hz = fftshift(S_940hz);
+
+% Realizando o plot do sinal composto no dominio do tempo:
 figure;
 subplot(2,1,1);
 plot(freq,S_f);
@@ -417,6 +438,10 @@ ylim([-0.1 1.1]);
 
 ==== Sinal de Entrada:
 
+A partir do script acima, o sinal de entrada foi gerado e apresentado na figura abaixo. Note que o sinal é composto por três componentes senoidais, nas frequências de 770Hz, 852Hz e 941Hz.
+
+As componentes somadas são apresentadas abaixo, tanto no dominio do tempo quanto no dominio da frequência, note que no dominio da frequência aparece as três componentes cossenoidas separadamente permitindo visualizar a soma completa dos sinais. 
+
 #figure(
   figure(
     rect(image("./pictures/q2.8.png")),
@@ -428,6 +453,10 @@ ylim([-0.1 1.1]);
 
 ==== Sinal de 770Hz Filtrado:
 
+Multiplicando o sinal de entrada pelo filtro de 770Hz, obtemos o sinal filtrado para a frequência de 770Hz. Note que o sinal filtrado apresenta apenas a componente de 770Hz, as demais componentes foram atenuadas pelo filtro.
+
+Note que também há uma pequena amplitude associada a lateral do sinal, isso ocorre devido a resposta em frequência do filtro que não é ideal, porem, a atenuação é suficiente para que a componente de 770Hz seja isolada das demais.
+
 #figure(
   figure(
     rect(image("./pictures/q2.9.png")),
@@ -438,6 +467,10 @@ ylim([-0.1 1.1]);
 )
 
 ==== Sinal de 852Hz Filtrado:
+
+Em seguida, podemos ver o sinal filtrado para a frequência de 852Hz. Note que o sinal filtrado apresenta apenas a componente de 852Hz, as demais componentes foram atenuadas pelo filtro.
+
+Note que também há uma pequena amplitude associada a lateral do sinal, isso ocorre devido a resposta em frequência do filtro que não é ideal, porem, a atenuação é suficiente para que a componente de 852Hz seja isolada das demais.
 
 
 #figure(
@@ -451,6 +484,10 @@ ylim([-0.1 1.1]);
 
 ==== Sinal de 941Hz Filtrado:
 
+Por fim temos o sinal filtrado para a frequência de 941Hz. Note que o sinal filtrado apresenta apenas a componente de 941Hz, as demais componentes foram atenuadas pelo filtro.
+
+Note que também há uma pequena amplitude associada a lateral do sinal, isso ocorre devido a resposta em frequência do filtro que não é ideal, porem, a atenuação é suficiente para que a componente de 941Hz seja isolada das demais.
+
 #figure(
   figure(
     rect(image("./pictures/q2.11.png")),
@@ -459,8 +496,6 @@ ylim([-0.1 1.1]);
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
-
-
 
 = Conclusão
 
