@@ -52,7 +52,7 @@ $
 omega = 2/"Ts" tan(omega/2) 
 $
 
-Desta forma, temos que: 
+Desta forma, temos que o script matlab corresponte é: 
 
 #sourcecode[```matlab
 wp = 0.2*pi;
@@ -77,7 +77,7 @@ $
 Omega'_r = 1/a (Omega_"r"/Omega_"p")
 $
 
-Desta forma, temos que: 
+Desta forma, temos que o script matlab corresponte é:
 
 #sourcecode[```matlab
 a = 1;
@@ -87,21 +87,22 @@ omega_r_linha = omega_p_linha * (omega_ar/omega_ap)
 
 === Calculo das atenuações: 
 
-Para o calculo das atenuações, utilizamos a formula apresentada em aula. 
+Para o calculo das atenuações, utilizamos a formula apresentada em aula para obter o valor de ganho em dB para a banda de passagem e de rejeição: 
 
-Para a banda de passagem: 
+- Para a banda de passagem: 
 
 $
 G_p = 20 log_10 (1 - sigma_p)
 $
 
-Para a banda de rejeição:
+- Para a banda de rejeição:
 
 $
 G_r = 20 log_10 (sigma_r)
 $
 
-Desta forma: 
+Desta forma, temos que o script matlab corresponte é:
+
 #sourcecode[```matlab
 sigma_p = 0.9;
 sigma_r = 0.2;
@@ -112,13 +113,20 @@ atenuacao_r = -1 * (20*log10(sigma_r))
 
 === Calculo dos parâmetros do filtro: 
 
+Em seguida podemos calcular os demais parâmetros do filtro, que são dados através das seguintes espressões: 
+
+- Calculo do fator de normalização:
 $
-e = sqrt(10^(0,1,A_p) -1)
+epsilon.alt = sqrt(10^(0,1,A_p) -1)
 $
 
+- Calculo da ordem do filtro:
 $
-n >= log_10((10^(0,1,A_r) -1) / e^2) / (2 log_10 Omega'_r)
+n >= log_10((10^(0,1,A_r) -1) / epsilon.alt^2) / (2 log_10 Omega'_r)
 $
+
+
+Desta forma, aplicando na sintaxe do matlab, temos que o script corresponte é:
 
 #sourcecode[```matlab
 eps = sqrt((10^(0.1*atenuacao_p))-1)
@@ -128,6 +136,114 @@ denominador = 2*log10(omega_r_linha);
 
 n = ceil(numerador/denominador)
 ```]
+
+
+=== Calculo das Raízes do Filtro:
+
+Em seguida, podemos calcular as raízes do filtro utilizando a função roots do matlab, para isso, utilizamos a seguinte formula: 
+
+$
+1 + epsilon.alt^2 (-s'^2)^n = 0
+$
+
+Desta, forma, como possuimos um filtro de ordem 12, temos que o script matlab corresponte é:
+
+#sourcecode[```matlab
+roots([eps^2 0 0 0 0 0 0 0 0 0 0 0 1])
+
+% Raizes encontradas: 
+% -1.0900 + 0.2921i
+% -1.0900 - 0.2921i
+% -0.7979 + 0.7979i
+% -0.7979 - 0.7979i
+% -0.2921 + 1.0900i
+% -0.2921 - 1.0900i
+```]
+
+=== Calculo dos Coeficientes do Filtro:
+
+Em seguida, podemos calcular os coeficientes do filtro utilizando a função poly do matlab aplicando as raizes encontradas no calculo anterior. 
+
+#sourcecode[```matlab
+poly([
+-1.0900 + 0.2921i
+-1.0900 - 0.2921i
+-0.7979 + 0.7979i
+-0.7979 - 0.7979i
+-0.2921 + 1.0900i
+-0.2921 - 1.0900i
+])
+```]
+
+Com a aplicação da função poly, obtemos os coeficientes do filtro que são:
+
+#sourcecode[```matlab
+h'(s') = 2.0648 / 1s'6 + 4.3600s'5 + 9.5048s'4 + 13.1362s'3 + 12.1033s'2 + 7.0697s + 2.0648
+```]
+
+Em seguida, podemos aplicar a desnormalização do filtro para obter os coeficientes do filtro no domínio do tempo, para isso, utilizamos a função bilinear do matlab, a partir da seguinte formula: 
+
+$
+s' = (1/a) (s/Omega'_p)
+$
+
+Desta forma, temos que o resultado da espressão é o seguinte: 
+
+#sourcecode[```matlab
+%h(s) = 0.0024 / 1s^6 1.4166s^5 + 1.0034s^4 + 0.4506s^3 + 0.1349s^2+ 0.0256s + 0.0024
+```]
+
+E desta forma, os valores dos coeficiente podem ser separados em numerador e denominador, como apresentado abaixo, sendo o vetor 'a' o numerador e o vetor 'b' o denominador:
+
+#sourcecode[```matlab
+a = [1 1.4166 1.0034 0.4506 0.1349 0.0256 0.0024]
+b = [0.0024]
+```]
+
+=== Aplicando a função bilinear:
+
+Por fim, podemos aplicar a função bilinear do matlab para obter os coeficientes do filtro no domínio do tempo, para isso, utilizamos a função bilinear do matlab, a partir do script abaixo: 
+
+#sourcecode[```matlab
+[numerador, denominador] = bilinear(b,a,fs)
+```]
+
+#sourcecode[```matlab
+Numerator:
+  0.00060234019040941179888S581924473101025;
+  0.009035102856141176766446854173864267068;
+  0.012046803808188236845078122883023752365;
+  0.009035102856141176766446854173864267068;
+  0.003614041142456470793314915468386061548;
+  0.000602340190409411798885819244731010258;
+
+Denominator:
+  1;
+ -3.293990202908562814343440550146624445915;
+  4.898232666546461722134608862688764929771;
+ -4.084996050238189013725786935538053512573;
+  1.992931744078747957615860286750830709934;
+ -0.535091724334459173384459518274525180459;
+  0.061463339042203794793106652605274575762;
+```]
+
+#figure(
+  figure(
+    rect(image("./pictures/q1.1.png")),
+    numbering: none,
+    caption: []
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+#figure(
+  figure(
+    rect(image("./pictures/q1.2.png")),
+    numbering: none,
+    caption: []
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
 
 = Questão 2
 
@@ -182,7 +298,9 @@ Abaixo podemos ver a magnitude e a fase do filtro sendo apresentadas juntas, not
 
 === Resposta ao impulso: 
 
+Abaixo está apresentada a resposta ao impulso do filtro. Note que a resposta ao impulso é finita, oque é um requisito para o desenvolvimento deste projeto por se tratar de um filtro para sinais digitais.
 
+Note que a resposta ao impulso apresenta um pico inicial e em seguida cai para zero, oque é esperado para um filtro passa-faixa.
 
 #figure(
   figure(
@@ -435,6 +553,7 @@ ylim([-0.1 1.1]);
 
 === Resultados Obtidos: 
 
+Os resultados obtidos para a filtragem das componentes cossenoidais são apresentados abaixo.
 
 ==== Sinal de Entrada:
 
