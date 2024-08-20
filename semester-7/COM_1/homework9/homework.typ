@@ -123,3 +123,5 @@ A modulação GMSK é uma técnica de modulação que utiliza um filtro gaussian
 - [2] - #link("https://en.wikipedia.org/wiki/Continuous_phase_modulation")[wikipedia - Continuous_phase_modulation]
 
 - [3] - #link("https://www.electronics-notes.com/articles/radio/modulation/what-is-gmsk-gaussian-minimum-shift-keying.php")[Gaussian Minimum Shift Keying, GMSK is a form of modulation based on frequency shift keying that has no phase discontinuities and provides efficient use of spectrum as well as enabling high efficiency radio power amplifiers.]
+
+- [4] - #link("https://web.archive.org/web/20121119032946/http://csee.wvu.edu:80/~mvalenti/documents/49IyerSeshadriCISS2k7.pdf")[S. Cheng, R. Iyer Sehshadri, M.C. Valenti, and D. Torrieri, The capacity of noncoherent continuous-phase frequency shift keying, in Proc. Conf. on Info. Sci. and Sys (CISS), (Baltimore, MD), Mar. 2007.]
