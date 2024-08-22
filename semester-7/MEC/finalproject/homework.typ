@@ -787,7 +787,82 @@ $
 
 === Diâmetro das barras de aço do pilar:
 
+Para calcular o diâmetro do pilar, primeiramente devemos definir o peso sobre ele: 
+
+$
+P = P_"carga" + P_"laje" + P_"viga"
+$
+
+Portanto temos que: 
+
+$
+P = 52k + 54,13464 + 32,46384 = 138,598"kN"
+$
+
+
+Entretanto, esse peso é dividio igualmente entre os quatro pilares, desta forma, temos que:
+
+$
+P_"1pilar" = 138,598 / 4 = 34,6495"kN"
+$
+
+Como dito pela questão que 75% da carga é descarregada no concreto e 25% no aço, temos que:
+
+$
+P_"aco" = 0,25 * 34,6495 = 8,662375"kN"
+$
+$
+P_"concreto" = 0,75 * 34,6495 = 25,987125"kN"
+$
+
+Em seguida, podemos aplicar a formula para calcular o a área do aço na secção do pilar: 
+
+$
+P_"aco"/ (E_"aco" * A_"aco") = P_"concreto" / (E_"concreto" * A_"concreto")
+$
+
+Portanto, temos que: 
+
+$
+(8,662375k )/ (200 * 10^9 * A_"aco") = (25,987125k) / (20 * 10^9 * A_"concreto")
+$
+
+Como sabemos a quantidade de barras de aço, temos que: 
+
+$
+(8,662375k )/ (200 * 10^9 * A_"aco") = (25,987125k) / (20 * 10^9 * (0,06 - A_"aco")) -> (8,662375k )/ (10 * A_"aco") = (25,987125k) / (0,06 - A_"aco")
+$
+
+$
+(8,662375k )/ (A_"aco") = (250,987125k) / (0,06 - A_"aco") -> (29 * (8,662375k ))/ (29 * (A_"aco")) = (250,987125k) / (0,06 - A_"aco")
+$
+
+$
+(250,987125k)/ (29 * A_"aco") = (250,987125k) / (0,06 - A_"aco")
+$
+
+$
+1 / (29 * A_"aco") = 1 / (0,06 - A_"aco") -> 29 A_"aco" = 0,06 - A_"aco"
+$
+
+$
+A_"aco" = (0,06) / 30 = 0,002m^2
+$
+
+Uma vez com a área do aço, calculada, podemos determinar o diâmetro das barras de aço:
+
+$
+0,002 = (6 * pi * d^2) / 4 -> 0,008 = 6 * pi * d^2 -> d^2 = (0,008) / (6 * pi)
+$
+
+$
+ d^2 = 0.00042441318 -> d = sqrt(0.00042441318) = 0.0206012m
+$
 === Tensão exercida sobre o solo pelas sapatas:
+
+
+
+
 
 === Diâmetro das barras de aço do pilar:
 
