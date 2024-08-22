@@ -515,7 +515,7 @@ $
 Portanto: 
 
 $
-8 = (epsilon * 1,59844 * 10^(-7)) / (0,019) -> 0,0152 = epsilon * 1,59844 * 10^(-7)
+8k = (epsilon * 1,59844 * 10^(-7)) / (0,019) -> 0,0152 = epsilon * 1,59844 * 10^(-7)
 $
 
 E assim calculamos a tensão de cisalhamento admissível: 
@@ -527,7 +527,7 @@ $
 
 = Questão 5:
 
-Considere o eixo mostrado abaixo. A tensão máxima admissível para o latão é de 55MPa. Dimensione os diâmetros mínimos dos eixos AB e BC.
+Considere o eixo mostrado abaixo. A tensão de cisalhamento máxima admissível para o latão é de 55MPa. Dimensione os diâmetros mínimos dos eixos AB e BC.
 
 #figure(
   figure(
@@ -538,12 +538,75 @@ Considere o eixo mostrado abaixo. A tensão máxima admissível para o latão é
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+== Diâmetros dos eixos BC:
 
+Primeiramente, calculamos o momento polar de inércia para o eixo BC, para isso temos que: 
+
+$
+J = pi / 2 ((d_"BC"/2)^4) -> J = pi / 2 (d_"BC"^4) / 16
+$
+
+Em seguida, podemos utilizar a formula de tensão de cisalhamento para realizar o calculo: 
+
+$
+T = (epsilon * J) / C -> T = (epsilon * J) / (d/2)
+$
+
+Agora, aplicamos a formula de calculo de inércia para o eixo BC:
+
+$
+12k = (55 * 10^6 * J) / (d_"BC"/2) -> 12k = (55 * 10^6 * (pi / 2 (d_"BC"^4) / 16)) / (d_"BC"/2)
+$
+
+Desta forma, temos que: 
+
+$
+12k = (55 * 10^6 * (pi / 2 (d_"BC"^4) / 16)) / (d_"BC"/2) -> 12k * d_"BC" = 2 * 55 * 10^6 * (pi / 2 (d_"BC"^4) / 16)
+$
+
+$
+12k * d_"BC" = 2 * 55 * 10^6 * (pi / 2) * (d_"BC"^4) / 16 -> (12k ) / (2 * 55 * 10^6 * (pi / 32)) = d_"BC"^4 / d_"BC"
+$
+
+$
+(12 * 10^3) / (110 * 10^6 * (pi / 32)) = d_"BC"^3 -> (12) / (110 * 10 ^ 3 * (pi / 32)) = d_"BC"^3 
+$
+
+$
+d_"BC"^3 = 0.00111119087 -> d_"BC" = 0.00111119087^(1/3) = 0.103576m "ou" 103,576"mm"
+$
 
 == Diâmetros dos eixos AB:
 
-== Diâmetros dos eixos BC:
+Para calcular o diâmetro do eixo AB, da mesma forma, iniciamos calculando o momento polar de inercia para o eixo AB, para isso temos que:
 
+$
+J = pi / 2 ((d_"AB"/2)^4) -> J = pi / 2 (d_"AB"^4) / 16
+$
+
+Em seguida, podemos utilizar a formula de tensão de cisalhamento para realizar o calculo:
+
+$
+T = (epsilon * J) / C -> T = (epsilon * J) / (d/2)
+$
+
+Agora, aplicamos a formula de calculo de inércia para o eixo AB:
+
+$
+4k = (55 * 10^6 * J) / (d_"AB"/2) -> 4k = (55 * 10^6 * (pi / 2 (d_"AB"^4) / 16)) / (d_"AB"/2)
+$
+
+$
+2 * 55* 10^6 * (pi / 32) * d_"AB"^4 = 4k * d_"AB" -> 110 * 10^6 * (pi / 32) * d_"AB"^4 = 4k * d_"AB"
+$
+
+$
+ d_"AB"^4 / d_"AB"  = (4k) / (110 * 10^6 * (pi / 32)) ->   d_"AB"^4 / d_"AB"  = (4 * 10^3) / (110 * 10^6 * (pi / 32)) -> d_"AB"^3 = 4 / (110 * 10^3 * (pi / 32))
+$
+
+$
+d_"AB"^3 = 0.00037039695 -> d_"AB" = 0.00037039695^(1/3) = 0.071816m "ou" 71,816"mm"
+$
 = Questão 6:
 
 Observe a estrutura. Determine qual a pressão exercida pelas sapatas no solo (kN/m²). 
