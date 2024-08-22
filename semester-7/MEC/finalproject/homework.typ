@@ -609,9 +609,9 @@ d_"AB"^3 = 0.00037039695 -> d_"AB" = 0.00037039695^(1/3) = 0.071816m "ou" 71,816
 $
 = Questão 6:
 
-Observe a estrutura. Determine qual a pressão exercida pelas sapatas no solo (kN/m²). 
+Observe as ilustrações da estrutura apresentada abaixo. 
 
-- A Carga adicional sobre a laje localizada bem no centro tem valor P(kN). 
+- A Carga adicional sobre a laje localizada bem no centro tem valor 52 (kN). 
 - Considere a densidade do concreto armado como sendo de 2.300kg/m³. 
 - As paredes têm largura de 15cm e densidade de 1300kg/m³. 
 - Desconsidere a porta e a janela para calcular a carga das paredes. 
@@ -619,14 +619,180 @@ Observe a estrutura. Determine qual a pressão exercida pelas sapatas no solo (k
 - Os 4 pilares têm medidas de secção de 40cm x 15cm. 
 - As vigas de cobertura e baldrames têm secções de 15cm por 30cm. 
 - As sapatas (ou blocos de fundação) têm medidas de 1m x 1m x 0,50m de altura. 
-- Os pilares são armados com 6 barras de aço de diâmetro “d”. (Determine esse diâmetro considerando que a carga da laje e da viga de cobertura é descarregada 75% no concreto e 25% no aço.)
+- Os pilares são armados com 6 barras de aço de diâmetro “d”. 
 
 Considere:
-Eaço = 200GPa e Econc=20GPa. 
+ - E_aço= 200GPa
+ - E_conc= 20GPa. 
+ - A carga das lajes e do peso P são descarregadas igualmente em todo o perímetro das vigas.
 
-Para as vigas, determine qual a Tensão máxima de flexão decorrente do peso próprio e da carga das paredes / lajes. 
 
-Considere que a carga das lajes e do peso P são descarregadas igualmente em todo o perímetro das vigas.
+Determine:
+
+- Qual a pressão exercida pelas sapatas no solo (kN/m²). 
+- Para as vigas, determine qual a Tensão máxima de flexão decorrente do peso próprio e da carga das paredes / lajes. 
+- Determine o diâmetro dos pilares considerando que a carga da laje e da viga de cobertura é descarregada 75% no concreto e 25% no aço.
+
+
+#figure(
+  figure(
+    rect(image("./pictures/q6.1.png")),
+    numbering: none,
+    caption: [Questão 6 - Perspectiva Isometrica]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+#figure(
+  figure(
+    rect(image("./pictures/q6.2.png")),
+    numbering: none,
+    caption: [Questão 6 - Corte da Estrutura]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+#figure(
+  figure(
+    rect(image("./pictures/q6.3.png")),
+    numbering: none,
+    caption: [Questão 6 - Planta Baixa]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+=== Peso próprio da laje (sem vigas):
+
+Inicialmente precisamos determinar o volume da laje, para isso temos que:
+
+$
+V_"laje" = B * H * L ->  V_"laje" =  4 * 0,15 * 4 = 2,4m^3
+$
+
+Em seguida, podemos calcular a massa da laje através do coeficiente de densidade do concreto armado: 
+
+$
+M = V_"laje" * D_"concreto" -> P = 2,4 * 2300 = 5520"kg" 
+$
+
+Utilizando o coeficiente graviacional como "g" = 9,807 m/s², temos que o peso é dado por: 
+
+$
+P_"laje" = 5520 * 9,807 = 54134,64N -> P = 54,13464"kN"
+$
+
+=== Peso próprio de todas as vigas:
+
+Para calcular o peso das vigas, precisamos determinar o volume das vigas, para isso temos que:
+
+$
+V_"viga" = B * H * L -> V_"viga" = 0,15 * 0,3 * 4 = 0,18m^3
+$
+
+Em seguida, podemos calcular a massa das vigas através do coeficiente de densidade: 
+
+$
+M = V_"viga" * D_"concreto" -> P = 0,18 * 2300 = 414"kg"
+$
+
+Utilizando o coeficiente graviacional como "g" = 9,807 m/s², temos que o peso é dado por:
+
+$
+P_"viga" = 414 * 9,807 = 4057,98N -> P = 4,05798"kN" 
+$
+
+Agora, como são utilizadas no total 8 vigas para a construção da estrutura, temos seu peso final multiplicado por 8: 
+
+$
+P_"viga" = 4,05798 * 8 = 32,46384"kN"
+$
+
+=== Peso próprio dos pilares:
+
+Para calcular o peso dos pilares, precisamos determinar o volume dos pilares, para isso temos que:
+
+$
+V_"pilar" = B * H * L -> V_"pilar" = 0,4 * 0,15 * 2,6 = 0,156m^3
+$
+
+Em seguida, podemos calcular a massa dos pilares através do coeficiente de densidade:
+
+$
+M = V_"pilar" * D_"concreto" -> P = 0,156 * 2300 = 358,8"kg"
+$
+
+Utilizando o coeficiente graviacional como "g" = 9,807 m/s², temos que o peso é dado por: 
+
+$
+P_"pilar" = 358,8 * 9,807 = 3520,476N -> P = 3,520476"kN"
+$
+
+Como são utilizados 4 pilares para a construção da estrutura, temos seu peso final multiplicado por 4:
+
+$
+P_"pilar" = 3,520476 * 4 = 14,081904"kN"
+$
+
+=== Peso próprio das paredes:
+
+Para calcular o peso das paredes, precisamos determinar o volume das paredes, para isso temos que:
+
+$
+V_"paredes" = B * H * L -> V_"paredes" = 0,15 * 2,6 * 4 = 1,56m^3
+$
+
+Em seguida, podemos calcular a massa das paredes através do coeficiente de densidade:
+
+$
+M = V_"paredes" * D_"paredes" -> P = 1,56 * 1300 = 2028"kg"
+$
+
+Utilizando o coeficiente graviacional como "g" = 9,807 m/s², temos que o peso é dado por:
+
+$
+P_"paredes" = 2028 * 9,807 = 19899,816N -> P = 19,899816"kN"
+$
+
+Como são utilizadas 4 paredes para a construção da estrutura, temos seu peso final multiplicado por 4:
+
+$
+P_"paredes" = 19,899816 * 4 = 79,599264"kN"
+$
+
+=== Peso próprio das sapatas:
+
+Para calcular o peso das sapatas, precisamos determinar o volume das sapatas, para isso temos que:
+
+$
+V_"sapatas" = B * H * L -> V_"sapatas" = 1 * 1 * 0,5 = 0,5m^3
+$
+
+Em seguida, podemos calcular a massa das sapatas através do coeficiente de densidade:
+
+$
+M = V_"sapatas" * D_"concreto" -> P = 0,5 * 2300 = 1150"kg"
+$
+
+Utilizando o coeficiente graviacional como "g" = 9,807 m/s², temos que o peso é dado por:
+
+$
+P_"sapatas" = 1150 * 9,807 = 11278,5N -> P = 11,2785"kN"
+$
+
+Como são utilizadas 4 sapatas para a construção da estrutura, temos seu peso final multiplicado por 4:
+
+$
+P_"sapatas" = 11,2785 * 4 = 45,114"kN"
+$
+
+=== Diâmetro das barras de aço do pilar:
+
+=== Tensão exercida sobre o solo pelas sapatas:
+
+=== Diâmetro das barras de aço do pilar:
+
+
+
 
 
 == Tabela de resultados: 
