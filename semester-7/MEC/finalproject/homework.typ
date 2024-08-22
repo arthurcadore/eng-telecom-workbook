@@ -856,18 +856,39 @@ $
 $
 
 $
- d^2 = 0.00042441318 -> d = sqrt(0.00042441318) = 0.0206012m
+ d^2 = 0.00042441318 -> d = sqrt(0.00042441318) = 0.0206012m "ou" 20,6012"mm" 
 $
 === Tensão exercida sobre o solo pelas sapatas:
 
+Para determinar a tensão exercida sobre o solo pelas sapatas, verificando a imagem temos que a área de cada sapata no solo é de 1m^2. Dessa forma, basta verificar o peso sobre as sapatas: 
 
+- P_laje = 54,13464kN
+- P_piso = 54,13464kN
+- P_vigas = 32,46384kN
+- P_pilares = 14,081904kN
+- P_paredes = 79,599264kN
+- P_sapatas = 45,114kN
 
+Desta forma temos que: 
 
+$
+P_"total" = P_"laje" + P_"piso" + P_"vigas" + P_"pilares" + P_"paredes" + P_"sapatas" + P_"carga"
+$
 
-=== Diâmetro das barras de aço do pilar:
+Portanto: 
 
+$
+P_"total" = 2* 54,1344k + 32,4384k + 14,0904k + 79,5994k + 45,114k + 52k
+$
+$
+P_"total" = 331,5286"kN"
+$
 
+Como o peso está sendo dividido entre as 4 sapatas e cada uma possui uma área de contato de $1m^2$ com o solo, temos que: 
 
+$
+P_"solo" = (331,5286) / 4 = 82,8821"kN"/m^2 "ou" 82,8821"Mpa"
+$
 
 
 == Tabela de resultados: 
@@ -878,19 +899,24 @@ $
      columns: (1fr, 1fr, 1fr),
     align: (left, center, center),
     table.header[Item][Estrutura][Resultado],
-    [1], [peso próprio da laje (sem vigas)], [kN],
-    [2], [peso próprio de todas as vigas], [kN],
-    [3], [peso próprio dos pilares], [kN],
-    [4], [peso próprio das paredes], [kN],
-    [5], [peso próprio das sapatas], [kN],
-    [6], [Tensão exercida sobre o solo pelas sapatas], [MPa],
-    [7], [Diâmetro das barras de aço do pilar], [mm],
+    [1], [peso próprio da laje (sem vigas)], [54,13464 kN],
+    [2], [peso próprio de todas as vigas], [32,46384 kN],
+    [3], [peso próprio dos pilares], [14,081904 kN],
+    [4], [peso próprio das paredes], [79,599264 kN],
+    [5], [peso próprio das sapatas], [45,114 kN],
+    [6], [Diâmetro das barras de aço do pilar], [20,6012 mm],
+    [7], [Tensão exercida sobre o solo pelas sapatas], [82,8821 MPa],
     ),
     numbering: none,
     caption: [Tabela de resultados obtidos]
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
+
+== Tensão máxima de flexão:
+
+
+
 
 = Referências Bibliográficas: 
 
