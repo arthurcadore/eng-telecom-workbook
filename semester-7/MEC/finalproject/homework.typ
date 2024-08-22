@@ -661,7 +661,7 @@ Determine:
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
-=== Peso próprio da laje (sem vigas):
+== Peso próprio da laje (sem vigas):
 
 Inicialmente precisamos determinar o volume da laje, para isso temos que:
 
@@ -681,7 +681,7 @@ $
 P_"laje" = 5520 * 9,807 = 54134,64N -> P = 54,13464"kN"
 $
 
-=== Peso próprio de todas as vigas:
+== Peso próprio de todas as vigas:
 
 Para calcular o peso das vigas, precisamos determinar o volume das vigas, para isso temos que:
 
@@ -707,7 +707,7 @@ $
 P_"viga" = 4,05798 * 8 = 32,46384"kN"
 $
 
-=== Peso próprio dos pilares:
+== Peso próprio dos pilares:
 
 Para calcular o peso dos pilares, precisamos determinar o volume dos pilares, para isso temos que:
 
@@ -733,7 +733,7 @@ $
 P_"pilar" = 3,520476 * 4 = 14,081904"kN"
 $
 
-=== Peso próprio das paredes:
+== Peso próprio das paredes:
 
 Para calcular o peso das paredes, precisamos determinar o volume das paredes, para isso temos que:
 
@@ -759,7 +759,7 @@ $
 P_"paredes" = 19,899816 * 4 = 79,599264"kN"
 $
 
-=== Peso próprio das sapatas:
+== Peso próprio das sapatas:
 
 Para calcular o peso das sapatas, precisamos determinar o volume das sapatas, para isso temos que:
 
@@ -785,7 +785,7 @@ $
 P_"sapatas" = 11,2785 * 4 = 45,114"kN"
 $
 
-=== Diâmetro das barras de aço do pilar:
+== Diâmetro das barras de aço do pilar:
 
 Para calcular o diâmetro do pilar, primeiramente devemos definir o peso sobre ele: 
 
@@ -858,7 +858,7 @@ $
 $
  d^2 = 0.00042441318 -> d = sqrt(0.00042441318) = 0.0206012m "ou" 20,6012"mm" 
 $
-=== Tensão exercida sobre o solo pelas sapatas:
+== Tensão exercida sobre o solo pelas sapatas:
 
 Para determinar a tensão exercida sobre o solo pelas sapatas, verificando a imagem temos que a área de cada sapata no solo é de 1m^2. Dessa forma, basta verificar o peso sobre as sapatas: 
 
@@ -914,6 +914,79 @@ $
 )
 
 == Tensão máxima de flexão:
+
+=== Calculo dos parâmetros iniciais: 
+
+Para calcular a tensão máxima de flexão, primeiramente, precisamos calcular o momento de inércia da viga, para isso temos que:
+
+$
+I = (b * h^3) / 12 = (0,15 * 0,3^3) / 12 = 0,003375
+$
+
+Agora, como deve-se calcular a tensão máxima de flexão partindo de todos os pesos da estrutura (exceto o peso da sapata pois não é apoiada na viga), temos que:
+
+$
+P = P_"total" - "P_sapatas" = 331,5286 - 45,114 = 286,4146"kN"
+$
+
+Agora, como são utilizadas 4 vigas na estrutura, o peso é idealmente divido entre as 4: 
+
+$
+P = (286,4146) / 4 = 71,60365"kN"
+$
+
+Como orientado no enunciado, o peso é idealmente distribuido pela viga, como o comprimento da mesma é de 4 metros, podemos calcular o peso distribuido:
+
+$
+P_"distribuido" = (71,60365) / 4 = 17,90025"kN/m"
+$
+
+=== Plotagem dos gráficos:
+
+A partir dos valores vistos acima, utilizei o aplicativo "viga online" para plotar a estrutura da viga e o gráfico de momento fletor: 
+
+#figure(
+  figure(
+    rect(image("./pictures/r6.8.png")),
+    numbering: none,
+    caption: [Viga montada com a força distribuida]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+#figure(
+  figure(
+    rect(image("./pictures/r6.9.png")),
+    numbering: none,
+    caption: [Máximo momento fletor]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+Dessa forma, podemos concluir que o maior momento fletor é de 35,796kNm.
+
+=== Calculo da tensão máxima de flexão:
+
+Para calcular a tensão máxima de flexão, agora verificamos o centro de gravidade "y" na secção transversal da viga:
+
+$
+y = h / 2 = 0,3 / 2 = 0,15m
+$
+
+
+Em seguida, aplicamos a fórmula para calcular a tensão máxima de flexão:
+
+$
+sigma = (M * y) / I
+$
+
+Portanto, temos que:
+
+$
+sigma = (35,796k * 0,15) / (0,003375) = 1.590.933,333 N/m^2 "ou" 1,590933 "MPa"
+$
+
+
 
 
 
