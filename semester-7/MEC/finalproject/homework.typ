@@ -171,21 +171,29 @@ E também, apresentado abaixo, o gráfico de momento fletor:
 
 == Tensão máxima de flexão:
 
+
+Primeiramente, calculamos o centro de gravidade "y" na secção transversal da viga:  
+
+$
+y = h / 2 = 30 / 2 = 15"cm" -> y = 0,15m
+$
+
+Agora calculamos o momento de inércia: 
+
+$
+I = (b * h^3) / 12 = (0,12 * 0,3^3) / 12 = (0,12 * 0,027) / 12 = 0,00027 
+$
+
 Para calcular a tensão máxima de flexão, utilizamos a fórmula:
 
 $
 sigma = (M * y) / I
 $
 
-Primeiramente, calculamos a área: 
-$
-
-$
-
 Aplicando aos valores obtidos na questão, temos que: 
 
 $
-sigma = (M * y) / 12
+sigma = (173,33k * 0,15) / (0,00027) = (25,999k) / (0,00027) = 96294444,44 N/m^2
 $
 
 = Questão 2: 
@@ -300,23 +308,29 @@ E também, apresentado abaixo, o gráfico de momento fletor:
 
 == Tensão máxima de flexão:
 
+Primeiramente, calculamos o centro de gravidade "y" na secção transversal da viga:
+
+$
+y = h / 2 = 25 / 2 = 12,5"cm" -> y = 0,125m
+$
+
+Agora calculamos o momento de inércia:
+
+$
+I = (b * h^3) / 12 = (0,08 * 0,25^3) / 12 = (0,08 * 0,015625) / 12 = 0,010416
+$
+
 Para calcular a tensão máxima de flexão, utilizamos a fórmula:
 
 $
 sigma = (M * y) / I
 $
 
-Primeiramente, calculamos a área: 
-$
+Aplicando aos valores obtidos na questão, temos que:
 
 $
-
-Aplicando aos valores obtidos na questão, temos que: 
-
+sigma = (69,333k * 0,125) / (0,010416) = (8,666k) / (0,010416) = 832049,251 N/m^2
 $
-sigma = (M * y) / 12
-$
-
 
 = Questão 3:
 
@@ -461,7 +475,9 @@ E também, apresentado abaixo, o gráfico de momento fletor:
 
 = Questão 4: 
 
-Determine a Tensão de cisalhamento do eixo vazado abaixo quando submetido ao momento de torção T3.
+Determine a Tensão de cisalhamento do eixo vazado abaixo quando submetido ao momento de torção T3. \
+
+Nota: Foi solicitado considerar outro valor para o material do eixo: Aço com modulo de elasticidade de 77GPa. 
 
 #figure(
   figure(
@@ -472,7 +488,42 @@ Determine a Tensão de cisalhamento do eixo vazado abaixo quando submetido ao mo
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
-== Tensão de cisalhamento:
+Para calcular a tensão de cisalhamento, inicialmente, precisamos calcular o momento polar de inércia, para isso temos que:
+
+$
+tau = pi / 2 (R_2^4 - R_1^4) 
+$
+
+Aplicando os valores da questão na formula, ficamos com a seguinte expressão: 
+
+$
+tau = pi / 2 (0,019^4 - 0,013^4) -> tau = pi / 2 (1,30321 * 10^(-7) - 0,28561 * 10^(-7)) 
+$
+
+Portanto, temos que: 
+
+$
+tau = pi / 2 [(1,30321 - 0,28561) * 10^(-7) ] = 1,59844 * 10^(-7)
+$
+
+Agora podemos calcular a Tensão de cisalhamento aplicando a seguinte formula: 
+
+$
+T = (epsilon * J ) / C
+$
+
+Portanto: 
+
+$
+8 = (epsilon * 1,59844 * 10^(-7)) / (0,019) -> 0,0152 = epsilon * 1,59844 * 10^(-7)
+$
+
+E assim calculamos a tensão de cisalhamento admissível: 
+$
+epsilon = (0,152) / (1,59844 * 10^(-7)) = 950927.153 N/m^2
+$
+
+
 
 = Questão 5:
 
@@ -486,6 +537,8 @@ Considere o eixo mostrado abaixo. A tensão máxima admissível para o latão é
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
+
+
 
 == Diâmetros dos eixos AB:
 
@@ -534,3 +587,11 @@ Considere que a carga das lajes e do peso P são descarregadas igualmente em tod
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
+
+= Referências Bibliográficas: 
+
+- Jesué Graciliano da Silva. Momento fletor. Youtube - JESUE REFRIGERACAO CLIMATIZACAO, 2018.
+
+- Jesué Graciliano da Silva. Aula resumo sobre torção - versão preliminar. Youtube - Jesue Graciliano da Silva, 2023.
+
+- Jesué Graciliano da Silva. Diametro das barras de aço. Youtube - JESUE REFRIGERACAO CLIMATIZACAO, 2018.
