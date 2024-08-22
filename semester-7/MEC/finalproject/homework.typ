@@ -20,6 +20,10 @@
 
 = Introdução: 
 
+Este relatório tem como objetivo apresentar a resolução de um conjunto de questões relacionadas à disciplina de Mecânica dos Sólidos. As questões abordam temas como diagramas de esforço cortante e momento fletor, tensão máxima de flexão, tensão de cisalhamento, dimensionamento de eixos e pilares, entre outros.
+
+= Parâmetros das questões: 
+
 Para este relatório, serão utilizadas as forças correspondentes a linha "A" da figura abaixo: 
 
 #figure(
@@ -987,9 +991,9 @@ sigma = (35,796k * 0,15) / (0,003375) = 1.590.933,333 N/m^2 "ou" 1,590933 "MPa"
 $
 
 
+= Conclusão: 
 
-
-
+A partir dos conceitos vistos, desenvolvimento e resultados obtidos, podemos concluir que os calculos voltados para a determinação de tensão máxima de flexão, tensão de cisalhamento, e diâmetro de barras de aço determinam limites para os materiais que são utilizados na montagem de estruturas e são fundamentais para a análise de sua estabilidade, garantindo a segurança e estabilidade das mesmas.
 
 = Referências Bibliográficas: 
 
