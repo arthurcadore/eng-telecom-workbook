@@ -9,7 +9,7 @@ canais = [
         195.7994526882282
 ]
 
-def verificar_sobreposicao(canais, resultados, tolerancia=0.000435):
+def verificar_sobreposicao(canais, resultados, tolerancia=0.00435):
     sobreposicoes = []
     canais_set = set(canais) 
     for f, arranjo in resultados:
