@@ -29,11 +29,10 @@ public class Cafeteira {
         }
     }
 
-    // ArrayList<ArrayList<String>>  linhas = le(usuarios.csv);
     public static ArrayList<ArrayList<String>> le(String pathname) {
         ArrayList<ArrayList<String>> linhas = new ArrayList<ArrayList<String>>(0);
         try {
-            File entrada = new File("./usuarios.csv");
+            File entrada = new File(pathname);
             Scanner linha = new Scanner(entrada);
 
             while (linha.hasNext()) {
@@ -58,10 +57,9 @@ public class Cafeteira {
 
         Scanner in = new Scanner(System.in);
 
-        List<List<String>> linhas = new ArrayList<>();
-        linhas.add(Arrays.asList("123", "juca", "arthur@email"));
+      //  List<List<String>> linhas = new ArrayList<>();
       //  linhas.add(Arrays.asList("123", "juca", "arthur@email"));
-        escreve(linhas, "/app/usuarios.csv");
+      //  escreve(linhas, "/app/usuarios.csv");
 
         while(continua) {
             System.out.println("================");
@@ -76,10 +74,23 @@ public class Cafeteira {
                 System.out.print("Entre com o id do usuário: ");
                 id = in.nextInt();
                 System.out.println("\tId " + id + " selecionado para informações de usuário");
+                
+                ArrayList<ArrayList<String>>  linhas = le("usuarios.csv");
+                // imprime todas as linhas do arquivo: 
+                for (ArrayList<String> elem : linhas) {
+                    System.out.println(String.join(",", elem));
+                }
+
             }else if(opcao == 2) {
                 System.out.print("Entre com o id do usuário: ");
                 id = in.nextInt();
                 System.out.println("\tId " + id + " selecionado para histórico de cafés");
+
+                ArrayList<ArrayList<String>>  linhas = le("usuarios.csv");
+                // imprime todas as linhas do arquivo: 
+                for (ArrayList<String> elem : linhas) {
+                    System.out.println(String.join(",", elem));
+                }
             }else if(opcao == 3) {
                 System.out.println("Informações da cafeteira:");
                 System.out.println("\tÓtima cafeteira");
