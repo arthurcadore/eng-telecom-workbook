@@ -9,16 +9,21 @@ import java.util.Scanner;
 
 public class Cafeteira {
 
-    // List<List<String>> linhas = new ArrayList<>();
-    // linhas.add(Arrays.asList("123", "juca", "j@email"));
-    // escreve(linhas, "usuarios.csv");
+
     public static void escreve(List<List<String>> linhas, String filename) {
         try {
-            FileWriter arquivo = new FileWriter(filename);
+            FileWriter arquivo = new FileWriter(filename, true);
             for (List<String> elem : linhas) {
                 arquivo.append(String.join(",", elem));
                 arquivo.append("\n");
             }
+            // imprimir o conteúdo da lista no terminal: 
+            for (List<String> elem : linhas) {
+                System.out.println(String.join(",", elem));
+            }
+            arquivo.flush();
+            arquivo.close();
+
         } catch(IOException e) {
             e.printStackTrace();;
         }
@@ -28,7 +33,7 @@ public class Cafeteira {
     public static ArrayList<ArrayList<String>> le(String pathname) {
         ArrayList<ArrayList<String>> linhas = new ArrayList<ArrayList<String>>(0);
         try {
-            File entrada = new File(pathname);
+            File entrada = new File("./usuarios.csv");
             Scanner linha = new Scanner(entrada);
 
             while (linha.hasNext()) {
@@ -52,6 +57,11 @@ public class Cafeteira {
         int id = 0;
 
         Scanner in = new Scanner(System.in);
+
+        List<List<String>> linhas = new ArrayList<>();
+        linhas.add(Arrays.asList("123", "juca", "arthur@email"));
+      //  linhas.add(Arrays.asList("123", "juca", "arthur@email"));
+        escreve(linhas, "/app/usuarios.csv");
 
         while(continua) {
             System.out.println("================");
