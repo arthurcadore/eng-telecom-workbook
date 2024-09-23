@@ -5,6 +5,11 @@ const int PWM_PIN = 3;
 const float VCC = 5;
 const float ADC_TOP = 1023;
 
+int scale;
+int hold;
+int read; 
+float saida; 
+
 void setPWM(float valor) {
   // Verifica se o valor está dentro do intervalo permitido (0 a 1023)
   if (valor < 0) {
@@ -27,13 +32,14 @@ void setup()
   Serial.begin(9600);
 }
 
+
 void loop()
 {
-  int scale = digitalRead(SCALE_PIN);
-  int hold = digitalRead(HOLD_PIN);
-  int read = analogRead(ANALOG_PIN);
+  scale = digitalRead(SCALE_PIN);
+  hold = digitalRead(HOLD_PIN);
+  read = analogRead(ANALOG_PIN);
+  saida = (read/ADC_TOP)*VCC; 
   
-  float saida = (read/ADC_TOP)*VCC; 
   Serial.print("Amostrado: ");
   Serial.println(read);
   Serial.print("Tensão: ");
