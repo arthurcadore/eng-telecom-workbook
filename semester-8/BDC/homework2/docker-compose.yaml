@@ -1,0 +1,11 @@
+version: "3"
+services:
+  javaapp:
+    privileged: true
+    container_name: javaapp
+    restart: always
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile-app
+    volumes:
+      - "./app:/app"

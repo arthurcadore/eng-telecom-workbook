@@ -1,0 +1,9 @@
+FROM gradle:8-jdk20-graal-jammy
+
+WORKDIR /app
+
+#RUN gradle installDist
+
+#CMD /app/app/build/install/app/bin/app
+
+CMD ["tail", "-f", "/dev/null"]
