@@ -14,6 +14,10 @@ At this point, my progress on engineering course is ilustrated below:
 
 ![progress](./pictures/progress.png)
 
+```
+Percentage of course completed: 64%
+```
+
 #### How to Use the Repository:
 
 Browse the repository to find any homework or project you are interested in. Each folder contains the necessary files to replicate the results. 
