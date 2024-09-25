@@ -1,3 +1,32 @@
+#import "@preview/klaro-ifsc-sj:0.1.0": report
+#import "@preview/codelst:2.0.1": sourcecode
+#show heading: set block(below: 1.5em)
+#show par: set block(spacing: 1.5em)
+#set text(font: "Arial", size: 12pt)
+#set text(lang: "pt")
+#set page(
+  footer: "Engenharia de Telecomunicações - IFSC-SJ",
+)
+
+#show: doc => report(
+  title: "Implementação de dados de 'Cafeteira' em CSV ",
+  subtitle: "Banco de Dados",
+  authors: ("Arthur Cadore Matuella Barcella",),
+  date: "24 de Setembro de 2024",
+  doc,
+)
+
+= Objetivo
+
+O objetivo desta tarefa é apresentar um sistema de gerenciamento de dados de uma cafeteira, onde o sistema deve ser capaz de armazenar informações de usuários e histórico de cafés em arquivos CSV.
+
+= Desenvolvimento: 
+
+O sistema foi desenvolvido em Java, e é composto por duas funções principais: `escreve` e `le`. A função `escreve` é responsável por escrever uma lista de listas de strings em um arquivo CSV, enquanto a função `le` é responsável por ler um arquivo CSV e retornar uma lista de listas de strings. 
+
+Abaixo está o código .java modificado durante a aula de BDC: 
+
+#sourcecode[```java
 // BDC - Homework 1
 // Aluno: Arthur Cadore M. Barcella
 // Importando as bibliotecas necessárias
@@ -122,3 +151,13 @@ public class Cafeteira {
         }
     }
 }
+```]
+
+O código acima pode consultar e imprimir os dados de usuários e histórico de cafés armazenados em arquivos CSV, conforme apresentado abaixo: 
+
+#sourcecode[```csv
+123,juca,arthur@email
+124,maria,maria@email
+125,joao,joao@email
+```]
+
