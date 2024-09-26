@@ -52,5 +52,5 @@ void loop()
   Serial.print("Tensão: ");
   Serial.println(saida);  
   setPWM(read);
-  delay(500);
+  delay(100);
 }
