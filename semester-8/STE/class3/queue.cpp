@@ -36,14 +36,32 @@ void setup()
 
   fqueue.push(&btn1_isr);
   fqueue.push(&btn2_isr);
+  Serial.println("Setup");
+  Serial.print("Tarefa 1: ");
+  Serial.println((unsigned int)task1, HEX);
+  Serial.print("Tarefa 2: ");
+  Serial.println((unsigned int)task2, HEX);
+
+
+
 }
 
 void loop()
 {
+    Serial.println("loop");
     void * func; 
-    fqueue.pop(&func);
-    
-    // return void pointer to function pointer
-    FuncPtr_t task = (FuncPtr_t)func;
-    task();
+
+    // check if queue is empty
+    if(fqueue.isEmpty() == false){
+        Serial.println("Fila vazia");
+
+        // check if queue has elements
+        if(fqueue.pop(&func) == true){
+            // return void pointer to function pointer
+            FuncPtr_t task = (FuncPtr_t)func;
+            task();
+        }
+    }
+
+    delay(500);
 }
