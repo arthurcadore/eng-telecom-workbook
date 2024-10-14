@@ -14,6 +14,10 @@
 #include <unistd.h>     // Para close
 #include <stdexcept>    // Para std::runtime_error
 
+// definindo as constantes de opcode
+#define RRQ 1
+#define WRQ 2
+
 using namespace std;
 
 
@@ -23,5 +27,10 @@ using namespace std;
 */
 
 string requestMessage(int opcode, string filename, string mode);
+
+/* 
+    Function to create the data block to be sent to the server        
+*/
+string datablock(int blockNumber, string data);
 
 #endif

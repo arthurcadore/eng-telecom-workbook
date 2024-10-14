@@ -27,11 +27,34 @@ string requestMessage(int opcode, string filename, string mode) {
 
     cout << "Mensagem: ";
 
-    for (int i = 0; i < msg.size(); i++) {
-        cout << hex << (int) msg[i] << " ";
+    if (opcode == RRQ) {
+        cout << "RRQ ";
+    } else {
+        cout << "WRQ ";
     }
 
     cout << endl;
+
+    return msg;
+}
+
+//   2 bytes     2 bytes      512 bytes
+//  ----------------------------------
+// | Opcode |   Block #  |   Data     |
+//  ----------------------------------
+// 
+// - Opcode: 3 
+// - Block: número do bloco (2 bytes)
+// - Data: 512 Bytes
+
+string datablock(int opcode, int blockNumber, string data) {
+
+    string msg;
+    msg += (char) (opcode >> 8);
+    msg += (char) (opcode & 0xFF);
+    msg += (char) (blockNumber >> 8);
+    msg += (char) (blockNumber & 0xFF);
+    msg += data;
 
     return msg;
 }
