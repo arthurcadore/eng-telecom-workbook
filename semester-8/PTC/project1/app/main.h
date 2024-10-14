@@ -7,9 +7,12 @@
 #include <string>
 #include <vector>
 
+#include <sys/socket.h> // Para socket
 #include <arpa/inet.h>  // Para inet_pton
 #include <netinet/in.h> // Para sockaddr_in
 #include <cstring>      // Para memset
+#include <unistd.h>     // Para close
+#include <stdexcept>    // Para std::runtime_error
 
 using namespace std;
 

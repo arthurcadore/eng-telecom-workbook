@@ -1,4 +1,19 @@
 #include "main.h"
+
+/*
+  Cria um socket UDP e retorna o descritor deste socket
+*/
+int createSocket() {
+    // Tentar criar o socket UDP
+    int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+    
+    if (sockfd < 0) {
+        throw std::runtime_error("Erro ao criar o socket UDP");
+    }
+    
+    return sockfd; // Retorna o descritor de socket se for bem-sucedido
+}
+
 /*
   Converte uma string contendo um endereço IPv4 para uma estrutura sockaddr_in
   Parâmetros:
@@ -35,7 +50,25 @@ sockaddr_in stringToIPv4(const std::string& ipAddress) {
     - string contendo o endereço IPv4
 */
 void download(sockaddr_in ip, int porta, string arquivo) {
-  // implementar
+
+        int sockfd = createSocket();
+        std::cout << "Socket criado com sucesso! Descritor: " << sockfd << std::endl;
+        ip.sin_port = htons(porta);
+
+        // Mensagem a ser enviada
+        const char* mensagem = "Olá, servidor UDP!";
+
+        // Enviar a mensagem para o servidor
+        ssize_t sentBytes = sendto(sockfd, mensagem, strlen(mensagem), 0, 
+                                   (struct sockaddr*)&ip, sizeof(ip));
+        if (sentBytes < 0) {
+            throw std::runtime_error("Erro ao enviar a mensagem");
+        } else {
+            std::cout << "Mensagem enviada com sucesso!\n";
+        }
+
+        // Fechar o socket
+        close(sockfd); 
 }
 
 /*
