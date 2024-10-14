@@ -14,6 +14,12 @@
 #include <unistd.h>     // Para close
 #include <stdexcept>    // Para std::runtime_error
 
+// definindo as constantes de opcode
+#define RRQ 1
+#define WRQ 2
+
+#include "requisition.h"
+
 using namespace std;
 
 sockaddr_in stringToIPv4(const std::string& ipAddress);

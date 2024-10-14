@@ -1,17 +1,27 @@
 #ifndef REQUISITION_H
 #define REQUISITION_H
 
-/*
- 2 bytes     string    1 byte     string   1 byte
- ------------------------------------------------
-| Opcode |  Filename  |   0  |   "octet"   |   0  |
- ------------------------------------------------
+#include <fstream>
+#include <iostream>
+#include <list>
+#include <string>
+#include <vector>
 
-- Opcode: 1 ou 2 
-- String1: Nome do arquivo
-- Delimitador: 0x00 (1 byte)
-- String2: octet
-- Delimitador: 0x00 (1 byte)
+#include <sys/socket.h> // Para socket
+#include <arpa/inet.h>  // Para inet_pton
+#include <netinet/in.h> // Para sockaddr_in
+#include <cstring>      // Para memset
+#include <unistd.h>     // Para close
+#include <stdexcept>    // Para std::runtime_error
+
+using namespace std;
+
+
+/*
+    Function to create the request message to be sent to 
+    the server WRR (Write Request) and WRQ (Read Request)
 */
+
+string requestMessage(int opcode, string filename, string mode);
 
 #endif

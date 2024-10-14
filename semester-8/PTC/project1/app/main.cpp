@@ -10,6 +10,8 @@ int createSocket() {
     if (sockfd < 0) {
         throw std::runtime_error("Erro ao criar o socket UDP");
     }
+
+    cout << "Socket criado com sucesso!" << endl;
     
     return sockfd; // Retorna o descritor de socket se for bem-sucedido
 }
@@ -51,16 +53,16 @@ sockaddr_in stringToIPv4(const std::string& ipAddress) {
 */
 void download(sockaddr_in ip, int porta, string arquivo) {
 
+        // Criar o socket
         int sockfd = createSocket();
-        std::cout << "Socket criado com sucesso! Descritor: " << sockfd << std::endl;
         ip.sin_port = htons(porta);
 
-        // Mensagem a ser enviada
-        const char* mensagem = "Olá, servidor UDP!";
+        string msg = requestMessage(RRQ, arquivo, "octet"); 
 
         // Enviar a mensagem para o servidor
-        ssize_t sentBytes = sendto(sockfd, mensagem, strlen(mensagem), 0, 
+        ssize_t sentBytes = sendto(sockfd, msg.c_str(), msg.size(), 0, 
                                    (struct sockaddr*)&ip, sizeof(ip));
+
         if (sentBytes < 0) {
             throw std::runtime_error("Erro ao enviar a mensagem");
         } else {
@@ -68,7 +70,7 @@ void download(sockaddr_in ip, int porta, string arquivo) {
         }
 
         // Fechar o socket
-        close(sockfd); 
+        close(sockfd);
 }
 
 /*
@@ -79,7 +81,25 @@ void download(sockaddr_in ip, int porta, string arquivo) {
     - arquivo: nome do arquivo a ser enviado
 */
 void upload(sockaddr_in ip, int porta, string arquivo) {
-  // implementar
+
+        // Criar o socket
+        int sockfd = createSocket();
+        ip.sin_port = htons(porta);
+
+        string msg = requestMessage(WRQ, arquivo, "octet"); 
+
+        // Enviar a mensagem para o servidor
+        ssize_t sentBytes = sendto(sockfd, msg.c_str(), msg.size(), 0, 
+                                   (struct sockaddr*)&ip, sizeof(ip));
+
+        if (sentBytes < 0) {
+            throw std::runtime_error("Erro ao enviar a mensagem");
+        } else {
+            std::cout << "Mensagem enviada com sucesso!\n";
+        }
+
+        // Fechar o socket
+        close(sockfd);
 }
 
 /*
