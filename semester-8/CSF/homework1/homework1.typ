@@ -263,7 +263,32 @@ $
 d = 10^(0,8509) = 7,1 "km"
 $
 
+Em seguida, calculamos o valor para a área suburbanda através da formula de hata para a perda de percurso:
+$
+l_50 = l_50 -2 [log(f/28)]^2 - 5,4
+$
 
+$
+l_50 = 125,807 -2 [log(900/28)]^2 -5,4 -> 125,807 - 2 [1,507]^2 -5,4 
+$
+
+$
+l_50 = 125,807 - 4,542 - 5,4 = 115,865 "dB"
+$
+
+Agora calculamos novamente o raio da célula para suburbano: 
+
+$
+L(d) = L_50 + 10n log(d/d_0) -> 156,76 = 115,865 + 10 . 4 log(d/1)
+$
+
+$
+156,76 = 115,865 + 40 log(d) -> log(d) = (156,76 - 115,865) / 40 = 1,022
+$
+
+$
+d = 10^(1,022) = 10,6 "km"
+$
 
 = Questão 8: 
 
