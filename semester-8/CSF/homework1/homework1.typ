@@ -437,6 +437,12 @@ for d = d0 : df
     end
 end
 
+% Calcula a média do vetor r
+media_r = mean(r);
+
+% Exibe o valor médio no console
+fprintf('Valor médio do vetor de barras: %.2f Mbps\n', media_r);
+
 figure;
 bar(r);
 title('Taxa observada no ráio de cobertura');
@@ -453,3 +459,5 @@ grid on;
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
+
+Valor médio do vetor de barras: $22.24 "Mbps"$
