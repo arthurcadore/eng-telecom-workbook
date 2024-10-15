@@ -196,6 +196,75 @@ $
 
 Sejam dados: pa=15 W, Gt=12 dBi, Gr=3 dBi. Seja a potência de ruído térmico no receptor –120 dBm. Qual o máximo raio de célula para o qual uma relação sinal-ruído (SNR) de 20 dB pode ser garantida em 95% do perímetro da borda da célula? Assuma n=4, =8 dB, f=900 MHz. Calcule uma perda de percurso de referência média em d0=1 km utilizando o modelo de perda de percurso COST231-Hata sabendo-se que a altura da antena da ERB é de 20 m e a altura da antena do terminal móvel é de 1,8 m. O ambiente em questão é de área suburbana de uma cidade.
 
+== Resolução
+
+
+Inicialmente devemos calcular a perda de percurso sendo d0 = 1km: 
+
+$
+a(h_m) = (1.1 log(900) -0,7) . 1,8 - (1,56 log(900) - 0,8) = 2,954
+$
+
+Dessa forma, temos que: 
+
+$
+a(h_m) = (1.1 . 2,954 - 0,7 ) . 1,8 - ( 1,56 . 2,954 - 0,8 )
+$
+$
+(3,249 -0,7 ) . 1,8 -  (4,605 - 0,8) -> 4,589 - 3,805 = 0,784 "dB"
+$
+
+Agora aplicamos o valor obtido na formula de perda de percurso:
+
+$
+L_p(d) = 46,3 + 33,9 log(900) - 13,82 log(20) - 0,784 + (44,9 -6,55 log(20) ) log(1) 
+$
+
+Dessa forma temos que: 
+
+$
+L_p(d) = 46,3 + (33,9 . 2,954 )- (13,82 . 1,301 ) - 0,784 + (44,9 - 6,55 . 1,301) . 0 
+$
+
+$
+L_p(d) = 46,3 + 100,2726 + 17,98 - 0,784 + (44,9 - 8,5255) . 0
+$
+$
+L_p(d) = 125,807"dB"
+$
+
+Como a questão pede uma relação de 20 dB no minimo, temos que:
+
+$
+P_r = P_t + G_t + G_r - L_p(d)
+$
+
+$
+-100 = 41,76 + 12 + 3 - L_p(d) -> L_p(d) = 41,76 + 12 + 3 + 100 = 156,76 "dB"
+$
+
+Por fim, substituimos na formula de hata novamente para calcular o raio da célula:
+
+$
+156,76 = 46,3 + 33,9 log(900) - 13,82 log(20) - 0,784 + (44,9 -6,55 log(20)) log(d)
+$
+
+Dessa forma temos que: 
+
+$
+156,76 - 125,807 = (44,9  6,55 log(20)) log(d)
+$
+
+$
+30,953 = (44,9 - 8,52355) log(d) -> 30,953 = 36,37645 log(d) -> log(d) = 0,8509
+$
+
+$
+d = 10^(0,8509) = 7,1 "km"
+$
+
+
+
 = Questão 8: 
 
 Uma operadora de telefonia celular pretende cobrir uma grande cidade com área de 2500 km2 usando ERBs com pa=20 W e Gt=3 dBi. Os terminais móveis têm Gr=0 dBi. Determinar o número de ERBs omnidirecionais necessárias para cobrir a cidade quando é esperado que 90% da periferia das células experimente cobertura de sinal a -90 dBm. Assuma =8 dB e f=900 MHz. O modelo de COST231-Hata é válido neste ambiente. Você pode calcular uma potência média de referência em d0=1 km usando os seguintes parâmetros: hb=20 m, hm=1,8 m. 
