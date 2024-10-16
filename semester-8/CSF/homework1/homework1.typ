@@ -292,12 +292,171 @@ $
 
 = Questão 8: 
 
-Uma operadora de telefonia celular pretende cobrir uma grande cidade com área de 2500 km2 usando ERBs com pa=20 W e Gt=3 dBi. Os terminais móveis têm Gr=0 dBi. Determinar o número de ERBs omnidirecionais necessárias para cobrir a cidade quando é esperado que 90% da periferia das células experimente cobertura de sinal a -90 dBm. Assuma =8 dB e f=900 MHz. O modelo de COST231-Hata é válido neste ambiente. Você pode calcular uma potência média de referência em d0=1 km usando os seguintes parâmetros: hb=20 m, hm=1,8 m. 
+Uma operadora de telefonia celular pretende cobrir uma grande cidade com área de 2500 km2 usando ERBs com pa=20 W e Gt=3 dBi. Os terminais móveis têm Gr=0 dBi. Determinar o número de ERBs omnidirecionais necessárias para cobrir a cidade quando é esperado que 90% da periferia das células experimente cobertura de sinal a -90 dBm. Assuma $rho$=8 dB e f=900 MHz. O modelo de COST231-Hata é válido neste ambiente. Você pode calcular uma potência média de referência em d0=1 km usando os seguintes parâmetros: hb=20 m, hm=1,8 m. 
 
+Para resolver essa questão, devemos aplicar a formula de perda de percurso de Hata: 
+
+$
+l_p(d) = 46,3 + 33,9 log(f) - 13,82 log(h_b) - a(h_m) + (44,9 - 6,55 log(h_b)) log(d)
+$
+
+Entretanto, precisamos primeiro calcular o fator de correção a(h_m) para a altura da antena do terminal móvel:
+
+$
+a(h_m) = (1,1 log(f) - 0,7) h_m - (1,56 log(f) - 0,8)
+$
+
+Dessa forma temos que: 
+
+$
+a(h_m) = (1,1 log(900) - 0,7) . 1,8 - 1,56 log(900) - 0,8
+$
+
+$
+a(h_m) = (1,1 . 2,9542 - 0,7) . 1,8 - (1,56 . 2,9542) - 0,8
+$
+
+$
+a(h_m) = (3,24962 - 0,7) . 1,8 - (4,6055 - 0,8) 
+$
+
+$
+ a(h_m) = 4,589 - 3,805 = 0,784 "dB"
+$
+
+
+Substituindo na equação de hata, temos que: 
+
+$
+l_p(d) = 46,3 + 33,9 log(900) - 13,82 log(20) - 0,7838 + (44,9 - 6,55 log(20)) log(1) + 3
+$
+
+Nota: uso do "C" = 3 para a perda de penetração, pois trata-se de uma área urbana.
+
+$
+l_p(d) = 46,3 + 33,9 . 2,9542 - 13,82 . 1,3010 - 0,7838 + 3
+$
+
+$
+l_p(d) = 130,72 "dB"
+$
+
+Em seguida, precisamos determinar o limite de cobertura, a partir do limite de sinal minimo de recepção do final da celula, que é de $P_r = 90"dBm"$. Dessa forma, temos que:
+
+$
+P_r = P_t + G_t + G_r - L(d)
+$
+
+$
+-90 = 43 + 3 + 0 - L(d) -> L(d) = 43 + 3 + 90 = 136 "dB"
+$
+
+Agora com o valor de perda de percurso, podemos reaplica-lo na formula de hata: 
+
+$
+136 = 46,3 + 33,9 log(900) -13,82 log(20) -0,78 + (44,9 - 6,55 log(20)) log(d) + 3 
+$
+
+$
+136 = 130,72 + (44,9 - 6,55 . 1,301) log(d) 
+$
+
+$
+136 - 130,72 = 44,9 log(d) - 8,5185 log(d) -> 5,28 = 36,3815 log(d)
+$
+
+$
+log(d) = 5,28 / 36,3815 = 0,145
+$
+
+$
+d = 10^(0,145) = 1,38 "km"
+$
+
+Com base no novo ráio de cobertura das estações, podemos calcular a quantidade de ERBs necessárias para cobrir a cidade: 
+
+$
+A_"cel" = pi . r^2 -> pi . 1,38^2 = 6,078 "km^2"
+$
+
+Nota: o calculo superior considera que cada ERB terá como área de cobertura um circulo de 1,38 km de raio.
+
+Como a cidade possui uma área de 2500 km2, temos que:
+
+$
+N_"ERBs" = 2500 / 6,078 = 412 "ERBs"
+$
 = Questão 9:
 
 Considere uma situação de propagação em ambiente interior (indoor). A antena transmissora encontra-se inicialmente fora da edificação e a perda de penetração estimada é 30 dB. O receptor encontra-se no piso térreo e o caminho do sinal até o mesmo atravessa uma partição horizontal e uma vertical cuja perda estimada é de 15 dB por partição. A antena transmissora encontra-se a 500 m da parede externa da edificação, sendo a frequência de operação f=900 MHz, hb=20 m, hm=1,8 m, podendo-se utilizar o modelo de COST231-Hata urbano para calcular uma perda de percurso de referência. Internamente à edificação a perda de percurso é proporcional a $d^-2,5$ além das perdas de penetração e partição já mencionadas. A distância interna entre a parede interna do edifício e o receptor é de 10 metros. Calcule a perda de percurso total nesta situação entre o transmissor e o receptor.
 
+== Resolução: 
+
+Para resolver essa questão, devemos aplicar a formula de perda de percurso de Hata: 
+
+$
+l_p(d) = 46,3 + 33,9 log(f) - 13,82 log(h_b) - a(h_m) + (44,9 - 6,55 log(h_b)) log(d)
+$
+
+Entretanto, precisamos primeiro calcular o fator de correção a(h_m) para a altura da antena do terminal móvel:
+
+$
+a(h_m) = (1,1 log(f) - 0,7) h_m - (1,56 log(f) - 0,8)
+$
+
+Dessa forma temos que: 
+
+$
+a(h_m) = (1,1 log(900) - 0,7) . 1,8 - 1,56 log(900) - 0,8
+$
+
+$
+a(h_m) = (1,1 . 2,9542 - 0,7) . 1,8 - (1,56 . 2,9542) - 0,8
+$
+
+$
+a(h_m) = (3,24962 - 0,7) . 1,8 - (4,6055 - 0,8) 
+$
+
+$
+ a(h_m) = 4,589 - 3,805 = 0,784 "dB"
+$
+
+Substituindo na equação de hata, temos que: 
+
+$
+l_p(d) = 46,3 + 33,9 log(900) - 13,82 log(20) - 0,7838 + (44,9 - 6,55 log(20)) log(500) + 3
+$
+
+Nota: uso do "C" = 3 para a perda de penetração, pois trata-se de uma área urbana.
+
+$
+l_p(d) = 46,3 + 33,9 . 2,9542 - 13,82 . 1,3010 - 0,7838 + (44,9 - 6,55 . 1,3010) + 2,6983 + 3
+$
+
+$
+l_p(d) = 46,3 + 100,2726 - 17,96 - 0,7838 (44,9 - 8,51855) . 2,6983 + 3
+$
+
+$
+l_p(d) = 46,3 + 100,2726 - 17,96 - 0,7838 + 98,9794 + 3 
+$
+
+$
+l_p(d) = 228,8716 "dB"
+$
+
+Também é necessário calcular a perda interna, conforme a própria questão aponta, a perda de percurso interna é proporcional a $d^-2,5$. Dessa forma, temos que:
+
+$
+l_p("interna") = 10 . n . log(10) ->  10 . 2,5 . log(10) = 10 . 2,5 = 25 "dB"
+$
+
+Como mencionado na questão, a perda de percurso interna é de 15 dB por partição. Como são duas partições (uma horizontal e outra vertical, temos 30 dB), acrecido da perda de penetração de 30 dB. Dessa forma, temos que:
+
+$
+l_p("total") = 228,8716 + 15 + 15 + 30 + 25 = 313,8716 "dB"
+$
 = Questão 10: 
 
 O provimento de cobertura celular em áreas rurais e remotas é um desafio para países como o Brasil, de grande extensão territorial. Considere uma situação em que um assinante de serviço de comunicação móvel encontra-se a 10 km da ERB. Faça uma análise dos enlaces de descida e de subida considerando os seguintes parâmetros: potências EIRP: 37 dBm na ERB; 27 dBm no TM; despreze demais ganhos e perdas no transmissor e no receptor; a potência do ruído térmico vale Pn=-120 dBm; perda de percurso pode ser modelada como L(d)=120+30log(d), sendo d a distância ERB-TM em [km]; a razão sinal ruído mínima para estabelecer o enlace é 5 dB. Analise o equilíbrio de desempenho entre os enlaces de subida e de descida. A operadora pode instalar, quando necessário, um repetidor (relay) que regenera o sinal da ERB ou do TM, transmitindo-o novamente em posição mais favorável. Suponha que o relay opera com mesma potência EIRP do TM. Nessas condições avalie a necessidade de instalar um relay para atuar em um dos enlaces. Além disso, determine uma distância ou faixa de distâncias para a instalação do relay de forma a beneficiar a comunicação rural em questão. 
