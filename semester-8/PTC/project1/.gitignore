@@ -5,6 +5,7 @@
 # Prerequisites
 *.d
 
+*.cfg
 
 # Compiled Object files
 *.slo
