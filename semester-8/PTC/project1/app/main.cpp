@@ -69,6 +69,52 @@ void download(sockaddr_in ip, int porta, string arquivo) {
             std::cout << "Mensagem enviada com sucesso!\n";
         }
 
+        bool state = true; // Estado do download
+        int blockNumber = 0;
+
+        do {
+
+          // Enviar a mensagem de ack para o server
+          string ack = ackMessage(blockNumber);
+           sentBytes = sendto(sockfd, ack.c_str(), ack.size(), 0, 
+                                     (struct sockaddr*)&ip, sizeof(ip));
+
+          // Aguarda a resposta do servidor de um bloco de dados com 512 bytes e imprime no terminal
+          char buffer[516];
+          socklen_t len = sizeof(ip);
+          ssize_t recvBytes = recvfrom(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr*)&ip, &len);
+
+          cout << "Recebendo " << recvBytes << " bytes" << endl;
+
+          if (recvBytes < 0) {
+              throw std::runtime_error("Erro ao receber a mensagem");
+          } else {
+              // Imprime apenas os bytes recebidos
+              // std::cout.write(buffer, recvBytes);
+              // std::cout << std::endl;
+
+              // excluir o terminador de string
+
+              // remover o cabeçalho do pacote
+
+              // 2 bytes opcode + 2 bytes block number 
+              // em seguida escreve em um arquivo usando a função writefile
+              writefile(buffer + 4, recvBytes - 4, arquivo);
+
+
+          }
+
+         //  // Verifica se o bloco de dados recebido é menor que 516 bytes
+         //  if (recvBytes < 516) {
+         //      state = false;
+         //  }
+          // Incrementa o número do bloco
+
+          blockNumber++;
+
+        } while (state);
+
+
         // Fechar o socket
         close(sockfd);
 }

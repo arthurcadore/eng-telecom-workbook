@@ -17,6 +17,9 @@
 // definindo as constantes de opcode
 #define RRQ 1
 #define WRQ 2
+#define DATA 3
+#define ACK 4
+#define ERROR 5
 
 using namespace std;
 
@@ -32,5 +35,10 @@ string requestMessage(int opcode, string filename, string mode);
     Function to create the data block to be sent to the server        
 */
 string datablock(int blockNumber, string data);
+
+/* 
+    Function to create the ACK message to be sent to the server
+*/
+string ackMessage(int blockNumber);
 
 #endif
