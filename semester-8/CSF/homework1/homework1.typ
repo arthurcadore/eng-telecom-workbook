@@ -199,7 +199,7 @@ Sejam dados: pa=15 W, Gt=12 dBi, Gr=3 dBi. Seja a potência de ruído térmico n
 == Resolução
 
 
-Inicialmente devemos calcular a perda de percurso sendo d0 = 1km: 
+Inicialmente devemos calcular a perda de percurso (meio urbano) sendo d0 = 1km para o modelo de Cost231-Hata: 
 
 $
 a(h_m) = (1.1 log(900) -0,7) . 1,8 - (1,56 log(900) - 0,8) = 2,954
@@ -233,7 +233,7 @@ $
 L_p(d) = 125,807"dB"
 $
 
-Como a questão pede uma relação de 20 dB no minimo, temos que:
+Como a questão pede uma relação de 20 dB no minimo, temos que o raio da célula é igual a todo o perimetro onde a relação é de 20 dB. Assim podemos calcula-lo com base na formula de perda de percurso:
 
 $
 P_r = P_t + G_t + G_r - L_p(d)
@@ -263,7 +263,9 @@ $
 d = 10^(0,8509) = 7,1 "km"
 $
 
-Em seguida, calculamos o valor para a área suburbanda através da formula de hata para a perda de percurso:
+Dessa forma, em meios urbanos temos que o raio da célula é de 7,1 km. Como a questão solicita 95% do perimetro da célula em um meio suburbano, temos que. 
+
+Em seguida, calculamos o valor para a área suburbanda através da formula de correção de Hata:
 $
 l_50 = l_50 -2 [log(f/28)]^2 - 5,4
 $
@@ -279,15 +281,39 @@ $
 Agora calculamos novamente o raio da célula para suburbano: 
 
 $
-L(d) = L_50 + 10n log(d/d_0) -> 156,76 = 115,865 + 10 . 4 log(d/1)
+P_t = 15W -> 41,76 "dBm"
 $
 
 $
-156,76 = 115,865 + 40 log(d) -> log(d) = (156,76 - 115,865) / 40 = 1,022
+Pr_0 = 41,76 + 12 + 3 - 115,865 = 41,76 + 15 - 115,865 = -59,105 "dBm"
+$
+
+A senssibilidade no receptor é de -120 dBm, porem, com a diferença de 20 dB, temos que a sensibilidade é de -100 dBm. Dessa forma, temos como calcular a diferença de 95% do perimetro da célula:
+
+$
+P_r [P_r(d) > - 100] = 0,95
 $
 
 $
-d = 10^(1,022) = 10,6 "km"
+Q( ( -100 - P_r(d) )/ 8 ) = 0,95 -> (-100 - P_r(d) )/ 8 = 0,95/Q -> -1,6449
+$
+
+$
+- P_r(d) = (8 . -1,6449) + 100 -> - P_r(d) = +86,84 "dBm" -> P_r(d) = -86,84 "dBm"
+$
+
+Dessa forma, o ráio da celula é de: 
+
+$
+P_r(d) = P_r(d) - 10n log(d/d_0)  
+$
+
+$
+-86,84 = -59,105 - 10 log(d/1) -> log(d) = (-86,841 + 59,105) / (-40)  = 0,6463 
+$
+
+$
+d_r = 10^0,6463 = 4,4 "km"
 $
 
 = Questão 8: 
@@ -348,35 +374,45 @@ P_r = P_t + G_t + G_r - L(d)
 $
 
 $
--90 = 43 + 3 + 0 - L(d) -> L(d) = 43 + 3 + 90 = 136 "dB"
+-90 = 43 + 3 + 0 - L(d) -> L(d) = 43 + 3 - 130 = -84,28 "dB"
 $
 
-Agora com o valor de perda de percurso, podemos reaplica-lo na formula de hata: 
+Como a questão pede 90% da periferia da célula, precisamos calcular com base na qfunc: 
 
 $
-136 = 46,3 + 33,9 log(900) -13,82 log(20) -0,78 + (44,9 - 6,55 log(20)) log(d) + 3 
-$
-
-$
-136 = 130,72 + (44,9 - 6,55 . 1,301) log(d) 
+P_r[ P_r(d) > -90] = 0,9
 $
 
 $
-136 - 130,72 = 44,9 log(d) - 8,5185 log(d) -> 5,28 = 36,3815 log(d)
+Q( (-90 - P_r(d)) / 8) = 0,9 -> (-90 - P_r(d)) / 8 = -1,2816 
 $
 
 $
-log(d) = 5,28 / 36,3815 = 0,145
+-90 - P_r(d) = -1,2816 . 8 -> -P_r(d) = -10,2528 + 90 = 79,7472 "dBm"
+$
+
+Agora com o valor de perda de percurso, podemos reaplica-lo na formula para descobrir o ráio da célula:
+
+$
+P_r(d) = P_r(d_0) - 10n log (d/d_0)
 $
 
 $
-d = 10^(0,145) = 1,38 "km"
+-79,7472 = -84,28 - 10 . 3,5log(d/1)
+$
+
+$
+log(d) = (79,7472 - 84,28) / 35 = -0,129
+$
+
+$
+d = 10^(-0,129) = 0,77 "km"
 $
 
 Com base no novo ráio de cobertura das estações, podemos calcular a quantidade de ERBs necessárias para cobrir a cidade: 
 
 $
-A_"cel" = pi . r^2 -> pi . 1,38^2 = 6,078 "km^2"
+A_"cel" = pi . r^2 -> pi . 0,77^2 = 1,86 "km^2"
 $
 
 Nota: o calculo superior considera que cada ERB terá como área de cobertura um circulo de 1,38 km de raio.
@@ -384,7 +420,7 @@ Nota: o calculo superior considera que cada ERB terá como área de cobertura um
 Como a cidade possui uma área de 2500 km2, temos que:
 
 $
-N_"ERBs" = 2500 / 6,078 = 412 "ERBs"
+N_"ERBs" = 2500 / 1,86 = 1344,08 "ERBs"
 $
 = Questão 9:
 
@@ -463,24 +499,24 @@ O provimento de cobertura celular em áreas rurais e remotas é um desafio para 
 
 == Resolução: 
 
-Para resolvermos a questão inicialmente calculamos a SNR: 
+Para resolvermos a questão inicialmente calculamos o valor minimo de recepção do sinal no receptor: 
 $
 "SNR" = P_s - P_n -> 5 = P_s - (-120) -> P_s = -115 "dBm"
 $
 
-Dessa forma, temos que: 
+Dessa forma, podemos calcular a perda de percurso minima para 10km mantendo a relação de 5 dB:
 
 $
 l_p(10) = 120 + 30log(10) = 150 "dB"
 $
 
-Assim, podemos calcular a potência recebida no terminal móvel:
+Assim, podemos calcular a potência recebida no terminal móvel (TM) pela ERB:
 
 $
 p_t_"Erb"_"tm" = 37 - 150 = -113 "dBm"
 $
 
-Da mesma maneira, podemos calcular a recebida na ERB pelo terminal movel: 
+Da mesma maneira, podemos calcular a recebida na ERB pelo terminal movel (TM): 
 
 $
 p_t_"tm"_"Erb" = 27 - 150 = -123 "dBm"
@@ -491,6 +527,8 @@ A partir dessa verificação, podemos determinar a faixa de distância para inst
 $
 -115 = 27 - L_p -> L_p = 142 "dB"
 $
+
+Em seguida, a partir da perda máxima, calculamos a distância para instalação do relay:
 
 $
 142 = 120 + 30 log(d) = 22/30 = log(d) -> d = 10^(22/30) = 10^0,733 = 5,5 "km"
@@ -513,29 +551,39 @@ Considerando que o ambiente de propagação é caracterizado por uma perda de pe
 
 == Resolução: 
 
+Inicialmente calculamos a potência mínima de recepção do sinal no receptor:
 
 $
 "SNR" = 3"dB" -> "SNR" = P_s - P_n -> 3 = P_s - (-110) -> P_s = -107 "dBm"
 $
 
-Dessa forma, aplicando na formula temos que: 
+
+Como a questão pede que seja observada em pelo menos 98% do perimetro da celula, temos que: 
 
 $
-P_s = P_t + G_t - P_l -> -107 = 43 + 10 - P_l -> P_l = 160 "dB"
-$
-
-$
- P_o = P_t - P_l (d_o) -> -45 = 43 - P_l(d_o) -> P_l(d_o) = 88 "dB"
+P_r[P_r(d) > -107] = 0,98 
 $
 
 $
-P_l(d) = P_l(d_o) + 10n log(d/d_o) -> 160 = 88 + 35 log(d) - 35log(100) + 8 
+Q( (-107 - P_r(d)) / 8) = 0,98 -> (-107 - P_r(d)) / 8 = -2,0537
 $
 
-Dessa forma temos que: 
+$
+(-107 - P_r(d)) = -16,4296 -> P_r(d) = -90,5704 "dBm"
+$
+
+Dessa forma, aplicamos esse valor na formula de perda de percurso para calcular a distância máxima: 
 
 $
-(160 - 88 - 8 + 70) / 35 = log(d) -> log(d) = 3,828 -> 10^(3,828) = 6,729 "km"
+P_r(d) = P_r(d_0) - 10n log(d/100)
+$
+
+$
+log(d/100) = ((P_r(d_0) - P_r(d))/10n) -> log(d/100) = ((-45 - (-90,5704))/35) = 1,4537
+$
+
+$
+d = 100 . 10^1,4537 = 100 . 26,59 = 2659 "m"
 $
 
 Considerando que a questão pede 98% do perímetro da célula, temos que:
