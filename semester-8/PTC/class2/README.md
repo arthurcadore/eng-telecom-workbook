@@ -22,3 +22,10 @@ add_executable(test_app main.cpp)
 # Portanto, renomeie test_app para o nome do seu executável
 target_link_libraries(test_app poller)
 ```
+
+# Commands to work: 
+```
+cmake -S . -B build
+
+cmake --build build
+```
