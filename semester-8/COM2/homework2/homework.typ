@@ -19,6 +19,7 @@
 
 = Introdução:
 
+O objetivo deste relatório é explorar o código de Hamming e suas propriedades, incluindo a construção de uma matriz geradora, a determinação da distância mínima e da distribuição de peso das palavras-código, a construção de uma matriz de verificação, a construção de uma tabela mensagem $→$ palavra-código, a construção de uma tabela síndrome $→$ padrão de erro, a determinação da distribuição de peso dos padrões de erro corrigíveis, e a implementação de uma simulação de desempenho de BER de um sistema de comunicação que utiliza o código de Hamming (8, 4) com decodificação via síndrome, modulação QPSK e canal AWGN.
 
 = Desenvolvimento:
 
@@ -320,61 +321,58 @@ $
 Para construir a tabela síndrome $→$ padrão de erro, utilizamos a matriz de verificação $H$ e a propriedade de que a síndrome é dada por $s = "He"^T$, onde $e$ é o vetor recebido.
 
 #sourcecode[```python
-# Inicializando matriz de padrões de erro
-errorMatrix = np.zeros((2**m_lenght, 2**k, n), dtype=int)
+# Inicializando matriz de padrões de erro com 16 linhas
+errorMatrix = np.zeros((16, 2**k, n), dtype=int)
 
-# Gerando palavras código aleatórias para cada coluna da primeira linha
-for col in range(2**k):
-    errorMatrix[0, col] = np.random.randint(2, size=n)  # Gera 0s e 1s aleatórios para cada coluna
+# Gerando palavras código aleatórias para cada coluna da primeira linha (exceto na primeira posição)
+for col in range(1, 2**k):
+    errorMatrix[0, col] = np.random.randint(2, size=n) 
 
-# Inicializando a primeira linha com os dados de paridade
-errorMatrix[1:9, 0] = np.eye(n)[:8]  # Preenchendo as primeiras 8 linhas da coluna 0 com a matriz identidade
+# Preenchendo a primeira coluna com a matriz identidade para padrões de erro de 1 bit
+for i in range(1, min(9, 16)):
+    errorMatrix[i, 0] = np.eye(n, dtype=int)[i-1]
 
-# Gerar padrões de erro para 1 e 2 bits de erro
-for row in range(1, 9):
-    for col in range(1, 2**k):
+# Gerando padrões de erro para 1 bit
+for row in range(1, 9):  # Para as linhas 1 a 8
+    for col in range(1, 2**k):  # Para todas as colunas
         errorMatrix[row, col] = (errorMatrix[0, col] + errorMatrix[row, 0]) % 2
 
-# Criando padrões de erro para 1 e 2 bits
-error1 = []
-error2 = []
+# Gerando padrões de erro para 2 bits
+two_bit_errors = list(it.combinations(range(n), 2))
 
-# Calculando padrões de erro para um bit de erro em cada posição
-for pos in range(n):
-    error_pattern = np.zeros(n, dtype=int)
-    error_pattern[pos] = 1
-    error1.append(error_pattern)
+# Contador para controlar o número de padrões de dois bits
+two_bit_count = 0  
 
-# Calculando padrões de erro para dois bits de erro em cada posição
-positions = it.combinations(range(n), 2)
-for pos in positions:
+# Laço para terminar com as linhas da tabela (16 linhas no total)
+for pos in two_bit_errors:
+    if 9 + two_bit_count >= 16: 
+        break
+
     error_pattern = np.zeros(n, dtype=int)
     error_pattern[list(pos)] = 1
-    error2.append(error_pattern)
+    errorMatrix[9 + two_bit_count, 0] = error_pattern
 
-# Preenchendo a matriz de padrões de erro com padrões de erro de 1 bit
-line_index = 0
-for pattern in error1:
-    if line_index < 2**m_lenght:
-        errorMatrix[line_index, 0] = pattern
-        line_index += 1
+    # Aplicando a combinação de dois bits de erro na matriz
+    for col in range(1, 2**k):
+        errorMatrix[9 + two_bit_count, col] = (errorMatrix[0, col] + errorMatrix[9 + two_bit_count, 0]) % 2
+    
+    two_bit_count += 1  # Incrementa o contador de padrões de dois bits
 
-# Preenchendo a matriz de padrões de erro com padrões de erro de 2 bits
-for pattern in error2:
-    if line_index < 2**m_lenght:
-        errorMatrix[line_index, 0] = pattern
-        line_index += 1
+# Preencher as linhas restantes com padrões aleatórios, se necessário
+for i in range(9 + two_bit_count, 16):
+    for col in range(2**k):
+        errorMatrix[i, col] = np.random.randint(2, size=n)  # Gera 0s e 1s aleatórios
 
 # Inicializando a matriz de pesos
-w_matrix = np.zeros((2**m_lenght, 2**k), dtype=int)
+w_matrix = np.zeros((16, 2**k), dtype=int)
 
 # Calculando os pesos para cada padrão de erro
-for row in range(0, 2**m_lenght):
-    for col in range(0, 2**k):
+for row in range(16):
+    for col in range(2**k):
         w_matrix[row, col] = sum(errorMatrix[row, col])
 
 # Impressão da matriz de padrões de erro
-print("Matriz de Padrões de Erro (errorMatrix):")
+print("Matriz de Padrões de Erro (ap):")
 for i in range(errorMatrix.shape[0]):
     for j in range(errorMatrix.shape[1]):
         print(f"{''.join(map(str, errorMatrix[i, j]))}", end=" ")
@@ -391,22 +389,22 @@ for i in range(errorMatrix.shape[0]):
       align: auto,
       columns: 16,
       gutter: 3pt,
-      [10000000], [01010100], [10111000], [00101001], [11010111], [00001111], [10000110], [11001111], [10000011], [01001000], [00110100], [11101001], [10010001], [00100111], [10011011], [01111010], 
-      [01000000], [11010100], [00111000], [10101001], [01010111], [10001111], [00000110], [01001111], [00000011], [11001000], [10110100], [01101001], [00010001], [10100111], [00011011], [11111010], 
-      [00100000], [00010100], [11111000], [01101001], [10010111], [01001111], [11000110], [10001111], [11000011], [00001000], [01110100], [10101001], [11010001], [01100111], [11011011], [00111010], 
-      [00010000], [01110100], [10011000], [00001001], [11110111], [00101111], [10100110], [11101111], [10100011], [01101000], [00010100], [11001001], [10110001], [00000111], [10111011], [01011010], 
-      [00001000], [01000100], [10101000], [00111001], [11000111], [00011111], [10010110], [11011111], [10010011], [01011000], [00100100], [11111001], [10000001], [00110111], [10001011], [01101010], 
-      [00000100], [01011100], [10110000], [00100001], [11011111], [00000111], [10001110], [11000111], [10001011], [01000000], [00111100], [11100001], [10011001], [00101111], [10010011], [01110010], 
-      [00000010], [01010000], [10111100], [00101101], [11010011], [00001011], [10000010], [11001011], [10000111], [01001100], [00110000], [11101101], [10010101], [00100011], [10011111], [01111110], 
-      [00000001], [01010110], [10111010], [00101011], [11010101], [00001101], [10000100], [11001101], [10000001], [01001010], [00110110], [11101011], [10010011], [00100101], [10011001], [01111000], 
-      [11000000], [01010101], [10111001], [00101000], [11010110], [00001110], [10000111], [11001110], [10000010], [01001001], [00110101], [11101000], [10010000], [00100110], [10011010], [01111011], 
-      [10100000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], 
-      [10010000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], 
-      [10001000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], 
-      [10000100], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], 
-      [10000010], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], 
-      [10000001], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], 
-      [01100000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000], [00000000],
+      [00000000], [10111010], [01001100], [00000110], [10110010], [00011000], [10000000], [00000110], [01011011], [11110111], [00001010], [10000010], [10101001], [01000101], [01101001], [00110101], 
+      [10000000], [00111010], [11001100], [10000110], [00110010], [10011000], [00000000], [10000110], [11011011], [01110111], [10001010], [00000010], [00101001], [11000101], [11101001], [10110101], 
+      [01000000], [11111010], [00001100], [01000110], [11110010], [01011000], [11000000], [01000110], [00011011], [10110111], [01001010], [11000010], [11101001], [00000101], [00101001], [01110101], 
+      [00100000], [10011010], [01101100], [00100110], [10010010], [00111000], [10100000], [00100110], [01111011], [11010111], [00101010], [10100010], [10001001], [01100101], [01001001], [00010101], 
+      [00010000], [10101010], [01011100], [00010110], [10100010], [00001000], [10010000], [00010110], [01001011], [11100111], [00011010], [10010010], [10111001], [01010101], [01111001], [00100101], 
+      [00001000], [10110010], [01000100], [00001110], [10111010], [00010000], [10001000], [00001110], [01010011], [11111111], [00000010], [10001010], [10100001], [01001101], [01100001], [00111101], 
+      [00000100], [10111110], [01001000], [00000010], [10110110], [00011100], [10000100], [00000010], [01011111], [11110011], [00001110], [10000110], [10101101], [01000001], [01101101], [00110001], 
+      [00000010], [10111000], [01001110], [00000100], [10110000], [00011010], [10000010], [00000100], [01011001], [11110101], [00001000], [10000000], [10101011], [01000111], [01101011], [00110111], 
+      [00000001], [10111011], [01001101], [00000111], [10110011], [00011001], [10000001], [00000111], [01011010], [11110110], [00001011], [10000011], [10101000], [01000100], [01101000], [00110100], 
+      [11000000], [01111010], [10001100], [11000110], [01110010], [11011000], [01000000], [11000110], [10011011], [00110111], [11001010], [01000010], [01101001], [10000101], [10101001], [11110101], 
+      [10100000], [00011010], [11101100], [10100110], [00010010], [10111000], [00100000], [10100110], [11111011], [01010111], [10101010], [00100010], [00001001], [11100101], [11001001], [10010101], 
+      [10010000], [00101010], [11011100], [10010110], [00100010], [10001000], [00010000], [10010110], [11001011], [01100111], [10011010], [00010010], [00111001], [11010101], [11111001], [10100101], 
+      [10001000], [00110010], [11000100], [10001110], [00111010], [10010000], [00001000], [10001110], [11010011], [01111111], [10000010], [00001010], [00100001], [11001101], [11100001], [10111101], 
+      [10000100], [00111110], [11001000], [10000010], [00110110], [10011100], [00000100], [10000010], [11011111], [01110011], [10001110], [00000110], [00101101], [11000001], [11101101], [10110001], 
+      [10000010], [00111000], [11001110], [10000100], [00110000], [10011010], [00000010], [10000100], [11011001], [01110101], [10001000], [00000000], [00101011], [11000111], [11101011], [10110111], 
+      [10000001], [00111011], [11001101], [10000111], [00110011], [10011001], [00000001], [10000111], [11011010], [01110110], [10001011], [00000011], [00101000], [11000100], [11101000], [10110100],
     
     ),
     numbering: none,
@@ -445,22 +443,22 @@ Com a tabela síndrome $→$ padrão de erro, temos que o resultado apresentado 
       columns: 3,
       gutter: 3pt,
         [index], [syndrome],     [Padrão de erro],
-        [0 ], [1101],  [10000000],
-        [1 ], [1011],  [01000000],
-        [2 ], [0111],  [00100000],
-        [3 ], [1110],  [00010000],
-        [4 ], [1000],  [00001000],
-        [5 ], [0100],  [00000100],
-        [6 ], [0010],  [00000010],
-        [7 ], [0001],  [00000001],
-        [8 ], [0110],  [11000000],
-        [9 ], [1010],  [10100000],
-        [10], [0011],  [10010000],
-        [11], [0101],  [10001000],
-        [12], [1001],  [10000100],
-        [13], [1111],  [10000010],
-        [14], [1100],  [10000001],
-        [15], [1100],  [01100000],
+        [0],      [0000],  [00000000],
+        [1],      [1101],  [10000000],
+        [2],      [1011],  [01000000],
+        [3],      [0111],  [00100000],
+        [4],      [1110],  [00010000],
+        [5],      [1000],  [00001000],
+        [6],      [0100],  [00000100],
+        [7],      [0010],  [00000010],
+        [8],      [0001],  [00000001],
+        [9],      [0110],  [11000000],
+        [10],     [1010],  [10100000],
+        [11],     [0011],  [10010000],
+        [12],     [0101],  [10001000],
+        [13],     [1001],  [10000100],
+        [14],     [1111],  [10000010],
+        [15],     [1100],  [10000001],
     
     ),
     numbering: none,
@@ -468,6 +466,8 @@ Com a tabela síndrome $→$ padrão de erro, temos que o resultado apresentado 
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
+
+
 
 
 === Determine a distribuição de peso dos padrões de erro corrigíveis.
@@ -546,6 +546,105 @@ Realizando a contagem dos bits corrigíveis, temos que a distribuição de peso 
 
 Escreva um programa que simule o desempenho de BER de um sistema de comunicação que utiliza o código de Hamming (8, 4) com decodificação via síndrome, modulação QPSK (com mapeamento Gray) e canal AWGN. Considere a transmissão de 100000 palavras-código e relação sinal-ruído de bit $("𝐸𝑏"/"𝑁0")$ variando de $−1$ a $7 "dB"$, com passo de $1 "dB"$. Compare com o caso não-codificado.
 
+
+=== Implementação do código
+
+Para implementar a simulação do desempenho de BER de um sistema de comunicação que utiliza o código de Hamming (8, 4) com decodificação via síndrome, modulação QPSK (com mapeamento Gray) e canal AWGN, utilizamos a biblioteca `komm` para gerar o código de Hamming (8, 4) e a modulação QPSK.
+
+#sourcecode[```python
+# Criação de um dicionário para mapear as síndromes para os padrões de erro
+syndrome_error = {tuple(s): e for s, e in zip(e_s["syndrome"], e_s["error"])}
+
+
+# Criando um vetor de 100 mensagens de 4 bits aleatórias
+u = np.random.randint(0, 2, (1000, 4))
+
+# Codificação das mensagens de 4 bits em palavras código de 8 bits usando a matriz geradora estendida
+v = (u @ G_input) % 2
+
+# Inicializando o modulador QPSK e o canal AWGN
+qpsk_mod = komm.PSKModulation(4)
+
+
+# Inicializando o modulador QPSK e o canal AWGN para o código de Hamming
+SNR = range(-1, 8)  # dB
+
+# Inicializando os vetores de BER para o código de Hamming e sem código
+ber = np.zeros(len(SNR))
+ber_hamm = np.zeros(len(SNR))
+
+
+# Loop para calcular a BER para cada valor de SNR 
+for i, snr in enumerate(SNR):
+
+    # calculando o valor de dBm de volta para lienar 
+    snr_lin = 10 ** (snr / 10)
+
+    # Inicializando o canal AWGN e aplicando a SNR em linear
+    awgn = komm.AWGNChannel(signal_power="measured", snr=snr_lin)
+
+    # Modulação, transmissão, recepção e demodulação para o código de Hamming
+    v_mod = qpsk_mod.modulate(v.flatten())
+    vb = awgn(v_mod)
+    v_demod = qpsk_mod.demodulate(vb).reshape(-1, 8)
+
+    # Decodificação do código de Hamming
+    s = ((H @ v_demod.T) % 2).T
+
+    # Calculando a palavra código corrigida para cada síndrome usando a tabela de síndromes e padrões de erro
+    errors = np.array([syndrome_error[tuple(x)] for x in s])
+    v_hat = (v_demod + errors) % 2
+
+    # Calculando a BER para o código de Hamming 
+    ber_hamm[i] = np.sum(v_hat.reshape(-1) != v.reshape(-1)) / 1000
+
+    # Modulação, transmissão, recepção e demodulação sem código de Hamming
+    u_mod = qpsk_mod.modulate(u.flatten())
+    ub = awgn(u_mod)
+    u_hat = qpsk_mod.demodulate(ub).reshape(-1, 4)
+
+    # Calculando a BER sem código de Hamming
+    ber[i] = np.sum(u_hat.reshape(-1) != u.reshape(-1)) / 1000
+```]
+
+
+=== Resultados
+
+Para verificar o resultado podemos realizar o plot da BER para o código de Hamming e sem código.
+
+#sourcecode[```python
+# Plotando BER original e codificado
+plt.figure()
+
+plt.semilogy(SNR, ber, label="Original (Não-codificado)", marker="o", color="red")
+plt.semilogy(SNR, ber_hamm, label="Codificado (Hamming)",marker="o", color="blue")
+
+plt.xlabel("SNR [dB]")
+plt.Figure(figsize=(10, 6))
+plt.ylabel("BER")
+plt.title("Desempenho de BER: Codificação Hamming vs. Não-codificado")
+
+plt.legend()
+plt.grid(True, which="both")  # Grid em ambas escalas
+plt.show()
+```]
+
+Dessa forma, temos que o gráfico de desempenho de BER para o código de Hamming (8, 4) e sem código é apresentado abaixo:
+
+#figure(
+  figure(
+    rect(image("./pictures/output.png")),
+    numbering: none,
+    caption: []
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
 = Conclusão:
 
+A partir dos conceitos vistos e resultados obtidos anteriormente, podemos concluir que o código de Hamming (8, 4) é capaz de corrigir um único erro e detectar até dois erros. Além disso, a implementação do código de Hamming (8, 4) em um sistema de comunicação, juntamente com a modulação QPSK e o canal AWGN, mostrou uma melhoria significativa no desempenho de BER em comparação com o sistema sem codificação. Portanto, o código de Hamming (8, 4) é uma técnica eficaz para melhorar a confiabilidade da comunicação em sistemas de comunicação digital.
+
+
 = Referências: 
+
+#link("https://rwnobrega.page/apontamentos/codigos-de-bloco/")[Códigos de Bloco - R. W. Nobrega]
