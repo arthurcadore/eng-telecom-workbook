@@ -13,12 +13,14 @@
 Distribuição de Rayleigh e Ricean ",
   subtitle: "Comunicações Sem Fio",
   authors: ("Arthur Cadore Matuella Barcella",),
-  date: "14 de Outubro de 2024",
+  date: "11 de Novembro de 2024",
   doc,
 )
 
 
 = Introdução
+
+Este relatório tem como objetivo apresentar os conceitos de atenuação de pequena escala e as distribuições de Rayleigh e Ricean, que são fundamentais para o entendimento da propagação de sinais em ambientes de comunicações sem fio. A atenuação de pequena escala refere-se à variação do sinal em curtos intervalos de tempo e distância, enquanto as distribuições de Rayleigh e Ricean são utilizadas para modelar essa variação em ambientes urbanos e rurais.
 
 = Sintese 
 
