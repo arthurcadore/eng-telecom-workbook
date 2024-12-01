@@ -1,0 +1,16 @@
+TFTP2 DEFINITIONS AUTOMATIC TAGS ::=
+BEGIN
+
+
+Data ::= SEQUENCE {
+    blocknum  INTEGER,
+    body OCTET STRING (SIZE(0..512))
+}
+
+MensagemTFTP2 ::= SEQUENCE{
+
+    msg CHOICE {
+        data Data,
+        ...
+    }
+}
