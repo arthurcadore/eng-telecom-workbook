@@ -23,7 +23,7 @@ Neste relatório, será apresentado um estudo sobre o algoritmo de Huffman, incl
 
 O algoritmo de Huffman é um método de compressão de dados que utiliza a codificação de caracteres para reduzir o tamanho de um arquivo. O algoritmo foi desenvolvido por David A. Huffman em 1952, e é amplamente utilizado em sistemas de comunicação e armazenamento de dados.
 
-= Compressão Huffmann 
+= Compressão Huffman
 
 == Leitura do arquivo 
 
@@ -166,7 +166,7 @@ print("Huff Ratio:", huff.rate(list(pmf.values())))
 print("Compress Ratio:", BFR - huff.rate(list(pmf.values())))
 ```]
 
-Com base nisso, podemos determinar o codigo de huffmann para cada caractere com base em sua participação do percentual total. Além disso, podemos determinar parâmetros resultantes do codigo de huffmann, como o huff ratio e a taxa de compressão: 
+Com base nisso, podemos determinar o codigo de huffman para cada caractere com base em sua participação do percentual total. Além disso, podemos determinar parâmetros resultantes do codigo de huffman, como o huff ratio e a taxa de compressão: 
 
 Huff Ratio: 4.643275
 Compress Ratio: 2.356724
@@ -254,7 +254,7 @@ print("Huffman code:", huffDecode.codewords)
 
 Com base no codigo acima, deve-se obter as palavras código utilizadas originalmente para codificar o texto.
 
-== Decodificação do arquivo por huffmann: 
+== Decodificação do arquivo por huffman: 
 
 Tendo as palavras código e o texto codificado, é possivel decodificar o texto original. Esse processo e realizado através do código abaixo:
 
