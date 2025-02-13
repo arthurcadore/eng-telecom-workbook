@@ -120,6 +120,36 @@ Alem disso, temos que:
 - Entropia de segunda ordem: 2.5909 bits por par de símbolos
 - Entropia média por símbolo (segunda ordem): 1.2955 bits/símbolo
 
+Dessa forma, resulta-se no seguinte diagrama
+#figure(
+  figure(
+    rect(image("./pictures/4.png")),
+    numbering: none,
+    caption: []
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+Dessa forma, podemos verificar da seguinte maneira: 
+
+#sourcecode[```python
+#print the huufman codewords in a more readable way (one per line)
+print("Huffman Codewords:")
+for i, c in enumerate(huff.codewords):
+    print(f"p({i//3}, {i%3}) = {c}")
+```]
+
+- Huffman Codewords:
+- p(0, 0) = (0, 1, 0, 0)
+- p(0, 1) = (1, 1)
+- p(0, 2) = (0, 1, 0, 1, 0, 0)
+- p(1, 0) = (1, 0)
+- p(1, 1) = (0, 0)
+- p(1, 2) = (0, 1, 1, 1)
+- p(2, 0) = (0, 1, 0, 1, 1)
+- p(2, 1) = (0, 1, 1, 0)
+- p(2, 2) = (0, 1, 0, 1, 0, 1)
+
 ==== Item D
 
 - Determine um código de Huffman para a extensão de segunda ordem da fonte. Qual o comprimento médio do código obtido? 
