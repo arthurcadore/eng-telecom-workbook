@@ -53,7 +53,7 @@ print(f"Entropia da fonte: {entropy:.4f} bits/símbolo")
 - Determine um código de Huffman para a fonte. QUal o comprimento médio do código obtido? 
 
 #sourcecode[```python
-code = komm.FixedToVariableCode.from_codewords(3, [(0,), (0,1), (1,1)])
+code = komm.FixedToVariableCode.from_codewords(3, [(1,0), (0,), (1,1)])
 
 print("Unicamente decodificavel: ", code.is_uniquely_decodable())
 print("Prefixo Livre:", code.is_prefix_free())
@@ -62,13 +62,23 @@ print("Huffman Codewords: ", code.codewords)
 
 # Calculate the compress ratio
 print("Compress Ratio: ", BFR - code.rate(pmf))
- ```]
+    ```]
 
 - Unicamente decodificavel:  True
-- Prefixo Livre: False
-- Huffman Rate:  1.7
-- Huffman Codewords:  [(0,), (0, 1), (1, 1)]
-- Compress Ratio:  0.30000000000000004
+- Prefixo Livre: True
+- Huffman Rate:  1.4
+- Huffman Codewords:  [(1, 0), (0,), (1, 1)]
+- Compress Ratio:  0.6000000000000001
+
+#figure(
+  figure(
+    rect(image("./pictures/3.png")),
+    numbering: none,
+    caption: []
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
 
 ==== Item C 
 
