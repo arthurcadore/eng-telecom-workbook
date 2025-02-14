@@ -138,7 +138,7 @@ print("Huffman Codewords:")
 for i, c in enumerate(huff.codewords):
     print(f"p({i//3}, {i%3}) = {c}")
 ```]
-
+  
 - Huffman Codewords:
 - p(0, 0) = (0, 1, 0, 0)
 - p(0, 1) = (1, 1)
