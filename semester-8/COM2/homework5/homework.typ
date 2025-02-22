@@ -13,7 +13,7 @@
 com Algoritmo de Huffman",
   subtitle: "Sistemas de Comunicação II",
   authors: ("Arthur Cadore Matuella Barcella",),
-  date: "01 de Dezembro de 2024",
+  date: "03 de Fevereiro de 2024",
   doc,
 )
 
@@ -23,9 +23,154 @@ Neste relatório, será apresentado um estudo sobre o algoritmo de Huffman, incl
 
 O algoritmo de Huffman é um método de compressão de dados que utiliza a codificação de caracteres para reduzir o tamanho de um arquivo. O algoritmo foi desenvolvido por David A. Huffman em 1952, e é amplamente utilizado em sistemas de comunicação e armazenamento de dados.
 
-= Compressão Huffman
+= Desenvolvimento 
 
-== Leitura do arquivo 
+== Análise Teorica
+
+=== Fonte Discreta sem Memória
+
+Considere uma fonte discreta sem memória (DMS) com alfabeto dado por $X = {a, b, c}$ e probabilidades respectivas dadas por $p_x = [3/10, 3/10, 1/10]$
+
+==== Item A
+
+- Calcule a entropia da fonte.
+
+#sourcecode[```python 
+pmf = [3/10, 6/10, 1/10]
+BFR = math.ceil(math.log2(len(pmf)))
+
+print(f"Numero de simbolos: {BFR}")
+entropy = -sum(p * math.log2(p) for p in pmf)
+
+print(f"Entropia da fonte: {entropy:.4f} bits/símbolo")
+```]
+
+- Numero de simbolos: 2
+- Entropia da fonte: 1.2955 bits/símbolo
+
+==== Item B
+
+- Determine um código de Huffman para a fonte. QUal o comprimento médio do código obtido? 
+
+#sourcecode[```python
+code = komm.FixedToVariableCode.from_codewords(3, [(1,0), (0,), (1,1)])
+
+print("Unicamente decodificavel: ", code.is_uniquely_decodable())
+print("Prefixo Livre:", code.is_prefix_free())
+print("Huffman Rate: ", code.rate(pmf))
+print("Huffman Codewords: ", code.codewords)
+
+# Calculate the compress ratio
+print("Compress Ratio: ", BFR - code.rate(pmf))
+    ```]
+
+- Unicamente decodificavel:  True
+- Prefixo Livre: True
+- Huffman Rate:  1.4
+- Huffman Codewords:  [(1, 0), (0,), (1, 1)]
+- Compress Ratio:  0.6000000000000001
+
+#figure(
+  figure(
+    rect(image("./pictures/3.png")),
+    numbering: none,
+    caption: []
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+
+==== Item C 
+
+- Calcule a extensão e segunda ordem da fonte. 
+
+#sourcecode[```python
+# Generate the PMF of the second order
+pmf_2nd = [p1 * p2 
+          for p1, p2 in itertools.product(pmf, repeat=2)]
+
+# Print the PMF of the second order
+print("Tabela de PMF de segunda ordem:")
+for i, p in enumerate(pmf_2nd):
+    print(f"p({i//3}, {i%3}) = {p:.4f}")
+print("\n")
+
+# Calculate the entropy of the second order
+entropy_2nd = -sum(p * math.log2(p) for p in pmf_2nd if p > 0)
+print(f"Entropia de segunda ordem: {entropy_2nd:.4f} bits por par de símbolos")
+
+# Calculate the average entropy per symbol
+entropy_per_symbol = entropy_2nd / 2
+print(f"Entropia média por símbolo (segunda ordem): {entropy_per_symbol:.4f} bits/símbolo")
+```]
+
+- Tabela de PMF de segunda ordem:
+- p(0, 0) = 0.0900 
+- p(0, 1) = 0.1800
+- p(0, 2) = 0.0300
+- p(1, 0) = 0.1800
+- p(1, 1) = 0.3600
+- p(1, 2) = 0.0600
+- p(2, 0) = 0.0300
+- p(2, 1) = 0.0600
+- p(2, 2) = 0.0100
+
+Alem disso, temos que:
+
+- Entropia de segunda ordem: 2.5909 bits por par de símbolos
+- Entropia média por símbolo (segunda ordem): 1.2955 bits/símbolo
+
+Dessa forma, resulta-se no seguinte diagrama
+#figure(
+  figure(
+    rect(image("./pictures/4.png")),
+    numbering: none,
+    caption: []
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+Dessa forma, podemos verificar da seguinte maneira: 
+
+#sourcecode[```python
+#print the huufman codewords in a more readable way (one per line)
+print("Huffman Codewords:")
+for i, c in enumerate(huff.codewords):
+    print(f"p({i//3}, {i%3}) = {c}")
+```]
+  
+- Huffman Codewords:
+- p(0, 0) = (0, 1, 0, 0)
+- p(0, 1) = (1, 1)
+- p(0, 2) = (0, 1, 0, 1, 0, 0)
+- p(1, 0) = (1, 0)
+- p(1, 1) = (0, 0)
+- p(1, 2) = (0, 1, 1, 1)
+- p(2, 0) = (0, 1, 0, 1, 1)
+- p(2, 1) = (0, 1, 1, 0)
+- p(2, 2) = (0, 1, 0, 1, 0, 1)
+
+==== Item D
+
+- Determine um código de Huffman para a extensão de segunda ordem da fonte. Qual o comprimento médio do código obtido? 
+
+#sourcecode[```python
+huff = komm.HuffmanCode(pmf_2nd)
+
+print("Huffman Ratio: ", huff.rate(pmf_2nd))
+print("Huffman Code: ", huff.codewords)
+
+# Calculate the compress ratio
+print("Compress Ratio: ", BFR_2nd - huff.rate(pmf_2nd))
+```]
+
+- Huffman Ratio:  2.6699999999999995
+- Huffman Code:  [(0, 1, 0, 0), (1, 1), (0, 1, 0, 1, 0, 0), (1, 0), (0, 0), (0, 1, 1, 1), (0, 1, 0, 1, 1), (0, 1, 1, 0), (0, 1, 0, 1, 0, 1)]
+- Compress Ratio:  1.3300000000000005
+
+== Compressão Huffman Em Arquivo
+
+=== Leitura do Arquivo 
 
 Inicialmente, deve-se coletar todos os caracteres contidos no arquivo de texto. Para isso, é necessário realizar a leitura do arquivo e contar a quantidade de ocorrências de cada caractere. Isso é executado através do código abaixo:
 
@@ -66,7 +211,7 @@ Desta forma, o vetor `letters` contém todos os caracteres contidos no arquivo d
 
 Também podemos notar que com base na impressão de "letters count", o arquivo contem 91 caracteres distintos, necessitando de 91 símbolos diferentes para representar cada caractere, portanto, a codificação mais simples precisará de 7 bits (2^7 = 128) para representar todos os caracteres.
 
-== Análise dos caracteres contidos
+=== Análise dos caracteres contidos
 
 Na sequencia, é possível analisar a quantidade de ocorrências de cada caractere contido no arquivo de texto. Para isso, foi aplicado um plot de barras, onde o eixo x representa os caracteres e o eixo y representa a quantidade de ocorrências de cada caractere. O código abaixo realiza essa operação:
 
@@ -100,7 +245,7 @@ Note que o primeiro caractere mais frequente é o espaço, seguido pelas letras 
 
 Nota: Após o caracter "u", aparentemente outro caracter espaço está sendo representado, porém, esse representa o caracter de quebra de linha ("/n"). 
 
-== Calculo do percentual individual 
+=== Calculo do percentual individual 
 
 Com base na quantidade de ocorrências de cada caractere, é possível calcular o percentual de cada caractere em relação ao total de caracteres contidos no arquivo de texto. 
 
@@ -147,7 +292,7 @@ Dessa forma é possível visualizar a porcentagem de cada caractere em relação
 )
 
 
-== Calculando a PMF (Probability Mass Function)
+=== Calculando a PMF (Probability Mass Function)
 
 Com base na lista de caracteres e seus respectivos percentuais, é possível calcular a Função de Massa de Probabilidade (PMF) de cada caractere. Para isso, é necessário criar um dicionário contendo o caractere e seu respectivo percentual. O código abaixo realiza essa operação:
 
@@ -173,7 +318,7 @@ Compress Ratio: 2.356724
 
 Dessa forma, podemos ver que o código aplicado foi capaz de reduzir a quandidate de bits necessária para representar os caracteres do arquivo em 2.35 bits (média). 
 
-== Indexação dos caracteres 
+=== Indexação dos caracteres 
 
 Em seguida, é necessário criar uma indexação do caractere e sua respectiva letra, de forma que cada caractere seja representado por um índice. O código abaixo realiza essa operação: 
 
@@ -184,7 +329,7 @@ index = {i: letter for i, letter in enumerate(letters)}for i in range(len(letter
 print ("Index:", index)
 ```]
 
-== Aplicando codificação sobre o texto
+=== Aplicando codificação sobre o texto
 
 Com base nesta indexação, é possível codificar o texto original, de forma que cada caractere seja representado por um índice. O código abaixo realiza essa operação. De forma que inicialmente o texto é "codificado" pelo index, transformando cada caractere em uma letra, e posteriormente é aplicado o código de huffman sobre o texto codificado.
 
@@ -201,7 +346,7 @@ huff_encoded = huff.encode(encoded_text)
 print("Huffman encoded text:", huff_encoded)
 ```]
 
-== Imprime o arquivo codificado
+=== Imprime o arquivo codificado
 
 Por fim, é possível imprimir o arquivo codificado, de forma que cada caractere seja representado por um índice. O código abaixo realiza essa operação:
 
@@ -235,9 +380,9 @@ Por fim, é possível analisar o arquivo codificado, de forma que cada caractere
 [...]
 ```]
 
-= Decodificando o arquivo
+== Decodificando o arquivo
 
-== Leitura do arquivo codificado
+=== Leitura do arquivo codificado
 
 Para decodificar o arquivo, é necessário realizar a leitura do arquivo codificado e aplicar o algoritmo de Huffman para decodificar o texto. O código abaixo realiza essa operação:
 
@@ -254,7 +399,7 @@ print("Huffman code:", huffDecode.codewords)
 
 Com base no codigo acima, deve-se obter as palavras código utilizadas originalmente para codificar o texto.
 
-== Decodificação do arquivo por huffman: 
+=== Decodificação do arquivo por huffman: 
 
 Tendo as palavras código e o texto codificado, é possivel decodificar o texto original. Esse processo e realizado através do código abaixo:
 
@@ -280,7 +425,7 @@ O texto decodificado é apresentado abaixo, note que ainda não é possivel ler 
 70 61  1 56
 ```]
 
-== Aplicando a indexação inversa:
+=== Aplicando a indexação inversa:
 
 Dessa forma, para resolver o problema de leitura do texto decodificado, é necessário aplicar a indexação inversa, de forma que cada índice seja representado por um caractere. Abaixo está o index utilizado no processo de codificação (gerado automaticamente durante a codificação).
 
@@ -309,7 +454,7 @@ decoded_text = [index[i] for i in decoded_text]
 print("Decoded text:", decoded_text[:100])
 ```]
 
-== Exportando decodificado em um arquivo: 
+=== Exportando decodificado em um arquivo: 
 
 Por fim, é possível exportar o texto decodificado para um arquivo de texto. O código abaixo realiza essa operação:
 
