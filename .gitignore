@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,java,c++,cmake,matlab,jupyternotebooks,c,gradle
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,java,c++,cmake,matlab,jupyternotebooks,c,gradle
 
+*.ods#
+
 venv/*
 ### C ###
 # Prerequisites
