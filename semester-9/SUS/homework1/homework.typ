@@ -9,7 +9,7 @@
 #show: doc => report(
   title: "Desenvolvimento na Era do 
 Meio Ambiente: Exercícios 1",
-  subtitle: "Economia para Engenharia",
+  subtitle: "Engenharia e Sustentabilidade",
   authors: ("Arthur Cadore Matuella Barcella",),
   date: "01 de Abril de 2025",
   doc,
