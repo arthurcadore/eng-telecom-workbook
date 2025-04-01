@@ -31,9 +31,9 @@ Monte o circuito elétrico equivalente e calcule a resistência térmica total d
 
 A representação da janela pode ser feita com um cicuito elétrico equivalente, onde temos: 
 
-1ª Camada: Vidro (Placa 1)
-2ª Camada: Ar (entre as placas)
-3ª Camada: Vidro (Placa 2)
+- 1ª Camada: Vidro (Placa 1)
+- 2ª Camada: Ar (entre as placas)
+- 3ª Camada: Vidro (Placa 2)
 
 Cada camada tem uma resistência térmica, que pode ser calculada pela equação:
 
@@ -189,7 +189,83 @@ Onde:
 
 - $A_b = A_c $
 
-- $A_e = 3 A_d$
+- $A_e = 3 A_d$k
+
+Inicialmente devemos determinar as áreas de cada sessão, para isso, consideremos que: 
+
+$ A_a = 1 m^2 $
+
+$ A = B . L -> 1 = 0,025 . L -> L = 40 m $
+
+Dessa forma, sabendo a Largura e a Altura, podemos calcular as áreas de cada seção:
+
+$ A_b + A_c = 40 . (0,075) -> A_b = A_c = 3 m^2 $ 
+
+$
+  A_b = A_c = 1,5 m^2 
+$
+
+Calculando para $A_d$ e $A_e$:
+
+$
+  A_d + A_e = 40 . (0,05) -> A_d + A_e = 2 m^2
+$
+
+$
+  A_d = 0,5 m^2 
+$
+
+$ 
+  A_e = 1,5 m^2
+$
+
+Agora, podemos calcular a resistência térmica de cada seção:
+
+$
+  R_A = (0,025)/(175 . 1) = 0,00014285
+$
+
+$
+  R_B = (0,075)/(30 . 1,5) = 0,0016666
+$
+
+$
+  R_C = (0,075)/(40 . 1,5) = 0,00125
+$
+
+$
+  R_D = (0,05)/(80 . 0,5) = 0,00125
+$
+
+$
+  R_E = (0,05)/(100 . 1,5) = 0,0003333
+$
+
+Agora, podemos calcular a resistência térmica total:
+
+$ R_"total" = R_A + (R_B . R_C)/(R_B + R_C) + (R_D . R_E)/(R_D + R_E) $
+
+$
+  R_"total" = 0,0142857 + (0,0016666 . 0,00125)/(0,0016666 + 0,00125) + (0,00125 . 0,0003333)/(0,00125 + 0,0003333)
+$
+
+$
+  R_"total" = 0,0011690
+$
+
+Agora podemos calcular o fluxo de calor através da parede composta:
+
+$ Q = (Delta T) / R_"total" $
+
+Onde $Delta T$ é a diferença de temperatura entre as faces esquerda e direita da parede composta:
+
+$ Delta T = 370 - 66 = 304 °C $
+
+Substituindo os valores, temos:
+
+$ Q = (304) / (0,0011690) $
+
+$ Q = 260030,92589W ->  260,03 "kW" $
 
 == Questão 5:
 
