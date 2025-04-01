@@ -8,7 +8,7 @@
 
 #show: doc => report(
   title: "Conceitos Gerais Sobre Energia 
-e Transferência de Calor: Exercicios 1",
+e Transferência de Calor: Exercicios 2",
   subtitle: "Fenomenos de Transporte",
   authors: ("Arthur Cadore Matuella Barcella",),
   date: "26 de Março de 2025",
