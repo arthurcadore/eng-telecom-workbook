@@ -83,8 +83,43 @@ Consultando a Tabela H da apostila, encontramos que o coeficiente de convecção
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+Substituindo os valores na fórmula:
 
+$
+  700 = 29 . (T_s - 30)
+$
+
+Dessa forma, temos que: 
+
+$
+  T_s - 30 = 700/29 = 24.1379 -> T_s = 30 + 24.1379 -> T_s = 54.1379
+$
+
+Assim, a temperatura da placa nas condições de equilíbrio é de aproximadamente 54,14°C.
 
 == Questão 3:
 
 Uma parede de concreto em um prédio comercial tem uma área superficial de 30 m² e uma espessura de 0,30 m. No inverno, o ar ambiente (interno) é mantido a 25°C enquanto o ar externo encontra-se a 0°C. Qual é a perda de calor através da parede? A condutividade do concreto é de 0,72 W/m.K
+
+Para resolver essa questão, utilizaremos a seguinte fórmula:
+
+$
+  Q = (k . A . (T_s - T_infinity)) / L
+$
+
+Onde:
+
+- Q = taxa de transferência de calor (W)
+- k = condutividade do material (W/m.K)
+- A = área superficial da parede (m²)
+- T_s = temperatura do ar interno (°C) -> 25°C
+- T_infinity = temperatura do ar externo (°C) -> 0°C
+- L = espessura da parede (m) -> 0,30 m
+
+Substituindo os valores na fórmula:
+
+$
+  Q = ((0,72) . 30 . (25 - 0)) / (0,30) -> Q = ((0,72) . 30 . 25) / (0,30) -> 540 / (0,30) -> Q = 1800W 
+$  
+
+Assim, a perda de calor através da parede é de 1800 W.
