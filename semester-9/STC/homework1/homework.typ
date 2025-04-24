@@ -276,6 +276,18 @@ Adiquirindo a seginte performace:
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+== Cascateamento Resultante: 
+
+#figure(
+  figure(
+    rect(image("./pictures/cascateamento.png")),
+    numbering: none,
+    caption: [Mapa de torres de telecomunicações - Fonte[1] ]
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+
 == Especificação dos equipamentos:
 
 === Radio APC-5A Giga: 
