@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1557px" height="843px" style="background-color:#ffffff;">
+
+<!-- Connection Lines -->
+    <g>
+        <path d="M531 101L388 95" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M354 100L323.9035451100159 127.79899223309664" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M316 135L320.2344483907716 123.77193485831631L323.9035451100159 127.79899223309664L327.5726418292602 131.82604960787697Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M539 70L388 90" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M1084 568L1145 570" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M1209 578L1143.564301105272 662.5601842932217" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M1137 671L1139.2640002136256 659.2155058219412L1143.564301105272 662.5601842932217L1147.8646019969185 665.9048627645022Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M1215 565L1231.2117150292581 470.54146930121584" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M1233 460L1236.5828619132917 471.4526460047573L1231.2117150292581 470.54146930121584L1225.8405681452243 469.6302925976744Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M1260 165L1260 298" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M1258 322L1238.934861695047 424.48444730952775" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M1237 435L1233.5769199837516 423.4985860346494L1238.934861695047 424.48444730952775L1244.292803406342 425.4703085844061Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M829 336L1008 339" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M1114 353L1209.6097770966117 428.37242896707136" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M1218 435L1206.2328609870024 432.6474610632788L1209.6097770966117 428.37242896707136L1212.986693206221 424.0973968708639Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M305 171L333 227" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M371 232L493.32002366980373 226.5085703014379" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M504 226L493.5791531812434 231.95029004167105L493.32002366980373 226.5085703014379L493.060894158364 221.06685056120477Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M748 153L657 151" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M515 151L356 152" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M497 486L665 389" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M673 365L547.717353624314 244.40020210550662" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M540 237L551.487944928472 240.46801403117055L547.717353624314 244.40020210550662L543.9467623201562 248.3323901798427Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M790 503L644 557" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M609 557L511.8192932823719 515.2310775932172" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M502 511L513.9751349949017 510.227897769799L511.8192932823719 515.2310775932172L509.6634515698421 520.2342574166353Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M530 629L616 570" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M1231 89L1150 88" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M1057 105L1057.8329566665022 141.3092266561398" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M1058 152L1052.3857355730288 141.3943394857253L1057.8329566665022 141.3092266561398L1063.2801777599757 141.2241138265543Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M815 172L915 263" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M932 263L1034.548820380342 183.54966420523493" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M1043 177L1037.8860409785518 187.8557552996993L1034.548820380342 183.54966420523493L1031.2115997821322 179.2435731107705Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M912 276L829 323" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M634 32L759 61" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M809 85L799 136" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M756 80L648 95" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M756 71L642 65" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M545 24L237 41" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M151 63L127 269" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M549 225L636 226" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M719 219L765.8819689651132 178.95831231561732" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M774 172L769.4274061754506 183.09465572767778L765.8819689651132 178.95831231561732L762.3365317547756 174.82196890355686Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M517 237L481 281" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M474 294L470.18074252250517 331.37331729745324" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M469 342L464.7661772418554 330.7716989329366L470.18074252250517 331.37331729745324L475.595307803155 331.9749356619699Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M468 367L467 420" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M468 433L471.9182492715066 475.3627845031483" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M473 486L466.4983172641041 475.9139640293248L471.9182492715066 475.3627845031483L477.3381812789091 474.8116049769718Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M439 361L185 412" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M126 412L126 304.6920782902604" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M126 294L131.44788599687456 304.6920782902604L126 304.6920782902604L120.55211400312544 304.6920782902604Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M414 486L182 436" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M1061 177L1096 329" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M1161 444L1023 437" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M828 443L546.5617039561737 487.33538361560306" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M536 489L545.713539544678 481.9539266599066L546.5617039561737 487.33538361560306L547.4098683676693 492.71684057129954Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M945 565L869 564" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M839 570L839 619.3079217097396" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M839 630L833.5521140031254 619.3079217097396L839 619.3079217097396L844.4478859968746 619.3079217097396Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M1067 686L773 695" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M640 696L336.69148908547453 693.112246604572" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M326 693L336.74868158712326 687.6646608225308L336.69148908547453 693.112246604572L336.6342965838258 698.559832386613Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M283 680L278 605" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M292 592L440.4813969436858 515.8699829590445" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M450 511L442.96277719992315 520.719953459872L440.4813969436858 515.8699829590445L438.00001668744846 511.0200124582169Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M892 491L960 491" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M1062 484L1166.532080603534 462.1778892704057" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M1177 460L1167.6417706129864 467.5115606061615L1166.532080603534 462.1778892704057L1165.4223905940814 456.84421793464986Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+    <g>
+        <path d="M176 63L263.4377108738406 128.59627115774634" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <path d="M272 135L260.1748480570509 132.95897537345397L263.4377108738406 128.59627115774634L266.70057369063034 124.23356694203875Z" stroke="none" fill="#000000" stroke-width="1.5" stroke-dasharray="none" />
+    </g>
+
+<!-- Linking Phrases -->
+    <g>
+        <g>
+            <text x="335px" y="97px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Constituem</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="1146px" y="575px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Tem</tspan><tspan fill="none">t</tspan><tspan>como</tspan><tspan fill="none">t</tspan><tspan>objetivo</tspan><tspan fill="none">t</tspan><tspan>promover</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="1179px" y="308px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Grupo</tspan><tspan fill="none">t</tspan><tspan>de</tspan><tspan fill="none">t</tspan><tspan>pessoas</tspan><tspan fill="none">t</tspan><tspan>que</tspan><tspan fill="none">t</tspan><tspan>se</tspan><tspan fill="none">t</tspan><tspan>reuniram</tspan>
+            </text>
+            <text x="1214px" y="319px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan fill="none">t</tspan><tspan>para</tspan><tspan fill="none">t</tspan><tspan>debater</tspan><tspan fill="none">t</tspan><tspan>sobre</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="1009px" y="339px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Introduzir</tspan><tspan fill="none">t</tspan><tspan>a</tspan><tspan fill="none">t</tspan><tspan>ideia</tspan><tspan fill="none">t</tspan><tspan>de</tspan><tspan fill="none">t</tspan><tspan>desenvolvimento</tspan><tspan fill="none">t</tspan>
+            </text>
+            <text x="1048px" y="350px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>econ&#244;mico</tspan><tspan fill="none">t</tspan><tspan>sustent&#225;vel</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="301px" y="237px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Regulamentam</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="516px" y="153px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Organizam</tspan><tspan fill="none">t</tspan><tspan>debates</tspan><tspan fill="none">t</tspan><tspan>para</tspan><tspan fill="none">t</tspan><tspan>criar</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="612px" y="375px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Leva</tspan><tspan fill="none">t</tspan><tspan>dinheiro</tspan><tspan fill="none">t</tspan><tspan>ao</tspan><tspan fill="none">t</tspan><tspan>estado</tspan><tspan fill="none">t</tspan><tspan>atrav&#233;s</tspan>
+            </text>
+            <text x="620px" y="386px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan fill="none">t</tspan><tspan>de</tspan><tspan fill="none">t</tspan><tspan>arrecada&#231;&#227;o</tspan><tspan fill="none">t</tspan><tspan>de</tspan><tspan fill="none">t</tspan><tspan>impostos</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="595px" y="567px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>S&#227;o</tspan><tspan fill="none">t</tspan><tspan>tipos</tspan><tspan fill="none">t</tspan><tspan>de</tspan><tspan fill="none">t</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="965px" y="80px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Grupo</tspan><tspan fill="none">t</tspan><tspan>de</tspan><tspan fill="none">t</tspan><tspan>pessoas</tspan><tspan fill="none">t</tspan><tspan>que</tspan><tspan fill="none">t</tspan><tspan>acreditam</tspan><tspan fill="none">t</tspan><tspan>que</tspan><tspan fill="none">t</tspan><tspan>a</tspan><tspan fill="none">t</tspan>
+            </text>
+            <text x="979px" y="91px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>quantidade</tspan><tspan fill="none">t</tspan><tspan>de</tspan><tspan fill="none">t</tspan><tspan>recursos</tspan><tspan fill="none">t</tspan><tspan>naturais</tspan><tspan fill="none">t</tspan><tspan>&#233;</tspan>
+            </text>
+            <text x="973px" y="102px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan fill="none">t</tspan><tspan>t&#227;o</tspan><tspan fill="none">t</tspan><tspan>abundante</tspan><tspan fill="none">t</tspan><tspan>que</tspan><tspan fill="none">t</tspan><tspan>nunca</tspan><tspan fill="none">t</tspan><tspan>acabar&#225;.</tspan><tspan fill="none">t</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="883px" y="273px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Organizada</tspan><tspan fill="none">t</tspan><tspan>pelas</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="757px" y="71px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Durante</tspan><tspan fill="none">t</tspan><tspan>a</tspan><tspan fill="none">t</tspan><tspan>confer&#234;ncia</tspan><tspan fill="none">t</tspan>
+            </text>
+            <text x="773px" y="82px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>cria-se</tspan><tspan fill="none">t</tspan><tspan>o</tspan><tspan fill="none">t</tspan><tspan>tratado</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="70px" y="38px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Tem</tspan><tspan fill="none">t</tspan><tspan>como</tspan><tspan fill="none">t</tspan><tspan>objetivo</tspan><tspan fill="none">t</tspan><tspan>regulamentar</tspan><tspan fill="none">t</tspan><tspan>a</tspan><tspan fill="none">t</tspan>
+            </text>
+            <text x="100px" y="49px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>polui&#231;&#227;o</tspan><tspan fill="none">t</tspan><tspan>para</tspan><tspan fill="none">t</tspan><tspan>evitar</tspan><tspan fill="none">t</tspan><tspan>o</tspan><tspan fill="none">t</tspan>
+            </text>
+            <text x="95px" y="60px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>aumento</tspan><tspan fill="none">t</tspan><tspan>da</tspan><tspan fill="none">t</tspan><tspan>temperatura</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="637px" y="229px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Conjunto</tspan><tspan fill="none">t</tspan><tspan>de</tspan><tspan fill="none">t</tspan><tspan>estados</tspan><tspan fill="none">t</tspan><tspan>constituem</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="400px" y="291px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Cria</tspan><tspan fill="none">t</tspan><tspan>leis</tspan><tspan fill="none">t</tspan><tspan>para</tspan><tspan fill="none">t</tspan><tspan>controlar</tspan><tspan fill="none">t</tspan><tspan>as</tspan><tspan fill="none">t</tspan><tspan>a&#231;&#245;es</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="422px" y="430px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Contribuem</tspan><tspan fill="none">t</tspan><tspan>para</tspan><tspan fill="none">t</tspan><tspan>o</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="45px" y="422px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Contribuem</tspan><tspan fill="none">t</tspan><tspan>para</tspan><tspan fill="none">t</tspan><tspan>o</tspan><tspan fill="none">t</tspan><tspan>crescimento</tspan><tspan fill="none">t</tspan><tspan>da</tspan>
+            </text>
+            <text x="45px" y="433px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan fill="none">t</tspan><tspan>polui&#231;&#227;o</tspan><tspan fill="none">t</tspan><tspan>conforme</tspan><tspan fill="none">t</tspan><tspan>se</tspan><tspan fill="none">t</tspan><tspan>desenvolvem</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="801px" y="429px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Tem</tspan><tspan fill="none">t</tspan><tspan>como</tspan><tspan fill="none">t</tspan><tspan>objetivo</tspan><tspan fill="none">t</tspan><tspan>promover</tspan><tspan fill="none">t</tspan><tspan>o</tspan><tspan fill="none">t</tspan><tspan>crescimento</tspan><tspan fill="none">t</tspan>
+            </text>
+            <text x="785px" y="440px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>econ&#244;mico</tspan><tspan fill="none">t</tspan><tspan>afetando</tspan><tspan fill="none">t</tspan><tspan>minimamente</tspan><tspan fill="none">t</tspan><tspan>o</tspan><tspan fill="none">t</tspan><tspan>meio</tspan><tspan fill="none">t</tspan><tspan>ambiente</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="810px" y="567px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>&#233;</tspan><tspan fill="none">t</tspan><tspan>um</tspan><tspan fill="none">t</tspan><tspan>tipo</tspan><tspan fill="none">t</tspan><tspan>de</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="641px" y="700px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Tem</tspan><tspan fill="none">t</tspan><tspan>como</tspan><tspan fill="none">t</tspan><tspan>objetivo</tspan><tspan fill="none">t</tspan><tspan>defender</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="210px" y="602px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Prov&#234;</tspan><tspan fill="none">t</tspan><tspan>recursos</tspan><tspan fill="none">t</tspan><tspan>naturais</tspan><tspan fill="none">t</tspan><tspan>para</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <g>
+            <text x="961px" y="494px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Contribui</tspan><tspan fill="none">t</tspan><tspan>com</tspan><tspan fill="none">t</tspan><tspan>solu&#231;&#245;es</tspan><tspan fill="none">t</tspan><tspan>para</tspan>
+            </text>
+        </g>
+    </g>
+
+<!-- Concepts -->
+    <g>
+        <rect x="1161px" y="435px" rx="8" ry="8" width="147px" height="25px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="1161px" y="435px" rx="8" ry="8" width="147px" height="25px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="1168px" y="451px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Desenvolvimento</tspan><tspan fill="none">t</tspan><tspan>Sustent&#225;vel</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="504px" y="212px" rx="8" ry="8" width="45px" height="25px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="504px" y="212px" rx="8" ry="8" width="45px" height="25px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="511px" y="228px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Estado</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="439px" y="342px" rx="8" ry="8" width="58px" height="25px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="439px" y="342px" rx="8" ry="8" width="58px" height="25px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="446px" y="358px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Empresas</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="748px" y="136px" rx="8" ry="8" width="94px" height="36px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="748px" y="136px" rx="8" ry="8" width="94px" height="36px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="755px" y="152px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Organiza&#231;&#227;o</tspan><tspan fill="none">t</tspan><tspan>das</tspan><tspan fill="none">t</tspan>
+            </text>
+            <text x="762px" y="163px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Na&#231;&#245;es</tspan><tspan fill="none">t</tspan><tspan>Unidas</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="235px" y="135px" rx="8" ry="8" width="121px" height="36px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="235px" y="135px" rx="8" ry="8" width="121px" height="36px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="242px" y="151px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Protocolos</tspan><tspan fill="none">t</tspan><tspan>Ambientais</tspan><tspan fill="none">t</tspan>
+            </text>
+            <text x="263px" y="162px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Internacionais</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="539px" y="50px" rx="8" ry="8" width="103px" height="25px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="539px" y="50px" rx="8" ry="8" width="103px" height="25px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="546px" y="66px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Protocolo</tspan><tspan fill="none">t</tspan><tspan>de</tspan><tspan fill="none">t</tspan><tspan>Kyoto</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="531px" y="90px" rx="8" ry="8" width="117px" height="25px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="531px" y="90px" rx="8" ry="8" width="117px" height="25px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="538px" y="106px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Protocolo</tspan><tspan fill="none">t</tspan><tspan>de</tspan><tspan fill="none">t</tspan><tspan>Montreal</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="545px" y="9px" rx="8" ry="8" width="89px" height="25px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="545px" y="9px" rx="8" ry="8" width="89px" height="25px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="552px" y="25px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Acordo</tspan><tspan fill="none">t</tspan><tspan>de</tspan><tspan fill="none">t</tspan><tspan>Paris</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="991px" y="152px" rx="8" ry="8" width="134px" height="25px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="991px" y="152px" rx="8" ry="8" width="134px" height="25px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="998px" y="168px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Confer&#234;ncia</tspan><tspan fill="none">t</tspan><tspan>de</tspan><tspan fill="none">t</tspan><tspan>Estocolmo</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="785px" y="323px" rx="8" ry="8" width="44px" height="25px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="785px" y="323px" rx="8" ry="8" width="44px" height="25px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="792px" y="339px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Rio</tspan><tspan fill="none">t</tspan><tspan>92</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="440px" y="629px" rx="8" ry="8" width="141px" height="25px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="440px" y="629px" rx="8" ry="8" width="141px" height="25px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="447px" y="645px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan fill="none">t</tspan><tspan>Desenvolvimento</tspan><tspan fill="none">t</tspan><tspan>Mim&#233;tico</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="752px" y="478px" rx="8" ry="8" width="140px" height="25px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="752px" y="478px" rx="8" ry="8" width="140px" height="25px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="759px" y="494px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Desenvolvimento</tspan><tspan fill="none">t</tspan><tspan>End&#243;geno</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="1215px" y="140px" rx="8" ry="8" width="90px" height="25px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="1215px" y="140px" rx="8" ry="8" width="90px" height="25px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="1222px" y="156px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan fill="none">t</tspan><tspan>Clube</tspan><tspan fill="none">t</tspan><tspan>de</tspan><tspan fill="none">t</tspan><tspan>Roma</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="1231px" y="76px" rx="8" ry="8" width="83px" height="25px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="1231px" y="76px" rx="8" ry="8" width="83px" height="25px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="1238px" y="92px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Cornucopianos</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="945px" y="553px" rx="8" ry="8" width="139px" height="25px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="945px" y="553px" rx="8" ry="8" width="139px" height="25px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="952px" y="569px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Movimentos</tspan><tspan fill="none">t</tspan><tspan>ambientalistas</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="99px" y="269px" rx="8" ry="8" width="53px" height="25px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="99px" y="269px" rx="8" ry="8" width="53px" height="25px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="106px" y="285px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Polui&#231;&#227;o</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="1067px" y="671px" rx="8" ry="8" width="120px" height="25px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="1067px" y="671px" rx="8" ry="8" width="120px" height="25px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="1074px" y="687px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Preserva&#231;&#227;o</tspan><tspan fill="none">t</tspan><tspan>Ambiental</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="411px" y="486px" rx="8" ry="8" width="125px" height="25px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="411px" y="486px" rx="8" ry="8" width="125px" height="25px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="418px" y="502px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Crescimento</tspan><tspan fill="none">t</tspan><tspan>Econ&#244;mico</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="767px" y="630px" rx="8" ry="8" width="143px" height="25px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="767px" y="630px" rx="8" ry="8" width="143px" height="25px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="774px" y="646px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Movimentos</tspan><tspan fill="none">t</tspan><tspan>contraculturais</tspan>
+            </text>
+        </g>
+    </g>
+    <g>
+        <rect x="241px" y="680px" rx="8" ry="8" width="85px" height="25px" stroke="none" fill="#edf4f6" stroke-width="0" />
+        <rect x="241px" y="680px" rx="8" ry="8" width="85px" height="25px" stroke="#000000" fill="none" stroke-width="1" stroke-dasharray="none" />
+        <g>
+            <text x="248px" y="696px" stroke="none" fill="#000000" stroke-width="1" stroke-dasharray="none" alignment-baseline="auto" text-anchor="start" text-decoration="normal" font-weight="bold" font-style="normal" font-size="8pt" font-family="Verdana">
+                <tspan>Meio</tspan><tspan fill="none">t</tspan><tspan>Ambiente</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
