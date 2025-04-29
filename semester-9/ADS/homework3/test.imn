@@ -29,8 +29,8 @@
                 }
             },
             "canvas"              : "c0",
-            "iconcoords"          : "120 288",
-            "labelcoords"         : "120 319"
+            "iconcoords"          : "216 216",
+            "labelcoords"         : "216 247"
         },
         "n1" : {
             "type"                : "pc",
@@ -53,8 +53,8 @@
                 }
             },
             "canvas"              : "c0",
-            "iconcoords"          : "432 48",
-            "labelcoords"         : "432 79"
+            "iconcoords"          : "408 96",
+            "labelcoords"         : "408 127"
         },
         "n2" : {
             "type"                : "pc",
@@ -77,8 +77,8 @@
                 }
             },
             "canvas"              : "c0",
-            "iconcoords"          : "432 552",
-            "labelcoords"         : "432 583"
+            "iconcoords"          : "408 360",
+            "labelcoords"         : "408 391"
         },
         "n3" : {
             "type"                : "pc",
@@ -101,15 +101,15 @@
                 }
             },
             "canvas"              : "c0",
-            "iconcoords"          : "792 288",
-            "labelcoords"         : "792 319"
+            "iconcoords"          : "624 240",
+            "labelcoords"         : "624 271"
         },
         "n4" : {
             "type"        : "lanswitch",
             "name"        : "switch1",
             "canvas"      : "c0",
-            "iconcoords"  : "432 288",
-            "labelcoords" : "432 311",
+            "iconcoords"  : "408 216",
+            "labelcoords" : "408 239",
             "ifaces"      : {
                 "ifc0" : {
                     "type" : "phys",
@@ -136,11 +136,11 @@
     },
     "links"    : {
         "l0" : {
-            "peers"        : "n1 n4",
-            "peers_ifaces" : "ifc1 ifc0"
+            "peers"        : "n4 n1",
+            "peers_ifaces" : "ifc0 ifc1"
         },
         "l1" : {
-            "peers"        : "n0 n4",
+            "peers"        : "n4 n0",
             "peers_ifaces" : "ifc1 ifc1"
         },
         "l2" : {
