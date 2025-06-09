@@ -286,3 +286,95 @@ Calculamos também o tempo médio de espera no sistema, com:
 $
   E[R] = E[R_q] + 1 / mu_p = 0.678 + 1 / 35 = 0.678 + 0.02857 = 0.70657 "min" = 42.4 "s"
 $
+
+= Questão: 
+Quando um estação base em uma rede celular possui *9 canais* que serão disputados por terminais móveis que chegam na *taxa média de 5 estações por minuto*. O tempo de *estadia na célula é de 1 minuto na média*. 
+
+== Como poderia ser modelado este sistema? 
+
+=== Tipo de Fila
+
+O sistema descrito pode ser modelado como um sistema de filas *M/M/k/k*, também conhecido como *Erlang-B*, apropriado para sistemas onde:
+- As *chegadas são Poisson* (aleatórias e independentes),
+- Os *tempos de serviço são exponenciais*,
+- Há *k servidores* (canais),
+- *Não há fila*: chamadas são *bloqueadas* se todos os canais estiverem ocupados.
+
+== Qual a probabilidade de bloqueio do sistema?
+
+=== Parâmetros
+
+- *Número de canais (servidores):* $k = 9$
+- *Taxa de chegada:* $lambda = 5$ chamadas por minuto
+- *Taxa de serviço:* $mu = 1$ chamada por minuto (já que o tempo médio de serviço é de 1 minuto)
+
+#sourcecode[```python 
+import math
+
+# Parâmetros
+lambda_chegada = 5  # taxa de chegada (chegadas por minuto)
+k = 9        # número de canais
+mu = 1       # taxa de serviço (serviços por minuto)
+
+
+```]
+
+
+=== Cálculo da Probabilidade de Bloqueio
+ Carga Oferecida (em Erlangs):\
+ \
+$
+A = lambda/mu = 5/1 = 5 "Erlangs"
+$
+
+#sourcecode[```python
+# Calcular a intensidade de tráfego (A) em Erlangs
+A = lambda_chegada / mu
+```]
+
+Fórmula de Erlang-B
+
+$
+  B(k, A) = (A^k / k!) / (sum_(i= 0)^k [A^i / i!])
+$
+
+#sourcecode[```python
+# Função Erlang-B
+def erlang_b(k, A):
+    numerator = (A**k) / math.factorial(k)
+    denominator = sum((A**i) / math.factorial(i) for i in range(k + 1))
+    return (numerator / denominator)
+    ```]
+
+#sourcecode[```python
+# Calcular a probabilidade de bloqueio
+prob_bloqueio = erlang_b(k, A)
+```]
+
+#sourcecode[```python
+# --- Exibição dos Resultados ---
+print("--- Análise do Sistema de Telefonia Celular (M/M/k/k) ---")
+print(f"Taxa de Chegada (λ): {lambda_chegada} chamadas/minuto")
+print(f"Taxa de Serviço (μ): {mu} chamadas/minuto")
+print(f"Número de Canais (k): {k}")
+print(f"Intensidade de Tráfego (A): {A:.2f} Erlangs")
+print("-" * 20)
+print(f"Probabilidade de Bloqueio: {prob_bloqueio:.6f}")
+print(f"Probabilidade de Bloqueio  em porcentagem: {prob_bloqueio:.2%}")
+```]
+
+=== Resultados
+Exibição dos parâmetros e resultados:
+
+
+
+#sourcecode(numbering: none)[```testbox
+--- Análise do Sistema de Telefonia Celular (M/M/k/k) ---
+Taxa de Chegada (λ): 5 chamadas/minuto
+Taxa de Serviço (μ): 1 chamadas/minuto
+Número de Canais (k): 9
+Intensidade de Tráfego (A): 5.00 Erlangs
+--------------------
+Probabilidade de Bloqueio: 0.037458
+Probabilidade de Bloqueio  em porcentagem: 3.75%
+```]
