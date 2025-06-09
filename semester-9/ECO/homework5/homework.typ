@@ -43,7 +43,21 @@ $
   P = 100000 . (0,0085 (1 + 0,0085)^{60}) / ((1 + 0,0085)^{60} - 1) -> P = 100000 . (0,002183)
 $
 
-Dessa forma, o valor da prestação mensal será aproximadamente $R\$2183,00.$
+Script para resolver a equação:
+
+#sourcecode[```python
+# Dados do problema
+PV1 = 100000
+i1 = 0.0085
+n1 = 60
+
+# Cálculo da prestação mensal usando a fórmula do sistema PRICE
+P1 = PV1 * (i1 * pow(1 + i1, n1)) / (pow(1 + i1, n1) - 1)
+
+print(f"Prestação mensal (PRICE): R$ {P1:.2f}")
+```]
+
+Dessa forma, o valor da prestação mensal será aproximadamente $R\$2134,00.$
 
 == Questão 2 
 
@@ -65,10 +79,24 @@ Onde:
 Substituindo os valores na fórmula:
 
 $
-  P_V = 1000 . (1 - (1 + 0,01)^{-6}) / (0,01) -> P_V = 1000 . (5,852) = 5.852,00
+  P_V = 1000 . (1 - (1 + 0,01)^{-6}) / (0,01) -> P_V = 1000 . (5,852) = 5.795,00
 $
 
-Dessa forma, o valor do empréstimo financiado será aproximadamente $R\$5.852,00.$
+Script para resolver a equação:
+
+#sourcecode[```python
+# Dados do problema
+P2 = 1000
+i2 = 0.01
+n2 = 6
+
+# Cálculo do valor presente usando a fórmula do valor presente de uma anuidade
+PV2 = P2 * (1 - pow(1 + i2, -n2)) / i2
+
+print(f"Valor presente (empréstimo): R$ {PV2:.2f}")
+```]
+
+Dessa forma, o valor do empréstimo financiado será aproximadamente $R\$5.795,00.$
 
 == Questão 3
 
@@ -96,10 +124,25 @@ $
 Resolvendo temos: 
 
 $
-  P = (1000000 . 0,00229167) / ((1 + 0,00229167)^(420) - 1) = 2292 / (1,60844) = 1424,73
+  P = (1000000 . 0,00229167) / ((1 + 0,00229167)^(420) - 1) = 2292 / (1,60844) = 1418,68
 $
 
-Dessa forma, o valor que deve ser poupado mensalmente será aproximadamente $R\$1.424,73.$
+Script para resolver a equação:
+
+#sourcecode[```python
+# Dados do problema
+VF3 = 1000000
+i3 = 0.0275 / 12
+n3 = 35 * 12
+
+# Cálculo do valor da poupança mensal usando a fórmula do valor futuro de uma anuidade
+P3 = (VF3 * i3) / (pow(1 + i3, n3) - 1)
+
+print(f"Poupança mensal necessária: R$ {P3:.2f}")
+```]
+
+
+Dessa forma, o valor que deve ser poupado mensalmente será aproximadamente $R\$1.418,68.$
 
 == Questão 4
 
@@ -167,10 +210,10 @@ Onde:
 Substituindo os valores na fórmula e isolando $P$:
 
 $
-  P = (30000 . 0,0058333) / ((1 + 0,0058333)^(24) - 1) = (174,99) / (0,148882) = 1174,73
+  P = (30000 . 0,0058333) / ((1 + 0,0058333)^(24) - 1) = (174,99) / (0,148882) = 1168,18
 $
 
-Dessa forma, o valor que deve ser depositado mensalmente será aproximadamente $R\$1.174,73.$
+Dessa forma, o valor que deve ser depositado mensalmente será aproximadamente $R\$1168,18.$
 
 == Questão 6
 
@@ -202,7 +245,7 @@ Qual a opção mais vantajosa? Ou seria ainda mais vantajoso comprar à vista, s
 - Total pago = entrada + parcelas = $R\$25.000 + R\$28.160,16 = R\$53.160,16$
 
 
-Portanto, a melhor opção é comprar à vista, pois o valor total pago seria de R\$50.000,00, enquanto a opção 1 resultaria em R\$59.900,96 e a opção 2 em R\$53.160,16.
+*Portanto, a melhor opção é comprar à vista*, pois o valor total pago seria de R\$50.000,00, enquanto a opção 1 resultaria em R\$59.900,96 e a opção 2 em R\$53.160,16.
 
 == Questão 7
 O financiamento de um imóvel no valor de \$200.000 será feito em 120 parcelas mensais, com taxa de 1% a.m. Compare os valores da primeira prestação, da amortização e dos juros pelo sistema SAC e pelo sistema PRICE. 
