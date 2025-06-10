@@ -1,91 +1,214 @@
-#import "@preview/typslides:1.2.6": *
-
-// Project configuration
-#show: typslides.with(
-  ratio: "16-9",
-  theme: "bluey",
-  font: "Fira Sans",
-  link-style: "color",
+#import "@preview/slydst:0.1.4": *
+#import "@preview/codelst:2.0.2": sourcecode
+#show heading: set block(below: 1.5em)
+#set text(size: 12pt)
+#set text(lang: "pt")
+#set page(
+  footer: "Engenharia de Telecomunicações - IFSC-SJ",
 )
 
-// The front slide is the first slide of your presentation
-#front-slide(
-  title: "This is a sample presentation",
-  subtitle: [Using _typslides_],
-  authors: "Antonio Manjavacas",
-  info: [#link("https://github.com/manjavacas/typslides")],
+#show: slides.with(
+  title: "Circuitos Osciladores",
+  subtitle: "Circuitos de Rádio-Frequência",
+  date: "10 de Junho de 2025",
+  authors: ("Arthur Cadore M. Barcella",),
+  layout: "medium",
+  ratio: 16/9,
+  title-color: none,
 )
 
-// Custom outline
-#table-of-contents()
+== Sumário
+ 
+#outline()
 
-// Title slides create new sections
-#title-slide[
-  This is a _Title slide_
-]
+= Cristais Piezoelétricos
 
-// A simple slide
-#slide[
-  - This is a simple `slide` with no title.
-  - #stress("Bold and coloured") text by using `#stress(text)`.
-  - Sample link: #link("typst.app").
-    - Link styling using `link-style`: `"color"`, `"underline"`, `"both"`
-  - Font selection using `font: "Fira Sans"`.
+== Constituição do Cristal
 
-  #framed[This text has been written using `#framed(text)`. The background color of the box is customisable.]
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+          #lorem(10)
+        ],
+        [
+#figure(
+  figure(
+    rect(image("./pictures/cristal_oscilador.png", width: 55%)),
+    numbering: none,
+    caption: figure.caption([Cristal Piezoelétrico fechado], position: top)
+    ),
+    )
+        ],
+    ),
+)
+ 
+== Modelo Elétrico
 
-  #framed(title: "Frame with title")[This text has been written using `#framed(title:"Frame with title")[text]`.]
-]
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+          #align(left)[
+          Um oscilador de cristal pode ser modelado como um circuito RLC série em paralelo com um capacitor, conforme apresentado a direita. 
 
-// Focus slide
-#focus-slide[
-  This is an auto-resized _focus slide_.
-]
+          A equação de impedância do cristal é dada por:
 
-// Blank slide
-#blank-slide[
-  - This is a `#blank-slide`.
+          $
+            Z(s) = (1/(s . C_1) + s . L_1 + R_1) || (1 / (s . C_0))
+          $
 
-  - Available #stress[themes]#footnote[Use them as *color* functions! e.g., `#reddy("your text")`]:
+          Onde: 
 
-  #framed(back-color: white)[
-    #bluey("bluey"), #reddy("reddy"), #greeny("greeny"), #yelly("yelly"), #purply("purply"), #dusky("dusky"), darky.
-  ]
+          - $C_1$ é a capacitância do cristal em série
+          - $L_1$ é a indutância do cristal em série
+          - $R_1$ é a resistência do cristal em série
+          - $C_0$ é a capacitância de derivação do cristal
+          - $s = sigma + j omega$: variável complexa de Laplace
+          
+          ]
+        ],
+        [
+          #figure(
+            figure(
+              rect(image("./pictures/modelo_eletrico.png", width: 85%)),
+              numbering: none,
+              caption: figure.caption([Modelo Elétrico Correspondente do Cristal], position: top)
+            ),
+          )
+        ],
+    ),
+)
 
-  // #show: typslides.with(
-  //   ratio: "16-9",
-  //   theme: "bluey",
-  //   ...
-  // )
 
-  - Or just use *your own theme color*:
-    - `theme: rgb("30500B")`
-]
 
-// Slide with title
-#slide(title: "Outlined slide", outlined: true)[
-  - Outline slides with `outlined: true`.
+== Modelo Elétrico 
 
-  #grayed([This is a `#grayed` text. Useful for equations.])
-  #grayed($ P_t = alpha - 1 / (sqrt(x) + f(y)) $)
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+          #align(left)[
+Dessa forma, adicionar uma capacitância em paralelo com o cristal, resulta em um aumento do valor de $C_0$, assim fazendo com que a frequência de ressonância (paralela) do circuito diminue. Em contra partida, adicionar uma indutância em paralelo com o cristal, faz com que a frequência de ressonância (paralela) do circuito aumente.
 
-]
+Assim, os fabricantes de cristais especificam a frequência de ressonância junto a um capacitor de carga $C_L$ que deve ser utilizado para que o cristal opere na frequência desejada, sem esse capacitor, o cristal irá operar em uma frequência maior da desejada.
+          ]
+        ],
+        [
+          #figure(
+           figure(
+             rect(image("./pictures/cristal_oscilador2.png", width: 65%)),
+             numbering: none,
+             caption: figure.caption([Oscilador de Cristal HC-49S 9AC (JGHC) ], position: top)
+           ),
+          )
+          #figure(
+            figure(
+              table(
+               columns: (1fr,  1fr),
+              align: (left, center),
+              table.header[Especificação][Valor],
+              [Frequency Range], [3.2-64 MHz], 
+              [Shunt Capac. (C0)], [7 pF],
+              [Load Capacitance], [20 pF],
+              ),
+              numbering: none,
+              caption: figure.caption([Especificações Técnicas], position: top)
+            ),
+          )
+        ],
+    ),
+)
 
-// Columns
-#slide(title: "Columns")[
+== Efeitos de temperatura 
 
-  #cols(columns: (2fr, 1fr, 2fr), gutter: 2em)[
-    #grayed[Columns can be included using `#cols[...][...]`]
-  ][
-    #grayed[And this is]
-  ][
-    #grayed[an example.]
-  ]
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+          #align(left)[
+Dessa forma, adicionar uma capacitância em paralelo com o cristal, resulta em um aumento do valor de $C_0$, assim fazendo com que a frequência de ressonância (paralela) do circuito diminue. Em contra partida, adicionar uma indutância em paralelo com o cristal, faz com que a frequência de ressonância (paralela) do circuito aumente.
 
-  - Custom spacing: `#cols(columns: (2fr, 1fr, 2fr), gutter: 2em)[...]`
+Assim, os fabricantes de cristais especificam a frequência de ressonância junto a um capacitor de carga $C_L$ que deve ser utilizado para que o cristal opere na frequência desejada, sem esse capacitor, o cristal irá operar em uma frequência maior da desejada.
+          ]
+        ],
+        [
+          #figure(
+           figure(
+             rect(image("./pictures/cristal_oscilador2.png", width: 65%)),
+             numbering: none,
+             caption: figure.caption([Oscilador de Cristal HC-49S 9AC (JGHC)], position: top)
+           ),
+          )
+          #figure(
+            figure(
+              table(
+               columns: (1fr,  1fr),
+              align: (left, center),
+              table.header[Especificação][Valor],
+              [Frequency Tolerance], [± 10 ppm], 
+              [Temperature Range], [\~40 \~+85℃],
+              [Aging (at 25℃ )], [± 5 ppm / year],
+              ),
+              numbering: none,
+              caption: figure.caption([Especificações Técnicas], position: top)
+            ),
+          )
+        ],
+    ),
+)
 
-    - Add a #stress[bibliography slide]...
+== Resposta em Frequência
 
-    1. `#let bib = bibliography("you_bibliography_file.bib")`
-    2. `#bibliography-slide(bib)`
-]
+
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+          #lorem(10)
+        ],
+        [
+#figure(
+  figure(
+    rect(image("./pictures/resposta_frequencia.png", width: 95%)),
+    numbering: none,
+    caption: figure.caption([Elaborada pelo Autor], position: top)
+  ),
+)
+        ],
+    ),
+)
+
+= VCO (Voltage-Controlled Oscillator)
+
+== Diagrama Elétrico
+
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+          #lorem(10)
+        ],
+        [
+#figure(
+  figure(
+    rect(image("./pictures/vco.png", width: 95%)),
+    numbering: none,
+    caption: figure.caption([Elaborada pelo Autor], position: top)
+  ),
+)
+        ],
+    ),
+)
