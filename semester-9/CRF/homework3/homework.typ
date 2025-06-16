@@ -408,3 +408,52 @@ Com base nos dois modos de operação do cristal, podemos observar a ressonânci
 
 
 = Circuito Oscilador 
+
+== Circuito Oscilador em Modo Paralelo: 
+
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+          #align(left)[
+
+            Com base no modelo elétrico do cristal visto anteriormente, podemos construir um circuito oscilador, neste exemplo, em modo paralelo.
+
+            Além dos componentes do cristal oscilador, o circuito precisa de um amplificador (neste caso, um conjunto de transistores) para fornecer ganho e permitir a oscilação do circuito.
+
+            O arranjo de transistores é montado de maneira a inverter a fase do sinal, permitindo que o circuito oscile, conforme apresentado a direita: 
+          ]
+        ],
+        [
+          #figure(
+            figure(
+              rect(image("./pictures/oscilador_paralelo.png", width: 100%)),
+              numbering: none,
+              caption: figure.caption([Circuito Oscilador em Modo Paralelo], position: top)
+            ),
+          )
+        ],
+    ),
+)
+
+== Resposta no Domínio do Tempo
+
+#figure(
+            figure(
+              rect(image("./pictures/oscilador_paralelo3.png", width: 100%)),
+              numbering: none,
+              caption: figure.caption([Circuito Oscilador em Modo Paralelo], position: top)
+            ),
+)
+
+== Resposta no Domínio da Frequência
+
+#figure(
+            figure(
+              rect(image("./pictures/oscilador_paralelo6.png", width: 100%)),
+              numbering: none,
+              caption: figure.caption([Resposta no Domínio da Frequência (Gráfico de Bode)], position: top)
+            ),
+)
