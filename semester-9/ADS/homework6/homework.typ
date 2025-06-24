@@ -78,6 +78,10 @@ Inicializa a simulação, agenda os eventos iniciais e executa os plots.
 = Resultados Gráficos
 
 == Colisões ao longo do tempo
+#sourcecode[```python
+plot_results(sim)  # Função responsável por gerar e salvar o gráfico de colisões
+```
+]
 #figure(
   figure(
     rect(image("./pictures/colisoes.png")),
@@ -88,6 +92,10 @@ Inicializa a simulação, agenda os eventos iniciais e executa os plots.
 )
 
 == Vazão por estação
+#sourcecode[```python
+plot_results(sim)  # Função responsável por gerar e salvar o gráfico de vazão
+```
+]
 #figure(
   figure(
     rect(image("./pictures/vazao.png")),
@@ -98,6 +106,10 @@ Inicializa a simulação, agenda os eventos iniciais e executa os plots.
 )
 
 == Backoffs ao longo do tempo
+#sourcecode[```python
+plot_results(sim)  # Função responsável por gerar e salvar o gráfico de backoffs
+```
+]
 #figure(
   figure(
     rect(image("./pictures/backoffs.png")),
@@ -107,12 +119,15 @@ Inicializa a simulação, agenda os eventos iniciais e executa os plots.
   caption: figure.caption([Backoffs ao longo do tempo], position: top)
 )
 
-+// Explicação sobre a ausência de backoffs na estação A
-+\text[justify]{
-+\strong{Observação:} No gráfico acima, observa-se que a estação A não apresenta backoffs ao longo do tempo. Isso ocorre porque, devido à natureza do tráfego gerado (processo Poisson com intervalos aleatórios), a estação A frequentemente fica com a fila vazia ou transmite em momentos em que não há sobreposição com a estação B, que gera pacotes em intervalos fixos. Assim, as colisões e, consequentemente, os backoffs, tendem a ocorrer apenas para a estação B, que está sempre transmitindo. Para forçar colisões em ambas, seria necessário ajustar os parâmetros para garantir concorrência mais frequente entre as transmissões das duas estações.
-+}
+\text[justify]{
+\strong{Observação:} No gráfico acima, observa-se que a estação A não apresenta backoffs ao longo do tempo. Isso ocorre porque, devido à natureza do tráfego gerado (processo Poisson com intervalos aleatórios), a estação A frequentemente fica com a fila vazia ou transmite em momentos em que não há sobreposição com a estação B, que gera pacotes em intervalos fixos. Assim, as colisões e, consequentemente, os backoffs, tendem a ocorrer apenas para a estação B, que está sempre transmitindo. Para forçar colisões em ambas, seria necessário ajustar os parâmetros para garantir concorrência mais frequente entre as transmissões das duas estações.
+}
 
 == Geração Exponencial
+#sourcecode[```python
+plot_exponential_generation(lambd=2.0, n_samples=10000)
+```
+]
 #figure(
   figure(
     rect(image("./pictures/exponencial.png")),
@@ -120,6 +135,27 @@ Inicializa a simulação, agenda os eventos iniciais e executa os plots.
     caption: []
   ),
   caption: figure.caption([Histograma e QQ-plot da geração exponencial], position: top)
+)
+
+== Geração Uniforme
+#sourcecode[```python
+plot_uniform_generation(n_samples=10000)
+```
+]
+$
+U_(n+1) = (a * U_n + c) mod m
+$
+
+$
+X_n = U_n/m
+$
+#figure(
+  figure(
+    rect(image("./pictures/uniforme.png")),
+    numbering: none,
+    caption: []
+  ),
+  caption: figure.caption([Histograma e QQ-plot da geração uniforme], position: top)
 )
 
 = Conclusão

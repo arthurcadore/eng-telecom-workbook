@@ -59,6 +59,20 @@ class Simulator:
             event.processing_event(self)
 
 # %%
+class UniformGenerator:
+    """
+    Gerador de números pseudoaleatórios uniformes em (0, 1) usando o método congruencial linear.
+    """
+    def __init__(self, seed=123456789):
+        self.modulus = 2**31 - 1
+        self.a = 16807
+        self.c = 0
+        self.state = seed
+
+    def sample(self):
+        self.state = (self.a * self.state + self.c) % self.modulus
+        return self.state / self.modulus
+
 class ExponentialGenerator:
     """
     Gerador de números aleatórios com distribuição exponencial.
@@ -69,11 +83,12 @@ class ExponentialGenerator:
     A distribuição exponencial é fundamental em simulações de eventos discretos, pois modela o tempo entre chegadas de eventos em processos Poisson (como chegadas de pacotes em redes).
     Ao encapsular a geração em uma classe, o código fica mais modular, testável e aderente a boas práticas de engenharia de software.
     """
-    def __init__(self, lambd):
+    def __init__(self, lambd, uniform_gen=None):
         self.lambd = lambd
+        self.uniform_gen = uniform_gen or UniformGenerator()
 
     def sample(self):
-        u = random.uniform(0, 1)
+        u = self.uniform_gen.sample()
         return -1 / self.lambd * np.log(u)
 
 class PacketArrivalA(Event):
@@ -279,6 +294,37 @@ def plot_exponential_generation(lambd=1.0, n_samples=10000):
     plt.savefig("pictures/exponencial.png")
     plt.show()
 
+def plot_uniform_generation(n_samples=10000):
+    """
+    Gera amostras uniformes, plota e salva:
+    - Histograma das amostras
+    - QQ-plot para comparação com a distribuição uniforme teórica
+    """
+    gen = UniformGenerator()
+    samples = [gen.sample() for _ in range(n_samples)]
+    samples = np.array(samples)
+
+    plt.figure(figsize=(16, 6))
+    # Histograma
+    plt.subplot(1, 2, 1)
+    plt.hist(samples, bins=50, density=True, alpha=0.7, color='green', label='Amostras')
+    x = np.linspace(0, 1, 200)
+    plt.plot(x, np.ones_like(x), 'r-', lw=2, label='PDF teórica')
+    plt.title('Histograma da Geração Uniforme (0,1)')
+    plt.xlabel('Valor')
+    plt.ylabel('Densidade')
+    plt.legend()
+    plt.grid(True)
+
+    # QQ-plot
+    plt.subplot(1, 2, 2)
+    from scipy.stats import probplot
+    probplot(samples, dist="uniform", sparams=(0, 1), plot=plt)
+    plt.title('QQ-plot (Uniforme)')
+    plt.tight_layout()
+    plt.savefig("pictures/uniforme.png")
+    plt.show()
+
 # %%
 def main():
     """
@@ -302,5 +348,7 @@ if __name__ == "__main__":
 
 # Exemplo de uso para provar a geração exponencial
 plot_exponential_generation(lambd=2.0, n_samples=10000)
+# Exemplo de uso para provar a geração uniforme
+plot_uniform_generation(n_samples=10000)
 
 
