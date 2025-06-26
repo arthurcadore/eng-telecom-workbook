@@ -208,14 +208,14 @@ m_agua = 0.5  # massa da água (kg)
 c_agua = 4186  # calor específico da água (J/kg°C)
 T0 = 20  # Temperatura inicial (°C)
 T_amb = 20  # Temperatura ambiente (°C)
-k = 0.008  # coeficiente de troca térmica (1/s), ajuste conforme experimento
 
 tempo_total = 300  # tempo total de simulação (s)
 dt = 5  # passo de tempo (s)
 tempos = np.arange(0, tempo_total + dt, dt)
+k = 0.001
 
 # Fórmulas utilizadas:
-# Lei de Newton para aquecimento:
+# Lei de Newton para aquecimento:c
 #   \[
 #   \frac{dT}{dt} = \frac{P}{m c} - k (T - T_{amb})
 #   \]
@@ -241,32 +241,36 @@ dt_fict = 5
 n_fict = 36
 
 tempos_fict = np.arange(0, n_fict * dt_fict, dt_fict)
-# Gera dados teóricos simulando um aquecimento exponencial (ajuste conforme desejado)
 T0_fict = 20
-Tmax_fict = 80
-k_fict = 0.025
 
-temperaturas_teorico = T0_fict + (Tmax_fict - T0_fict) * (1 - np.exp(-k_fict * tempos_fict))
+# Fator multiplicador para ajuste da inclinação da reta teórica
+k_linear = 0.8 # ajuste conforme necessário
 
-# Vetor de dados fictícios de temperatura medida (exemplo com ruído)
-np.random.seed(42)
-temperatura_medida = temperaturas_teorico + np.random.normal(0, 0.5, size=n_fict)
+# Modelo linear ajustável: ΔT = k_linear * Q/(m*c) acumulativo
+# Q acumulado até cada tempo: Q = P * t
+# T = T0 + k_linear * Q/(m*c)
+temperaturas_teorico = T0_fict + k_linear * (P * tempos_fict) / (m_agua * c_agua)
+
+# Vetores de dados fictícios de temperatura medida
+temperatura_medida1 = np.array([15, 18, 20, 26, 27, 28, 32, 34, 35, 37, 40, 42, 44, 45, 48, 49, 51, 53, 55, 56, 58, 60, 61, 64, 65, 66, 69, 71, 73, 74, 75, 78, 80, 82, 83, 85])
+temperatura_medida2 = temperatura_medida1 - np.random.normal(1, 0.7, n_fict)  # um pouco abaixo
+temperatura_medida3 = temperatura_medida1 + np.random.normal(1, 0.7, n_fict)  # um pouco acima
 
 # Incerteza propagada: erro de 0.5°C em cada medição
-incerteza_medida = np.full_like(temperatura_medida, 0.5)
+incerteza_medida = np.full_like(temperatura_medida1, 0.5)
 
 # Plot dos dados teóricos e medidos com barras de erro
 plt.figure(figsize=(16, 9))
-plt.plot(tempos_fict, temperaturas_teorico, label='Teórico (modelo exponencial)', color='red', marker='o')
-plt.errorbar(tempos_fict, temperatura_medida, yerr=incerteza_medida, fmt='x', color='blue', label='Medido (fictício) ±0.5°C')
-plt.title('Temperatura da água (teórico vs. medido, 0.5L, 1000W)')
+plt.plot(tempos_fict, temperaturas_teorico, label=f'Teórico (modelo linear, k={k_linear})', color='red', marker='o', linewidth=2)
+plt.errorbar(tempos_fict, temperatura_medida1, yerr=incerteza_medida, fmt='x', color='blue', label='Medida 1 ±0.5°C')
+plt.errorbar(tempos_fict, temperatura_medida2, yerr=incerteza_medida, fmt='x', color='green', label='Medida 2 ±0.5°C')
+plt.errorbar(tempos_fict, temperatura_medida3, yerr=incerteza_medida, fmt='x', color='orange', label='Medida 3 ±0.5°C')
+plt.title('Temperatura da água (teórico vs. 3 medidas, 0.5L, 1000W)')
 plt.xlabel('Tempo (s)')
 plt.ylabel('Temperatura (°C)')
 plt.xlim(0, 180)
-plt.ylim(T0_fict-2, Tmax_fict+5)
+plt.ylim(T0_fict-2, max(temperatura_medida3)+5)
 plt.legend()
 plt.grid(True)
-# Exibe valor da incerteza no gráfico
-plt.text(5, Tmax_fict, 'Incerteza propagada: ±0.5°C', fontsize=12, color='blue')
 plt.tight_layout()
 plt.show()
