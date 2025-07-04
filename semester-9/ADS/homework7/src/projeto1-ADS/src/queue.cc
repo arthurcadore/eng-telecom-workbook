@@ -1,15 +1,3 @@
-/*
- * queue.cc
- *
- *  Created on: Dec 14, 2022
- *      Author: omnet1
- */
-
-
-// Baseado nas Anotações de
-// Paolo Giaccone
-//http://www.telematica.polito.it/sites/default/files/public/courses/computer-network-design/labs.pdf
-/*** queue.cc ***/
 #include <string.h>
 #include <omnetpp.h>
 

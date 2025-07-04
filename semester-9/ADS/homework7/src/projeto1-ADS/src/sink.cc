@@ -1,13 +1,3 @@
-/*
- * sink.cc
- *
- *  Created on: Dec 14, 2022
- *      Author: omnet1
- */
-
-// Baseado nas Anotações de
-// Paolo Giaccone
-//http://www.telematica.polito.it/sites/default/files/public/courses/computer-network-design/labs.pdf
 #include <string.h>
 #include <omnetpp.h>
 
