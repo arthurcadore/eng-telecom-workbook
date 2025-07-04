@@ -70,7 +70,7 @@ tma_3 = 0.10
 anos_concessao = 18
 
 fluxo_custos = np.zeros(anos_concessao + 1)
-fluxo_custos[0] = -60000
+fluxo_custos[0] = -60000000
 for ano in range(1, anos_concessao + 1):
     fluxo_custos[ano] = -(100000 * (1.03)**(ano-1))
 vpl_custos = calcular_vpl_manual(tma_3, fluxo_custos)
