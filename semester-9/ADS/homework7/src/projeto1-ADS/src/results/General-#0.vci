@@ -1,0 +1,25 @@
+                                                                
+version 3
+run General-0-20250704-17:11:29-566669
+attr configname General
+attr datetime 20250704-17:11:29
+attr datetimef 20250704-171129
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network MM1
+attr processid 566669
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config network MM1
+
+vector 0 MM1.sink1 Delay ETV
+vector 1 MM1.sink2 Delay ETV
+0	483 114 23 166 0 0 12 0 0 0 0
+1	597 104 27 157 0 0 11 0 0 0 0

@@ -90,3 +90,4 @@ cada requisição, para o cenário de maior tempo médio observado no item (a);
 = Resolução: 
 
 == Implementação do modelo
+

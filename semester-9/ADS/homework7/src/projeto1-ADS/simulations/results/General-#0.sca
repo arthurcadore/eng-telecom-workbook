@@ -1,0 +1,56 @@
+version 3
+run General-0-20250704-17:11:06-566537
+attr configname General
+attr datetime 20250704-17:11:06
+attr datetimef 20250704-171106
+attr experiment General
+attr inifile simulations/omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network src.MM1
+attr processid 566537
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config network src.MM1
+config sim-time-limit 100s
+config *.gen0.interArrivalTime exponential(2.0s)
+config *.gen1.interArrivalTime exponential(2.2s)
+config *.gen2.interArrivalTime exponential(2.1s)
+config *.queue0.serviceTime exponential(0.9s)
+config *.queue1.serviceTime exponential(0.8s)
+config *.queue2.serviceTime exponential(0.85s)
+config *.splitter.prob 0.6
+
+par MM1.gen0 typename "\"src.Generator\""
+par MM1.gen0 interArrivalTime 1.59175s
+attr unit s
+par MM1.gen1 typename "\"src.Generator\""
+par MM1.gen1 interArrivalTime 1.97683s
+attr unit s
+par MM1.gen2 typename "\"src.Generator\""
+par MM1.gen2 interArrivalTime 2.63745s
+attr unit s
+par MM1.queue0 typename "\"src.Queue\""
+par MM1.queue0 serviceTime 1.67364s
+attr unit s
+par MM1.queue1 typename "\"src.Queue\""
+par MM1.queue1 serviceTime 0.738579s
+attr unit s
+par MM1.queue2 typename "\"src.Queue\""
+par MM1.queue2 serviceTime 1.65881s
+attr unit s
+par MM1.splitter typename "\"src.Splitter\""
+par MM1.splitter prob 0.6
+par MM1.sink1 typename "\"src.Sink\""
+scalar MM1.sink1 "Ave delay" 2.3902890845793
+scalar MM1.sink1 "Number of packets" 82
+par MM1.sink2 typename "\"src.Sink\""
+scalar MM1.sink2 "Ave delay" 7.0253071278904
+scalar MM1.sink2 "Number of packets" 58
+par MM1 typename "\"src.MM1\""
+
