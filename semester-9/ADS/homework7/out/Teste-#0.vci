@@ -1,0 +1,52 @@
+file 16232 1751667211                                           
+version 3
+run Teste-0-20250704-19:13:31-590542
+attr configname Teste
+attr datetime 20250704-19:13:31
+attr datetimef 20250704-191331
+attr experiment Teste
+attr inifile simulations/omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network src.MM1
+attr processid 590542
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config network src.MM1
+config sim-time-limit 100s
+config **.gen0.interArrivalTime 0.7s
+config **.gen1.interArrivalTime 1.3s
+config **.gen2.interArrivalTime 0.7s
+config **.queue0.serviceTime 0.1s
+config **.queue1.serviceTime 0.3s
+config **.queue2.serviceTime 0.5s
+config **.splitter.prob 0.6
+config **.vector-recording true
+config **.queue*.queueLength.vector-recording true
+config network src.MM1
+config sim-time-limit 100s
+config *.gen0.interArrivalTime exponential(2.0s)
+config *.gen1.interArrivalTime exponential(2.2s)
+config *.gen2.interArrivalTime exponential(2.1s)
+config *.queue0.serviceTime exponential(0.9s)
+config *.queue1.serviceTime exponential(0.8s)
+config *.queue2.serviceTime exponential(0.85s)
+config *.splitter.prob 0.6
+config **.queue*.queueLength.vector-recording true
+
+vector 0 MM1.queue0 queueLength ETV
+vector 1 MM1.queue1 queueLength ETV
+vector 2 MM1.queue2 queueLength ETV
+vector 3 MM1.sink1 Delay ETV
+vector 4 MM1.sink2 Delay ETV
+0	1370 1868 0 1842 0 99.5 143 0 0 0 0
+1	3238 2389 0 1835 0 99.1 183 0 1 29 29
+2	5627 5315 0 1845 0 99.6 402 0 10 1860 10068
+3	10942 2313 9 1837 1.1 99.1 153 0.3 0.7 58.5 23.63
+4	13255 2976 11 1846 1.2 99.6 197 0.5 4.5 550.5 1697.23
+

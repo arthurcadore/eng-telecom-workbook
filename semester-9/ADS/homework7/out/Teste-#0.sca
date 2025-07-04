@@ -1,0 +1,68 @@
+version 3
+run Teste-0-20250704-19:13:31-590542
+attr configname Teste
+attr datetime 20250704-19:13:31
+attr datetimef 20250704-191331
+attr experiment Teste
+attr inifile simulations/omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network src.MM1
+attr processid 590542
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config network src.MM1
+config sim-time-limit 100s
+config **.gen0.interArrivalTime 0.7s
+config **.gen1.interArrivalTime 1.3s
+config **.gen2.interArrivalTime 0.7s
+config **.queue0.serviceTime 0.1s
+config **.queue1.serviceTime 0.3s
+config **.queue2.serviceTime 0.5s
+config **.splitter.prob 0.6
+config **.vector-recording true
+config **.queue*.queueLength.vector-recording true
+config network src.MM1
+config sim-time-limit 100s
+config *.gen0.interArrivalTime exponential(2.0s)
+config *.gen1.interArrivalTime exponential(2.2s)
+config *.gen2.interArrivalTime exponential(2.1s)
+config *.queue0.serviceTime exponential(0.9s)
+config *.queue1.serviceTime exponential(0.8s)
+config *.queue2.serviceTime exponential(0.85s)
+config *.splitter.prob 0.6
+config **.queue*.queueLength.vector-recording true
+
+par MM1.gen0 typename "\"src.Generator\""
+par MM1.gen0 interArrivalTime 0.7s
+attr unit s
+par MM1.gen1 typename "\"src.Generator\""
+par MM1.gen1 interArrivalTime 1.3s
+attr unit s
+par MM1.gen2 typename "\"src.Generator\""
+par MM1.gen2 interArrivalTime 0.7s
+attr unit s
+par MM1.queue0 typename "\"src.Queue\""
+par MM1.queue0 serviceTime 0.1s
+attr unit s
+par MM1.queue1 typename "\"src.Queue\""
+par MM1.queue1 serviceTime 0.3s
+attr unit s
+par MM1.queue2 typename "\"src.Queue\""
+par MM1.queue2 serviceTime 0.5s
+attr unit s
+par MM1.splitter typename "\"src.Splitter\""
+par MM1.splitter prob 0.6
+par MM1.sink1 typename "\"src.Sink\""
+scalar MM1.sink1 "Ave delay" 0.38235294117647
+scalar MM1.sink1 "Number of packets" 153
+par MM1.sink2 typename "\"src.Sink\""
+scalar MM1.sink2 "Ave delay" 2.7944162436548
+scalar MM1.sink2 "Number of packets" 197
+par MM1 typename "\"src.MM1\""
+
