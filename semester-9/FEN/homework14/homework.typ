@@ -20,7 +20,7 @@
 )
 
 #show: doc => report(
-  title: "Exercicios 13: Equação de Bernoulli - 
+  title: "Exercicios 14: Equação de Bernoulli - 
   Perda de Carga no Escoamento",
   subtitle: "Fenomenos de Transporte",
   authors: ("Arthur Cadore Matuella Barcella",),
