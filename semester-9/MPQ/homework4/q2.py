@@ -33,6 +33,8 @@ print(f"Coeficiente angular (n) = {a:.4f}")
 print(f"Coeficiente linear (ln(a)) = {b:.4f}")
 print(f"Constante a = e^b = {A:.4f}")
 
+print(f"a_mmq = {a_mmq:.4f}, b_mmq = {b_mmq:.4f}")
+
 # Estimativa dos valores de y usando a equação ajustada
 df["y_lin_est"] = a * df["x_lin"] + b
 df["y_est"] = np.exp(df["y_lin_est"])
