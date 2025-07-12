@@ -2,10 +2,23 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from math import sqrt
+import os
 from itertools import combinations
+import scienceplots
+
+# Estilo visual
+plt.style.use('science')
+plt.rcParams["figure.figsize"] = (16, 9)
+plt.rc('font', size=16)
+plt.rc('axes', titlesize=22)
+plt.rc('axes', labelsize=22)
+plt.rc('xtick', labelsize=16)
+plt.rc('ytick', labelsize=16)
+plt.rc('legend', fontsize=16)
+plt.rc('figure', titlesize=22)
 
 # === INSIRA AQUI OS VALORES MEDIDOS (em ohms) ===
-resistores_1k = np.array([1002, 998, 1001, 1003, 997])  # Exemplo, substitua pelos valores reais
+resistores_1k = np.array([1002, 998, 1001, 1003, 997, 1001, 996])  # Exemplo, substitua pelos valores reais
 resistores_1M = np.array([1005000, 999000, 1001000, 1002000, 999500])  # Exemplo
 
 # Erro relativo de 0,01%
@@ -30,13 +43,11 @@ def analise_estatistica(resistores, nome):
     print(f"Erro médio: {erro_medio:.4f} Ω")
     return media, desvio_padrao, erro_medio
 
-media_1k, sigma_1k, erro_medio_1k = analise_estatistica(resistores_1k, '1kΩ')
-media_1M, sigma_1M, erro_medio_1M = analise_estatistica(resistores_1M, '1MΩ')
+media_1k, sigma_1k, erro_medio_1k = analise_estatistica(resistores_1k, '1k$\\Omega$')
 
 # --- DataFrame dos valores medidos ---
 df_medidos = pd.DataFrame({
-    'Resistores 1kΩ': resistores_1k,
-    'Resistores 1MΩ': resistores_1M
+    'Resistores 1k$\\Omega$': resistores_1k,
 })
 print("\nTabela de valores medidos:")
 print(df_medidos)
@@ -44,26 +55,60 @@ print("\nCSV dos valores medidos:")
 print(df_medidos.to_csv(index=False))
 
 # --- Plot da distribuição normal dos valores medidos ---
-def plot_distribuicao(resistores, media, sigma, nome):
-    # Distribuição normal: \( f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2} \left(\frac{x-\mu}{\sigma}\right)^2} \)
-    from scipy.stats import norm
-    x = np.linspace(media - 4*sigma, media + 4*sigma, 1000)
-    y = norm.pdf(x, media, sigma)
+def plot_distribuicao(resistores, media, sigma, nome, tipo="normal", filename="plot.svg"):
+    import os
     plt.figure(figsize=(16, 9))
-    # plt.hist(resistores, bins=5, density=True, alpha=0.5, label='Valores medidos')
-    plt.plot(x, y, label=f'Normal(μ={media:.2f}, σ={sigma:.2f})', color='blue')
-    plt.title(f'Distribuição Normal dos Resistores {nome}')
-    plt.xlabel('Resistência (Ω)')
-    plt.ylabel('Densidade de Probabilidade')
-    plt.axvline(media, color='black', linestyle='--', label='Média')
-    plt.axvline(media + sigma, color='red', linestyle='--', label='+1σ')
-    plt.axvline(media - sigma, color='red', linestyle='--', label='-1σ')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
+    if tipo == "normal":
+        if filename == 'plot_hist_1k.svg':
+            min_r = np.floor(min(resistores)*2)/2 - 0.5
+            max_r = np.ceil(max(resistores)*2)/2 + 0.5
+            bins = np.arange(min_r, max_r+0.5, 0.5)
+            plt.hist(resistores, bins=bins, density=False, alpha=0.6, label='Valores medidos', color='gray', edgecolor='black')
+        else:
+            plt.hist(resistores, bins=5, density=False, alpha=0.6, label='Valores medidos', color='gray', edgecolor='black')
+        from scipy.stats import norm
+        x = np.linspace(min(resistores)-2, max(resistores)+2, 1000)
+        y = norm.pdf(x, media, sigma)
+        y_scaled = y * len(resistores) * (max(resistores)-min(resistores))/5
+        plt.plot(x, y_scaled, label=f'Normal($\mu$={media:.2f}, $\sigma$={sigma:.2f})', color='blue')
+        plt.title(f'Distribuição Normal dos Resistores {nome}')
+        plt.xlabel('Resistência ($\\Omega$)')
+        plt.ylabel('Frequência')
+        plt.axvline(media, color='black', linestyle='--', label='Média', linewidth=2    )
+        plt.axvline(media + sigma, color='red', linestyle='--', label='+1$\sigma$', linewidth=2)
+        plt.axvline(media - sigma, color='red', linestyle='--', label='-1$\sigma$', linewidth=2)
+        plt.xlim(min(resistores)-2, max(resistores)+2)
+        leg0 = plt.legend(
+            loc='upper right', frameon=True, edgecolor='black',
+            facecolor='white', fontsize=12, fancybox=True
+        )
+        leg0.get_frame().set_facecolor('white')
+        leg0.get_frame().set_edgecolor('black')
+        leg0.get_frame().set_alpha(1.0)
 
-plot_distribuicao(resistores_1k, media_1k, sigma_1k, '1kΩ')
-plot_distribuicao(resistores_1M, media_1M, sigma_1M, '1MΩ')
+        plt.grid(True)
+    elif tipo == "barras":
+        unique, counts = np.unique(resistores, return_counts=True)
+        plt.bar(unique, counts, width=unique[0]*0.01, color='orange', edgecolor='black', alpha=0.8, label='Contagem')
+        plt.title(f'Distribuição dos Resistores {nome}')
+        plt.xlabel('Resistência ($\\Omega$)')
+        plt.ylabel('Contagem')
+        plt.grid(axis='y')
+        for i, v in enumerate(counts):
+            plt.text(unique[i], v+0.02, str(v), ha='center', va='bottom', fontsize=12)
+        leg0 = plt.legend(
+            loc='upper right', frameon=True, edgecolor='black',
+            facecolor='white', fontsize=12, fancybox=True
+        )
+        leg0.get_frame().set_facecolor('white')
+        leg0.get_frame().set_edgecolor('black')
+        leg0.get_frame().set_alpha(1.0)
+    os.makedirs("./pictures", exist_ok=True)
+    plt.tight_layout()
+    plt.savefig(f"./pictures/{filename}", dpi=300)
+    plt.close()
+
+plot_distribuicao(resistores_1k, media_1k, sigma_1k, '1k$\\Omega$', tipo='normal', filename='plot_hist_1k.svg')
 
 # --- Associação em série ---
 # Resistência equivalente em série: \( R_{eq,s} = \sum_{i=1}^n R_i \)
@@ -95,16 +140,16 @@ def print_resultado(nome, Req, erro):
     print(f"{nome}: {Req:.4f} Ω ± {erro:.4f} Ω")
 
 print("\n=== Resultados das Associações ===")
-print_resultado("Série 1kΩ", Req_serie_1k, erro_serie_1k)
-print_resultado("Paralelo 1kΩ", Req_paralelo_1k, erro_paralelo_1k)
-print_resultado("Série 1MΩ", Req_serie_1M, erro_serie_1M)
-print_resultado("Paralelo 1MΩ", Req_paralelo_1M, erro_paralelo_1M)
+print_resultado("Série 1k$\\Omega$", Req_serie_1k, erro_serie_1k)
+print_resultado("Paralelo 1k$\\Omega$", Req_paralelo_1k, erro_paralelo_1k)
+print_resultado("Série 1M$\\Omega$", Req_serie_1M, erro_serie_1M)
+print_resultado("Paralelo 1M$\\Omega$", Req_paralelo_1M, erro_paralelo_1M)
 
 # --- Tabela resumo das associações ---
 dados = {
     'Associação': ['Série 1kΩ', 'Paralelo 1kΩ', 'Série 1MΩ', 'Paralelo 1MΩ'],
-    'Req (Ω)': [Req_serie_1k, Req_paralelo_1k, Req_serie_1M, Req_paralelo_1M],
-    'Erro (Ω)': [erro_serie_1k, erro_paralelo_1k, erro_serie_1M, erro_paralelo_1M]
+    'Req ($\\Omega$)': [Req_serie_1k, Req_paralelo_1k, Req_serie_1M, Req_paralelo_1M],
+    'Erro ($\\Omega$)': [erro_serie_1k, erro_paralelo_1k, erro_serie_1M, erro_paralelo_1M]
 }
 df = pd.DataFrame(dados)
 
@@ -161,116 +206,22 @@ valores = [Req_paralelo_misto1, Req_misto2, Req_misto3, Req_misto4]
 erros = [erro_paralelo_misto1, erro_misto2, erro_misto3, erro_misto4]
 
 plt.figure(figsize=(16, 9))
-plt.scatter(range(len(valores)), valores, color='purple')
-for i, (x, y, e) in enumerate(zip(range(len(valores)), valores, erros)):
-    plt.text(x, y, f"{y:.1f}±{e:.1f}", fontsize=9, ha='left', va='bottom', color='purple')
-plt.xticks(range(len(labels)), labels, rotation=20)
-plt.title('Associação Mista: Evolução da Resistência Equivalente')
-plt.xlabel('Estágio da associação')
-plt.ylabel('Resistência equivalente (Ω)')
-plt.grid(True)
+cores = ['#4c72b0', '#55a868', '#c44e52', '#8172b3']
+barras = plt.bar(labels, valores, yerr=erros, capsize=10, color=cores, edgecolor='black')
+
+for i, barra in enumerate(barras):
+    altura = barra.get_height()
+    plt.text(barra.get_x() + barra.get_width()/2, altura + max(erros)*0.1, f'{valores[i]:.1f}±{erros[i]:.1f}', 
+             ha='center', va='bottom', fontsize=11, color='black')
+
+plt.title('Associação Mista: Evolução da Resistência Equivalente', fontsize=16)
+plt.xlabel('Etapas da associação', fontsize=14)
+plt.ylabel('Resistência Equivalente ($\\Omega$)', fontsize=14)
+plt.xticks(rotation=20)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
-plt.show()
 
-# --- Simulação de resposta a sinal senoidal (5V, 1kHz) ---
-# Parâmetros do sinal
-V_in = 5  # Volts (amplitude)
-freq = 1000  # Hz
-omega = 2 * np.pi * freq
-T = 1 / freq
-
-t = np.linspace(0, 3*T, 1000)  # 3 períodos
-vin = V_in * np.sin(omega * t)
-
-# Exemplo: saída sobre o resistor de 1k em série na associação mista 1k + (1M || 1k) + 1M
-# Usando Req_misto3 como resistência total, e r1k_a como resistência de interesse
-V_out = vin * (r1k_a / Req_misto3)
-
-# Fator de amplificação para visualização
-fator_saida = 80
-
-plt.figure(figsize=(16, 9))
-plt.plot(t * 1e3, vin, label='Sinal de entrada (5V, 1kHz)', color='blue')
-plt.plot(t * 1e3, V_out * fator_saida, label=f'Sinal de saída (sobre 1kΩ em série) ×{fator_saida}', color='orange')
-plt.title('Resposta do circuito resistivo a um sinal senoidal')
-plt.xlabel('Tempo (ms)')
-plt.ylabel('Tensão (V)')
-plt.legend()
-plt.grid(True)
-plt.tight_layout()
-plt.show()
-
-# --- Efeito Joule: aquecimento de água com resistor (modelo realista com lei de Newton) ---
-# Dados do problema
-P = 1000  # Potência do resistor (W)
-V = 220   # Tensão (V)
-m_agua = 0.5  # massa da água (kg)
-c_agua = 4186  # calor específico da água (J/kg°C)
-T0 = 20  # Temperatura inicial (°C)
-T_amb = 20  # Temperatura ambiente (°C)
-
-tempo_total = 300  # tempo total de simulação (s)
-dt = 5  # passo de tempo (s)
-tempos = np.arange(0, tempo_total + dt, dt)
-k = 0.001
-
-# Fórmulas utilizadas:
-# Lei de Newton para aquecimento:c
-#   \[
-#   \frac{dT}{dt} = \frac{P}{m c} - k (T - T_{amb})
-#   \]
-# Solução discreta para cada passo de tempo dt:
-#   \[
-#   T_{i+1} = T_i + \left( \frac{P}{m c} - k (T_i - T_{amb}) \right) dt
-#   \]
-
-temperaturas = [T0]
-for i in range(1, len(tempos)):
-    T_atual = temperaturas[-1]
-    # Lei de Newton: dT/dt = (P/(m*c)) - k*(T - T_amb)
-    dT = (P/(m_agua*c_agua) - k*(T_atual - T_amb)) * dt
-    temperaturas.append(T_atual + dT)
-
-temperaturas = np.array(temperaturas)
-
-# Vetor para valores práticos (preencha após experimento)
-temperaturas_praticas = np.full_like(temperaturas, np.nan, dtype=float)  # substitua np.nan pelos valores reais
-
-# --- Vetor de dados fictícios para 36 amostras (5 em 5 segundos, até 180s) ---
-dt_fict = 5
-n_fict = 36
-
-tempos_fict = np.arange(0, n_fict * dt_fict, dt_fict)
-T0_fict = 20
-
-# Fator multiplicador para ajuste da inclinação da reta teórica
-k_linear = 0.8 # ajuste conforme necessário
-
-# Modelo linear ajustável: ΔT = k_linear * Q/(m*c) acumulativo
-# Q acumulado até cada tempo: Q = P * t
-# T = T0 + k_linear * Q/(m*c)
-temperaturas_teorico = T0_fict + k_linear * (P * tempos_fict) / (m_agua * c_agua)
-
-# Vetores de dados fictícios de temperatura medida
-temperatura_medida1 = np.array([15, 18, 20, 26, 27, 28, 32, 34, 35, 37, 40, 42, 44, 45, 48, 49, 51, 53, 55, 56, 58, 60, 61, 64, 65, 66, 69, 71, 73, 74, 75, 78, 80, 82, 83, 85])
-temperatura_medida2 = temperatura_medida1 - np.random.normal(1, 0.7, n_fict)  # um pouco abaixo
-temperatura_medida3 = temperatura_medida1 + np.random.normal(1, 0.7, n_fict)  # um pouco acima
-
-# Incerteza propagada: erro de 0.5°C em cada medição
-incerteza_medida = np.full_like(temperatura_medida1, 0.5)
-
-# Plot dos dados teóricos e medidos com barras de erro
-plt.figure(figsize=(16, 9))
-plt.plot(tempos_fict, temperaturas_teorico, label=f'Teórico (modelo linear, k={k_linear})', color='red', marker='o', linewidth=2)
-plt.errorbar(tempos_fict, temperatura_medida1, yerr=incerteza_medida, fmt='x', color='blue', label='Medida 1 ±0.5°C')
-plt.errorbar(tempos_fict, temperatura_medida2, yerr=incerteza_medida, fmt='x', color='green', label='Medida 2 ±0.5°C')
-plt.errorbar(tempos_fict, temperatura_medida3, yerr=incerteza_medida, fmt='x', color='orange', label='Medida 3 ±0.5°C')
-plt.title('Temperatura da água (teórico vs. 3 medidas, 0.5L, 1000W)')
-plt.xlabel('Tempo (s)')
-plt.ylabel('Temperatura (°C)')
-plt.xlim(0, 180)
-plt.ylim(T0_fict-2, max(temperatura_medida3)+5)
-plt.legend()
-plt.grid(True)
-plt.tight_layout()
-plt.show()
+# Salvar imagem
+os.makedirs("./pictures", exist_ok=True)
+plt.savefig(f"./pictures/plot_assoc_mista.svg", dpi=300)
+plt.close()

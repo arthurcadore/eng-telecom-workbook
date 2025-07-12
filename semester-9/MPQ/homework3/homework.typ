@@ -9,9 +9,9 @@
 )
 
 #show: doc => report(
-  title: "Estudo Experimental de Associações de Resistores em Série e Paralelo",
+  title: "Estudo Experimental de Associações de Resistores e Efeito Joule",
   subtitle: "Relatório de Laboratório",
-  authors: ("Arthur Cadore Matuella Barcella, Faber Bernardo Junior",),
+  authors: ("Arthur Cadore Matuella Barcella, Faber Bernardo Junior","Gabriel Luiz Espindola Pedro"),
   date: "Junho de 2025",
   doc,
 )
@@ -24,76 +24,221 @@ Este experimento tem como objetivo analisar o comportamento de associações de 
 
 A associação de resistores é fundamental em circuitos elétricos. Em série, a resistência equivalente é a soma dos valores individuais. Em paralelo, o inverso da resistência equivalente é a soma dos inversos das resistências. Em CA, além da resistência, pode haver influência de capacitâncias e indutâncias parasitas, especialmente em altas frequências. O multímetro permite medir resistência, tensão e corrente em CC e CA, enquanto o osciloscópio possibilita a análise de formas de onda e resposta dinâmica dos circuitos.
 
+= Resistores Comerciais
+
+== Série E12
+
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+          $
+            R_"eq" = ( sum_(i=1)^n R_i )
+          $
+          #figure(
+            figure(
+              rect(image("./pictures/matriz_serie_e12.svg", width: 100%)),
+              numbering: none,
+              caption: [Matriz de resistores em série],
+            ),
+            caption: figure.caption([Elaborada pelo Autor], position: top)
+          )
+        ],
+        [
+          $
+            1/R_"eq" = ( sum_(i=1)^n 1/R_i)
+          $
+          #figure(
+            figure(
+              rect(image("./pictures/matriz_paralelo_e12.svg", width: 100%)),
+              numbering: none,
+              caption: [Matriz de resistores em paralelo],
+            ),
+            caption: figure.caption([Elaborada pelo Autor], position: top)
+          )
+        ],
+    ),
+)
+
+
+== Série E24
+
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+          $
+            R_"eq" = ( sum_(i=1)^n R_i )
+          $
+          #figure(
+            figure(
+              rect(image("./pictures/matriz_serie_e24.svg", width: 100%)),
+              numbering: none,
+              caption: [Matriz de resistores em série],
+            ),
+            caption: figure.caption([Elaborada pelo Autor], position: top)
+          )
+        ],
+        [
+          $
+            1/R_"eq" = ( sum_(i=1)^n 1/R_i)
+          $
+          #figure(
+            figure(
+              rect(image("./pictures/matriz_paralelo_e24.svg", width: 100%)),
+              numbering: none,
+              caption: [Matriz de resistores em paralelo],
+            ),
+            caption: figure.caption([Elaborada pelo Autor], position: top)
+          )
+        ],
+    ),
+)
+
+
+
+
 = Materiais e métodos:
 
-- 5 resistores de 1kΩ
-- 5 resistores de 1MΩ
+- 10 resistores de 1kΩ
+- 10 resistores de 1MΩ
 - Fonte de alimentação CC
-- Gerador de funções (CA)
 - Multímetro digital
-- Osciloscópio
 - Protoboard e cabos
 
-Foram montados circuitos com resistores em série, paralelo e mista. As medições de resistência, tensão e corrente foram realizadas com o multímetro. Para análise em CA, aplicou-se um sinal senoidal e observou-se a resposta no osciloscópio.
+Foram montados circuitos com resistores em série, paralelo e mista. As medições de resistência, tensão e corrente foram realizadas com o multímetro.
 
 = Cálculos e resultados obtidos:
 
-== Cálculo teórico das resistências equivalentes:
+== Distribuição normal dos valores medidos:
 
-#sourcecode[```python
-# Resistores de 1kΩ
-R_1k = 1000  # ohms
-n_1k = 5
-# Série
-Req_serie_1k = n_1k * R_1k
-# Paralelo
-Req_paralelo_1k = R_1k / n_1k
-print(f"Req série 1kΩ: {Req_serie_1k} Ω")
-print(f"Req paralelo 1kΩ: {Req_paralelo_1k} Ω")
+A análise estatística dos valores medidos permite determinar a média, desvio padrão e erro médio dos resistores:
 
-# Resistores de 1MΩ
-R_1M = 1_000_000  # ohms
-n_1M = 5
-Req_serie_1M = n_1M * R_1M
-Req_paralelo_1M = R_1M / n_1M
-print(f"Req série 1MΩ: {Req_serie_1M} Ω")
-print(f"Req paralelo 1MΩ: {Req_paralelo_1M} Ω")
-```]
+- Média:
+$ 
+  R = 1/n (sum_(i=1)^n R_i)
+$
 
-== Tabela de valores medidos (exemplo):
+Onde: 
+- $R$ é a média
+- $n$ o número de resistores.
 
-| Associação      | Teórico (Ω) | Medido CC (Ω) | Medido CA (Ω) |
-|-----------------|-------------|---------------|---------------|
-| Série 1kΩ       | 5000        |               |               |
-| Paralelo 1kΩ    | 200         |               |               |
-| Série 1MΩ       | 5000000     |               |               |
-| Paralelo 1MΩ    | 200000      |               |               |
+- Desvio padrão:
 
-== Medidas de tensão e corrente (exemplo):
+$ 
+  sigma = sqrt(sum_(i=1)^n ((R_i - R)^2/n-1))
+$
 
-| Associação      | Tensão (V) | Corrente (mA) | Fonte         |
-|-----------------|------------|---------------|---------------|
-| Série 1kΩ       |            |               | CC/CA         |
-| Paralelo 1kΩ    |            |               | CC/CA         |
-| Série 1MΩ       |            |               | CC/CA         |
-| Paralelo 1MΩ    |            |               | CC/CA         |
+Onde: 
+- $sigma$ representa a dispersão dos valores em relação à média.
 
-== Observação de formas de onda (CA):
+- Erro médio:
 
-Inclua aqui capturas de tela do osciloscópio mostrando a resposta dos circuitos em CA, destacando possíveis atenuações ou distorções.
+$ 
+  Delta R = sigma/sqrt(n)
+$
 
-// #figure(
-//   figure(
-//     rect(image("./pictures/image.png", width: 100%)),
-//     numbering: none,
-//     caption: [Exemplo de forma de onda observada no osciloscópio],
-//   ),
-//   caption: figure.caption([Elaborada pelo Autor], position: top)
-// )
+Onde: 
+- $Delta R$ é o erro médio
+- $sigma$ é o desvio padrão
+- $n$ é o número de resistores.
+
+#figure(
+  figure(
+    rect(image("./pictures/plot_hist_1k.svg", width: 100%)),
+    numbering: none,
+    caption: [Distribuição normal dos valores medidos],
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+
+== Associação de resistores (série, paralelo e mista):
+
+O erro absoluto na associação em série é:
+
+$ 
+  Delta R_"eq" = sum_(i=1)^n Delta R_i 
+$
+
+Onde: 
+- $Delta R_"eq"$: é a incerteza total
+- $Delta R_i$: são as incertezas individuais de cada resistor.
+
+A propagação de erro para paralelo:
+
+$ 
+  Delta R_"eq" = R_"eq"^2 sqrt( sum_(i=1)^n ((Delta R_i)/R_i^2)^2 ) 
+$
+
+Onde: 
+- $Delta R_"eq"$: é a incerteza total da associação em paralelo.
+- $Delta R_i$: são as incertezas individuais de cada resistor.
+- $R_"eq"$: é a resistência equivalente.
+
+Considerando o circuito misto de exemplo abaixo: 
+
+$
+  R_"eq" = 1K Omega + (1M Omega || 1k Omega) + (1M Omega || 1M Omega) + 1M Omega + (1k Omega || 1k Omega)
+$
+
+Podemos calcular a resistência equivalente das etapas do circuito misto, como mostrado abaixo:
+
+#figure(
+  figure(
+    rect(image("./pictures/plot_assoc_mista.svg", width: 100%)),
+    numbering: none,
+    caption: [Calculo das resistências do circuito misto],
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
+
+== Efeito Joule: aquecimento de água
+
+
+
+O efeito Joule é a conversão de energia elétrica em calor pela passagem de corrente em um resistor. O aquecimento da água pode ser descrito pela equação diferencial:
+$ 
+  d_T/d_t = P/"mc" - k (T - T_"amb") 
+$
+
+Onde:
+- $T$: é a temperatura da água,
+- $P$: é a potência dissipada,
+- $m$: a massa da água,
+- $c$: o calor específico,
+- $k$: a constante de resfriamento,
+- $T_"amb"$: a temperatura ambiente.
+
+A solução discreta utilizada na simulação é:
+
+$ 
+  T_(i+1) = T_i + ( P/"mc" - k (T_i - T_"amb") ) d_t 
+$
+
+Onde: 
+- $d_t$: é o passo de tempo da simulação.
+
+O gráfico a seguir compara o modelo teórico com dados experimentais simulados:
+
+#figure(
+  figure(
+    rect(image("./pictures/plot_temperatura.svg", width: 100%)),
+    numbering: none,
+    caption: [Curva de aquecimento da água por efeito Joule],
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
 
 = Discussão:
 
-Analise as diferenças entre os valores teóricos e experimentais, possíveis causas de erro (tolerância dos resistores, contatos, instrumentos), e o comportamento dos circuitos em CA (ex: influência de capacitâncias parasitas em altas frequências).
+Analise as diferenças entre os valores teóricos e experimentais, possíveis causas de erro (tolerância dos resistores, contatos, instrumentos).
 
 = Conclusão:
 
