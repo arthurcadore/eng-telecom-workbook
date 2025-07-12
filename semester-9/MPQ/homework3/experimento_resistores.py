@@ -160,50 +160,61 @@ print(df.to_string(index=False))
 
 
 # --- Associação mista ---
-# Exemplo 1: 1k + (1M || 1k) + 1M
+# Associação: 1k + (1M || 1k) + (1M || 1M) + 1M + (1k || 1k)
 # Seleciona resistores (pode ser ajustado conforme os valores reais)
 r1k_a = resistores_1k[0]
 r1M_a = resistores_1M[0]
 r1k_b = resistores_1k[1]
 r1M_b = resistores_1M[1]
+r1M_c = resistores_1M[2]
+r1M_d = resistores_1M[3]
+r1k_c = resistores_1k[2]
+r1k_d = resistores_1k[3]
 
 # Erros correspondentes
 e1k_a = erro_1k[0]
 e1M_a = erro_1M[0]
 e1k_b = erro_1k[1]
 e1M_b = erro_1M[1]
+e1M_c = erro_1M[2]
+e1M_d = erro_1M[3]
+e1k_c = erro_1k[2]
+e1k_d = erro_1k[3]
 
 # Etapa 1: (1M_b || 1k_b)
-Req_paralelo_misto1 = 1 / (1/r1M_b + 1/r1k_b)
-erro_paralelo_misto1 = (Req_paralelo_misto1**2) * sqrt((e1M_b/r1M_b**2)**2 + (e1k_b/r1k_b**2)**2)
+Req_etapa1 = 1 / (1/r1M_b + 1/r1k_b)
+erro_etapa1 = (Req_etapa1**2) * sqrt((e1M_b/r1M_b**2)**2 + (e1k_b/r1k_b**2)**2)
 
-# Etapa 2: r1k_a + Req_paralelo_misto1
-Req_misto2 = r1k_a + Req_paralelo_misto1
-erro_misto2 = e1k_a + erro_paralelo_misto1
+# Etapa 2: [Etapa 1] + (1M_c || 1M_d)
+Req_paralelo_1M = 1 / (1/r1M_c + 1/r1M_d)
+erro_paralelo_1M = (Req_paralelo_1M**2) * sqrt((e1M_c/r1M_c**2)**2 + (e1M_d/r1M_d**2)**2)
+Req_etapa2 = Req_etapa1 + Req_paralelo_1M
+erro_etapa2 = erro_etapa1 + erro_paralelo_1M
 
-# Etapa 3: Req_misto2 + r1M_a
-Req_misto3 = Req_misto2 + r1M_a
-erro_misto3 = erro_misto2 + e1M_a
+# Etapa 3: [Etapa 2] + 1M_a
+Req_etapa3 = Req_etapa2 + r1M_a
+erro_etapa3 = erro_etapa2 + e1M_a
 
-# Exemplo 2: (1k || 1k) + (1M || 1M)
-Req_paralelo_1k = 1 / (1/resistores_1k[2] + 1/resistores_1k[3])
-erro_paralelo_1k = (Req_paralelo_1k**2) * sqrt((erro_1k[2]/resistores_1k[2]**2)**2 + (erro_1k[3]/resistores_1k[3]**2)**2)
+# Etapa 4: [Etapa 3] + (1k_c || 1k_d)
+Req_paralelo_1k = 1 / (1/r1k_c + 1/r1k_d)
+erro_paralelo_1k = (Req_paralelo_1k**2) * sqrt((e1k_c/r1k_c**2)**2 + (e1k_d/r1k_d**2)**2)
+Req_etapa4 = Req_etapa3 + Req_paralelo_1k
+erro_etapa4 = erro_etapa3 + erro_paralelo_1k
 
-Req_paralelo_1M = 1 / (1/resistores_1M[2] + 1/resistores_1M[3])
-erro_paralelo_1M = (Req_paralelo_1M**2) * sqrt((erro_1M[2]/resistores_1M[2]**2)**2 + (erro_1M[3]/resistores_1M[3]**2)**2)
-
-Req_misto4 = Req_paralelo_1k + Req_paralelo_1M
-erro_misto4 = erro_paralelo_1k + erro_paralelo_1M
+# Etapa 5: 1k_a + [Etapa 4]
+Req_etapa5 = r1k_a + Req_etapa4
+erro_etapa5 = e1k_a + erro_etapa4
 
 # --- Plot das associações mistas ---
 labels = [
     'Etapa 1: (1M || 1k)',
-    'Etapa 2: 1k + (1M || 1k)',
-    'Etapa 3: 1k + (1M || 1k) + 1M',
-    'Etapa 4: (1k || 1k) + (1M || 1M)'
+    'Etapa 3: + 1M',
+    'Etapa 4: + (1k || 1k)',
+    'Etapa 5: + 1k',
+    'Etapa 2: + (1M || 1M)'
 ]
-valores = [Req_paralelo_misto1, Req_misto2, Req_misto3, Req_misto4]
-erros = [erro_paralelo_misto1, erro_misto2, erro_misto3, erro_misto4]
+valores = [Req_etapa1, Req_etapa3, Req_etapa4, Req_etapa5, Req_etapa2]
+erros = [erro_etapa1, erro_etapa3, erro_etapa4, erro_etapa5, erro_etapa2]
 
 plt.figure(figsize=(16, 9))
 cores = ['#4c72b0', '#55a868', '#c44e52', '#8172b3']
