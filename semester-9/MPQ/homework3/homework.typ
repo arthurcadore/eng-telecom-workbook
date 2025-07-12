@@ -11,27 +11,36 @@
 #show: doc => report(
   title: "Estudo Experimental de Associações de Resistores e Efeito Joule",
   subtitle: "Relatório de Laboratório",
-  authors: ("Arthur Cadore Matuella Barcella, Faber Bernardo Junior","Gabriel Luiz Espindola Pedro"),
-  date: "Junho de 2025",
+  authors: ("Arthur Cadore Matuella Barcella","Faber Bernardo Junior","Gabriel Luiz Espindola Pedro"),
+  date: "12 de junho de 2025",
   doc,
 )
 
 = Introdução:
 
-Este experimento tem como objetivo analisar o comportamento de associações de resistores em série e paralelo, utilizando cinco resistores de 1kΩ e cinco de 1MΩ. Serão realizadas medições em corrente contínua (CC), empregando multímetro e osciloscópio para observar as respostas dos circuitos.
+Este experimento tem como objetivo analisar o comportamento de associações de resistores em série e em paralelo, utilizando cinco resistores de 1 kΩ e cinco de 1 MΩ. As medições serão realizadas em corrente contínua (CC), com o uso de multímetro e osciloscópio para observar as respostas dos circuitos.
 
-Este estudo é fundamental para compreender como a disposição dos resistores afeta a resistência total de um circuito, além de proporcionar experiência prática com instrumentos de medição e análise experimental.
+A compreensão de como a disposição dos resistores influencia a resistência total de um circuito é essencial na eletrônica. Além disso, este experimento proporciona experiência prática com instrumentos de medição e desenvolve habilidades em análise experimental.
+
 = Revisão de literatura:
 
-A associação de resistores é fundamental em circuitos elétricos. Em série, a resistência equivalente é a soma dos valores individuais. Em paralelo, o inverso da resistência equivalente é a soma dos inversos das resistências. Em CA, além da resistência, pode haver influência de capacitâncias e indutâncias parasitas, especialmente em altas frequências. O multímetro permite medir resistência, tensão e corrente em CC, enquanto o osciloscópio possibilita a análise de formas de onda e resposta dinâmica dos circuitos.
+As associações de resistores são fundamentais em circuitos elétricos. Em associação série, a resistência equivalente é dada pela soma dos valores individuais. Já em associação paralelo, a resistência equivalente é obtida pela soma dos inversos das resistências individuais.
 
-Esta seção revisa os conceitos teóricos necessários para a análise experimental, reforçando a importância de entender as associações e as limitações práticas dos instrumentos.
+Em corrente alternada (CA), além da resistência, fatores como capacitâncias e indutâncias parasitas podem influenciar o comportamento do circuito, especialmente em altas frequências. O multímetro é utilizado para medir resistência, tensão e corrente em CC, enquanto o osciloscópio permite visualizar formas de onda e analisar a resposta dinâmica dos circuitos.
+
+Esta seção revisa os conceitos teóricos fundamentais para a análise experimental, reforçando a importância de compreender as associações resistivas e as limitações práticas dos instrumentos de medição.
+
 = Resistores Comerciais
 
-Os resistores comerciais seguem séries padronizadas (E12, E24, etc.), que definem os valores disponíveis no mercado. O conhecimento dessas séries é essencial para a escolha adequada dos componentes em projetos eletrônicos, garantindo precisão e facilidade de reposição.
+Em eletrônica, não é viável fabricar resistores com qualquer valor numérico de resistência. Por isso, a indústria adota séries padronizadas de resistores, como as séries E12, E24, entre outras. Essas séries definem um conjunto finito de valores nominais por década, de forma que seja possível cobrir uma ampla faixa de resistências com precisão adequada para a maioria das aplicações.
+
+O uso de resistores comerciais padronizados é essencial para facilitar a fabricação em escala, reduzir custos, garantir intercambialidade entre componentes e assegurar a reposição em projetos práticos. No entanto, nem sempre é possível encontrar exatamente o valor desejado entre os disponíveis na série padrão.
+
+Para contornar essa limitação, é comum combinar resistores em série e/ou paralelo para obter valores de resistência equivalentes que não estejam disponíveis diretamente no mercado. Assim, qualquer valor de resistência pode ser aproximado com boa precisão por meio de associações de resistores comerciais, o que reforça a importância de entender e aplicar corretamente os princípios dessas associações em projetos eletrônicos.
+
 == Série E12
 
-A série E12 é uma das séries comerciais mais comuns, composta por valores padronizados de resistores. As figuras abaixo ilustram como os resistores dessa série podem ser associados em série e em paralelo:
+A série E12 é uma das mais comuns e contempla valores padronizados de resistores amplamente utilizados em aplicações gerais. As figuras a seguir ilustram como os resistores dessa série podem ser combinados em série e paralelo, destacando os efeitos dessas associações na resistência equivalente.
 
 #figure(
     grid(
@@ -266,7 +275,6 @@ O experimento permitiu compreender, na prática, os princípios fundamentais das
 A investigação do efeito Joule demonstrou como a energia elétrica é convertida em calor, evidenciando o papel dos resistores como elementos dissipadores. A modelagem matemática e a comparação com dados experimentais destacaram a relevância de fatores como perdas térmicas e transferência de calor para o ambiente, aspectos essenciais para o dimensionamento seguro de dispositivos elétricos.
 
 Além de consolidar conceitos teóricos, o experimento proporcionou experiência com instrumentos de medição e análise de dados, habilidades essenciais para a formação em Engenharia. O estudo reforça a importância do rigor experimental e da análise crítica dos resultados, fundamentais para o desenvolvimento de soluções eficientes e seguras em projetos eletrônicos e sistemas de energia.
-
 
 = Referências:
 
