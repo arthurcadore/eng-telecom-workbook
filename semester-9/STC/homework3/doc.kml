@@ -9547,99 +9547,9 @@
 							</Point>
 						</Placemark>
 					</Folder>
-					<Placemark>
-						<name>CORONEL FARRAPO</name>
-						<styleUrl>#msn_ylw-pushpin0</styleUrl>
-						<LineString>
-							<tessellate>1</tessellate>
-							<coordinates>
-								-51.23999449277001,-27.41080681362274,0 -51.21206815328451,-27.39015467114925,0 
-							</coordinates>
-						</LineString>
-					</Placemark>
-					<Placemark>
-						<name>LINHA AZUL 4</name>
-						<styleUrl>#msn_ylw-pushpin1</styleUrl>
-						<LineString>
-							<tessellate>1</tessellate>
-							<coordinates>
-								-51.21633326502005,-27.39964922965788,0 -51.22428740174157,-27.3908070203558,0 
-							</coordinates>
-						</LineString>
-					</Placemark>
-					<Placemark>
-						<name>LINHA AZUL 2</name>
-						<styleUrl>#msn_ylw-pushpin3</styleUrl>
-						<LineString>
-							<tessellate>1</tessellate>
-							<coordinates>
-								-51.21977139212211,-27.4019961184074,0 -51.22722614752975,-27.39403937768285,0 
-							</coordinates>
-						</LineString>
-					</Placemark>
-					<Placemark>
-						<name>ORTOGONAL AO POP (1)</name>
-						<styleUrl>#msn_ylw-pushpin3</styleUrl>
-						<LineString>
-							<tessellate>1</tessellate>
-							<coordinates>
-								-51.22139587853,-27.40307264171785,0 -51.22898488447557,-27.39518524451235,0 
-							</coordinates>
-						</LineString>
-					</Placemark>
-					<Placemark>
-						<name>LINHA AZUL 3</name>
-						<styleUrl>#msn_ylw-pushpin3</styleUrl>
-						<LineString>
-							<tessellate>1</tessellate>
-							<coordinates>
-								-51.21779046717592,-27.40067207852572,0 -51.22517230510933,-27.39287133029081,0 
-							</coordinates>
-						</LineString>
-					</Placemark>
 				</Folder>
 			</Folder>
 		</Document>
-		<Placemark>
-			<name>LINHA AZUL 5</name>
-			<styleUrl>#msn_ylw-pushpin</styleUrl>
-			<LineString>
-				<tessellate>1</tessellate>
-				<coordinates>
-					-51.2236596372536,-27.40456548343316,0 -51.23094248948099,-27.39633214576074,0 
-				</coordinates>
-			</LineString>
-		</Placemark>
-		<Placemark>
-			<name>LINHA AZUL 6</name>
-			<styleUrl>#msn_ylw-pushpin</styleUrl>
-			<LineString>
-				<tessellate>1</tessellate>
-				<coordinates>
-					-51.22527921372537,-27.40563948731414,0 -51.23248302397885,-27.39760888613976,0 
-				</coordinates>
-			</LineString>
-		</Placemark>
-		<Placemark>
-			<name>LINHA AZUL 7</name>
-			<styleUrl>#msn_ylw-pushpin</styleUrl>
-			<LineString>
-				<tessellate>1</tessellate>
-				<coordinates>
-					-51.22713537310377,-27.40681543951723,0 -51.23445713085327,-27.39891774423718,0 
-				</coordinates>
-			</LineString>
-		</Placemark>
-		<Placemark>
-			<name>LINHA AZUL 8</name>
-			<styleUrl>#msn_ylw-pushpin</styleUrl>
-			<LineString>
-				<tessellate>1</tessellate>
-				<coordinates>
-					-51.22867187410635,-27.40788505779987,0 -51.23601343621846,-27.39989156594126,0 
-				</coordinates>
-			</LineString>
-		</Placemark>
 		<atom:link rel="app" href="https://www.google.com/earth/about/versions/#earth-pro" title="Google Earth Pro 7.3.6.10201"></atom:link>
 	</Folder>
 </Document>
