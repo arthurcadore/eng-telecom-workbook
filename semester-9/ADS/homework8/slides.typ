@@ -58,6 +58,43 @@
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
+== Topologia
+#sourcecode[```py
+package inet.showcases.wireless.handover;
+import inet.node.inet.WirelessHost;
+import inet.node.wireless.AccessPoint;
+import inet.physicallayer.wireless.ieee80211.packetlevel.Ieee80211ScalarRadioMedium;
+import inet.visualizer.canvas.integrated.IntegratedCanvasVisualizer;
+
+
+network HandoverShowcase
+{
+    parameters:
+        @display("bgb=640,420");
+    submodules:
+        visualizer: IntegratedCanvasVisualizer {
+            parameters:
+                @display("p=100,200");
+        }
+        radioMedium: Ieee80211ScalarRadioMedium {
+            parameters:
+                @display("p=100,100");
+        }
+        host: WirelessHost {
+            parameters:
+                @display("p=50,280;r=,,#707070");
+        }
+        ap1: AccessPoint {
+            parameters:
+                @display("p=100,350;r=,,#707070");
+        }
+        ap2: AccessPoint {
+            parameters:
+                @display("p=500,350;r=,,#707070");
+        }
+}
+```]
+
 = A Simulação
 
 == Parâmetros
@@ -71,6 +108,55 @@
   - Eventos wireless por AP
   - Eventos de backoff
   - Trocas de canal (handover)
+
+== Parâmetros
+
+#sourcecode[```ini
+[General]
+network = HandoverShowcase
+
+# management submodule parameters
+**.mgmt.numChannels = 5
+
+# access point
+**.ap1.wlan[*].mgmt.ssid = "AP1"
+**.ap2.wlan[*].mgmt.ssid = "AP2"
+**.ap*.wlan[*].mgmt.beaconInterval = 100ms
+
+*.host*.mobility.typename = "LinearMobility"
+*.host*.mobility.speed = 10mps
+*.host*.mobility.initialMovementHeading = 0deg
+*.host*.mobility.updateInterval = 100ms
+*.host.mobility.constraintAreaMinX = 40m
+*.host.mobility.constraintAreaMaxX = 600m
+```]
+
+#sourcecode[```ini
+# wireless channels
+**.analogModel.ignorePartialInterference = true
+**.ap1.wlan[*].radio.channelNumber = 2
+**.ap2.wlan[*].radio.channelNumber = 3
+**.host.wlan[*].radio.channelNumber = 0  # just initially -- it'll scan
+```]
+
+#sourcecode[```ini
+# wireless configuration
+**.radio.transmitter.power = 2.0mW # sets communication ranges
+
+**.networkConfiguratorModule = ""  # no need for configurator
+
+**.wlan[*].agent.activeScan = true
+**.wlan[*].agent.defaultSsid = ""
+**.wlan[*].agent.channelsToScan = ""  # "" means all
+**.wlan[*].agent.probeDelay = 0.1s
+**.wlan[*].agent.minChannelTime = 0.15s
+**.wlan[*].agent.maxChannelTime = 0.3s
+
+# visualization
+*.visualizer.physicalLinkVisualizer.displayLinks = true
+*.ap*.wlan[*].radio.displayCommunicationRange = true
+```]
+
 
 == Contagem de eventos
 
