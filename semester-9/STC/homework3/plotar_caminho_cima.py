@@ -5,7 +5,14 @@ CAMINHO_ARQUIVO = "caminhos.txt"
 
 # Conjunto das últimas caixas que queremos plotar
 ultima_caixa = {
-    "A0021", "B0020", "C0018", "D0016", "E0016", "F0020", "G0016", "H0021"
+    "A0021", 
+    "B0020", 
+    "C0018", 
+    "D0016", 
+    "E0016", 
+    "F0020", 
+    "G0016", 
+    "H0021"
 }
 
 # --- Lê e filtra caminhos que terminam em uma das últimas caixas ---

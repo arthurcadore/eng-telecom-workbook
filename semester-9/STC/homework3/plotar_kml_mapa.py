@@ -55,9 +55,43 @@ caixa_de_emenda_conectorizada = {
                                  "H0006",
                                  "H0012",
                                  "H0017",
-                                 "H0021"
+                                 "H0021",
+                                 "I0001",
+                                 "I0005",
+                                 "I0009",
+                                 "I0014",
+                                 "J0001",
+                                 "J0006",
+                                 "J0010",
+                                 "J0015",
+                                 "K0001",
+                                 "K0006",
+                                 "K0013",
+                                 "K0018",
+                                 "L0001",
+                                 "L0006",
+                                 "L0013",
+                                 "L0019",
+                                 "M0001",
+                                 "M0007",
+                                 "M0013",
+                                 "M0018",
+                                 "N0001",
+                                 "N0010",
+                                 "N0017",
+                                 "N0025",
+                                 "O0001",
+                                 "O0005",
+                                 "O0010",
+                                 "O0015",
+                                 "P0001",
+                                 "P0004",
+                                 "P0010",
+                                 "P0015"
+
+
 }
-m = folium.Map(location=[0, 0], zoom_start=15)
+m = folium.Map(location=[0, 0], zoom_start=17)
 
 # --- Lê os pontos e plota marcadores ---
 for placemark in root.iterfind('.//{http://www.opengis.net/kml/2.2}Placemark'):
@@ -336,8 +370,23 @@ def formatar_nome(nome):
 
 # --- Caixas finais desejadas ---
 ultima_caixa = {
-    "A0021", "B0020", "C0018", "D0016", "E0016", "F0020", "G0016", "H0021"
-}
+                "A0021", 
+                "B0020", 
+                "C0018", 
+                "D0016", 
+                "E0016", 
+                "F0020", 
+                "G0016", 
+                "H0021",
+                "I0014",
+                "J0015",
+                "K0018",
+                "L0019",
+                "M0018",
+                "N0025",
+                "O0015",
+                "P0015"
+} 
 
 # --- Gerar caminhos do POP até cada CC ---
 saida_linhas = []
