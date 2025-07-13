@@ -16,7 +16,7 @@ plt.rc('figure', titlesize=22)
 
 
 # Configurações
-anos = 6
+anos = 10
 meses_total = anos * 12
 clientes_mensal = 20
 numero_clientes = 1280
@@ -177,6 +177,11 @@ df[('Valores (R$)', 'Saldo Acumulado')] = df[('Valores (R$)', 'Lucro Líquido')]
 
 print(df.head(24))
 
+# Exportar as primeiras 12 linhas para CSV
+csv_path = "fluxo_caixa_12meses.csv"
+df.head(12).to_csv(csv_path, encoding="utf-8")
+print(f"Exportado para {csv_path}")
+
 # --- Plot do fluxo de caixa dos 10 anos ---
 fig, axes = plt.subplots(2, 1, figsize=(16, 10), sharex=True)
 meses = range(1, len(df) + 1)
@@ -248,7 +253,7 @@ import matplotlib.ticker as mticker
 plt.bar(meses, saldo_acumulado, label="Saldo Acumulado", color="royalblue")
 if payback_time:
     plt.axvline(payback_time, color="green", linestyle="--", label=f"Payback: M{payback_time}")
-plt.title(f"Viabilidade: Payback, VPL=R$ {vpl:,.2f}, TIR={(1+tir)**12-1:.2%} a.a.")
+plt.title(f"Payback {payback_time} meses, VPL=R$ {vpl:,.2f}, TIR={(1+tir)**12-1:.2%} a.a.")
 plt.xlabel("Meses")
 plt.ylabel("Saldo Acumulado (R$)")
 plt.gca().yaxis.set_major_formatter(mticker.StrMethodFormatter('{x:,.0f}'))
