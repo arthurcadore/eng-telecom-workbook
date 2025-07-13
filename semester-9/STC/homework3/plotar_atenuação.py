@@ -3,10 +3,15 @@ import matplotlib.pyplot as plt
 DB_PER_KM = 0.2         # Atenuação fibra dB/km
 CF_ATTENUATION = 0.2    # Atenuação fixa por CF
 SPLITTER_1x2_ATT = 3.7  # Atenuação splitter 1x2 (na última CF)
-SPLITTER_10_90_ATT_1 = 11  # Atenuação splitter 10/90 (10%)
-SPLITTER_10_90_ATT_2 = 0.8  # Atenuação propagada (90%)
-SPLITTER_1x16_ATT = 13.7  # Atenuação splitter 1x16
-SFP_POWER_DBM = 5.0  # Potência de saída do SFP (transmissor) em dBm
+SPLITTER_10_90_ATT = 11.0   # Atenuação splitter 10/90 (porta 10%)
+SPLITTER_20_80_ATT = 7.5   # Atenuação splitter 20/80 (porta 20%)
+SPLITTER_30_70_ATT = 5.5   # Atenuação splitter 30/70 (porta 30%)
+SPLITTER_1x16_ATT = 13.7   # Atenuação splitter 1x16
+SPLITTER_10_90_PROP = 0.8  # Atenuação propagada (porta 90%)
+SPLITTER_20_80_PROP = 1.1  # Atenuação propagada (porta 80%)
+SPLITTER_30_70_PROP = 1.5  # Atenuação propagada (porta 70%)
+SFP_POWER_DBM = 2.0  # Potência de saída do SFP (transmissor) em dBm
+CC_ATTENUATION = 1.0  # Atenuação fixa por caixa CC
 LAST_MILE_ATT = 0.0525  # Atenuação last mile após splitter 1x16
 FINAL_CONNECTOR_ATT = 1.0  # Atenuação do conector final
 
@@ -40,11 +45,11 @@ def process_line(line):
 
     attenuations.append((parts[0], total_accum))  # POP
 
+    cc_count = 0
     for i in range(1, len(parts), 2):
         dist = float(parts[i])
         elem = parts[i + 1]
 
-        # Fibra + propagada do lado 90% (caso anterior tenha sido CC)
         fiber_loss = dist * DB_PER_KM
         total_accum += fiber_loss
 
@@ -56,16 +61,33 @@ def process_line(line):
 
         # CC
         elif elem.startswith("CC("):
-            total_accum += SPLITTER_10_90_ATT_1 + SPLITTER_1x16_ATT
-
-            # Salva o ponto anterior à CC para retomar
-            last_valid_point = attenuations[-1][1]
-            retomar = last_valid_point + SPLITTER_10_90_ATT_2
+            cc_count += 1
+            total_accum += CC_ATTENUATION  # Atenuação fixa por caixa CC
+            if cc_count == 1:
+                # 1ª CC: splitter 10/90
+                total_accum += SPLITTER_20_80_ATT + SPLITTER_1x16_ATT
+                last_valid_point = attenuations[-1][1]
+                retomar = last_valid_point + SPLITTER_20_80_PROP
+            elif cc_count == 2:
+                # 2ª CC: splitter 20/80
+                total_accum += SPLITTER_30_70_ATT + SPLITTER_1x16_ATT
+                last_valid_point = attenuations[-1][1]
+                retomar = last_valid_point + SPLITTER_30_70_PROP
+            elif cc_count == 3:
+                # 3ª CC: splitter 30/70
+                total_accum += SPLITTER_30_70_ATT + SPLITTER_1x16_ATT
+                last_valid_point = attenuations[-1][1]
+                retomar = last_valid_point + SPLITTER_30_70_PROP
+            elif cc_count == 4:
+                # 4ª CC: vai direto para 1x16 (porta 70)
+                total_accum += SPLITTER_1x16_ATT
+                # Não há ramal a retomar após a última CC
 
         attenuations.append((elem, total_accum))
 
-        if elem.startswith("CC("):
-            total_accum = retomar  # ramal de 90% continua aqui
+        # Retomar só se não for a última CC
+        if elem.startswith("CC(") and cc_count < 4:
+            total_accum = retomar  # ramal de propagação continua aqui
 
     # Aplica last mile e conector final ao último ponto
     if len(attenuations) > 1:
@@ -107,3 +129,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+''
