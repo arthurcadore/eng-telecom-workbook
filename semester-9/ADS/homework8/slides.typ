@@ -21,13 +21,33 @@
  
 #outline()
 
-= Objetivo do experimento 
+= Parte 1 - Seleção e Apresentação de Showcase
+
+==  Objetivo do Experimento
+
+- Avaliar o comportamento de handover em redes Wi-Fi 802.11.
+- Medir estatísticas de eventos wireless, troca de canal e backoff.
+- https://inet.omnetpp.org/docs/showcases/wireless/handover/doc/index.html
+
+= Breve Revisão de Conceitos e Tecnologias Usadas
+
+== Handover em redes sem fio (802.11)
+== Conceitos de AP, STA, canais e eventos MAC
+- AP1/AP2: pontos de acesso
+- STA: estação móvel
+- Parâmetros de rádio, canal, potência, etc.
+
+== Métricas: eventos wireless, handover, backoff
 
 = Modelo Simulado
 
-= Simulação 
+== Estrutura
 
-== Cenário 
+- Estrutura dos nodos: APs, STA móvel, links
+- Topologia e posicionamento dos elementos
+- Modelos de tráfego e mobilidade
+
+== Topologia 
 
 #figure(
   figure(
@@ -38,19 +58,32 @@
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
-== Eventos wireless
+= A Simulação
 
+== Parâmetros
+
+- Configuração da rede: número de APs, canais, STA
+- Fatores e níveis: canal, distância, mobilidade
+- Parâmetros fixados: potência, taxa de transmissão, etc.
+
+- Coleta via vetores do OMNeT++/INET
+- Métricas analisadas:
+  - Eventos wireless por AP
+  - Eventos de backoff
+  - Trocas de canal (handover)
+
+== Contagem de eventos
 
 #figure(
   figure(
     rect(image("./pictures/plot2_eventos_ap1_ap2.svg", width: 100%)),
     numbering: none,
-    caption: [Cenário de Handover],
+    caption: [Contagem de eventos wireless por AP],
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
-== Backoffs
+== Backoffs no tempo
 
 #figure(
   figure(
@@ -61,7 +94,7 @@
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
-== Troca de canal 
+== Handover
 
 #figure(
   figure(
@@ -71,8 +104,3 @@
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
-
-
-= Revisão dos Resultados 
-
-= Possibilidade de Variações
