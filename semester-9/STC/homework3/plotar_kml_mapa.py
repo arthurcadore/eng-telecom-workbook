@@ -29,7 +29,7 @@ caixa_de_emenda_conectorizada = {
                                  "D0014",
                                  "D0016",    
                                  "C0007",
-                                 "C0011",
+                                 "C0011", 
                                  "C0014",
                                  "C0018",
                                  "B0006",
@@ -152,6 +152,7 @@ for placemark in root.iterfind('.//{http://www.opengis.net/kml/2.2}Placemark'):
                 except ValueError:
                     pass
 
+print(f"Total de pontos no KML: {len(points)}")
 # --- Agrupar por prefixo alfabético ---
 def get_prefix(name):
     match = re.match(r"([A-Za-z]+)", name)
