@@ -16,7 +16,7 @@ plt.rc('figure', titlesize=22)
 
 
 # Configurações
-anos = 10
+anos = 6
 meses_total = anos * 12
 clientes_mensal = 20
 numero_clientes = 1280
@@ -183,7 +183,7 @@ df.head(12).to_csv(csv_path, encoding="utf-8")
 print(f"Exportado para {csv_path}")
 
 # --- Plot do fluxo de caixa dos 10 anos ---
-fig, axes = plt.subplots(2, 1, figsize=(16, 10), sharex=True)
+fig, axes = plt.subplots(2, 1, figsize=(18, 8), sharex=True)
 meses = range(1, len(df) + 1)
 
 # Receitas
@@ -248,7 +248,7 @@ print(f"VPL (a 15% a.a.): R$ {vpl:,.2f}")
 print(f"TIR: {tir*100:.2f}% ao mês ou {(1+tir)**12-1:.2%} ao ano")
 
 # --- Gráfico de Viabilidade ---
-plt.figure(figsize=(12,6))
+plt.figure(figsize=(18,8))
 import matplotlib.ticker as mticker
 plt.bar(meses, saldo_acumulado, label="Saldo Acumulado", color="royalblue")
 if payback_time:
