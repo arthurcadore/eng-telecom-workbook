@@ -9022,56 +9022,6 @@
 							</Point>
 						</Placemark>
 						<Placemark>
-							<name>H0022</name>
-							<open>1</open>
-							<LookAt>
-								<gx:TimeStamp><when>2024-06-22</when>
-</gx:TimeStamp>
-								<gx:ViewerOptions>
-									<gx:option name="historicalimagery"></gx:option>
-									<gx:option enabled="0" name="sunlight"></gx:option>
-									<gx:option enabled="0" name="streetview"></gx:option>
-								</gx:ViewerOptions>
-								<longitude>-51.22374232765826</longitude>
-								<latitude>-27.39103632182625</latitude>
-								<altitude>0</altitude>
-								<heading>-42.65270953192431</heading>
-								<tilt>13.0374853292865</tilt>
-								<range>202.0878586468334</range>
-								<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
-							</LookAt>
-							<styleUrl>#msn_ylw-pushpin2</styleUrl>
-							<Point>
-								<gx:drawOrder>1</gx:drawOrder>
-								<coordinates>-51.22388372572545,-27.39117752653307,0</coordinates>
-							</Point>
-						</Placemark>
-						<Placemark>
-							<name>H0023</name>
-							<open>1</open>
-							<LookAt>
-								<gx:TimeStamp><when>2024-06-22</when>
-</gx:TimeStamp>
-								<gx:ViewerOptions>
-									<gx:option name="historicalimagery"></gx:option>
-									<gx:option enabled="0" name="sunlight"></gx:option>
-									<gx:option enabled="0" name="streetview"></gx:option>
-								</gx:ViewerOptions>
-								<longitude>-51.22374232765826</longitude>
-								<latitude>-27.39103632182625</latitude>
-								<altitude>0</altitude>
-								<heading>-42.65270953192431</heading>
-								<tilt>13.0374853292865</tilt>
-								<range>202.0878586468334</range>
-								<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
-							</LookAt>
-							<styleUrl>#msn_ylw-pushpin2</styleUrl>
-							<Point>
-								<gx:drawOrder>1</gx:drawOrder>
-								<coordinates>-51.2241669689913,-27.39088517470661,0</coordinates>
-							</Point>
-						</Placemark>
-						<Placemark>
 							<name>P0001</name>
 							<open>1</open>
 							<Camera>

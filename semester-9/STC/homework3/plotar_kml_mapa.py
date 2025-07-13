@@ -13,7 +13,51 @@ tree = ET.parse(kml_path)
 root = tree.getroot()
 
 points = []
-m = folium.Map(location=[0, 0], zoom_start=2)
+caixa_de_emenda_fusao = {"X0002", 
+                         "X0004", 
+                         "X0012",
+                         "X0019",
+                         "X0025",
+                         "X0030",
+                         "R0006",
+                         "R0015",
+                         "R0020"
+}
+caixa_de_emenda_conectorizada = {
+                                 "D0007", 
+                                 "D0011", 
+                                 "D0014",
+                                 "D0016",    
+                                 "C0007",
+                                 "C0011",
+                                 "C0014",
+                                 "C0018",
+                                 "B0006",
+                                 "B0012",
+                                 "B0016",
+                                 "B0020",
+                                 "A0007",
+                                 "A0013",
+                                 "A0016",
+                                 "A0021",
+                                 "E0005",
+                                 "E0008",
+                                 "E0011",
+                                 "E0016",
+                                 "F0020",
+                                 "F0016",
+                                 "F0012",
+                                 "F0007",
+                                 "G0007",
+                                 "G0011",
+                                 "G0013",
+                                 "G0016",
+                                 "H0006",
+                                 "H0012",
+                                 "H0017",
+                                 "H0021"
+}
+m = folium.Map(location=[0, 0], zoom_start=15)
 
 # --- Lê os pontos e plota marcadores ---
 for placemark in root.iterfind('.//{http://www.opengis.net/kml/2.2}Placemark'):
@@ -30,14 +74,25 @@ for placemark in root.iterfind('.//{http://www.opengis.net/kml/2.2}Placemark'):
                     lon, lat = float(coords[0]), float(coords[1])
                     points.append({'name': name, 'lat': lat, 'lon': lon})
 
-                    is_pop = name.strip().upper() == "POP"
+                    name_clean = name.strip().upper()
+                    is_pop = name_clean == "POP"
+
+                    # Determinar cor do marcador
+                    if name_clean in caixa_de_emenda_fusao:
+                        color = "red"
+                    elif name_clean in caixa_de_emenda_conectorizada:
+                        color = "deeppink"  # ou "hotpink", ou "magenta"
+                    elif is_pop:
+                        color = "green"
+                    else:
+                        color = "blue"
 
                     folium.CircleMarker(
                         location=[lat, lon],
-                        radius=8 if is_pop else 3,
-                        color='red' if is_pop else 'blue',
+                        radius=8 if is_pop else 5,
+                        color=color,
                         fill=True,
-                        fill_color='red' if is_pop else 'blue',
+                        fill_color=color,
                         fill_opacity=1,
                         popup=f"{name}<br>({lat}, {lon})"
                     ).add_to(m)
@@ -116,7 +171,7 @@ manual_pairs = [
     ("R0006", "N0001"),
     ("R0006", "F0001"),
     ("R0001", "X0004"),
-    ("R0001", "M0001"),
+    ("X0004", "M0001"),
     ("X0002", "E0001"),
     ("X0012", "D0001"),
     ("X0012", "L0001"),
@@ -245,3 +300,68 @@ if points:
 # --- Salvar ---
 m.save('mapa_kml.html')
 print('Mapa gerado: mapa_kml.html')
+
+import networkx as nx
+
+# --- Construir grafo com manual_pairs + conexões por prefixo ---
+G = nx.Graph()
+
+# Adiciona conexões por prefixo
+for prefix, group_points in groups.items():
+    sorted_group = sorted(group_points, key=lambda x: x['name'])
+    for i in range(len(sorted_group) - 1):
+        p1 = sorted_group[i]['name']
+        p2 = sorted_group[i + 1]['name']
+        coord1 = (points_dict[p1]['lat'], points_dict[p1]['lon'])
+        coord2 = (points_dict[p2]['lat'], points_dict[p2]['lon'])
+        dist = geodesic(coord1, coord2).kilometers
+        G.add_edge(p1, p2, weight=dist)
+
+# Adiciona conexões manuais
+for a, b in manual_pairs:
+    if a in points_dict and b in points_dict:
+        coord_a = (points_dict[a]['lat'], points_dict[a]['lon'])
+        coord_b = (points_dict[b]['lat'], points_dict[b]['lon'])
+        dist = geodesic(coord_a, coord_b).kilometers
+        G.add_edge(a, b, weight=dist)
+
+# --- Formata nome com rótulo ---
+def formatar_nome(nome):
+    if nome in caixa_de_emenda_fusao:
+        return f"CF({nome})"
+    elif nome in caixa_de_emenda_conectorizada:
+        return f"CC({nome})"
+    else:
+        return nome
+
+# --- Gerar caminhos do POP até cada CC ---
+saida_linhas = []
+
+for cc in caixa_de_emenda_conectorizada:
+    if cc not in G or "POP" not in G:
+        continue
+    try:
+        caminho = nx.shortest_path(G, source="POP", target=cc, weight='weight')
+        caminho_formatado = [formatar_nome(caminho[0])]
+
+        for i in range(1, len(caminho)):
+            nome_ant = caminho[i - 1]
+            nome_atual = caminho[i]
+            coord1 = (points_dict[nome_ant]['lat'], points_dict[nome_ant]['lon'])
+            coord2 = (points_dict[nome_atual]['lat'], points_dict[nome_atual]['lon'])
+            dist = geodesic(coord1, coord2).kilometers
+            caminho_formatado.append(f"{dist:.2f}")
+            caminho_formatado.append(formatar_nome(nome_atual))
+
+        linha = " - ".join(caminho_formatado)
+        saida_linhas.append(linha)
+
+    except nx.NetworkXNoPath:
+        print(f"Sem caminho entre POP e {cc}")
+
+# --- Exportar resultado ---
+with open("caminhos.txt", "w") as f:
+    for linha in saida_linhas:
+        f.write(linha + "\n")
+
+print("Arquivo 'caminhos.txt' gerado com sucesso.")
