@@ -334,12 +334,19 @@ def formatar_nome(nome):
     else:
         return nome
 
+# --- Caixas finais desejadas ---
+ultima_caixa = {
+    "A0021", "B0020", "C0018", "D0016", "E0016", "F0020", "G0016", "H0021"
+}
+
 # --- Gerar caminhos do POP até cada CC ---
 saida_linhas = []
 
 for cc in caixa_de_emenda_conectorizada:
     if cc not in G or "POP" not in G:
         continue
+    if cc not in ultima_caixa:
+        continue  # Pula caixas que não são finais
     try:
         caminho = nx.shortest_path(G, source="POP", target=cc, weight='weight')
         caminho_formatado = [formatar_nome(caminho[0])]

@@ -1,3 +1,15 @@
+# Conjunto das caixas desejadas para filtrar as linhas
+ultima_caixa = {
+    "A0021",
+    "B0020",
+    "C0018",
+    "D0016",
+    "E0016",
+    "F0020",
+    "G0016",
+    "H0021"
+}
+
 # Lê todos os caminhos do arquivo original
 with open("caminhos.txt", "r") as f:
     linhas = [linha.strip() for linha in f if linha.strip()]
@@ -7,6 +19,12 @@ cc_vistas = set()
 
 for linha in linhas:
     tokens = linha.split(" - ")
+
+    # Verifica se a linha contém alguma das caixas da ultima_caixa
+    if not any(caixa in tokens for caixa in ultima_caixa):
+        continue  # ignora linhas que não têm nenhuma das caixas
+
+    # Pega os tokens que começam com "CC(" e ainda não foram vistos
     novas_cc = {t for t in tokens if t.startswith("CC(") and t not in cc_vistas}
 
     if novas_cc:
