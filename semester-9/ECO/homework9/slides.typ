@@ -24,6 +24,17 @@
 
 = Dados do Projeto
 
+== Localização: 
+
+#figure(
+  figure(
+    rect(image("./pictures/projeto.png", width: 90%)),
+    numbering: none,
+    caption: [Localização],
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
 == Equipamentos Ativos:
 
 Os equipamentos ativos são os equipamentos que são usados para a implantação da rede GPON, como o OLT, a ONU e o transceiver. 
