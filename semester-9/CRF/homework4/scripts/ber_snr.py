@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 from scipy.signal import butter, lfilter
 from concurrent.futures import ProcessPoolExecutor
 from functools import partial
+import os
+from multiprocessing import cpu_count
 import scienceplots
 
 # Estilo visual
@@ -21,7 +23,7 @@ fs = 100_000
 fc = 10_000
 N = 1_000
 samples_per_bit = 100
-snr_range = np.arange(0, 20, 0.5)
+snr_range = np.arange(0, 10, 0.5)
 num_trials = 10  # Número de execuções por SNR
 
 def bpsk_modulate(bits, fc, fs, samples_per_bit):
@@ -67,7 +69,10 @@ def simulate_ber(snr_db, N, fc, fs, samples_per_bit, num_trials):
 
 # Pool paralelo
 if __name__ == '__main__':
-    with ProcessPoolExecutor() as executor:
+    # Limita o número de processos ao número de CPUs disponíveis
+    max_workers = min(cpu_count(), 20)  # Não mais que 4 processos
+    print(f"Usando {max_workers} processos paralelos")
+    with ProcessPoolExecutor(max_workers=max_workers) as executor:
         # Usa partial para fixar parâmetros
         simulate_fn = partial(simulate_ber, N=N, fc=fc, fs=fs, samples_per_bit=samples_per_bit, num_trials=num_trials)
         ber = list(executor.map(simulate_fn, snr_range))
