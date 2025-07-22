@@ -11,7 +11,7 @@
   title: "Modulador e demodulador BPSK",
   subtitle: "Circuitos de Rádio Frequência",
   date: "22 de Julho de 2025",
-  authors: ("Arthur Cadore M. Barcella , Gabriel Luiz, Gustavo"),
+  authors: ("Arthur Cadore M. Barcella , Gabriel Luiz E. Pedro, Gustavo Paulo"),
   layout: "medium",
   ratio: 16/9,
   title-color: none,
@@ -22,7 +22,52 @@
  
 #outline()
 
-= Sinal BPSK
+= BPSK - Binary Phase Shift Keying
+
+== O que é BPSK?
+
+#align(horizon+center)[
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+          #align(left+top)[
+BPSK (Binary Phase Shift Keying) é um método de modulação digital que representa bits através do deslocamento da fase de uma portadora, onde: 
+
+- bit '0' = Fase de 0°
+- bit '1' = Fase de 180°
+
+            #figure(
+              figure(
+                rect(image("./diagrams/IQ.png", width: 80%)),
+                numbering: none,
+                caption: [Diagrama de constelação],
+              ),
+            )
+ 
+          ]
+        ],
+        [
+          #align(left+top)[
+- Principais características: 
+  - Simples implementação
+  - Robusta contra ruído
+  - Baixa complexidade
+  - Alta eficiência espectral
+
+- Aplicações principais
+  - Comunicação via satélite
+  - Rádio digital
+  - Sistemas de navegação GPS
+  - Comunicação por rádio
+  - Transmissão de dados em redes sem fio           
+          ]
+        ],
+    ),
+)
+]
 
 == Formato do sinal 
 
@@ -46,12 +91,6 @@
   ),
 
 )
-
-== Aplicações 
-
-- Simulação do sinal BPSK
-- Simulação do demodulador
-- Simulação da curva BER vs SNR
 
 == Curva BER vs SNR 
 
@@ -276,5 +315,40 @@
 
 == Conclusão
 
-- colocar conclusão aqui 
+#align(horizon+center)[
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto, auto),
+        gutter: 1em,
+        [ 
+          #align(left+top)[
+            - O projeto demonstrou o funcionamento completo do sistema BPSK:
+              - Modulação e demodulação eficientes
+              - Preservação da qualidade do sinal
+              - Baixa complexidade de implementação
+
+            - A curva BER vs SNR mostrou que o BPSK apresenta desempenho superior comparado a outras técnicas:
+              - Melhor relação erro/taxa de transmissão
+              - Menor BER para cada valor de SNR
+              - Mais robusto contra ruído
+          ]
+        ],
+        [
+          #align(left+top)[
+            - Comparação com outras técnicas:
+              - ASK: Mais sensível ao ruído, pior BER
+              - FSK: Menor eficiência espectral
+              - BPSK: Melhor compromisso entre robustez e eficiência
+
+            - Conclusão final:
+              - O BPSK demonstrou ser uma excelente escolha para aplicações que requerem:
+                - Alta qualidade de transmissão
+                - Baixa complexidade
+                - Boa robustez contra ruído
+          ]
+        ],
+    ),
+)
+] 
 
