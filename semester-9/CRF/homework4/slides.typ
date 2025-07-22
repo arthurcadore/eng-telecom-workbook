@@ -49,6 +49,21 @@
 
 == Aplicações 
 
+- Simulação do sinal BPSK
+- Simulação do demodulador
+- Simulação da curva BER vs SNR
+
+== Curva BER vs SNR
+
+#figure(
+  figure(
+    rect(image("./scripts/curva_ber_comparativa.svg", width: 100%)),
+    numbering: none,
+    caption: [Curva BER vs SNR],
+  ),
+  caption: figure.caption([Elaborada pelo Autor], position: top)
+)
+
 = Modulador
 
 == Esquemático do modulador
@@ -140,9 +155,6 @@
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
 
-== Sinal demodulado
-
-
 
 = Cadeia de modulação e demodulação
 
@@ -168,9 +180,6 @@
   ),
   caption: figure.caption([Elaborada pelo Autor], position: top)
 )
-
-
-== Curva BER vs SNR
 
 = Conclusão
 

@@ -20,7 +20,7 @@ plt.rc('figure', titlesize=22)
 # Parâmetros
 fs = 100_000
 fc = 10_000
-N = 1_000  # reduzido para acelerar simulação
+N = 500_000  # reduzido para acelerar simulação
 samples_per_bit = 100
 snr_range = np.arange(-5, 15, 0.5)  # Inclui SNR negativos e aumenta o intervalo
 num_trials = 5
