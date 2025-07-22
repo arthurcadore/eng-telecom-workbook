@@ -32,7 +32,7 @@
     numbering: none,
     caption: [Modulador],
   ),
-  caption: figure.caption([Elaborada pelo Autor], position: top)
+
 )
 
 == FFT do sinal 
@@ -44,7 +44,7 @@
     numbering: none,
     caption: [FFT do sinal],
   ),
-  caption: figure.caption([Elaborada pelo Autor], position: top)
+
 )
 
 == Aplicações 
@@ -53,7 +53,7 @@
 - Simulação do demodulador
 - Simulação da curva BER vs SNR
 
-== Curva BER vs SNR
+== Curva BER vs SNR 
 
 #figure(
   figure(
@@ -61,21 +61,23 @@
     numbering: none,
     caption: [Curva BER vs SNR],
   ),
-  caption: figure.caption([Elaborada pelo Autor], position: top)
+
 )
 
 = Modulador
 
 == Esquemático do modulador
 
+#align(horizon+center)[
 #figure(
   figure(
     rect(image("./pictures/esq_modulador.svg", width: 100%)),
     numbering: none,
-    caption: [Modulador],
+    caption: [Circuito Modulador],
   ),
-  caption: figure.caption([Elaborada pelo Autor], position: top)
+
 )
+]
 
 == Simulação do modulador
 
@@ -83,9 +85,9 @@
   figure(
     rect(image("./pictures/modulador2.png", width: 100%)),
     numbering: none,
-    caption: [Modulador],
+    caption: [Sinal Modulado no tempo],
   ),
-  caption: figure.caption([Elaborada pelo Autor], position: top)
+
 )
 
 == FFT Modulante 
@@ -96,7 +98,7 @@
     numbering: none,
     caption: [FFT modulante],
   ),
-  caption: figure.caption([Elaborada pelo Autor], position: top)
+
 )
 
 == FFT Portadora 
@@ -107,7 +109,7 @@
     numbering: none,
     caption: [FFT portadora],
   ),
-  caption: figure.caption([Elaborada pelo Autor], position: top)
+
 )
 == Sinal modulado
 
@@ -115,34 +117,35 @@
   figure(
     rect(image("./pictures/modulador.png", width: 100%)),
     numbering: none,
-    caption: [Modulador],
+    caption: [Sinal modulado],
   ),
-  caption: figure.caption([Elaborada pelo Autor], position: top)
+
 )
 
-== Sinal Modulado no espectro 
+== FFT Sinal Modulado
 
 #figure(
   figure(
     rect(image("./pictures/fft_bpsk.png", width: 100%)),
     numbering: none,
-    caption: [Sinal Modulado no espectro],
+    caption: [FFT sinal modulado],
   ),
-  caption: figure.caption([Elaborada pelo Autor], position: top)
+
 )
 
 = Demodulador
 
 == Esquemático do demodulador
-
+#align(horizon+center)[
 #figure(
   figure(
     rect(image("./pictures/esq_demodulador.svg", width: 100%)),
     numbering: none,
-    caption: [Demodulador],
+    caption: [Circuito Demodulador],
   ),
-  caption: figure.caption([Elaborada pelo Autor], position: top)
+
 )
+]
 
 == Simulação do demodulador
 
@@ -150,24 +153,36 @@
   figure(
     rect(image("./pictures/demodulado.png", width: 100%)),
     numbering: none,
-    caption: [Demodulador],
+    caption: [Sinal demodulado no tempo],
   ),
-  caption: figure.caption([Elaborada pelo Autor], position: top)
+
 )
 
+== FFT Demodulado
+
+#figure(
+  figure(
+    rect(image("./pictures/fft_demodulado.png", width: 100%)),
+    numbering: none,
+    caption: [FFT sinal demodulado],
+  ),
+
+)
 
 = Cadeia de modulação e demodulação
 
 == Esquemático da cadeia
 
+#align(horizon+center)[
 #figure(
   figure(
     rect(image("./pictures/moddemod.svg", width: 100%)),
     numbering: none,
     caption: [Modulador e Demodulador],
   ),
-  caption: figure.caption([Elaborada pelo Autor], position: top)
+
 )
+]
 
 
 == Sinal modulado vs sinal demodulado
@@ -176,12 +191,14 @@
   figure(
     rect(image("./pictures/demodulado2.png", width: 100%)),
     numbering: none,
-    caption: [Demodulador],
+    caption: [Comparação sinal modulante e sinal demodulado],
   ),
-  caption: figure.caption([Elaborada pelo Autor], position: top)
+
 )
 
 = Conclusão
 
 == Conclusão
+
+- colocar conclusão aqui 
 
