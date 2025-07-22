@@ -74,12 +74,13 @@ if __name__ == '__main__':
 
     # Plotagem
     plt.figure(figsize=(18, 8))
-    plt.plot(snr_range, ber, 'o-', label="Simulação BPSK (paralelo)")
+    plt.plot(snr_range, ber, 'o-', label="Simulação BPSK")
     plt.xlabel("SNR (dB)")
     plt.ylabel("BER")
     plt.grid(True)
-    plt.title("BER vs SNR - BPSK com Multiprocessamento")
     plt.yscale("log")
+    plt.xlim([0, 10])
+    plt.ylim([1e-5, 1])
     leg = plt.legend(
             loc='upper right', frameon=True, edgecolor='black',
             facecolor='white', fontsize=12, fancybox=True)
