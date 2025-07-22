@@ -66,6 +66,36 @@
 
 = Modulador
 
+== Diagrama de blocos modulador
+
+#align(horizon+center)[
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+          #figure(
+            figure(
+              rect(image("./diagrams/modulador.png", width: 86%)),
+              numbering: none,
+              caption: figure.caption([Modulador BPSK], position: top)
+            ),
+          )
+        ],
+        [
+          #figure(
+            figure(
+              rect(image("./diagrams/modulador2.png", width: 100%)),
+              numbering: none,
+              caption: figure.caption([Modulador Balanceado], position: top)
+            ),
+          )
+        ],
+    ),
+)
+]
+
 == Esquemático do modulador
 
 #align(horizon+center)[
@@ -135,6 +165,19 @@
 
 = Demodulador
 
+== Diagrama de blocos do demodulador
+
+#align(horizon+center)[
+#figure(
+  figure(
+    rect(image("./diagrams/demodulador.png", width: 100%)),
+    numbering: none,
+    caption: [Diagrama de blocos do demodulador],
+  ),
+
+)
+]
+
 == Esquemático do demodulador
 #align(horizon+center)[
 #figure(
@@ -147,18 +190,51 @@
 )
 ]
 
-== Simulação do demodulador
+== Sinal Recebido
 
 #figure(
   figure(
-    rect(image("./pictures/demodulado.png", width: 100%)),
+    rect(image("./pictures/demod1.png", width: 100%)),
     numbering: none,
-    caption: [Sinal demodulado no tempo],
+    caption: [Sinal recebido e portadora no tempo],
   ),
 
 )
 
-== FFT Demodulado
+== Etapa 1 - Soma com portadora
+
+#figure(
+  figure(
+    rect(image("./pictures/demod2.png", width: 100%)),
+    numbering: none,
+    caption: [Sinal somado com portadora],
+  ),
+
+)
+
+== Etapa 1 - Filtragem 
+
+#figure(
+  figure(
+    rect(image("./pictures/demod3.png", width: 100%)),
+    numbering: none,
+    caption: [Sinal somado com portadora],
+  ),
+
+)
+
+== Etapa 2 - Detecção de bit
+
+#figure(
+  figure(
+    rect(image("./pictures/demod4.png", width: 100%)),
+    numbering: none,
+    caption: [Sinal detectado],
+  ),
+
+)
+
+== FFT Sinal Demodulado
 
 #figure(
   figure(
