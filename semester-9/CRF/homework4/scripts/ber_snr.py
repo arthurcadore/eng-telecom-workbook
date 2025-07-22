@@ -3,12 +3,23 @@ import matplotlib.pyplot as plt
 from scipy.signal import butter, lfilter
 from concurrent.futures import ProcessPoolExecutor
 from functools import partial
-import os
+import scienceplots
+
+# Estilo visual
+plt.style.use('science')
+plt.rcParams["figure.figsize"] = (18, 8 )
+plt.rc('font', size=16)
+plt.rc('axes', titlesize=22)
+plt.rc('axes', labelsize=22)
+plt.rc('xtick', labelsize=16)
+plt.rc('ytick', labelsize=16)
+plt.rc('legend', fontsize=16)
+plt.rc('figure', titlesize=22)
 
 # Parâmetros da simulação
 fs = 100_000
 fc = 10_000
-N = 50_000
+N = 1_000
 samples_per_bit = 100
 snr_range = np.arange(0, 20, 0.5)
 num_trials = 10  # Número de execuções por SNR
@@ -62,13 +73,18 @@ if __name__ == '__main__':
         ber = list(executor.map(simulate_fn, snr_range))
 
     # Plotagem
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize=(18, 8))
     plt.plot(snr_range, ber, 'o-', label="Simulação BPSK (paralelo)")
     plt.xlabel("SNR (dB)")
     plt.ylabel("BER")
     plt.grid(True)
     plt.title("BER vs SNR - BPSK com Multiprocessamento")
     plt.yscale("log")
-    plt.legend()
+    leg = plt.legend(
+            loc='upper right', frameon=True, edgecolor='black',
+            facecolor='white', fontsize=12, fancybox=True)
+    leg.get_frame().set_facecolor('white')
+    leg.get_frame().set_edgecolor('black')
+    leg.get_frame().set_alpha(1.0)
     plt.tight_layout()
     plt.savefig('curva_ber.svg', format='svg', dpi=300)
