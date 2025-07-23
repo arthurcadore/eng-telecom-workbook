@@ -10,8 +10,8 @@
 #show: slides.with(
   title: "Investimento em Rede GPON",
   subtitle: "Economia para a Engenharia",
-  date: "13 de Julho de 2025",
-  authors: ("Arthur Cadore M. Barcella",),
+  date: "23 de Julho de 2025",
+  authors: ("Arthur Cadore M. Barcella , Gabriel Luiz E. Pedro, Gustavo Paulo"),
   layout: "medium",
   ratio: 16/9,
   title-color: none,
