@@ -29,7 +29,7 @@ def plotar_potencia_caminho(pontos, potencias, nome_final):
     plt.tight_layout()
 
     base_path = os.path.join("out", f"potencia_{nome_final}")
-    plt.savefig(base_path + ".pdf")
+    plt.savefig(base_path + ".svg")
     plt.close()
 
 def process_line(line):

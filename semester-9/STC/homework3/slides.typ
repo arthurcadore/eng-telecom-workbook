@@ -847,7 +847,57 @@ Além da própria caixa, será necessário o conjunto de ancoragem para fixar a 
 )
 
 
+= Orçamento da PON
 
+== Calculo de distâncias e caminho 
+
+Os dados brutos (latitude / longitude) obtidos do mapa foram então computados em um script, que para cada ponto, calculava a distância em linha reta, retornando as distância em km. 
+
+#sourcecode[```text
+POP - 0.02 - X0001 - 0.01 - CF(X0002) - 0.02 - X0003 - 0.03 - CF(X0004) - 0.00 - X0005 - 0.04 - X0006 - 0.04 - X0007 - 0.03 - X0008 - 0.04 - X0009 - 0.03 - X0010 - 0.03 - X0011 - 0.03 - CF(X0012) - 0.02 - X0013 - 0.03 - X0014 - 0.04 - X0015 - 0.03 - X0016 - 0.04 - X0017 - 0.04 - X0018 - 0.03 - CF(X0019) - 0.04 - X0020 - 0.03 - X0021 - 0.05 - X0022 - 0.04 - X0023 - 0.06 - X0024 - 0.02 - CF(X0025) - 0.04 - X0026 - 0.04 - X0027 - 0.02 - X0028 - 0.04 - X0029 - 0.04 - CF(X0030) - 0.02 - A0001 - 0.02 - A0002 - 0.03 - A0003 - 0.02 - A0004 - 0.03 - A0005 - 0.03 - A0006 - 0.02 - CC(A0007) - 0.03 - A0008 - 0.04 - A0009 - 0.02 - A0010 - 0.04 - A0011 - 0.05 - A0012 - 0.02 - CC(A0013) - 0.03 - A0014 - 0.04 - A0015 - 0.02 - CC(A0016) - 0.04 - A0017 - 0.05 - A0018 - 0.02 - A0019 - 0.03 - A0020 - 0.06 - CC(A0021)
+```]
+
+== Plotagem derivações norte
+
+#figure(
+ figure(
+   rect(image("./caminho_cima.svg", width: 100%)),
+   numbering: none,
+   caption: figure.caption([Derivações norte], position: top)
+ ),
+)
+
+== Plotagem derivações sul
+
+#figure(
+ figure(
+   rect(image("./caminho_baixo.svg", width: 100%)),
+   numbering: none,
+   caption: figure.caption([Derivações sul], position: top)
+ ),
+)
+
+== Calculo de atenuação
+
+Para cada derivação apresentada anteriormente, foi então feita outra computação, considerando a atenução da fibra, emendas, fusões e splitagem, considerando um sinal +5dBm da OLT para alcançar o gráfico abaixo:
+
+#figure(
+ figure(
+   rect(image("./out/potencia_CC(A0021).svg", width: 80%)),
+   numbering: none,
+   caption: figure.caption([Atenução derivação A], position: top)
+ ),
+)
+
+== Calculo de atenuação
+
+#figure(
+ figure(
+   rect(image("./out/potencia_CC(J0015).svg", width: 100%)),
+   numbering: none,
+   caption: figure.caption([Atenuação derivação J], position: top)
+ ),
+)
 
 == Ampliação da Rede 
 
