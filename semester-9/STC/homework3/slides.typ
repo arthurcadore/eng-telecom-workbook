@@ -22,11 +22,16 @@
 #outline()
 
 
-= Necessidade Mapeada
+// = Necessidade Mapeada
 
-== Necessidade de Implantação de Rede GPON
+// == Necessidade de Implantação de Rede GPON
 
-- escrever requisitos do projeto aqui
+// Requisitos:
+
+// - Atender a um bairro;
+// - Possuir pelo menos 10 portas PON;
+// - Alcançar market share de 50%;
+// - Orçamento total estimado: R\$ 50 mil a R\$ 70 mil.
 
 = Escolha do Local
 
@@ -44,18 +49,45 @@
 
 == Verificação de Habitantes (IBGE)
 
-COLOCAR AQUI IBGE
 
-- O centro da cidade é o local escolhido para a implantação da rede GPON, pois concentra o maior número de habitantes e empresas. 
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+          #align(left)[
+- O centro da cidade é o local escolhido para a implantação da rede GPON, pois concentra o maior número de habitantes e empresas.
+
+- Além disso, o projeto atende uma pequena área dos seguintes bairros, com possibilidade de ampliação: 
+  - Senhor Bom Jesus
+  - Santo Antonio 
+  - Nossa senhora de Lourdes
+
+- #link("https://censo2022.ibge.gov.br/panorama/mapas.html?tema=numero_de_domicilios&recorte=bairros&localidade=4203600")[Ref: IBGE]
+
+          ]
+        ],
+        [
+#figure(
+  figure(
+    rect(image("./pictures/mapa/ibge4.png", width: 100%)),
+    numbering: none,
+    caption: figure.caption([], position: top)
+  ),
+)
+        ],
+    ),
+)
 
 
 == Verificação de Empresas (Telecomunicações)
 
-COLOCAR AQUI TELECOMUNICAÇÕES
+Unico provedor de internet identificado na região foi: 
 
-== Verificação de Preços de Internet
+- GGNET Telecomunicações: #link("https://www.gegnet.com.br/")[Ref: GGNET]
 
-COLOCAR AQUI PREÇOS DE INTERNET (QUE FONTES?)
+Com base na análise de preços dos concorrentes, foi definido de maneira preliminar  os seguintes valores: 
 
 #align(center)[
 #table(
@@ -64,9 +96,9 @@ COLOCAR AQUI PREÇOS DE INTERNET (QUE FONTES?)
     [Plano], [Preço Mensal], [Taxa de Instalação]
   ),
 
-  [Plano 100Mbps], [100], [300],
-  [Plano 200Mbps], [150], [300],
-  [Plano 500Mbps], [200], [300],
+  [Plano 100Mbps], [R\$115,00], [R\$100,00],
+  [Plano 200Mbps], [R\$135,00], [R\$100,00],
+  [Plano 500Mbps], [R\$145,00], [R\$100,00],
 )
 ]
 
@@ -101,14 +133,6 @@ COLOCAR AQUI PREÇOS DE INTERNET (QUE FONTES?)
     caption: figure.caption([], position: top)
   ),
 )
-
-== Ampliação da Rede (cenários futuros)
-
-COLOCAR AQUI AMPLIAÇÃO
-
-- MIGRAR DROP 24 PARA 36FO 
-
-- realizar fusões diretas nas caixas ao invés de splitter 1x2
 
 = Equipamentos Ativos:
 
@@ -341,8 +365,8 @@ COLOCAR AQUI AMPLIAÇÃO
               align: (left, center),
               table.header[Especificação][Valor],
               [Potência], [3000VA], 
-              [Temperature Range], [\~40 \~+85℃],
-              [Preço], [R\$ 1.200,00],
+              [Peso], [\~40 \~+85℃],
+              [Preço], [R\$ 4.931,00],
               [Autonomia (500w)], [1:15hr],
               ),
               numbering: none,
@@ -363,6 +387,47 @@ COLOCAR AQUI AMPLIAÇÃO
         ],
     ),
 )
+
+== Rack de Telecomunicações
+
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+          #align(left)[
+            O rack de telecomunicações é uma estrutura metálica usada para acomodar, organizar e proteger equipamentos de rede, como switches, servidores e distribuidores ópticos.
+          #figure(
+            figure(
+              table(
+               columns: (1fr,  1fr),
+              align: (left, center),
+              table.header[Especificação][Valor],
+              [Tamanho], [20U],
+              [Dimensão Externas (L × A × P)], [600 × 956 × 670 mm],
+              [Peso], [44kg],
+              [Preço], [R\$ 2552,10],
+              ),
+              numbering: none,
+              caption: figure.caption([Especificações Técnicas], position: top)
+            ),
+          )
+          ]
+        ],
+        [
+        #figure(
+           figure(
+             rect(image("./pictures/rack.jpeg", width: 90%)),
+             numbering: none,
+             caption: figure.caption([Modelo: RPD 2067], position: top)
+           ),
+          )
+          #link("https://www.kabum.com.br/produto/630758/rack-piso-intelbras-desmontavel-20u-670mm-rpd-2067-4770059?srsltid=AfmBOoplSIAXO8KOtkB5O1CrK7QRfvNoPM6LCaiY_8Lx2z-m1r1JIrZJF1U")[Ref: Rack]
+        ],
+    ),
+)
+
 
 = Equipamentos Passivos
 
@@ -400,7 +465,7 @@ COLOCAR AQUI AMPLIAÇÃO
              caption: figure.caption([Ref: Splitter Balanceado], position: top)
            ),
           )
-          #link("https://www.kalunga.com.br/prod/nobreak-senoidal-racktorre-snb-3000va-bi-rt-4822042-intelbras-cx-1-un/446921?srsltid=AfmBOor7xTK77tKhOoruNxiUYvhupgtyOCmuuafeMHAcDGk9F_fYu8XBp6M")[Ref: Splitter Desbalanceado]
+          #link("https://shopee.com.br/product/349240281/5789113149?gads_t_sig=VTJGc2RHVmtYMTlxTFVSVVRrdENkWVp3RFo3Mkw5czd4Z0hzdEF1WVFibUFPN2RubTV4RWJ0SUFCc3JveHBNTWxwRGljSVRHdVRIcE4yMSs2NzdjY2FyM3ROaHZCMzlpeU9YaXhUa1JvYW1vaitCb2F0MWJ2U2ZDdUpCQmRxUDI1VVRhMjMwWHkxZFE4QXlJVnJUMU5nPT0")[Ref: Splitter Desbalanceado]
         ],
     ),
 )
@@ -439,90 +504,57 @@ COLOCAR AQUI AMPLIAÇÃO
              caption: figure.caption([Ref: Splitter Balanceado], position: top)
            ),
           )
-          #link("https://www.kalunga.com.br/prod/nobreak-senoidal-racktorre-snb-3000va-bi-rt-4822042-intelbras-cx-1-un/446921?srsltid=AfmBOor7xTK77tKhOoruNxiUYvhupgtyOCmuuafeMHAcDGk9F_fYu8XBp6M")[Ref: Splitter Balanceado]
+          #link("https://shopee.com.br/product/349240281/5789113149?gads_t_sig=VTJGc2RHVmtYMTlxTFVSVVRrdENkWVp3RFo3Mkw5czd4Z0hzdEF1WVFibUFPN2RubTV4RWJ0SUFCc3JveHBNTWxwRGljSVRHdVRIcE4yMSs2NzdjY2FyM3ROaHZCMzlpeU9YaXhUa1JvYW1vaitCb2F0MWJ2U2ZDdUpCQmRxUDI1VVRhMjMwWHkxZFE4QXlJVnJUMU5nPT0")[Ref: Splitter Balanceado]
         ],
     ),
 )
 
 == DIO (Distribuidor Interno Óptico)
 
+
 #figure(
     grid(
         columns: (auto, auto),
         rows:    (auto, auto),
         gutter: 1em,
         [ 
-
+          #align(left)[
+            O DIO (Distribuidor Óptico Interno) é um equipamento passivo utilizado para organizar, proteger e interligar fibras ópticas em ambientes internos de redes de telecomunicações.
+          #figure(
+            figure(
+              table(
+               columns: (1fr,  1fr),
+              align: (left, center),
+              table.header[Especificação][Valor],
+              [Adaptadores SP/APC], [48],
+              [Bandejas de fusão], [4],
+              [Capacidade de fusões], [até 24 por bandeja],
+              [Capacidade de splitter PLC], [até 3 por bandeja],
+              [Preço], [R\$ 995,46],
+              ),
+              numbering: none,
+              caption: figure.caption([Especificações Técnicas], position: top)
+            ),
+          )
+          ]
         ],
         [
         #figure(
-          figure(
-            rect(image("./pictures/dio.jpeg", width: 35%)),
-            numbering: none,
-            caption: figure.caption([Distribuidor Interno Óptico], position: top)
-          ),
-        )
-         #link("https://www.mercadolivre.com.br/mini-dio-em-aco-12fo-sc-preto/p/MLB28125651?utm_source=chatgpt.com")[Ref: DIO]
+           figure(
+             rect(image("./pictures/dio.jpeg", width: 90%)),
+             numbering: none,
+             caption: figure.caption([DIO 48FO], position: top)
+           ),
+          )
+          #link("https://produto.mercadolivre.com.br/MLB-5003421636-dio-completo-48fo-distribuidor-interno-optico-sc-apc-2u-_JM")[Ref: DIO]
         ],
     ),
 )
 
-== Rack de Telecomunicações
-
-#figure(
-  figure(
-    rect(image("./pictures/rack.jpeg", width: 65%, height: 65%)),
-    numbering: none,
-    caption: figure.caption([Rack de Telecomunicações], position: top)
-  ),
-)
-#align(center)[
- #link("https://produto.mercadolivre.com.br/MLB-4750152146-rack-telecom-cabeamento-dados-cftv-19-10u-x-570mm-_JM?matt_tool=18956390&utm_source=google_shopping&utm_medium=organic")[R\$648,82]
-]
-== Patch-cords de Fibra Óptica
-
-#figure(
-  figure(
-    rect(image("./pictures/patch_cord.jpeg", width: 45%)),
-    numbering: none,
-    caption: figure.caption([Patch-cord], position: top)
-  ),
-) 
-#align(center)[
-#link("https://www.mercadolivre.com.br/10-x-cordo-optico-patch-cord-sc-apc-sc-apc-15m/p/MLB39324367#polycard_client=search-nordic&searchVariation=MLB39324367&wid=MLB4996931928&position=4&search_layout=grid&type=product&tracking_id=ded7b86f-72d4-4d2f-80a4-f0ddc19da19b&sid=search")[R\$7,90 / m]
-]
 
 
-== Conectores e acopladores SC/APC e SCP/UPC
 
-
-= Lançamento e Ancoragem:
-
-== Backbone Mini-RA (AS-80) 36FO
-
-
-GPT achou esse de  36FO mas parece estar mt barato:
-
-https://www.alibaba.com/product-detail/fiber-optic-cable-36-core-single_60815455138.html?spm=a2700.7724857.0.0.27fb1796JHLnpO
-
-
-e esse de 24FO (muitooo mais caro):
-
-https://radiocom.com.co/producto/cable-fibra-optica-gyfty53-monomodo-24-fibras-pe-bloqueo-agua/?utm_source=chatgpt.com
-
-== Derivação Mini-RA  6FO 
-
-#figure(
-  figure(
-    rect(image("./pictures/6fo.jpeg", width: 65%)),
-    numbering: none,
-    caption: figure.caption([6FO], position: top)
-  ),
-)
-
-== Distribuição Drop 1FO
-
-== CE/CF (Caixa de Emenda/Fusão)
+== Conectores e Acopladores
 
 #figure(
     grid(
@@ -533,18 +565,241 @@ https://radiocom.com.co/producto/cable-fibra-optica-gyfty53-monomodo-24-fibras-p
 
           #figure(
            figure(
-             rect(image("./pictures/emenda_poste.jpeg", width: 65%)),
+             rect(image("./pictures/SCAPC.png", width: 43%)),
              numbering: none,
-             caption: figure.caption([Caixa de emenda no poste], position: top)
+             caption: figure.caption([Conector SC/APC], position: top)
+           ),
+          )
+          #figure(
+           figure(
+             rect(image("./pictures/SCAPC2.png", width: 43%)),
+             numbering: none,
+             caption: figure.caption([Acoplador SC/APC], position: top)
            ),
           )
         ],
         [
           #figure(
            figure(
-             rect(image("./pictures/suporte_emenda.jpeg", width: 65%)),
+             rect(image("./pictures/patch1.png", width: 50%)),
              numbering: none,
-             caption: figure.caption([Suporte pra caixa de emenda], position: top)
+             caption: figure.caption([Patch Cord SC/APC-SC/APC], position: top)
+           ),
+          )
+          #figure(
+           figure(
+             rect(image("./pictures/patch_cord.jpeg", width: 50%)),
+             numbering: none,
+             caption: figure.caption([Patch Cord SC/APC-SC/UPC], position: top)
+           ),
+          )
+        ],
+    ),
+)
+
+
+
+= Lançamento e Ancoragem:
+
+== Backbone Mini-RA (AS-80) 24FO
+
+
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+          #align(left)[
+            O backbone (linha vermelha no mapa) será instalado inicialmente com 24 fibras (pensando em futuras expansões), sendo 24FO AS-80, (R\$1.776 o metro, Dollar á R\$5,55)
+          - #link("https://plantec.com/produtos/detalhes/4830164/cabo-fibra-optica-3km-cfoa-sm-as80-24fo-nr-intelbras/")[Ref: CFOA-SM-ASU80-S-24F]
+        #figure(
+           figure(
+             rect(image("./pictures/MiniRA-24FO AS-80.png", width: 50%)),
+             numbering: none,
+             caption: figure.caption([Bobina com 4Km], position: top)
+           ),
+          )
+          ]
+        ],
+        [
+        #figure(
+           figure(
+             rect(image("./pictures/MiniRA-24FO AS-80-2.png", width: 90%)),
+             numbering: none,
+             caption: figure.caption([Mini-RA 24FO AS-80], position: top)
+           ),
+          )
+        ],
+    ),
+)
+
+== Derivação Mini-RA (AS-80) 6FO
+
+
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+          #align(left)[
+            A derivação (linhas azuis no mapa) serão instaladas inicialmente com 6 fibras (pensando em futuras expansões), sendo 6FO AS-80, (R\$1.11 o metro, Dollar á R\$5,55)
+          - #link("https://www.pauta.com.br/bobina-cabo-optico-intelbrasfiberhome-asu80-6fo-3km-cfoa-sm-asu80-s-6f-nr-4830157")[Ref: CFOA-SM-ASU80-S-6F]
+        #figure(
+           figure(
+             rect(image("./pictures/MiniRA-24FO AS-80.png", width: 50%)),
+             numbering: none,
+             caption: figure.caption([Bobina com 3Km], position: top)
+           ),
+          )
+          ]
+        ],
+        [
+        #figure(
+           figure(
+             rect(image("./pictures/ASU80-6FO-SM-ASU80.png", width: 90%)),
+             numbering: none,
+             caption: figure.caption([ASU80-6FO-SM-ASU80], position: top)
+           ),
+          )
+        ],
+    ),
+)
+
+== Distribuição Drop 1FO
+
+          #align(left)[
+            A distribuição (Entre a CTO e o cliente) será instalada utilizando drop 1FO, (R\$ 667 a bobina).
+          - #link("https://www.mercadolivre.com.br/cabo-de-rede-fibra-optica-1km-de-extenso-lan-wan-intelbras/p/MLB28851010")[Ref: Drop 1FO]
+          ]
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+        #figure(
+           figure(
+             rect(image("./pictures/drop.png", width: 60%)),
+             numbering: none,
+             caption: figure.caption([Bobina com 1Km], position: top)
+           ),
+          )
+        ],
+        [
+
+
+        #figure(
+           figure(
+             rect(image("./pictures/drop2.png", width: 90%)),
+             numbering: none,
+             caption: figure.caption([Drop 1FO], position: top)
+           ),
+          )
+        
+        ],
+    ),
+)
+
+
+== CF 36FO (Caixa de Emenda/Fusão)
+
+          #align(left)[
+            As fusões em cada derivação serão feitas na caixa de emenda, que terá 36FO (R\$ 197,51 un). Podendo comportar até 72 fibras com sangria. 
+          - #link("https://www.kabum.com.br/produto/415905/caixa-de-emenda-2-flex-telecom-ceo-36fo-ate-72-fibras-svt-3-bandejas?srsltid=AfmBOoqE8cOpNJ4JkMAS8yjAyj7gwS-IbmtM2Vi8i9EGOA8QNlZNx53Mxzs")[Ref: Caixa de Emenda]
+          ]
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+        #figure(
+           figure(
+             rect(image("./pictures/caixaemenda.jpeg", width: 50%)),
+             numbering: none,
+             caption: figure.caption([Caixa de emenda 36FO], position: top)
+           ),
+          )
+        ],
+        [
+
+
+        #figure(
+           figure(
+             rect(image("./pictures/caixaemenda2.jpeg", width: 50%)),
+             numbering: none,
+             caption: figure.caption([Caixa de emenda 36FO], position: top)
+           ),
+          )
+        
+        ],
+    ),
+)
+
+
+== Cojunto de Ancoragem
+Além da própria caixa, será necessário o conjunto de ancoragem para fixar a caixa no poste.
+#figure(
+  grid(
+    columns: 2,
+    align: center,
+
+    figure(
+      image("./pictures/abracadeira_bap.jpeg", width: 40%),
+      numbering: none,
+      caption: [#link("https://netcomputadores.com.br/gs/bap3--abracadeira--p--poste-bap3/34961?srsltid=AfmBOorgnHeCbrs95rPLqJn_qefFZBIkk3osq935D4nqjREzSs5Qjlsz3MA", "Ref: Abraçadeira BAP-3 (R$ 22,00)")]
+    ),
+
+    figure(
+      image("./pictures/alca_preformada.jpeg", width: 28%),
+      numbering: none,
+      caption: [#link("https://produto.mercadolivre.com.br/MLB-3871814471-alca-preformada-multiplex-70mm-az-107772-_JM?matt_tool=18956390&utm_source=google_shopping&utm_medium=organic", "Ref: Alça Preformada (R$ 11,00)")]
+    ),
+
+    figure(
+      image("./pictures/isolador_bap.png", width: 45%),
+      numbering: none,
+      caption: [#link("https://www.unicaserv.com.br/rede-externa/ferragens/kit-conjunto-isolador-tipo-roldana-abracadeira-ajustavel-bap-3-com-parafuso?srsltid=AfmBOoqV8JDT8tTPq4oFZBlxpYjjNJTPF0EkyhGgmkKckSkK6MQo_oyeDag", "Ref: Isolador BAP-3 (R$ 40,20)")]
+    ),
+    
+    figure(
+      image("./pictures/suporte_emenda.jpeg", width: 45%),
+      numbering: none,
+      caption: [#link("https://www.santeconline.com.br/cruzeta-soldavel-marrom-25mm-tigre-15880?srsltid=AfmBOoql3GQKDxZXMJeoJNL8BOxpMNp9MbHAWQFnBuuLnJ76DeSH7pkuAAI", "Ref: Cruzeta (R$ 16,25)")]
+    ),
+
+  ),
+
+)
+
+== Ancoragem da caixa de emenda
+
+#figure(
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+          #align(left)[
+           Para montar a caixa no poste, além do custo da própria caixa, foram considerados demais asessórios utilizados, como: 
+            - Abracadeira BAP
+            - Alça preformada 
+            - Isolador BAP
+            - Cruzeta 
+            - Parafusos
+
+            Dessa forma, o custo total por caixa de emenda é de R\$253,00
+          ]
+
+        ],
+        [
+          #figure(
+           figure(
+             rect(image("./pictures/emenda_poste.jpeg", width: 65%)),
+             numbering: none,
+             caption: figure.caption([Ancoragem da caixa de emenda], position: top)
            ),
           )
         ],
@@ -554,43 +809,81 @@ https://radiocom.com.co/producto/cable-fibra-optica-gyfty53-monomodo-24-fibras-p
 == CTO (Caixa de Terminação Óptica)
 
 #figure(
-  figure(
-    rect(image("./pictures/caixaterminaloptica.jpeg", width: 65%)),
-    numbering: none,
-    caption: figure.caption([CTO], position: top)
-  ),
+    grid(
+        columns: (auto, auto),
+        rows:    (auto, auto),
+        gutter: 1em,
+        [ 
+          #align(left)[
+            A CTO (Caixa de Terminação Óptica) é um equipamento passivo utilizado para derivar e proteger fibras ópticas em redes externas, facilitando a conexão entre a rede de distribuição e os assinantes.
+          #figure(
+            figure(
+              table(
+               columns: (1fr,  1fr),
+              align: (left, center),
+              table.header[Especificação][Valor],
+              [Conectores], [16 saídas SC/APC],
+              [Splitter Interno], [1x16 PLC SC/APC],
+              [Peso], [1.3kg],
+              [Preço], [R\$ 229,99],
+              ),
+              numbering: none,
+              caption: figure.caption([Especificações Técnicas], position: top)
+            ),
+          )
+          ]
+        ],
+        [
+        #figure(
+           figure(
+             rect(image("./pictures/cto.png", width: 90%)),
+             numbering: none,
+             caption: figure.caption([Modelo: XFCT 1616], position: top)
+           ),
+          )
+          #link("https://www.magazineluiza.com.br/caixa-de-terminacao-optica-aerea-intelbras-1x16-sc-apc-com-splitter/p/bg6dc5kgd5/et/dvsn/")[Ref: CTO]
+        ],
+    ),
 )
 
 
-== Cojunto de Ancoragem
 
 
-#figure(
-  figure(
-    rect(image("./pictures/abracadeira_bap.jpeg", width: 25%)),
-    numbering: none,
-    caption: figure.caption([abracadeira bap], position: top)
-  ),
-)
+== Ampliação da Rede 
 
-#figure(
-  figure(
-    rect(image("./pictures/alca_preformada.jpeg", width: 25%)),
-    numbering: none,
-    caption: figure.caption([alça preformada], position: top)
-  ),
-)
+O projeto prevê a ampliação da rede PON para atender mais clientes, com a possibilidade de: 
 
-- Abraçadeira BAP-3
-- Isolador BAP-3 (n achei)
-- Alça Preformada
-- Cruzeta (n achei, n sei se esse é a rozeta ou outra coisa).
+- Adicionar uma segunda placa de serviço da OLT (atendendo mais 2048 clientes), 4096 no total.  
+
+- Ampliar o drop 24 para 36FO (permitindo atingir as 32 portas PON da OLT), sendo possivel atender até 3072 sem alterar o backbone ou adicionar uma fibra paralela. 
+
+- Realizar fusões diretas nas caixas ao invés de splitter 1x2 (permitindo aumentar a área de atendimento mantendo os cabos de derivação já passados.
+
 
 = Alugueis
 
-== Poste 
+== Aluguel de Poste 
+#align(left)[
+  Quantidade de postes pela cidade mapeada é de 338 postes, portanto:
+  - R\$6,00 \* 338 = R\$2028,00 (mes) com postes. 
+]
 
-== POP (Ponto de Presença)
+#figure(
+ figure(
+   rect(image("./pictures/postes2.png", width: 80%)),
+   numbering: none,
+   caption: figure.caption([Quantidade de postes], position: top)
+ ),
+)
+
+
+
+== Aluguel de POP (Ponto de Presença)
+
+#align(left)[
+  Como base da empresa e POP, será alugada uma sala comercial com $115m^2$, no valor de R\$3.500,00 (mes).
+- #link("https://www.maisnovacasa.com.br/58739647/imoveis/locacao-sala-centro-campos-novos-sc")[Ref: POP]
+]
 
 #figure(
     grid(
@@ -601,7 +894,7 @@ https://radiocom.com.co/producto/cable-fibra-optica-gyfty53-monomodo-24-fibras-p
 
           #figure(
            figure(
-             rect(image("./pictures/pop.jpeg", width: 90%)),
+             rect(image("./pictures/pop.jpeg", width: 75%)),
              numbering: none,
              caption: figure.caption([POP], position: top)
            ),
@@ -610,76 +903,153 @@ https://radiocom.com.co/producto/cable-fibra-optica-gyfty53-monomodo-24-fibras-p
     ),
 )
 
-== Uplink
+== Aluguel de Uplink
 
+Inicialmente, o link dedicado previsto é de 2Gbps (primeiro ano), até que uma carteira de clientes minima (aprox. 240 clientes) seja atingida. 
 
+- Para isso, o aluguel do uplink inicial será de R\$5000,00 (mês).
 
-= Mão de Obra Técnica
+Após o aumento da quantidade de clientes para 1280, o uplink será aumentado para 5Gbps, considerando o aumento na quantidade de usuários simultâneos. 
 
-== Opção 1: Prestação de Serviços
+- Para isso, o aluguel do uplink será de R\$10.000,00 (mês).
 
-== Mão de Obra:
-
-A mão de obra foi definida com base em discussão em sala, foi colocado um valor definido por demanda da mão de obra, apenas para simplificar o cálculo. 
-
-#align(center)[
-#table(
-  columns: 3,
-  table.header(
-    [Serviço], [Custo Mensal], [Quantidade]
-  ),
-  [Instalação POP], [5000], [1],
-  [Instalação Residencial], [50], [1280],
-  [Instalação Infraestrutura PON], [1], [10000],
-  [Fusões], [1], [1000],
-)
-]
-
-== Opção 2: Contratação de Funcionários
+#link("https://racctelecom.com.br/link-dedicado-1gb-preco/", "Ref: Aluguel de Uplink")
 
 
 = Custos Empresariais
 
-== Abertura da empresa 
+// == Técnica Opção 1: Prestação de Serviços
 
-== Impostos 
+// A mão de obra foi definida com base em discussão em sala, foi colocado um valor definido por demanda da mão de obra, apenas para simplificar o cálculo. 
 
-== Taxas de Licenciamento
+// #align(center)[
+// #table(
+//   columns: 3,
+//   table.header(
+//     [Serviço], [Custo Mensal], [Quantidade]
+//   ),
+//   [Instalação POP], [5000], [1],
+//   [Instalação Residencial], [50], [1280],
+//   [Instalação Infraestrutura PON], [1], [10000],
+//   [Fusões], [1], [1000],
+// )
+// ]
 
-==  Custos de divulgação / Marketing
+== Contratação de Funcionários
+
+Custos para contratar dois funcionários para instalação da rede PON (1280 clientes). 
+
+Para isso, devemos considerar o salário base de R\$3.000,00: 
+
+- INSS 20% -> R\$600,00
+- FGTS 8% -> R\$240,00
+- 13° Salário (8,33%) -> R\$250,00
+- Férias (11,11%) -> R\$330,00
+- SAT (1%) -> R\$30,00
+
+Dessa forma, o custo total por funcionário é de R\$4.530,00 (mês). Considerando 2 funcionários, o custo total é de R\$9.060,00 (mês). 
+
+== Abertura da empresa, impostos e taxas
+
+- Abertura: 
+  - Honorários contador: R\$1.500,00
+  - Junta comercial (SC): R\$200,00
+  - Certificado Digital: R\$200,00 (ano)
+  - Alvará de Funcionamento: R\$500,00
+
+- Impostos e Taxas: 
+  - SCM (Serviço de comunicação multimídea): R\$400,00 (Registro) + R\$1340,00 (licenciamento)
+  - Taxas FISTEL (TFI e TFF): R\$ 1340,00 + R\$ 670,00 (ano)
+
+- Outros custos: 
+  - Divulgação: R\$2000,00 (mes)
+  - Energia elétrica: R\$600,00 (mes)
+  - Agua: R\$100,00 (mes)
+  - Carro: R\$1500,00 (mes)
 
 = Análise de Viabilidade Econômica
 
 == Despesas 
 
-- instalações
-- manutenção da rede
-- alugueis 
-- mão de obra / salários
-- impostos 
-- marketing
-- custos de abertura
-- custos de equipamentos
-- custos de energia
+Considerando todos os parâmetros anteriores, temos as seguintes despesas:
 
-== Receitas (Bruta)
+#figure(
+  figure(
+    rect(image("./eco/despesas.svg", width: 100%)),
+    numbering: none,
+    caption: figure.caption([Despesas], position: top)
+  ),
+)
+
+== Receitas (Bruta e Descontada)
+
+Valor bruto: 
 
 - mensalidade dos clientes
+  - 20 Clientes novos por mês
+  - Considera-se a distribuição de 70%, 20% e 10% de 100Mbps, 200Mbps e 300Mbps respectivamente. 
 - venda de equipamentos (instalação)
+  - 20 Instalações novas mês
+  - Considera-se 100 reais de instalação. 
+  
+Valor descontado, considerando o valor de imposto sobre a prestação de serviço (Simples Nacional), temos: 
 
+- 6% a 17% (em média 8-11% no estado).
 
-== Receitas (Descontada)
+== Receitas (Bruta e Descontada)
 
-- Procurar impostos para descontar no valor bruto (ICMS, ISS, etc), ver se entra agencias, imposto sobre Prestação de serviço ou comercio. 
+#figure(
+  figure(
+    rect(image("./eco/receitas.svg", width: 100%)),
+    numbering: none,
+    caption: figure.caption([Receitas], position: top)
+  ),
+)
 
-==  Fluxo de Caixa
+== Fluxo de Caixa
 
-== Payback
-
-== TIR (Taxa Interna de Retorno)
+#figure(
+  figure(
+    rect(image("./eco/fc.svg", width: 100%)),
+    numbering: none,
+    caption: figure.caption([Fluxo de Caixa], position: top)
+  ),
+)
 
 == VPL (Valor Presente Líquido)
 
-= Conclusão
+#figure(
+  figure(
+    rect(image("./eco/vpl.svg", width: 100%)),
+    numbering: none,
+    caption: figure.caption([VPL (Considerando TMA de 15%)], position: top)
+  ),
+)
+
+== Payback e TIR
+
+Considerando os dados apresentados temos: 
+
+- Payback Simples: 12 meses
+- Payback Descontado: 24 meses
+- TIR: 8%
+
+#figure(
+  figure(
+    rect(image("./eco/tir.png", width: 90%)),
+    numbering: none,
+    caption: figure.caption([TIR], position: top)
+  ),
+)
+
+= Conclusão 
+
+== Conclusão
+
+Com base nos cálculos realizados, podemos concluir que o investimento é viavel *A LONGO PRAZO*, sendo necessario investir grandes somas, especialmente nos primeiros dois anos para poder manter a infraestrutrutura funcionando. 
+
+A longo prazo o investimento se torna lucrativo, mesmo sem ampliação da rede, considerando a carteira de clientes que se formou, e os custos estabilizados de operação e manutenção. 
+
+
 
 
