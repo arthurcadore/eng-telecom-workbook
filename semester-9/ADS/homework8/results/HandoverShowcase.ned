@@ -16,7 +16,7 @@ import inet.visualizer.canvas.integrated.IntegratedCanvasVisualizer;
 network HandoverShowcase
 {
     parameters:
-        @display("bgb=640,420");
+        @display("bgb=800,600");
     submodules:
         visualizer: IntegratedCanvasVisualizer {
             parameters:
@@ -26,9 +26,13 @@ network HandoverShowcase
             parameters:
                 @display("p=100,100");
         }
-        host: WirelessHost {
+        host1: WirelessHost {
             parameters:
                 @display("p=50,280;r=,,#707070");
+        }
+        host2: WirelessHost {
+            parameters:
+                @display("p=750,280;r=,,#707070");
         }
         ap1: AccessPoint {
             parameters:
