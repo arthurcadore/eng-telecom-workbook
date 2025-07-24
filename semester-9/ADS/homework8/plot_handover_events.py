@@ -23,7 +23,7 @@ plt.rc('figure', titlesize=22)
 plt.rcParams['lines.linewidth'] = 3
 
 # Caminho para o arquivo .vec
-vec_file = 'General-#0.vec'
+vec_file = './results/General-#0.vec'
 
 # --- Passo 1: Mapear vetores de interesse --- #
 vector_map = {}  # id: (name, title)
@@ -202,6 +202,93 @@ if vector_ap1 or vector_ap2:
     
     plt.savefig(os.path.join(pictures_dir, 'plot2_eventos_ap1_ap2.svg'), format='svg')
     plt.close()
+
+    # --- NOVO: Plot de estatísticas de tráfego TCP e UDP --- #
+    udp_vectors = []
+    tcp_vectors = []
+
+    # Coletar vetores UDP e TCP
+    for vid, (vname, title) in vector_map.items():
+        if 'udpApp' in vname:
+            udp_vectors.append(vid)
+        elif 'tcpApp' in vname:
+            tcp_vectors.append(vid)
+
+    if udp_vectors or tcp_vectors:
+        # Coletar dados de UDP
+        udp_data = defaultdict(list)
+        for vid in udp_vectors:
+            times = [t for t, v in data[vid]]
+            values = [v for t, v in data[vid]]
+            udp_data[vector_map[vid][1]].extend(values)
+        
+        # Coletar dados de TCP
+        tcp_data = defaultdict(list)
+        for vid in tcp_vectors:
+            times = [t for t, v in data[vid]]
+            values = [v for t, v in data[vid]]
+            tcp_data[vector_map[vid][1]].extend(values)
+        
+        # Criar plot
+        plt.figure(figsize=(14, 6))
+        
+        # Dados UDP
+        udp_stats = []
+        udp_labels = []
+        if udp_data:
+            for label, values in udp_data.items():
+                if values:
+                    udp_stats.append(sum(values))  # Total de bytes
+                    udp_labels.append(f'UDP {label}')
+        
+        # Dados TCP
+        tcp_stats = []
+        tcp_labels = []
+        if tcp_data:
+            for label, values in tcp_data.items():
+                if values:
+                    tcp_stats.append(sum(values))  # Total de bytes
+                    tcp_labels.append(f'TCP {label}')
+        
+        # Plotar dados
+        width = 0.38
+        x = np.arange(len(udp_stats + tcp_stats))
+        
+        # Plotar UDP
+        if udp_stats:
+            bars1 = plt.bar(x[:len(udp_stats)], udp_stats, width, label='UDP', color='tab:blue')
+            # Adicionar valores acima das barras
+            for i, bar in enumerate(bars1):
+                plt.text(bar.get_x() + bar.get_width()/2, bar.get_height(), 
+                         f'{int(bar.get_height())} bytes', 
+                         ha='center', va='bottom', fontsize=10)
+        
+        # Plotar TCP
+        if tcp_stats:
+            bars2 = plt.bar(x[len(udp_stats):], tcp_stats, width, label='TCP', color='tab:orange')
+            # Adicionar valores acima das barras
+            for i, bar in enumerate(bars2):
+                plt.text(bar.get_x() + bar.get_width()/2, bar.get_height(), 
+                         f'{int(bar.get_height())} bytes', 
+                         ha='center', va='bottom', fontsize=10)
+        
+        plt.xlabel('Tipo de tráfego')
+        plt.ylabel('Bytes transferidos')
+        plt.title('Estatísticas de tráfego TCP e UDP')
+        plt.xticks(x, udp_labels + tcp_labels, rotation=45, ha='right')
+        
+        if udp_stats or tcp_stats:
+            leg0 = plt.legend(
+                loc='upper right', frameon=True, edgecolor='black',
+                facecolor='white', fontsize=12, fancybox=True
+            )
+            leg0.get_frame().set_facecolor('white')
+            leg0.get_frame().set_edgecolor('black')
+            leg0.get_frame().set_alpha(1.0)
+        
+        plt.tight_layout()
+        plt.savefig(os.path.join(pictures_dir, 'plot_traffic_stats.svg'), format='svg')
+        plt.close()
 
     # --- NOVO: Gráficos de linha por evento ao longo do tempo ---
     for idx, label in enumerate(all_labels):
