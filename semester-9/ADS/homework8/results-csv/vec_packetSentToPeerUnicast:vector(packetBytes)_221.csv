@@ -1,0 +1,8 @@
+time,value,module,metric
+12410.0,29.889518679635,HandoverShowcase.ap2.wlan[0].mac.dcf,packetSentToPeerUnicast:vector(packetBytes)
+12710.0,30.439310663044,HandoverShowcase.ap2.wlan[0].mac.dcf,packetSentToPeerUnicast:vector(packetBytes)
+12723.0,30.439542663044,HandoverShowcase.ap2.wlan[0].mac.dcf,packetSentToPeerUnicast:vector(packetBytes)
+12766.0,30.440283740819,HandoverShowcase.ap2.wlan[0].mac.dcf,packetSentToPeerUnicast:vector(packetBytes)
+12779.0,30.440395740819,HandoverShowcase.ap2.wlan[0].mac.dcf,packetSentToPeerUnicast:vector(packetBytes)
+12826.0,30.440756818554,HandoverShowcase.ap2.wlan[0].mac.dcf,packetSentToPeerUnicast:vector(packetBytes)
+12839.0,30.440888818554,HandoverShowcase.ap2.wlan[0].mac.dcf,packetSentToPeerUnicast:vector(packetBytes)

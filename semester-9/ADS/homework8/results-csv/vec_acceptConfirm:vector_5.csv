@@ -1,0 +1,10 @@
+time,value,module,metric
+725.0,1.531276162993,HandoverShowcase.host1.wlan[0].agent,acceptConfirm:vector
+826.0,1.532607205317,HandoverShowcase.host1.wlan[0].agent,acceptConfirm:vector
+886.0,1.533699726436,HandoverShowcase.host1.wlan[0].agent,acceptConfirm:vector
+12669.0,30.439224124138,HandoverShowcase.host1.wlan[0].agent,acceptConfirm:vector
+12784.0,30.440396279691,HandoverShowcase.host1.wlan[0].agent,acceptConfirm:vector
+12844.0,30.440889357411,HandoverShowcase.host1.wlan[0].agent,acceptConfirm:vector
+37220.0,90.455718122063,HandoverShowcase.host1.wlan[0].agent,acceptConfirm:vector
+37321.0,90.457090275618,HandoverShowcase.host1.wlan[0].agent,acceptConfirm:vector
+37381.0,90.458523352293,HandoverShowcase.host1.wlan[0].agent,acceptConfirm:vector

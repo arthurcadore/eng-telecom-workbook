@@ -1,8 +1,8 @@
 version 3
-run General-0-20250724-18:33:15-850769
+run General-0-20250727-14:10:10-854952
 attr configname General
-attr datetime 20250724-18:33:15
-attr datetimef 20250724-183315
+attr datetime 20250727-14:10:10
+attr datetimef 20250727-141010
 attr experiment General
 attr inifile omnetpp.ini
 attr iterationvars ""
@@ -10,7 +10,7 @@ attr iterationvarsd ""
 attr iterationvarsf ""
 attr measurement ""
 attr network HandoverShowcase
-attr processid 850769
+attr processid 854952
 attr repetition 0
 attr replication #0
 attr resultdir results
@@ -76,8 +76,39 @@ config *.host1.udpApp[0].verbose true
 config *.host1.tcpApp[0].verbose true
 config *.host2.udpApp[0].verbose true
 config *.host2.tcpApp[0].verbose true
+config *.host1.udpApp[0].recordPacketsSent true
+config *.host1.udpApp[0].recordBytesSent true
+config *.host1.udpApp[0].recordPacketsReceived true
+config *.host1.udpApp[0].recordBytesReceived true
+config *.host2.udpApp[0].recordPacketsReceived true
+config *.host2.udpApp[0].recordBytesReceived true
+config *.host1.tcpApp[0].recordPacketsSent true
+config *.host1.tcpApp[0].recordBytesSent true
+config *.host1.tcpApp[0].recordPacketsReceived true
+config *.host1.tcpApp[0].recordBytesReceived true
+config *.host2.tcpApp[0].recordPacketsReceived true
+config *.host2.tcpApp[0].recordBytesReceived true
+config *.host1.wlan[*].agent.recordHandoverAttempts true
+config *.host1.wlan[*].agent.recordHandoverSuccesses true
+config *.host1.wlan[*].agent.recordHandoverFailures true
+config *.host1.wlan[*].agent.recordHandoverDuration true
+config *.host1.wlan[*].agent.recordHandoverLatency true
+config *.host1.wlan[*].radio.recordSignalStrength true
+config *.host1.wlan[*].radio.recordSNR true
+config *.host1.wlan[*].radio.recordBitErrorRate true
+config *.host1.wlan[*].radio.recordPacketErrorRate true
+config *.host1.wlan[*].mac.recordPacketLoss true
+config *.host1.wlan[*].mac.recordRetries true
+config *.host1.wlan[*].mac.recordRetransmissions true
 config *.visualizer.physicalLinkVisualizer.displayLinks true
 config *.ap*.wlan[*].radio.displayCommunicationRange true
+config *.host1.udpApp[*].statistic-recording "\"vector\""
+config *.host2.udpApp[*].statistic-recording "\"vector\""
+config *.host1.tcpApp[*].statistic-recording "\"vector\""
+config *.host2.tcpApp[*].statistic-recording "\"vector\""
+config *.host1.wlan[*].agent.statistic-recording "\"vector\""
+config *.host1.wlan[*].radio.statistic-recording "\"vector\""
+config *.host1.wlan[*].mac.statistic-recording "\"vector\""
 
 par HandoverShowcase.visualizer.sceneVisualizer typename "\"inet.visualizer.canvas.scene.SceneCanvasVisualizer\""
 par HandoverShowcase.visualizer.sceneVisualizer visualizationTargetModule "\"^.^\""
@@ -2001,7 +2032,7 @@ statistic HandoverShowcase.host1.wlan[0].radio minSnir:histogram
 field count 1000
 field mean 1875.7361844349
 field stddev 1177.4761516596
-field min 316.30070469778
+field min 316.3007046978
 field max 3960.1011385908
 field sum 1875736.1844349
 field sqrsum 4903449871.2378
@@ -4941,9 +4972,9 @@ attr source transmissionStateChanged
 attr title "Radio transmission state, count"
 statistic HandoverShowcase.ap1.wlan[0].radio minSnir:histogram
 field count 16
-field mean 1917.8820129658
+field mean 1917.8820129657
 field stddev 1231.2892902407
-field min 682.18483215875
+field min 682.1848321587
 field max 3180.2816442641
 field sum 30686.112207452
 field sqrsum 81593442.394442
@@ -6175,7 +6206,7 @@ attr title "Radio transmission state, count"
 statistic HandoverShowcase.ap2.wlan[0].radio minSnir:histogram
 field count 8
 field mean 729.53235705155
-field stddev 20.197296581017
+field stddev 20.197296581014
 field min 696.79749681218
 field max 740.50133002376
 field sum 5836.2588564124

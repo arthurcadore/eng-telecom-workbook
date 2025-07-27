@@ -1,0 +1,13 @@
+time,value,module,metric
+12410.0,29.889518679635,HandoverShowcase.ap2.wlan[0].mac.rx,nav:vector
+12410.0,29.889518679635,HandoverShowcase.ap2.wlan[0].mac.rx,nav:vector
+12423.0,29.889562679635,HandoverShowcase.ap2.wlan[0].mac.rx,nav:vector
+12723.0,30.439542663044,HandoverShowcase.ap2.wlan[0].mac.rx,nav:vector
+12723.0,30.439542663044,HandoverShowcase.ap2.wlan[0].mac.rx,nav:vector
+12737.0,30.439586663044,HandoverShowcase.ap2.wlan[0].mac.rx,nav:vector
+12779.0,30.440395740819,HandoverShowcase.ap2.wlan[0].mac.rx,nav:vector
+12779.0,30.440395740819,HandoverShowcase.ap2.wlan[0].mac.rx,nav:vector
+12797.0,30.440439740819,HandoverShowcase.ap2.wlan[0].mac.rx,nav:vector
+12839.0,30.440888818554,HandoverShowcase.ap2.wlan[0].mac.rx,nav:vector
+12839.0,30.440888818554,HandoverShowcase.ap2.wlan[0].mac.rx,nav:vector
+12853.0,30.440932818554,HandoverShowcase.ap2.wlan[0].mac.rx,nav:vector

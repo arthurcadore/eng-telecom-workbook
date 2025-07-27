@@ -343,5 +343,271 @@ if vector_ap1 or vector_ap2:
 else:
     print('Nenhum vetor AP1 ou AP2 identificado!')
 
+# --- Passo 4: Plot de pacotes enviados/recebidos por AP --- #
+if vector_ap1 or vector_ap2:
+    # Coletar vetores relacionados a pacotes e bytes
+    packet_vectors = []
+    byte_vectors = []
+    for vid, (vname, title) in vector_map.items():
+        if 'packet' in vname or 'packet' in title:
+            if '.ap1.' in vname:
+                packet_vectors.append(vid)
+            elif '.ap2.' in vname:
+                packet_vectors.append(vid)
+        if 'bytes' in vname or 'bytes' in title:
+            if '.ap1.' in vname:
+                byte_vectors.append(vid)
+            elif '.ap2.' in vname:
+                byte_vectors.append(vid)
+
+    # Plot de pacotes enviados/recebidos
+    plt.figure(figsize=(14, 6))
+    for vid in packet_vectors:
+        times = [t for t, v in data[vid]]
+        values = [v for t, v in data[vid]]
+        if not times:
+            continue
+        ap = 'AP1' if '.ap1.' in vector_map[vid][0] else 'AP2'
+        plt.plot(times, values, label=f'{ap} - {vector_map[vid][1]}', marker='o')
+    plt.xlabel('Tempo (s)')
+    plt.ylabel('Pacotes')
+    plt.title('Pacotes enviados/recebidos por AP')
+    plt.xlim(0, 60)
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(pictures_dir, 'plot_packets.svg'), format='svg')
+    plt.close()
+
+    # Plot de bytes enviados/recebidos
+    plt.figure(figsize=(14, 6))
+    for vid in byte_vectors:
+        times = [t for t, v in data[vid]]
+        values = [v for t, v in data[vid]]
+        if not times:
+            continue
+        ap = 'AP1' if '.ap1.' in vector_map[vid][0] else 'AP2'
+        plt.plot(times, values, label=f'{ap} - {vector_map[vid][1]}', marker='o')
+    plt.xlabel('Tempo (s)')
+    plt.ylabel('Bytes')
+    plt.title('Bytes enviados/recebidos por AP')
+    plt.xlim(0, 60)
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(pictures_dir, 'plot_bytes.svg'), format='svg')
+    plt.close()
+
+    # Plot combinado de pacotes e bytes
+    plt.figure(figsize=(14, 6))
+    for vid in packet_vectors + byte_vectors:
+        times = [t for t, v in data[vid]]
+        values = [v for t, v in data[vid]]
+        if not times:
+            continue
+        ap = 'AP1' if '.ap1.' in vector_map[vid][0] else 'AP2'
+        label = f'{ap} - {vector_map[vid][1]}'
+        if 'bytes' in label.lower():
+            plt.plot(times, values, label=label, linestyle='--', marker='x')
+        else:
+            plt.plot(times, values, label=label, marker='o')
+    plt.xlabel('Tempo (s)')
+    plt.ylabel('Quantidade')
+    plt.title('Pacotes e bytes enviados/recebidos por AP')
+    plt.xlim(0, 60)
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(pictures_dir, 'plot_combined.svg'), format='svg')
+    plt.close()
+
+# --- Passo 5: Plot de estatísticas de handover --- #
+# Coletar vetores de handover
+handover_vectors = []
+for vid, (vname, title) in vector_map.items():
+    if any(kw in vname or kw in title for kw in ['handoverAttempts', 'handoverSuccesses', 'handoverFailures',
+                                               'handoverDuration', 'handoverLatency']):
+        if '.host1.' in vname or '.host1' in vname:
+            handover_vectors.append(vid)
+
+if handover_vectors:
+    plt.figure(figsize=(14, 6))
+    plt.suptitle('Estatísticas de Handover')
+    
+    # Subplot 1: Tentativas, Sucessos e Falhas
+    plt.subplot(2, 2, 1)
+    for vid in handover_vectors:
+        vname, title = vector_map[vid]
+        if any(kw in vname or kw in title for kw in ['handoverAttempts', 'handoverSuccesses', 'handoverFailures']):
+            times = [t for t, v in data[vid]]
+            values = [v for t, v in data[vid]]
+            if times:
+                label = title if title else vname
+                plt.plot(times, values, label=label.replace('handover', '').title(), marker='o')
+    plt.xlabel('Tempo (s)')
+    plt.ylabel('Contagem')
+    plt.title('Tentativas, Sucessos e Falhas')
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    
+    # Subplot 2: Duração
+    plt.subplot(2, 2, 2)
+    for vid in handover_vectors:
+        vname, title = vector_map[vid]
+        if any(kw in vname or kw in title for kw in ['handoverDuration']):
+            times = [t for t, v in data[vid]]
+            values = [v for t, v in data[vid]]
+            if times:
+                label = title if title else vname
+                plt.plot(times, values, label=label.replace('handover', '').title(), marker='o')
+    plt.xlabel('Tempo (s)')
+    plt.ylabel('Duração (s)')
+    plt.title('Duração do Handover')
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    
+    # Subplot 3: Latência
+    plt.subplot(2, 2, 3)
+    for vid in handover_vectors:
+        vname, title = vector_map[vid]
+        if any(kw in vname or kw in title for kw in ['handoverLatency']):
+            times = [t for t, v in data[vid]]
+            values = [v for t, v in data[vid]]
+            if times:
+                label = title if title else vname
+                plt.plot(times, values, label=label.replace('handover', '').title(), marker='o')
+    plt.xlabel('Tempo (s)')
+    plt.ylabel('Latência (s)')
+    plt.title('Latência do Handover')
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    
+    plt.tight_layout(rect=[0, 0, 1, 0.95])
+    plt.savefig(os.path.join(pictures_dir, 'plot_handover_stats.svg'), format='svg')
+    plt.close()
+    print(f'Plot de estatísticas de handover gerado com sucesso em {pictures_dir}/plot_handover_stats.svg')
+else:
+    print('Nenhum vetor de estatísticas de handover encontrado!')
+
+# --- Passo 6: Plot de estatísticas UDP e TCP --- #
+# Coletar vetores UDP e TCP
+udp_vectors = {'host1': {'sent': [], 'received': []},
+              'host2': {'received': []}}
+tcp_vectors = {'host1': {'sent': [], 'received': []},
+              'host2': {'received': []}}
+
+# Função auxiliar para adicionar vetor
+def add_to_dict(d, host, direction, vid):
+    if host in d:
+        d[host][direction].append(vid)
+
+# Coletar vetores
+for vid, (vname, title) in vector_map.items():
+    if '.udpApp' in vname:
+        if 'sent' in vname or 'sent' in title:
+            if '.host1.' in vname:
+                add_to_dict(udp_vectors, 'host1', 'sent', vid)
+        elif 'received' in vname or 'received' in title:
+            if '.host1.' in vname:
+                add_to_dict(udp_vectors, 'host1', 'received', vid)
+            elif '.host2.' in vname:
+                add_to_dict(udp_vectors, 'host2', 'received', vid)
+    elif '.tcpApp' in vname:
+        if 'sent' in vname or 'sent' in title:
+            if '.host1.' in vname:
+                add_to_dict(tcp_vectors, 'host1', 'sent', vid)
+        elif 'received' in vname or 'received' in title:
+            if '.host1.' in vname:
+                add_to_dict(tcp_vectors, 'host1', 'received', vid)
+            elif '.host2.' in vname:
+                add_to_dict(tcp_vectors, 'host2', 'received', vid)
+
+# Plotar estatísticas UDP e TCP
+if udp_vectors or tcp_vectors:
+    plt.figure(figsize=(14, 6))
+    
+    # Subplot 1: UDP - Host1
+    plt.subplot(2, 2, 1)
+    plt.title('UDP - Host1')
+    for vid in udp_vectors['host1']['sent']:
+        times = [t for t, v in data[vid]]
+        values = [v for t, v in data[vid]]
+        if times:
+            label = f"{vector_map[vid][1] if vector_map[vid][1] else vector_map[vid][0]}"
+            plt.plot(times, values, label=label, marker='o')
+    for vid in udp_vectors['host1']['received']:
+        times = [t for t, v in data[vid]]
+        values = [v for t, v in data[vid]]
+        if times:
+            label = f"{vector_map[vid][1] if vector_map[vid][1] else vector_map[vid][0]}"
+            plt.plot(times, values, label=label, marker='x')
+    plt.xlabel('Tempo (s)')
+    plt.ylabel('Quantidade')
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    
+    # Subplot 2: UDP - Host2
+    plt.subplot(2, 2, 2)
+    plt.title('UDP - Host2')
+    for vid in udp_vectors['host2']['received']:
+        times = [t for t, v in data[vid]]
+        values = [v for t, v in data[vid]]
+        if times:
+            label = f"{vector_map[vid][1] if vector_map[vid][1] else vector_map[vid][0]}"
+            plt.plot(times, values, label=label, marker='x')
+    plt.xlabel('Tempo (s)')
+    plt.ylabel('Quantidade')
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    
+    # Subplot 3: TCP - Host1
+    plt.subplot(2, 2, 3)
+    plt.title('TCP - Host1')
+    for vid in tcp_vectors['host1']['sent']:
+        times = [t for t, v in data[vid]]
+        values = [v for t, v in data[vid]]
+        if times:
+            label = f"{vector_map[vid][1] if vector_map[vid][1] else vector_map[vid][0]}"
+            plt.plot(times, values, label=label, marker='o')
+    for vid in tcp_vectors['host1']['received']:
+        times = [t for t, v in data[vid]]
+        values = [v for t, v in data[vid]]
+        if times:
+            label = f"{vector_map[vid][1] if vector_map[vid][1] else vector_map[vid][0]}"
+            plt.plot(times, values, label=label, marker='x')
+    plt.xlabel('Tempo (s)')
+    plt.ylabel('Quantidade')
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    
+    # Subplot 4: TCP - Host2
+    plt.subplot(2, 2, 4)
+    plt.title('TCP - Host2')
+    for vid in tcp_vectors['host2']['received']:
+        times = [t for t, v in data[vid]]
+        values = [v for t, v in data[vid]]
+        if times:
+            label = f"{vector_map[vid][1] if vector_map[vid][1] else vector_map[vid][0]}"
+            plt.plot(times, values, label=label, marker='x')
+    plt.xlabel('Tempo (s)')
+    plt.ylabel('Quantidade')
+    plt.grid(True)
+    plt.legend()
+    plt.tight_layout()
+    
+    plt.suptitle('Estatísticas UDP e TCP')
+    plt.tight_layout(rect=[0, 0, 1, 0.95])
+    plt.savefig(os.path.join(pictures_dir, 'plot_udp_tcp_stats.svg'), format='svg')
+    plt.close()
+    print(f'Plot de estatísticas UDP/TCP gerado com sucesso em {pictures_dir}/plot_udp_tcp_stats.svg')
+else:
+    print('Nenhum vetor de estatísticas UDP/TCP encontrado!')
+
 # --- Fim --- #
 print('Script finalizado. Ajuste os vetores de interesse conforme necessário.')

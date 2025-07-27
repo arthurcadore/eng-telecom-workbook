@@ -1,0 +1,2 @@
+time,value,module,metric
+0.0,0.0,HandoverShowcase.ap2.wlan[0].radio,radioChannel:vector

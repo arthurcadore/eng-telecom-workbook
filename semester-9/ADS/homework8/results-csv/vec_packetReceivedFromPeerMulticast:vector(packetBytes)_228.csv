@@ -1,0 +1,2 @@
+time,value,module,metric
+12398.0,29.889262679635,HandoverShowcase.ap2.wlan[0].mac.dcf,packetReceivedFromPeerMulticast:vector(packetBytes)

@@ -1,0 +1,2 @@
+time,value,module,metric
+0.0,0.0,HandoverShowcase.host2.udp,droppedPkBadChecksum:vector(count)
