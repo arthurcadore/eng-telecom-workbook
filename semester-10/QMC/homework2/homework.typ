@@ -11,7 +11,7 @@
 #show: doc => report(
   title: "Laboratório - Estudo de condutividade",
   subtitle: "Química Geral",
-  authors: ("Arthur Cadore Matuella Barcella",),
+  authors: ("Arthur Cadore Matuella Barcella","Gustavo Briance Mengue Mena"),
   date: "1 de Setembro de 2025",
   doc,
 )
@@ -86,36 +86,130 @@ Resultado das medidas de condutividade realizados em sala:
 
 == Por que a água da rede publica de abastecimento tem maior condutividade que a água destilada?
 
+A água da rede pública tem maior condutividade (71,8 µS/cm) que a água destilada (4,64 µS/cm) porque contém íons dissolvidos como cálcio (Ca²⁺), magnésio (Mg²⁺), sódio (Na⁺), cloreto (Cl⁻) e bicarbonato (HCO₃⁻). Esses íons são condutores de corrente elétrica. Já a água destilada é praticamente pura, com mínima presença de íons, resultando em baixa condutividade.
+
 
 == É sabido que o cloreto de sódio no estado sólido comporta-se como isolante elétrico. 
 
 === Explique essa afirmação sabendo que o mesmo é representado através de modelos como $"Na"^+"Cl"^-$
 
+No estado sólido, os íons Na⁺ e Cl⁻ estão fortemente ligados em uma rede cristalina rígida, sem mobilidade para transportar carga elétrica, atuando como isolante.
+
 === Explique usando equações de reações e as teorias de ligação e estrutura quimica, a condutividade elétrica e o processo quimico que ocorre quando se dissolve cloreto de sódio em agua. 
+
+Quando o NaCl se dissolve em água, ocorre a dissociação iônica:
+
+$
+  "NaCl"("s") arrow "Na"^+("aq") + "Cl"^-("aq")
+$
+A água, sendo um solvente polar, estabiliza os íons por hidratação, permitindo que se movimentem livremente e conduzam corrente elétrica.
 
 === Que espécies iônicas podem ser encontradas na água do mar? 
 
+Na água do mar, além de Na⁺ e Cl⁻, encontramos íons como $"Mg"^2+$, $"Ca"^2+$, $"K"^+$, $"SO"_4^(2-)$, $"HCO"_3^-$ e $"Br"^-$.
+
 == Que espécies quimicas estão presentes em soluções de $"NaOH"$ e $"HCl"$ (0,01 M/L)? Escreva equações para descrever as reações que produzem tais espécies. 
+
+Em solução aquosa, ou seja, dissolvida em água, as espécies químicas são:
+
+- NaOH se dissocia completamente: 
+  $
+    "NaOH"("s") arrow "Na"^+("aq") + "OH"^-("aq")
+  $
+- HCl se ioniza completamente:
+  $
+    "HCl"("g") + "H"₂O("l") arrow "H"₃O⁺("aq") + "Cl"⁻("aq")
+  $
 
 == Como você classificaria os alcoois etanol e propanol (eletrólitos fortes, fracos ou não eletrólitos)? Considere as condutividades registradas para os alcoois puros e dissolvidos em água e justifique sua resposta. 
 
+Tanto o etanol (7,18 µS/cm) quanto o propanol (7,85 µS/cm) são não eletrólitos quando puros, pois não formam íons significativos. Quando dissolvidos em água, há um pequeno aumento na condutividade (8,05 µS/cm e 8,27 µS/cm, respectivamente), mas ainda assim são considerados não eletrólitos, pois não sofrem ionização significativa em água.
+
 == Descreva e explique em forma de texto e também usando equações de reações quimicas, as propriedades de condutividade elétrica do ácido acético glacial e do mesmo dissolvido em água. Você classificaria o ácido acético como eletrólito forte, fraco ou não eletrólito? Justifique sua resposta.
+
+O ácido acético é um eletrólito fraco. Em solução aquosa, ele sofre ionização parcial:
+
+$
+  "CH"₃"COOH"("aq") arrow "CH"₃"COO"⁻("aq") + "H"⁺("aq")
+$
+
+Isso é evidenciado pelos valores de condutividade:
+- Solução 0,1 M/L: 418,08 $(mu S)/"cm"$
+- Solução 6 M/L: 13,68 $(mu S)/"cm"$
+- Solução 17 M/L (glacial): 7,94 $(mu S)/"cm"$
+
+A condutividade não aumenta proporcionalmente com a concentração, característica de um eletrólito fraco.
 
 == Você classificaria a sacarose como eletrólito forte, fraco ou não eletrólito? Justifique sua resposta.
 
+A sacarose é um não eletrólito, como mostra sua baixa condutividade (28,24 $(mu S)/"cm"$), muito próxima à da água pura. Ela não se ioniza em solução aquosa, mantendo-se como moléculas neutras.
+
 == Comparando os dados obtidos para as medidas de condutividade de ácido acético glacial, ácido acético em propanol e ácido acético em ága, explique a influência dos solventes nas propriedades químicas dos sistemas e descreva suas respectivas representações através de equações químicas. 
+
+- Ácido acético glacial (17 M/L). Baixa condutividade (7,94 $(mu S)/"cm"$), pouca autoionização.
+
+- Ácido acético em propanol (1:1). Condutividade similar (8,81 $(mu S)/"cm"$), o propanol não favorece a ionização.
+
+- Ácido acético em água (1:1). Maior condutividade (294,1 $(mu S)/"cm"$), a água promove a ionização:
+
+$
+  "CH"₃"COOH"("aq") + "H"₂O("l") arrow "CH"₃"COO"⁻("aq") + "H"₃O⁺("aq")
+$
 
 == Comparando qualitativamente a velocidade das reações 11 [30 $"mL"$ HCl (6 M/L) + $"CaCO"_3$] e 12 [30 $"mL"$ Ácido Acético (6 M/L) + $"CaCO"_3$], explique a relação entre as velocidades observadas e os dados de condutividade obtidos para os sistemas químicos 9 [60 $"mL"$ HCl (6 M/L)] e 10 [60 $"mL"$ Ácido Acético (6 M/L)]. Faça o mesmo para as reações 13 [30 $"mL"$ HCl (6 M/L) + $"Zn(s)"$] e 14 [30 $"mL"$ Ácido Acético (6 M/L) + $"Zn(s)"$], também comparando com as condutividades obtidas nas reações 9 [60 $"mL"$ HCl (6 M/L)] e 10 [60 $"mL"$ Ácido Acético (6 M/L)]
 
 === Reações 11 e 12 ($"CaCO"_3$ + HCl e $"CaCO"_3$ + Ácido Acético)
 
+- Reação 11 ($"HCl" + "CaCO"_3$). Reação rápida, condutividade inicial alta (182,3 µS/cm): 
+
+  $
+    2"HCl"("aq") + "CaCO"_3("aq") arrow "CaCl"_2("aq") + "H"_2"O"("l") + "CO"_2("g")
+  $
+
+- Reação 12 ($"CH"_3"COOH" + "CaCO"_3$). Reação mais lenta, condutividade inicial baixa (6,30 µS/cm): 
+
+  $
+    2"CH"_3"COOH"("aq") + "CaCO"_3("aq") arrow ("CH"_3"COO")_2"Ca"("aq") + "H"_2"O"("l") + "CO"_2("g")
+  $
+
 === Reações 13 e 14 ($"Zn(s)"$ + HCl e $"Zn(s)"$ + Ácido Acético)
+
+- Reação 13 ($"HCl"("aq") + "Zn(s)"$). Reação rápida, condutividade inicial alta: 
+
+  $
+    2"HCl"("aq") + "Zn(s)" arrow "ZnCl"_2("aq") + "H"_2("g")
+  $
+
+- Reação 14 ($"CH"_3"COOH"("aq") + "Zn(s)"$). Reação muito lenta, condutividade inicial baixa: 
+
+  $
+    2"CH"_3"COOH"("aq") + "Zn(s)" arrow ("CH"_3"COO")_2"Zn"("aq") + "H"_2("g")
+  $
 
 == Explique, usando equações de reações químicas e as teorias de força e eletrólitos as diferenaçs de condutividade observadas para os reagentes em separado e para os produtos formados nas reações 16 [15 $"mL"$ HCl (0,01 M/L) + 15 $"mL"$ NaOH (0,01 M/L)] e 17 [30 $"mL"$ Ácido Acético (0,1 M/L) + 15 $"mL"$ $"NH"_3$ (0,1 M/L)]
 
-== Exlique
+Reação 16 ($"HCl"("aq") + "NaOH"("aq")$). Condutividade inicial alta (devido aos íons H⁺ e OH⁻) que diminui durante a reação (formação de água) e depois aumenta novamente (excesso de $"Na"^+$ e $"Cl"^-$).
 
-=== Qual o objetivo da prática de estudo da condutividade feita em laboratório?
+$
+  "H"^+("aq") + "Cl"^-("aq") + "Na"^+("aq") + "OH"^-("aq") arrow "Na"^+("aq") + "Cl"^-("aq") + "H"_2"O"("l")
+$
 
-=== Como você sabe que está usando corretamente o condutivimetro? 
+
+Reação 17 ($"CH"_3"COOH"("aq") + "NH"_3("aq")$). Condutividade inicial baixa (poucos íons) que aumenta durante a reação (formação de CH₃COO⁻ e NH₄⁺): 
+
+$
+  "CH"_3"COOH"("aq") + "NH"_3("aq") arrow "CH"_3"COO"^-("aq") + "NH"_4^+("aq")
+$
+
+
+== Explique como você sabe que está usando corretamente o condutivimetro? 
+
+1. Calibrar o aparelho com solução padrão
+2. Lavar o eletrodo com água destilada entre as medidas
+3. Secar suavemente o excesso de água sem esfregar
+4. Mergulhar o eletrodo na solução até a marca indicada
+5. Aguardar estabilização da leitura
+6. Anotar o valor junto com a temperatura
+
+A condutividade é afetada pela temperatura, então é importante registrar a temperatura durante as medições para correções posteriores, se necessário.
 
