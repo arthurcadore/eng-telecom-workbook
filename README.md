@@ -1,22 +1,11 @@
 # Telecom Engineering Workbook
-## Author: Arthur Cadore M. Barcella - IFSC - São José
 
 #### This repository is dedicated to all homeworks and projects developed during the Telecom Engineering course at IFSC. 
 
 The image below illustrates all the subjects present in the telecommunications engineering course at IFSC SJ - (PPC 2022)
 
-![main](./pictures/main.png)
+![main](./.assets/main.png)
 ---
-
-### Current progress on course: 
-
-At this point, my progress on engineering course is ilustrated below: 
-
-![progress](./pictures/progress.png)
-
-```
-Percentage of course completed: 64%
-```
 
 #### How to Use the Repository:
 
@@ -36,3 +25,5 @@ This repository uses `typst` to format all homeworks and projects. You can find 
 But, if you want to recompile or edit the files, you can simply do it by running the `.devcontainer` specifications. 
 
 ---
+
+## Author: Arthur Cadore M. Barcella, IFSC, São José
