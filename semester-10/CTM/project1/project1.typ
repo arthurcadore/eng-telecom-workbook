@@ -238,3 +238,5 @@ Dessa forma, podemos concluir que com 4 elétrons no total (2 por átomo), ambos
 - [1]: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.solutioninn.com%2Fstudy-help%2Fchemistry-the-central-science%2Frepeat-exercise-1247-for-a-linear-chain-of-eight-lithium-846201
 
 - [2]: https://www.youtube.com/watch?v=n-Fvm06m4Wc
+- [3]: https://www.youtube.com/watch?v=xAbwx9oHw70
+- [4]: https://www.youtube.com/watch?v=GhdULTKdFYM
